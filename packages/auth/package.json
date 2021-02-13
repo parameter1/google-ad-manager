@@ -1,0 +1,30 @@
+{
+  "name": "@parameter1/google-ad-manager-auth",
+  "version": "0.0.0",
+  "description": "Handles authentication for the Google Ad Manager API",
+  "author": "Jacob Bare <jacob@parameter1.com>",
+  "homepage": "https://github.com/parameter1/google-ad-manager/tree/main/packages/auth#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/parameter1/google-ad-manager.git",
+    "directory": "packages/auth"
+  },
+  "license": "MIT",
+  "main": "src/index.js",
+  "scripts": {
+    "lint": "eslint --ext .js ./",
+    "test": "yarn lint"
+  },
+  "dependencies": {
+    "jsonwebtoken": "^8.5.1",
+    "node-fetch": "^2.6.1"
+  },
+  "devDependencies": {
+    "eslint": "^7.20.0",
+    "eslint-config-airbnb-base": "^14.2.1",
+    "eslint-plugin-import": "^2.22.1"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}
