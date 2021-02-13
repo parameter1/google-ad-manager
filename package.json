@@ -1,0 +1,19 @@
+{
+  "name": "google-ad-manager",
+  "author": "Jacob Bare <jacob@parameter1.com>",
+  "private": true,
+  "repository": "https://github.com/parameter1/google-ad-manager.git",
+  "license": "MIT",
+  "scripts": {
+    "lerna": "lerna",
+    "test": "lerna run test",
+    "lint": "lerna run lint"
+  },
+  "workspaces": [
+    "packages/*",
+    "services/*"
+  ],
+  "devDependencies": {
+    "lerna": "^3.22.1"
+  }
+}
