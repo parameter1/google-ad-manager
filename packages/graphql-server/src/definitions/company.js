@@ -5,8 +5,10 @@ module.exports = gql`
 extend type Query {
   "Finds a single company by ID."
   company(input: SingleRecordQueryInput!): Company
+    @findById(service: "Company")
   "Finds multiple companies based on the (optional) input parameters."
   companies(input: MultipleRecordsQueryInput = {}): CompanyConnection!
+    @find(service: "Company")
 }
 
 enum CompanyTypeEnum {

@@ -7,6 +7,9 @@ module.exports = gql`
 scalar Date
 scalar BigInt
 
+directive @find(service: String!) on FIELD_DEFINITION
+directive @findById(service: String!) on FIELD_DEFINITION
+
 type Query {
   "A generic ping/pong test query."
   ping: String!
