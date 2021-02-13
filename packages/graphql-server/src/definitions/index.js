@@ -1,8 +1,11 @@
 const { gql } = require('apollo-server-express');
 
+const company = require('./company');
+
 module.exports = gql`
 
 scalar Date
+scalar BigInt
 
 type Query {
   "A generic ping/pong test query."
@@ -14,9 +17,24 @@ type Mutation {
   ping: String!
 }
 
+type PageInfo {
+  hasNextPage: Boolean!
+  hasPreviousPage: Boolean!
+  nextOffset: Int
+  previousOffset: Int
+}
+
+type StatementInfo {
+  query: String
+  where: String
+  orderBy: String
+  limit: Int
+  offset: Int
+}
+
 input SingleRecordQueryInput {
   "The ID of the record to retrieve."
-  id: Int!
+  id: BigInt!
   "When in strict mode (default), the query will throw an error when the item is not found."
   strict: Boolean = true
 }
@@ -31,5 +49,7 @@ input MultipleRecordsQueryInput {
   "The number of records to skip."
   offset: Int
 }
+
+${company}
 
 `;
