@@ -24,7 +24,7 @@ module.exports = merge(
       /**
        *
        */
-      async ping() {
+      ping() {
         return 'pong';
       },
     },
