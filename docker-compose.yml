@@ -1,6 +1,8 @@
 version: '3.7'
 
 x-env-defaults: &env
+  NEW_RELIC_ENABLED: ${NEW_RELIC_ENABLED-0}
+  NEW_RELIC_LICENSE_KEY: ${NEW_RELIC_LICENSE_KEY-(unset)}
   NODE_ENV: development
   TERMINUS_TIMEOUT: 1000
   TERMINUS_SHUTDOWN_DELAY: 0
@@ -22,7 +24,7 @@ x-node-defaults: &node
 services:
   graphql:
     <<: *node
-    working_dir: /services/graphql
+    working_dir: /gam/services/graphql
     entrypoint: ["yarn"]
     command: ["dev"]
     environment:
