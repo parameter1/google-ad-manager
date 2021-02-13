@@ -18,6 +18,7 @@
   "dependencies": {
     "@parameter1/google-ad-manager-auth": "^0.0.0",
     "@parameter1/utils": "^1.1.12",
+    "inflected": "^2.1.0",
     "soap": "^0.36.0"
   },
   "devDependencies": {

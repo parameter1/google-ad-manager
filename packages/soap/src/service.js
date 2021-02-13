@@ -1,5 +1,7 @@
 const soap = require('soap');
+const { pluralize } = require('inflected');
 const { getAsObject } = require('@parameter1/utils');
+const StatementBuilder = require('./utils/statement-builder');
 
 const ROOT_URI = 'https://www.google.com/apis/ads/publisher';
 
@@ -24,9 +26,48 @@ class GoogleAdManagerService {
     this.version = version;
     this.networkCode = networkCode;
     this.applicationName = applicationName;
+    this.pluralized = pluralize(name);
 
     this.auth = auth;
     this.wsdl = `${ROOT_URI}/${version}/${name}Service?wsdl`;
+  }
+
+  /**
+   * @todo not all services have this! determine how to make the right classes
+   */
+  async find({
+    where,
+    orderBy,
+    limit,
+    offset,
+  } = {}) {
+    const action = `get${this.pluralized}ByStatement`;
+    const statement = new StatementBuilder({
+      where,
+      orderBy,
+      limit,
+      offset,
+    });
+    const query = statement.build();
+    const { data } = await this.request(action, { filterStatement: { query } });
+    return {
+      ...data,
+      results: data.results || [],
+      statement: { query, ...statement.clauses },
+    };
+  }
+
+  /**
+   * @todo not all services have this! determine how to make the right classes
+   */
+  async findById(id) {
+    const action = `get${this.pluralized}ByStatement`;
+    const query = new StatementBuilder({ where: `id = ${id}`, limit: 1 }).build();
+    console.log(query);
+    const { data } = await this.request(action, { filterStatement: { query } });
+    const { results } = data;
+    if (results && results[0]) return results[0];
+    return null;
   }
 
   /**
