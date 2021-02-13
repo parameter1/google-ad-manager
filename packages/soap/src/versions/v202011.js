@@ -3,5 +3,6 @@ module.exports = {
   services: {
     Company: true,
     LineItem: true,
+    Order: true,
   },
 };
