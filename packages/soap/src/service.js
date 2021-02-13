@@ -63,7 +63,6 @@ class GoogleAdManagerService {
   async findById(id) {
     const action = `get${this.pluralized}ByStatement`;
     const query = new StatementBuilder({ where: `id = ${id}`, limit: 1 }).build();
-    console.log(query);
     const { data } = await this.request(action, { filterStatement: { query } });
     const { results } = data;
     if (results && results[0]) return results[0];
