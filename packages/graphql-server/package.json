@@ -1,0 +1,35 @@
+{
+  "name": "@parameter1/google-ad-manager-graphql-server",
+  "version": "0.0.0",
+  "description": "The GraphQL server library for the Google Ad Manager API",
+  "author": "Jacob Bare <jacob@parameter1.com>",
+  "homepage": "https://github.com/parameter1/google-ad-manager/tree/main/packages/graphql-server#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/parameter1/google-ad-manager.git",
+    "directory": "packages/graphql-server"
+  },
+  "license": "MIT",
+  "main": "index.js",
+  "scripts": {
+    "lint": "eslint --ext .js ./",
+    "test": "yarn lint"
+  },
+  "dependencies": {
+    "@parameter1/graphql-type-date": "^1.0.11",
+    "@parameter1/utils": "^1.1.12",
+    "apollo-server-express": "^2.21.0",
+    "envalid": "^7.0.0",
+    "express": "^4.17.1",
+    "graphql": "^15.5.0",
+    "lodash.merge": "^4.6.2"
+  },
+  "devDependencies": {
+    "eslint": "^7.20.0",
+    "eslint-config-airbnb-base": "^14.2.1",
+    "eslint-plugin-import": "^2.22.1"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}
