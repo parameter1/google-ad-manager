@@ -3,8 +3,13 @@ const { get, set, isFunction: isFn } = require('@parameter1/utils');
 const { STATUS_CODES } = require('http');
 const express = require('express');
 const schema = require('./schema');
+const createSoapClient = require('./soap');
 
 module.exports = ({
+  jsonKeyFilePath,
+  networkCode,
+  applicationName,
+
   path,
 
   context,
@@ -20,9 +25,17 @@ module.exports = ({
 } = {}) => {
   const app = express();
 
+  const soap = createSoapClient({ jsonKeyFilePath, networkCode, applicationName });
+
   const server = new ApolloServer({
     schema,
-    context,
+    context: async (...args) => {
+      const ctx = {
+        ...(isFn(context) ? await context(...args) : context),
+        soap,
+      };
+      return ctx;
+    },
     tracing,
     cacheControl,
     introspection,
