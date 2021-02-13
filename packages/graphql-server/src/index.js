@@ -9,6 +9,7 @@ module.exports = ({
   jsonKeyFilePath,
   networkCode,
   applicationName,
+  apiVersion,
 
   path,
 
@@ -25,7 +26,12 @@ module.exports = ({
 } = {}) => {
   const app = express();
 
-  const soap = createSoapClient({ jsonKeyFilePath, networkCode, applicationName });
+  const soap = createSoapClient({
+    jsonKeyFilePath,
+    networkCode,
+    applicationName,
+    apiVersion,
+  });
 
   const server = new ApolloServer({
     schema,
