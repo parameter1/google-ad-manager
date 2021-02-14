@@ -40,6 +40,8 @@ type Company {
   name: String!
   "Specifies what kind of company this is."
   type: CompanyTypeEnum!
+  "The date and time this company was last modified."
+  lastModifiedDateTime: GAMDateTime!
 }
 
 "Represents multiple companies."

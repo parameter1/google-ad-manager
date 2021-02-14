@@ -21,6 +21,8 @@ type Order {
   advertiserId: BigInt!
   "The Advertiser that owns this Order."
   advertiser: Company! @refOne(service: "Company", localField: "advertiserId")
+  "The date and time this order was last modified."
+  lastModifiedDateTime: GAMDateTime!
 }
 
 "Represents multiple orders."
