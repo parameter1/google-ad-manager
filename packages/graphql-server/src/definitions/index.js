@@ -6,8 +6,9 @@ const order = require('./order');
 
 module.exports = gql`
 
-scalar Date
 scalar BigInt
+scalar Date
+scalar GAMDateTime
 
 directive @find(service: String!) on FIELD_DEFINITION
 directive @findById(service: String!) on FIELD_DEFINITION
