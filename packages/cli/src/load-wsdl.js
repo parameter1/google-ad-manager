@@ -13,5 +13,5 @@ module.exports = async ({ url } = {}) => {
   const parsed = await new Promise((resolve, reject) => {
     parseString(xml, (e, data) => (e ? reject(e) : resolve(data)));
   });
-  return new WSDL(parsed);
+  return WSDL.fromRaw(parsed);
 };

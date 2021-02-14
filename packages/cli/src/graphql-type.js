@@ -10,6 +10,7 @@ const typeMap = {
 
 const buildAttr = (field) => {
   let type = typeMap[field.type];
+  if (field.multiple) type = `[${type}]`;
   if (field.required) type = `${type}!`;
   const lines = [];
   if (field.documentation) lines.push(`"${field.documentation}"`);
@@ -38,8 +39,7 @@ ${buildAttrs(type.fields)}
 module.exports = async ({ url } = {}) => {
   const wsdl = await loadWSDL({ url });
   const target = typeFromURL(url);
-  const primaryType = wsdl.getComplexType(target);
+  const primaryType = wsdl.getComplexType(target, true);
   if (!primaryType) throw new Error(`Unable to extract target type ${target} from ${url}`);
-  console.log(primaryType);
   return buildRootType(primaryType);
 };

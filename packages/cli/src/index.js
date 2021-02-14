@@ -14,6 +14,7 @@ const run = async () => {
   //   url: 'https://ads.google.com/apis/ads/publisher/v202011/LineItemService?wsdl',
   // });
   // log(def);
+  // return;
 
   const questions = [
     {

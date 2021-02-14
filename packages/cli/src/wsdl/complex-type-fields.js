@@ -1,12 +1,8 @@
 const WSDLComplexTypeField = require('./complex-type-field');
 
 class WSDLComplexTypeFields {
-  constructor(elements = []) {
-    this.map = elements.reduce((map, element) => {
-      const field = new WSDLComplexTypeField(element);
-      map.set(field.name, field);
-      return map;
-    }, new Map());
+  constructor({ map } = {}) {
+    this.map = map;
   }
 
   get(name) {
@@ -26,6 +22,15 @@ class WSDLComplexTypeFields {
       set.add(field.type);
       return set;
     }, new Set());
+  }
+
+  static fromRaw(elements = []) {
+    const fieldMap = elements.reduce((map, element) => {
+      const field = WSDLComplexTypeField.fromRaw(element);
+      map.set(field.name, field);
+      return map;
+    }, new Map());
+    return new WSDLComplexTypeFields({ map: fieldMap });
   }
 }
 
