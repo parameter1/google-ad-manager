@@ -1,4 +1,4 @@
-const getDocs = require('../utils/get-docs');
+const cleanDocs = require('../utils/clean-docs');
 const cleanType = require('../utils/clean-type');
 
 class WSDLTypeField {
@@ -20,7 +20,7 @@ class WSDLTypeField {
   static fromRaw(element = {}) {
     const { name } = element.$;
     const type = cleanType(element.$.type);
-    const documentation = getDocs(element);
+    const documentation = cleanDocs(element);
 
     const required = /attribute is required/i.test(documentation);
     const multiple = element.$.maxOccurs === 'unbounded';

@@ -1,6 +1,6 @@
 const { get, getAsArray } = require('@parameter1/utils');
 const cleanType = require('../utils/clean-type');
-const getDocs = require('../utils/get-docs');
+const cleanDocs = require('../utils/clean-docs');
 const WSDLTypeFields = require('./fields');
 
 class WSDLType {
@@ -28,7 +28,7 @@ class WSDLType {
 
   static fromRaw(type = {}) {
     const name = cleanType(type.$.name);
-    const documentation = getDocs(type);
+    const documentation = cleanDocs(type);
 
     let enumeration = [];
     const restriction = get(type, 'restriction.0');
@@ -39,7 +39,7 @@ class WSDLType {
       if (!enumArr.length) throw new Error(`Simple type ${name} did not provide any enumerated values.`);
       enumeration = enumArr.map((en) => ({
         value: en.$.value,
-        documentation: getDocs(en),
+        documentation: cleanDocs(en),
       }));
     }
 
