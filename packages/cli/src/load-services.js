@@ -1,5 +1,5 @@
+const { ROOT_API_PATH, ROOT_URI } = require('@parameter1/google-ad-manager-constants');
 const loadApiInfo = require('./load-api-info');
-const { ROOT_API_PATH, ROOT_URI } = require('./constants');
 
 module.exports = async ({ version } = {}) => {
   const $ = await loadApiInfo();

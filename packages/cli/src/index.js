@@ -3,19 +3,11 @@ const loadServices = require('./load-services');
 const loadVersions = require('./load-versions');
 const graphQLType = require('./graphql-type');
 
-const { log } = console;
-
 process.on('unhandledRejection', (e) => {
   throw e;
 });
 
 const run = async () => {
-  // const def = await graphQLType({
-  //   url: 'https://ads.google.com/apis/ads/publisher/v202011/LineItemService?wsdl',
-  // });
-  // log(def);
-  // return;
-
   const questions = [
     {
       type: 'checkbox',
@@ -45,16 +37,24 @@ const run = async () => {
       },
       when: (answers) => answers.actions.includes('generateGraphQL'),
     },
+    {
+      type: 'input',
+      name: 'directory',
+      message: 'Enter a directory to save the generated files to',
+      when: (answers) => answers.actions.includes('generateGraphQL'),
+    },
   ];
 
-  const { actions, version, services } = await inquirer.prompt(questions);
+  const {
+    actions,
+    version,
+    services,
+  } = await inquirer.prompt(questions);
 
   if (actions.includes('generateGraphQL')) {
-    const defs = await Promise.all(services.map(async (url) => {
-      const def = await graphQLType({ version, url });
-      return def;
+    await Promise.all(services.map(async (url) => {
+      await graphQLType({ version, url });
     }));
-    log(defs.join('\n\n\n'));
   }
 };
 

@@ -32,7 +32,7 @@ enum CompanyTypeEnum {
   UNKNOWN
 }
 
-"Represents an agency, a single advertiser or an entire advertising network."
+"Represents an [agency](https://google.com), a single {@code advertiser} or an entire advertising network."
 type Company {
   "Uniquely identifies the Company."
   id: BigInt!

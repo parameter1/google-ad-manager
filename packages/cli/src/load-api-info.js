@@ -1,6 +1,6 @@
 const cheerio = require('cheerio');
 const fetch = require('node-fetch');
-const { ROOT_URI } = require('./constants');
+const { ROOT_URI } = require('@parameter1/google-ad-manager-constants');
 
 let promise;
 

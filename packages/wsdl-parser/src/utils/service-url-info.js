@@ -1,4 +1,4 @@
-const { ROOT_API_PATH } = require('../../constants');
+const { ROOT_API_PATH } = require('@parameter1/google-ad-manager-constants');
 
 module.exports = (url) => {
   const parsed = new URL(url);
