@@ -15,7 +15,15 @@ class WSDLType {
     this.documentation = documentation;
     this.extension = extension || null;
     this.fields = fields || new WSDLTypeFields();
-    this.enumeration = enumeration || [];
+    this.enumeration = (enumeration || []).sort((a, b) => {
+      if (a.value > b.value) return 1;
+      if (a.value < b.value) return -1;
+      return 0;
+    });
+  }
+
+  get isEnumerated() {
+    return this.enumeration.length;
   }
 
   static fromRaw(type = {}) {
