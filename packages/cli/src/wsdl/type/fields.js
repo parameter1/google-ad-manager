@@ -1,6 +1,14 @@
 const WSDLTypeField = require('./field');
 
 class WSDLTypeFields extends Map {
+  filter(...args) {
+    return this.toArray().filter(...args);
+  }
+
+  map(...args) {
+    return this.toArray().map(...args);
+  }
+
   toArray() {
     return Array.from(this).map(([, field]) => field);
   }
