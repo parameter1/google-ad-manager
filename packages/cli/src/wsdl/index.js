@@ -1,16 +1,31 @@
+const fetch = require('node-fetch');
+const { parseString } = require('xml2js');
+const { getAsObject } = require('@parameter1/utils');
 const WSDLType = require('./type');
 const WSDLTypeFields = require('./type/fields');
 const WSDLTypes = require('./types');
 const cleanType = require('./utils/clean-type');
+const infoFromURL = require('./utils/service-url-info');
 
 class WSDL {
   /**
    *
    * @param {object} params
+   * @param {string} params.url The service URL, e.g. `https://ads.google.com/apis/ads/publisher/v202011/CompanyService`
    * @param {WSDLTypes} params.types
    */
-  constructor({ types } = {}) {
+  constructor({ url, types } = {}) {
+    if (!url) throw new Error('The WSDL service URL is required.');
+    const info = infoFromURL(url);
+    this.url = url;
+    this.name = info.name;
+    this.version = info.version;
+    this.primaryTypeName = info.primaryType;
     this.types = types;
+  }
+
+  getPrimaryType() {
+    return this.getType(this.primaryTypeName, true);
   }
 
   getType(name, merged = false) {
@@ -45,9 +60,19 @@ class WSDL {
     return this.getTypeExtensions(type.extension, tree);
   }
 
-  static fromRaw(data = {}) {
-    const types = WSDLTypes.fromRaw(data);
-    return new WSDL({ types });
+  static async loadFromUrl(url) {
+    const res = await fetch(url);
+    const xml = await res.text();
+    return WSDL.loadFromXML(xml);
+  }
+
+  static async loadFromXML(xml) {
+    const parsed = await new Promise((resolve, reject) => {
+      parseString(xml, (e, data) => (e ? reject(e) : resolve(data)));
+    });
+    const { location } = getAsObject(parsed, 'wsdl:definitions.wsdl:service.0.wsdl:port.0.wsdlsoap:address.0.$');
+    const types = WSDLTypes.fromRaw(parsed);
+    return new WSDL({ url: location, types });
   }
 }
 
