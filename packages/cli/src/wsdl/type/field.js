@@ -1,7 +1,7 @@
-const getDocs = require('./utils/get-docs');
-const cleanType = require('./utils/clean-type');
+const getDocs = require('../utils/get-docs');
+const cleanType = require('../utils/clean-type');
 
-class WSDLComplexTypeField {
+class WSDLTypeField {
   constructor({
     name,
     type,
@@ -24,7 +24,7 @@ class WSDLComplexTypeField {
     const required = /attribute is required/i.test(documentation);
     const multiple = element.$.maxOccurs === 'unbounded';
 
-    return new WSDLComplexTypeField({
+    return new WSDLTypeField({
       name,
       type,
       documentation,
@@ -34,4 +34,4 @@ class WSDLComplexTypeField {
   }
 }
 
-module.exports = WSDLComplexTypeField;
+module.exports = WSDLTypeField;

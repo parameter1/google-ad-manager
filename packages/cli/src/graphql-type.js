@@ -2,10 +2,11 @@ const loadWSDL = require('./load-wsdl');
 const typeFromURL = require('./type-from-url');
 
 const typeMap = {
+  'xsd:double': 'Float',
   'xsd:long': 'BigInt',
   'xsd:string': 'String',
   'xsd:int': 'Int',
-  'tns:DateTime': 'GAMDateTime',
+  DateTime: 'GAMDateTime',
 };
 
 const buildAttr = (field) => {
@@ -39,7 +40,7 @@ ${buildAttrs(type.fields)}
 module.exports = async ({ url } = {}) => {
   const wsdl = await loadWSDL({ url });
   const target = typeFromURL(url);
-  const primaryType = wsdl.getComplexType(target, true);
+  const primaryType = wsdl.getType(target, true);
   if (!primaryType) throw new Error(`Unable to extract target type ${target} from ${url}`);
   return buildRootType(primaryType);
 };
