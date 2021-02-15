@@ -24,6 +24,18 @@ class WSDL {
     });
   }
 
+  getAllReferencedTypesFor(name, types = new WSDLTypes()) {
+    if (types.has(name)) return types;
+    const type = this.getType(name, true);
+    if (!type) throw new Error(`No type found for '${name}'`);
+    types.set(name, type);
+    const refs = type.fields.getAllReferencedTypes('object');
+    refs.forEach((refName) => {
+      this.getAllReferencedTypesFor(refName, types);
+    });
+    return types;
+  }
+
   getTypeExtensions(name, tree = []) {
     const n = cleanType(name);
     const type = this.types.get(n);

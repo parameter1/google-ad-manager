@@ -13,7 +13,7 @@ class WSDLTypeFields extends Map {
     return Array.from(this).map(([, field]) => field);
   }
 
-  getAllTypes(referenceType) {
+  getAllReferencedTypes(referenceType) {
     return this.toArray().reduce((set, field) => {
       if (!referenceType) {
         set.add(field.type);
