@@ -11,6 +11,7 @@ class WSDLTypeField {
   }) {
     this.name = name;
     this.type = type;
+    this.referenceType = /^xsd:/.test(type) ? 'scalar' : 'object';
     this.documentation = documentation;
     this.required = required;
     this.multiple = multiple;
