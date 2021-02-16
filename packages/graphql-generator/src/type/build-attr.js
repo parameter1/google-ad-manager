@@ -30,7 +30,7 @@ module.exports = (field, referencedTypes, cleanDocs) => {
   if (field.multiple) type = `[${type}]`;
   if (field.required) type = `${type}!`;
   const lines = [];
-  if (field.documentation) lines.push(`"${cleanDocs(field.documentation)}"`);
+  if (field.documentation) lines.push(`"""\n${cleanDocs(field.documentation)}\n"""`);
   lines.push(`${field.name}: ${type}`);
   return lines.map((line) => `  ${line}`).join('\n');
 };
