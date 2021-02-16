@@ -1,4 +1,4 @@
-const CompanyService = require('./company');
+const Service = require('./service');
 
 /**
  * THIS FILE IS GENERATED. DO NOT EDIT.
@@ -9,5 +9,10 @@ const CompanyService = require('./company');
  * @param {GoogleAuth} params.auth The Google authetication object (contains the access token)
  */
 module.exports = ({ networkCode, applicationName, auth } = {}) => ({
-  CompanyService: new CompanyService({ networkCode, applicationName, auth }),
+  CompanyService: new Service({
+    url: 'https://www.google.com/apis/ads/publisher/v202011/CompanyService',
+    networkCode,
+    applicationName,
+    auth,
+  }),
 });
