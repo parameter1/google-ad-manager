@@ -21,6 +21,7 @@
     "@parameter1/utils": "^1.1.12",
     "cheerio": "^1.0.0-rc.5",
     "inquirer": "^7.3.3",
+    "mkdirp": "^1.0.4",
     "node-fetch": "^2.6.1",
     "xml2js": "^0.4.23"
   },
