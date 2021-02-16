@@ -7,7 +7,7 @@
  */
 module.exports = ({ value, documentation }, cleanDocs) => {
   const lines = [];
-  if (documentation) lines.push(`"""\n${cleanDocs(documentation)}\n"""`);
+  if (documentation) lines.push(`"${cleanDocs(documentation)}"`);
   lines.push(value);
   return lines.map((line) => `  ${line}`).join('\n');
 };
