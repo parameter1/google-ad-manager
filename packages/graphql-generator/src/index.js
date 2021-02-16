@@ -10,8 +10,7 @@ const buildTypes = require('./type');
  * @param {string[]} definitions.enums
  * @param {string[]} definitions.types
  */
-const buildFile = ({ enums, types }) => `
-const { gql } = require('apollo-server-express');
+const buildFile = ({ enums, types }) => `const { gql } = require('apollo-server-express');
 
 module.exports = gql\`
 ${types.join('')}

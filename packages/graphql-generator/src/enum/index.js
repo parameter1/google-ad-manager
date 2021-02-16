@@ -9,7 +9,7 @@ const buildValue = require('./build-value');
  */
 module.exports = ({ type, cleanDocs } = {}) => `
 "${cleanDocs(type.documentation)}"
-enum ${createName(type.name)}Enum {
+enum ${createName(type.name)} {
 ${type.enumeration.map((enumer) => buildValue(enumer, cleanDocs)).join('\n')}
 }
 `;
