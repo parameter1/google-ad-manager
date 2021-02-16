@@ -1,4 +1,5 @@
 const { SchemaDirectiveVisitor } = require('apollo-server-express');
+const { StatementBuilder } = require('@parameter1/google-ad-manager-soap/utils');
 
 class FindDirective extends SchemaDirectiveVisitor {
   /**
@@ -10,30 +11,31 @@ class FindDirective extends SchemaDirectiveVisitor {
     field.resolve = async (_, { input }, { soap }) => {
       const service = soap.service(this.args.service);
 
-      const {
-        where,
-        orderBy,
-        limit,
-        offset,
-      } = input;
-
-      const { totalResultSetSize: totalCount, results, statement } = await service.find({
-        where,
-        orderBy,
-        limit,
-        offset,
+      const statement = new StatementBuilder({
+        where: input.where,
+        orderBy: input.orderBy,
+        limit: input.limit,
+        offset: input.offset,
       });
+      const query = statement.build();
+      const { data } = await service.request(this.args.method, { filterStatement: { query } });
+      const results = data.results || [];
+      const { totalResultSetSize: totalCount } = data;
+      const { clauses } = statement;
 
-      const hasNextPage = totalCount > results.length + statement.offset;
-      const hasPreviousPage = Boolean(statement.offset);
-      const previousOffset = statement.offset - statement.limit;
+      const hasNextPage = totalCount > results.length + clauses.offset;
+      const hasPreviousPage = Boolean(clauses.offset);
+      const previousOffset = clauses.offset - clauses.limit;
       return {
         totalCount,
         nodes: results,
-        statement,
+        statement: {
+          query,
+          ...clauses,
+        },
         pageInfo: {
           hasNextPage,
-          ...(hasNextPage && { nextOffset: statement.offset + statement.limit }),
+          ...(hasNextPage && { nextOffset: clauses.offset + clauses.limit }),
           hasPreviousPage,
           ...(hasPreviousPage && { previousOffset: previousOffset > 0 ? previousOffset : 0 }),
         },

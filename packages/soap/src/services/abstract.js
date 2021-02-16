@@ -1,72 +1,34 @@
 const soap = require('soap');
-const { pluralize } = require('inflected');
 const { getAsObject } = require('@parameter1/utils');
-const StatementBuilder = require('./utils/statement-builder');
-
-const ROOT_URI = 'https://www.google.com/apis/ads/publisher';
+const { serviceUrlInfo } = require('@parameter1/google-ad-manager-wsdl-parser/utils');
 
 class GoogleAdManagerService {
   /**
    *
    * @param {object} params
-   * @param {string} params.name The service name, e.g. Company or LineItem
-   * @param {string} params.version The API version in use, e.g. v2020211
+   * @param {string} params.url The service URL, e.g. CompanyService or LineItemService
    * @param {string} params.networkCode The Google Ad Manager network code to access
    * @param {string} params.applicationName The application name.
    * @param {GoogleAuth} params.auth The Google authetication object (contains the access token)
    */
   constructor({
-    name,
-    version,
+    url,
     networkCode,
     applicationName,
     auth,
   } = {}) {
-    this.name = name;
-    this.version = version;
+    if (!url) throw new Error('The service URL is required.');
+    this.url = url;
+    const info = serviceUrlInfo(url);
+
+    this.name = info.name;
+    this.version = info.version;
     this.networkCode = networkCode;
     this.applicationName = applicationName;
-    this.pluralized = pluralize(name);
 
     this.auth = auth;
-    this.wsdl = `${ROOT_URI}/${version}/${name}Service?wsdl`;
-  }
-
-  /**
-   * @todo not all services have this! determine how to make the right classes
-   */
-  async find({
-    where,
-    orderBy,
-    limit,
-    offset,
-  } = {}) {
-    const action = `get${this.pluralized}ByStatement`;
-    const statement = new StatementBuilder({
-      where,
-      orderBy,
-      limit,
-      offset,
-    });
-    const query = statement.build();
-    const { data } = await this.request(action, { filterStatement: { query } });
-    return {
-      ...data,
-      results: data.results || [],
-      statement: { query, ...statement.clauses },
-    };
-  }
-
-  /**
-   * @todo not all services have this! determine how to make the right classes
-   */
-  async findById(id) {
-    const action = `get${this.pluralized}ByStatement`;
-    const query = new StatementBuilder({ where: `id = ${id}`, limit: 1 }).build();
-    const { data } = await this.request(action, { filterStatement: { query } });
-    const { results } = data;
-    if (results && results[0]) return results[0];
-    return null;
+    this.wsdl = info.toWSDL();
+    this.namespace = info.namespace;
   }
 
   /**
@@ -113,7 +75,7 @@ class GoogleAdManagerService {
             networkCode: this.networkCode,
             applicationName: this.applicationName,
           },
-        }, '', 'ns1', `${ROOT_URI}/${this.version}`);
+        }, '', 'ns1', this.namespace);
       }
 
       // add the bearer access token.

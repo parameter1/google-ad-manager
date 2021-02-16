@@ -2,7 +2,7 @@ const { ApolloServer } = require('apollo-server-express');
 const { get, set, isFunction: isFn } = require('@parameter1/utils');
 const { STATUS_CODES } = require('http');
 const express = require('express');
-const schema = require('./schema');
+const schemas = require('./schemas');
 const createSoapClient = require('./soap');
 
 module.exports = ({
@@ -30,11 +30,11 @@ module.exports = ({
     jsonKeyFilePath,
     networkCode,
     applicationName,
-    apiVersion,
+    version: apiVersion,
   });
 
   const server = new ApolloServer({
-    schema,
+    schema: schemas(apiVersion),
     context: async (...args) => {
       const ctx = {
         ...(isFn(context) ? await context(...args) : context),

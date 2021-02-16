@@ -1,19 +1,15 @@
 const { gql } = require('apollo-server-express');
 
-const company = require('./company');
-const lineItem = require('./line-item');
-const order = require('./order');
-
 module.exports = gql`
 
 scalar BigInt
 scalar Date
 scalar GAMDateTime
 
-directive @find(service: String!) on FIELD_DEFINITION
-directive @findById(service: String!) on FIELD_DEFINITION
+directive @find(service: String!, method: String!) on FIELD_DEFINITION
+directive @findById(service: String!, method: String!) on FIELD_DEFINITION
 
-directive @refOne(service: String!, localField: String) on FIELD_DEFINITION
+# directive @refOne(service: String!, localField: String) on FIELD_DEFINITION
 
 type Query {
   "A generic ping/pong test query."
@@ -57,9 +53,5 @@ input MultipleRecordsQueryInput {
   "The number of records to skip."
   offset: Int
 }
-
-${company}
-${lineItem}
-${order}
 
 `;
