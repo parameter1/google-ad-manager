@@ -32,7 +32,7 @@ class WSDL {
     if (!merged) return this.types.get(cleanType(name));
     const tree = this.getTypeExtensions(name);
     const fields = tree.reverse().reduce((arr, type) => [...arr, ...type.fields], []);
-    const primary = tree.shift();
+    const primary = tree.pop();
     return new WSDLType({
       ...primary,
       fields: new WSDLTypeFields(fields),

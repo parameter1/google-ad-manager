@@ -1,7 +1,7 @@
+const graphQLGenerator = require('@parameter1/google-ad-manager-graphql-generator');
 const inquirer = require('inquirer');
 const loadServices = require('./load-services');
 const loadVersions = require('./load-versions');
-const graphQLType = require('./graphql-type');
 
 process.on('unhandledRejection', (e) => {
   throw e;
@@ -53,7 +53,7 @@ const run = async () => {
 
   if (actions.includes('generateGraphQL')) {
     await Promise.all(services.map(async (url) => {
-      await graphQLType({ version, url });
+      await graphQLGenerator({ version, url });
     }));
   }
 };
