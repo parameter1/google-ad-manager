@@ -79,14 +79,13 @@ class WSDL {
   getAllReferencedTypesFor(name, types = new WSDLTypes()) {
     const names = isArray(name) ? name : [name];
     names.forEach((n) => {
-      if (types.has(n)) return;
+      if (/^xsd:/.test(n)) return; // skip scalars
+      if (types.has(n)) return; // skip if already loaded
       const type = this.getType(n, true);
       if (!type) throw new Error(`No type found for '${n}'`);
       types.set(n, type);
       const refs = type.fields.getAllReferencedTypes('object');
-      refs.forEach((refName) => {
-        this.getAllReferencedTypesFor(refName, types);
-      });
+      this.getAllReferencedTypesFor([...refs], types);
     });
     return types;
   }
