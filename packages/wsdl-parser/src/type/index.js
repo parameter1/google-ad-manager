@@ -7,12 +7,14 @@ class WSDLType {
   constructor({
     name,
     documentation,
+    abstract,
     extension,
     fields,
     enumeration,
   } = {}) {
     this.name = name;
     this.documentation = documentation;
+    this.abstract = abstract || false;
     this.extension = extension || null;
     this.fields = fields || new WSDLTypeFields();
     this.enumeration = (enumeration || []).sort((a, b) => {
@@ -28,6 +30,7 @@ class WSDLType {
 
   static fromRaw(type = {}) {
     const name = cleanType(type.$.name);
+    const abstract = type.$.abstract === 'true';
     const documentation = cleanDocs(type);
 
     let enumeration = [];
@@ -58,6 +61,7 @@ class WSDLType {
     return new WSDLType({
       name,
       documentation,
+      abstract,
       extension,
       fields,
       enumeration,

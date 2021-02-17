@@ -7,6 +7,7 @@ class WSDLTypeField {
     type,
     documentation,
     required,
+    readonly,
     multiple,
   }) {
     this.name = name;
@@ -14,6 +15,7 @@ class WSDLTypeField {
     this.referenceType = /^xsd:/.test(type) ? 'scalar' : 'object';
     this.documentation = documentation;
     this.required = required;
+    this.readonly = readonly;
     this.multiple = multiple;
   }
 
@@ -23,6 +25,7 @@ class WSDLTypeField {
     const documentation = cleanDocs(element);
 
     const required = /attribute is required/i.test(documentation);
+    const readonly = /read-only/i.test(documentation);
     const multiple = element.$.maxOccurs === 'unbounded';
 
     return new WSDLTypeField({
@@ -30,6 +33,7 @@ class WSDLTypeField {
       type,
       documentation,
       required,
+      readonly,
       multiple,
     });
   }

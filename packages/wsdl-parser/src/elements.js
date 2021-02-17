@@ -1,19 +1,18 @@
 const { getAsArray } = require('@parameter1/utils');
+const ArrayLikeMap = require('./array-like-map');
 const WSDLElement = require('./element');
 
 const ELEMENT_TYPE_PATH = 'wsdl:definitions.wsdl:types.0.schema.0.element';
 
-class WSDLElements extends Map {
-  filter(...args) {
-    return this.toArray().filter(...args);
-  }
-
-  map(...args) {
-    return this.toArray().map(...args);
-  }
-
-  toArray() {
-    return Array.from(this).map(([, field]) => field);
+class WSDLElements extends ArrayLikeMap {
+  getReturnValueTypesFor(name) {
+    const element = this.get(name);
+    if (!element) throw new Error(`No element found for ${name}`);
+    const types = new Set();
+    element.fields.forEach((field) => {
+      if (field.name === 'rval') types.add(field.type);
+    });
+    return [...types];
   }
 
   getAllReturnValueTypes() {

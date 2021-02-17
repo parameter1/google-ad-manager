@@ -1,19 +1,8 @@
 const { getAsArray } = require('@parameter1/utils');
+const ArrayLikeMap = require('./array-like-map');
 const WSDLOperation = require('./operation');
 
-class WSDLOperations extends Map {
-  filter(...args) {
-    return this.toArray().filter(...args);
-  }
-
-  map(...args) {
-    return this.toArray().map(...args);
-  }
-
-  toArray() {
-    return Array.from(this).map(([, field]) => field);
-  }
-
+class WSDLOperations extends ArrayLikeMap {
   static fromRaw(data = {}) {
     const ops = getAsArray(data, 'wsdl:definitions.wsdl:binding.0.wsdl:operation');
 
