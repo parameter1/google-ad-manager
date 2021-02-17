@@ -1,4 +1,3 @@
-const createEnumName = require('../enum/create-name');
 const scalars = require('../utils/scalar-type-map');
 
 /**
@@ -7,16 +6,16 @@ const scalars = require('../utils/scalar-type-map');
 * @param {WSDLTypeFields} referencedTypes
 * @param {function} cleanDocs
 */
-module.exports = (field, referencedTypes, cleanDocs) => {
+module.exports = (field, cleanDocs) => {
   let type;
   if (scalars[field.type]) {
     // explicitally mapped
     type = scalars[field.type];
   } else {
-    // either an enum or another object type
-    const typeObj = referencedTypes.get(field.type);
-    if (!typeObj) throw new Error(`Unable to find a reference type for ${field.type}`);
-    type = typeObj.isEnumerated ? createEnumName(typeObj.name) : field.type;
+    // Force a JSON input type.
+    // Because the SOAP supports empty objects (e.g. ActivateLineItem: {} <ActiveLineItem />)
+    // we cannot strictly type the inputs because graph doesn't support empty input objects
+    type = 'JSONObject';
   }
   if (field.multiple) type = `[${type}]`;
   if (field.required) type = `${type}!`;

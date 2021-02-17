@@ -1,5 +1,6 @@
 const createName = require('./create-name');
 const buildValue = require('./build-value');
+const fileHash = require('../utils/file-hash');
 
 /**
  *
@@ -7,9 +8,16 @@ const buildValue = require('./build-value');
  * @param {WSDLType} params.type
  * @param {function} params.cleanDocs
  */
-module.exports = ({ type, cleanDocs } = {}) => `
-"${cleanDocs(type.documentation)}"
-enum ${createName(type.name)} {
-${type.enumeration.map((enumer) => buildValue(enumer, cleanDocs)).join('\n')}
-}
-`;
+module.exports = ({ type, cleanDocs } = {}) => {
+  const name = createName(type.name);
+  const lines = [];
+  lines.push(`"${cleanDocs(type.documentation)}"`);
+  lines.push(`enum ${name} {`);
+  type.enumeration.forEach((enumer) => {
+    buildValue(enumer, cleanDocs).forEach((line) => lines.push(`  ${line}`));
+  });
+  lines.push('}');
+
+  const contents = lines.join('\n');
+  return { name, hash: fileHash(contents), contents };
+};
