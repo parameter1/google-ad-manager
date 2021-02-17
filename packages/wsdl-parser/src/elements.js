@@ -16,6 +16,16 @@ class WSDLElements extends Map {
     return Array.from(this).map(([, field]) => field);
   }
 
+  getAllReturnValueTypes() {
+    const types = new Set();
+    this.forEach((element) => {
+      element.fields.forEach((field) => {
+        if (field.name === 'rval') types.add(field.type);
+      });
+    });
+    return [...types];
+  }
+
   static fromRaw(data = {}) {
     // for now, skip elements associated with an object type
     const elements = getAsArray(data, ELEMENT_TYPE_PATH).filter((element) => {
