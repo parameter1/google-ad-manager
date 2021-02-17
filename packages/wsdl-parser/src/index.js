@@ -1,6 +1,9 @@
 const fetch = require('node-fetch');
 const { parseString } = require('xml2js');
 const { getAsObject } = require('@parameter1/utils');
+const { pluralize } = require('inflected');
+const WSDLElements = require('./elements');
+const WSDLOperations = require('./operations');
 const WSDLType = require('./type');
 const WSDLTypeFields = require('./type/fields');
 const WSDLTypes = require('./types');
@@ -13,19 +16,29 @@ class WSDL {
    * @param {object} params
    * @param {string} params.url The service URL, e.g. `https://ads.google.com/apis/ads/publisher/v202011/CompanyService`
    * @param {WSDLTypes} params.types
+   * @param {WSDLElements} params.elements
+   * @param {WSDLOperations} params.operations
    */
-  constructor({ url, types } = {}) {
+  constructor({
+    url,
+    types,
+    elements,
+    operations,
+  } = {}) {
     if (!url) throw new Error('The WSDL service URL is required.');
     const info = infoFromURL(url);
     this.url = url;
     this.name = info.name;
+    this.shortName = info.shortName;
     this.version = info.version;
-    this.primaryTypeName = info.primaryType;
+    this.pluralized = pluralize(info.shortName);
     this.types = types;
+    this.elements = elements;
+    this.operations = operations;
   }
 
-  getPrimaryType() {
-    return this.getType(this.primaryTypeName, true);
+  getByStatementOps() {
+    return this.operations.filter((op) => /get.+?ByStatement/.test(op.name));
   }
 
   getType(name, merged = false) {
@@ -72,7 +85,14 @@ class WSDL {
     });
     const { location } = getAsObject(parsed, 'wsdl:definitions.wsdl:service.0.wsdl:port.0.wsdlsoap:address.0.$');
     const types = WSDLTypes.fromRaw(parsed);
-    return new WSDL({ url: location, types });
+    const elements = WSDLElements.fromRaw(parsed);
+    const operations = WSDLOperations.fromRaw(parsed);
+    return new WSDL({
+      url: location,
+      elements,
+      types,
+      operations,
+    });
   }
 }
 

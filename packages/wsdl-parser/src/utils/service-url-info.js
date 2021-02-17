@@ -2,11 +2,10 @@ const { ROOT_URI, ROOT_API_PATH } = require('@parameter1/google-ad-manager-const
 
 module.exports = (url) => {
   const parsed = new URL(url);
-  const [, primaryType] = /\/([a-z]+)service$/i.exec(parsed.pathname);
   const [version, name] = parsed.pathname.replace(`/${ROOT_API_PATH}/`, '').split('/');
   return {
     name,
-    primaryType,
+    shortName: name.replace(/Service$/, ''),
     version,
     parsed,
     namespace: `${ROOT_URI}/${version}`,
