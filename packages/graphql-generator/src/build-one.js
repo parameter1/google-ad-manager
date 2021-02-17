@@ -75,7 +75,7 @@ module.exports = async ({ url } = {}) => {
     name: wsdl.name,
     shortName: wsdl.shortName,
     filename,
-    definitions,
+    ...definitions,
     queries,
     mutations,
   };
