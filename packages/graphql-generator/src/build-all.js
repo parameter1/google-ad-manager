@@ -57,7 +57,7 @@ module.exports = async ({ urls } = {}) => {
   index.push(
     '// THIS FILE IS GENREATED. DO NOT EDIT.',
     "const { gql } = require('apollo-server-express');\n",
-    "const globalDefinitions = require('../../../definitions')",
+    "const globalDefinitions = require('../../../definitions');",
   );
 
   index.push(...filenames.map(({ filename, varName }) => `const ${varName} = require('./${filename}');`));
