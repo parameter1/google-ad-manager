@@ -39,8 +39,10 @@ module.exports = async ({ url } = {}) => {
     const returnField = wsdl.getReturnFieldForOperation(operationName);
     // save all return types. will be used to recrusively build types + enums
     returnTypeNames.add(returnField.type);
+    const isMutation = mutationPrefixes.some((prefix) => operationName.startsWith(prefix));
 
     const built = buildQuery({
+      opType: isMutation ? 'Mutation' : 'Query',
       service: wsdl.shortName,
       operationName,
       element,
@@ -48,7 +50,6 @@ module.exports = async ({ url } = {}) => {
       returnField,
       cleanDocs,
     });
-    const isMutation = mutationPrefixes.some((prefix) => operationName.startsWith(prefix));
     const map = isMutation ? mutations : queries;
     map.set(built.name, built);
   });
