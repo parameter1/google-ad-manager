@@ -17,7 +17,7 @@ module.exports = async ({ urls } = {}) => {
         const loaded = map.get(name);
         const toSet = {
           key,
-          target: loaded && loaded.count > 1 ? 'common.js' : result.filename,
+          filename: loaded && loaded.count > 1 ? 'common.js' : result.filename,
           count: loaded ? loaded.count + 1 : 1,
           hashes: loaded ? loaded.hashes.add(hash) : new Set([hash]),
           contents,
@@ -28,11 +28,18 @@ module.exports = async ({ urls } = {}) => {
   });
 
   const itemMap = new Map();
-  map.forEach(({ target, contents }) => {
-    const items = itemMap.has(target) ? itemMap.get(target) : [];
-    items.push(contents);
-    itemMap.set(target, items);
-  });
+  Array
+    .from(map)
+    .map(([name, o]) => ({ name, ...o }))
+    .sort((a, b) => {
+      if (a.name > b.name) return 1;
+      if (a.name < b.name) return -1;
+      return 0;
+    }).forEach(({ filename, contents }) => {
+      const items = itemMap.has(filename) ? itemMap.get(filename) : [];
+      items.push(contents);
+      itemMap.set(filename, items);
+    });
 
   const fileMap = new Map();
   let filenames = [];
