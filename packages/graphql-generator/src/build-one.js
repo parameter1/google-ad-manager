@@ -58,8 +58,10 @@ module.exports = async ({ url } = {}) => {
   // This essentially finds all types used by this service.
   const referencedTypes = wsdl.getAllReferencedTypesFor([...returnTypeNames]);
   // Skip Date and DateTime types... these will be treated as scalars
+  // Skip abstract types... refs will be treated as JSONObject scalars
   const skip = ['Date', 'DateTime'];
-  const filteredTypes = referencedTypes.filter((type) => !skip.includes(type.name));
+  const filteredTypes = referencedTypes
+    .filter((type) => !skip.includes(type.name) && !type.abstract);
 
   const definitions = filteredTypes.reduce((o, type) => {
     if (type.enumeration.length) {

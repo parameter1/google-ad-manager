@@ -17,6 +17,8 @@ module.exports = (field, referencedTypes, cleanDocs) => {
     const typeObj = referencedTypes.get(field.type);
     if (!typeObj) throw new Error(`Unable to find a reference type for ${field.type}`);
     type = typeObj.isEnumerated ? createEnumName(typeObj.name) : field.type;
+    // use generic JSONObject scalar when referenced type is abstract
+    if (typeObj.abstract) type = 'JSONObject';
   }
   if (field.multiple) type = `[${type}]`;
   if (field.required) type = `${type}!`;
