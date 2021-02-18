@@ -32,21 +32,21 @@ const run = async () => {
       },
       when: (answers) => answers.actions.includes('generateGraphQL'),
     },
-    {
-      type: 'checkbox',
-      name: 'services',
-      message: 'Which services would you like to process?',
-      choices: async ({ version }) => {
-        const services = await loadServices({ version });
-        return services;
-      },
-      when: (answers) => answers.actions.includes('generateGraphQL'),
-    },
+    // {
+    //   type: 'checkbox',
+    //   name: 'services',
+    //   message: 'Which services would you like to process?',
+    //   choices: async ({ version }) => {
+    //     const services = await loadServices({ version });
+    //     return services;
+    //   },
+    //   when: (answers) => answers.actions.includes('generateGraphQL'),
+    // },
     {
       type: 'input',
       name: 'directory',
       message: 'Enter a directory to save the generated files to',
-      default: () => path.resolve(__dirname, '../../graphql-server/src/definitions'),
+      default: (answers) => path.resolve(__dirname, `../../graphql-server/src/schemas/${answers.version}/definitions`),
       when: (answers) => answers.actions.includes('generateGraphQL'),
     },
   ];
@@ -54,13 +54,16 @@ const run = async () => {
   const {
     actions,
     version,
-    services,
     directory,
   } = await inquirer.prompt(questions);
 
   if (actions.includes('generateGraphQL')) {
-    await Promise.all(services.map(async (url) => {
-      const { filename, contents } = await graphQLGenerator({ version, url });
+    const services = await loadServices({ version });
+    const fileMap = await graphQLGenerator
+      .buildAll({ urls: services.map(({ value: url }) => url) });
+    const files = Array.from(fileMap).map(([filename, contents]) => ({ filename, contents }));
+
+    await Promise.all(files.map(async ({ filename, contents }) => {
       const location = path.resolve(directory, filename);
       await mkdirp(path.dirname(location));
       await writeFile(location, contents, 'utf8');
