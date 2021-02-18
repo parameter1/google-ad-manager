@@ -24,8 +24,17 @@ class WSDLTypeField {
     const type = cleanType(element.$.type);
     const documentation = cleanDocs(element);
 
-    const required = /attribute is required/i.test(documentation);
-    const readonly = /read-only/i.test(documentation);
+    let required = [
+      /attribute is required/i,
+      /value is required/i,
+    ].some((pattern) => pattern.test(documentation));
+    if (name === 'id') required = true;
+
+    const readonly = [
+      /read-only/i,
+      /value is readonly/i,
+    ].some((pattern) => pattern.test(documentation));
+
     const multiple = element.$.maxOccurs === 'unbounded';
 
     return new WSDLTypeField({
