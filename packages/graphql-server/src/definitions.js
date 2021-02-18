@@ -5,6 +5,8 @@ module.exports = gql`
 scalar BigInt
 scalar Date
 scalar GAMDateTime
+scalar JSON
+scalar JSONObject
 
 directive @find(service: String!, method: String!) on FIELD_DEFINITION
 directive @findById(service: String!, method: String!) on FIELD_DEFINITION
