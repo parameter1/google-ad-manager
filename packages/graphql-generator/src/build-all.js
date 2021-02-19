@@ -8,7 +8,7 @@ module.exports = async ({ urls } = {}) => {
     results.set(result.name, result);
   }));
 
-  const keys = ['queries', 'mutations', 'types', 'enums', 'inputs'];
+  const keys = ['queries', 'mutations', 'interfaces', 'types', 'enums', 'inputs'];
   const map = new Map();
 
   results.forEach((result) => {
@@ -17,7 +17,7 @@ module.exports = async ({ urls } = {}) => {
         const loaded = map.get(name);
         const toSet = {
           key,
-          filename: loaded && loaded.count > 1 ? 'common.js' : result.filename,
+          filename: loaded ? 'common.js' : result.filename,
           count: loaded ? loaded.count + 1 : 1,
           hashes: loaded ? loaded.hashes.add(hash) : new Set([hash]),
           contents,
@@ -62,7 +62,7 @@ module.exports = async ({ urls } = {}) => {
   });
   const index = [];
   index.push(
-    '// THIS FILE IS GENREATED. DO NOT EDIT.',
+    '// THIS FILE IS GENERATED. DO NOT EDIT.',
     "const { gql } = require('apollo-server-express');\n",
     "const globalDefinitions = require('../../../definitions');",
   );

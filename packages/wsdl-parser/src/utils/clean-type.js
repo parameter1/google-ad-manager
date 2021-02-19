@@ -1,4 +1,4 @@
 module.exports = (type) => {
   if (!type) return '';
-  return type.replace(/^tns:/, '');
+  return type.replace(/^tns:/, '').replace(/\./g, '');
 };

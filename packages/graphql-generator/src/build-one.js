@@ -2,6 +2,7 @@ const WSDL = require('@parameter1/google-ad-manager-wsdl-parser');
 const { underscore, dasherize } = require('inflected');
 const buildEnum = require('./enum');
 const buildInput = require('./input');
+const buildInterface = require('./interface');
 const buildType = require('./type');
 const buildQuery = require('./query');
 const createDocsFn = require('./utils/clean-docs');
@@ -42,6 +43,7 @@ module.exports = async ({ url } = {}) => {
     const isMutation = mutationPrefixes.some((prefix) => operationName.startsWith(prefix));
 
     const built = buildQuery({
+      wsdl,
       opType: isMutation ? 'Mutation' : 'Query',
       service: wsdl.shortName,
       operationName,
@@ -58,21 +60,43 @@ module.exports = async ({ url } = {}) => {
   // This essentially finds all types used by this service.
   const referencedTypes = wsdl.getAllReferencedTypesFor([...returnTypeNames]);
   // Skip Date and DateTime types... these will be treated as scalars
-  // Skip abstract types... refs will be treated as JSONObject scalars
   const skip = ['Date', 'DateTime'];
   const filteredTypes = referencedTypes
-    .filter((type) => !skip.includes(type.name) && !type.abstract);
+    .filter((type) => !skip.includes(type.name));
 
   const definitions = filteredTypes.reduce((o, type) => {
+    const extendedTypes = wsdl.getAllChildTypesFor(type.name, false);
+    const hasChildClasses = Boolean(extendedTypes.size);
+
+    if (type.abstract || hasChildClasses) {
+      const interfaceObj = buildInterface({
+        wsdl,
+        type,
+        referencedTypes,
+        cleanDocs,
+      });
+      o.interfaces.set(interfaceObj.name, interfaceObj);
+      return o;
+    }
     if (type.enumeration.length) {
       const enumObj = buildEnum({ type, cleanDocs });
       o.enums.set(enumObj.name, enumObj);
       return o;
     }
-    const typeObj = buildType({ type, referencedTypes, cleanDocs });
+    const typeObj = buildType({
+      wsdl,
+      type,
+      referencedTypes,
+      cleanDocs,
+    });
     o.types.set(typeObj.name, typeObj);
     return o;
-  }, { types: new Map(), enums: new Map(), inputs });
+  }, {
+    interfaces: new Map(),
+    types: new Map(),
+    enums: new Map(),
+    inputs,
+  });
   const filename = `${dasherize(underscore(wsdl.shortName))}.js`;
   return {
     name: wsdl.name,

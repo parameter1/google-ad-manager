@@ -25,7 +25,11 @@ class WSDLType {
   }
 
   get isEnumerated() {
-    return this.enumeration.length;
+    return Boolean(this.enumeration.length);
+  }
+
+  get hasFields() {
+    return Boolean(this.fields.size);
   }
 
   static fromRaw(type = {}) {

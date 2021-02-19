@@ -32,16 +32,23 @@ const run = async () => {
       },
       when: (answers) => answers.actions.includes('generateGraphQL'),
     },
-    // {
-    //   type: 'checkbox',
-    //   name: 'services',
-    //   message: 'Which services would you like to process?',
-    //   choices: async ({ version }) => {
-    //     const services = await loadServices({ version });
-    //     return services;
-    //   },
-    //   when: (answers) => answers.actions.includes('generateGraphQL'),
-    // },
+    {
+      type: 'confirm',
+      name: 'generateAll',
+      message: 'Generate all services',
+      default: true,
+      when: (answers) => answers.actions.includes('generateGraphQL'),
+    },
+    {
+      type: 'checkbox',
+      name: 'servicesToGenerate',
+      message: 'Which services would you like to generate?',
+      choices: async ({ version }) => {
+        const services = await loadServices({ version });
+        return services;
+      },
+      when: (answers) => !answers.generateAll,
+    },
     {
       type: 'input',
       name: 'directory',
@@ -55,12 +62,21 @@ const run = async () => {
     actions,
     version,
     directory,
+    generateAll,
+    servicesToGenerate,
   } = await inquirer.prompt(questions);
 
   if (actions.includes('generateGraphQL')) {
     const services = await loadServices({ version });
-    const fileMap = await graphQLGenerator
-      .buildAll({ urls: services.map(({ value: url }) => url) });
+
+    const urls = services
+      .filter((service) => {
+        if (generateAll) return true;
+        return servicesToGenerate.includes(service.value);
+      })
+      .map(({ value: url }) => url);
+
+    const fileMap = await graphQLGenerator.buildAll({ urls });
     const files = Array.from(fileMap).map(([filename, contents]) => ({ filename, contents }));
 
     await Promise.all(files.map(async ({ filename, contents }) => {

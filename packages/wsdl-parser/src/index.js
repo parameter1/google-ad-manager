@@ -44,6 +44,16 @@ class WSDL {
     this.messages = messages;
   }
 
+  getAllTypes(merge = false) {
+    if (!merge) return this.types;
+    const types = new WSDLTypes();
+    this.types.forEach((type, name) => {
+      const merged = this.getType(name, true);
+      types.set(name, merged);
+    });
+    return types;
+  }
+
   getType(name, merged = false) {
     if (!merged) return this.types.get(cleanType(name));
     const tree = this.getTypeExtensions(name);
@@ -84,10 +94,24 @@ class WSDL {
       const type = this.getType(n, true);
       if (!type) throw new Error(`No type found for '${n}'`);
       types.set(n, type);
+      // also load all extended child for this type.
+      const children = this.getAllChildTypesFor(type.name).map((child) => child.name);
       const refs = type.fields.getAllReferencedTypes('object');
-      this.getAllReferencedTypesFor([...refs], types);
+      this.getAllReferencedTypesFor([...refs, ...children], types);
     });
     return types;
+  }
+
+  getAllChildTypesFor(name, withDescendants = true, found = new WSDLTypes()) {
+    const root = this.getType(name);
+    if (!root) throw new Error(`No type found for ${name}`);
+    this.types.forEach((type) => {
+      if (type.extension === root.name) {
+        found.set(type.name, type);
+        if (withDescendants) this.getAllChildTypesFor(type.name, withDescendants, found);
+      }
+    });
+    return found;
   }
 
   getTypeExtensions(name, tree = []) {

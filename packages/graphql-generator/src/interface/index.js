@@ -1,6 +1,6 @@
-const createInterfaceName = require('../interface/create-name');
+const createName = require('./create-name');
 const fileHash = require('../utils/file-hash');
-const buildAttr = require('./build-attr');
+const buildAttr = require('../type/build-attr');
 
 /**
  *
@@ -18,11 +18,12 @@ module.exports = ({
 } = {}) => {
   const lines = [];
   lines.push(`"${cleanDocs(type.documentation)}"`);
+  const name = createName(type.name);
 
   // set the interface implementation when this type has an extension
   const interfaces = type.extension ? wsdl.getTypeExtensions(type.extension) : [];
-  const impl = interfaces.length ? ` implements ${interfaces.map((parent) => createInterfaceName(parent.name)).join(' & ')}` : '';
-  lines.push(`type ${type.name}${impl} {`);
+  const impl = interfaces.length ? ` implements ${interfaces.map((parent) => createName(parent.name)).join(' & ')}` : '';
+  lines.push(`interface ${name}${impl} {`);
 
   const needsPlaceholder = !type.hasFields
     || interfaces.some((parent) => !parent.hasFields);
@@ -39,5 +40,5 @@ module.exports = ({
   lines.push('}');
 
   const contents = lines.join('\n');
-  return { name: type.name, hash: fileHash(contents), contents };
+  return { name, hash: fileHash(contents), contents };
 };
