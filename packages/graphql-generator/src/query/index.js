@@ -16,18 +16,21 @@ module.exports = ({
   let returnType;
   if (scalars[returnField.type]) {
     returnType = scalars[returnField.type];
-  } else if (returnField.isEnumerated) {
-    // reference the enum
-    returnType = createEnumName(returnField.type);
-  } else if (returnField.abstract) {
-    // when abstract, reference the interface
-    returnType = createInterfaceName(returnField.type);
-  } else if (wsdl.getAllChildTypesFor(returnField.type, false).size) {
-    // if the type has child, extended objects, reference the interface
-    returnType = createInterfaceName(returnField.type);
   } else {
-    // otherwise, use the type as-is
-    returnType = returnField.type;
+    const returnFieldType = wsdl.getType(returnField.type, false);
+    if (returnFieldType.isEnumerated) {
+      // reference the enum
+      returnType = createEnumName(returnFieldType.name);
+    } else if (returnFieldType.abstract) {
+      // when abstract, reference the interface
+      returnType = createInterfaceName(returnFieldType.name);
+    } else if (wsdl.getAllChildTypesFor(returnFieldType.name, false).size) {
+      // if the type has child, extended objects, reference the interface
+      returnType = createInterfaceName(returnFieldType.name);
+    } else {
+      // otherwise, use the type as-is
+      returnType = returnFieldType.name;
+    }
   }
 
   if (returnField.multiple) returnType = `[${returnType}]`;
