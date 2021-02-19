@@ -50,7 +50,7 @@ module.exports = async ({ urls } = {}) => {
       'module.exports = gql`',
     );
     items.push('`;');
-    fileMap.set(filename, `${items.join('\n\n')}\n`);
+    fileMap.set(filename, `${items.join('\n\n')}\n`.replace(/\\\\/g, '\\'));
     const file = filename.replace('.js', '');
     filenames.push({ filename: file, varName: camelize(underscore(file), false) });
   });
