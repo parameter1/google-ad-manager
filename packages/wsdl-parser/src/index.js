@@ -94,10 +94,12 @@ class WSDL {
       const type = this.getType(n, true);
       if (!type) throw new Error(`No type found for '${n}'`);
       types.set(n, type);
-      // also load all extended child for this type.
+      // also load all extended child, extensions, and field refs for this type.
       const children = this.getAllChildTypesFor(type.name).map((child) => child.name);
+      const extensions = this.getTypeExtensions(type.name).map((extension) => extension.name);
       const refs = type.fields.getAllReferencedTypes('object');
-      this.getAllReferencedTypesFor([...refs, ...children], types);
+      const referenceTypes = new Set([...refs, ...children, ...extensions]);
+      this.getAllReferencedTypesFor([...referenceTypes], types);
     });
     return types;
   }
