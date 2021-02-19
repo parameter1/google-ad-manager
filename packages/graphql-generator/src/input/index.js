@@ -14,6 +14,10 @@ module.exports = ({ element, cleanDocs } = {}) => {
 
   lines.push(`"${cleanDocs(element.documentation)}"`);
   lines.push(`input ${name} {`);
+
+  const needsPlaceholder = !element.hasFields;
+  if (needsPlaceholder) lines.push('  _: Boolean'); // add placeholder field when empty fieldset
+
   element.fields.filter((field) => !field.readonly).forEach((field) => {
     buildAttr(field, cleanDocs).forEach((line) => lines.push(`  ${line}`));
   });
