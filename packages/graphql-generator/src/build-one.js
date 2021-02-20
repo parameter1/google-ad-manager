@@ -27,6 +27,8 @@ module.exports = async ({ url } = {}) => {
   let inputsUsed = new Set();
   // Build root input definitions from operation elements.
   rootInputElements.forEach((element) => {
+    // skip building the root input when the operation doesn't have fields
+    if (!element.hasFields) return;
     const input = buildInput({ wsdl, type: element });
     // merge the used inputs and always inlcude root inputs
     inputsUsed = new Set([...inputsUsed, input.name, ...input.inputsUsed]);
@@ -62,7 +64,7 @@ module.exports = async ({ url } = {}) => {
   const mutations = new Map();
   const returnTypeNames = new Set();
   rootInputElements.forEach((element, operationName) => {
-    const inputName = createInputName(element.name);
+    const inputName = element.hasFields ? createInputName(element.name) : null;
     const returnField = wsdl.getReturnFieldForOperation(operationName);
     // save all return types. will be used to recrusively build types + enums
     returnTypeNames.add(returnField.type);

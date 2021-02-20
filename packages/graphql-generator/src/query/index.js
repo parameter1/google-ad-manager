@@ -15,9 +15,10 @@ module.exports = ({
   if (returnField.multiple) returnType = `[${returnType}]`;
 
   const lines = [];
+  const inputArg = inputName ? `(input: ${inputName}!)` : '';
   lines.push(`extend type ${opType} {`);
   lines.push(`  "${cleanDocs(element.documentation)}"`);
-  lines.push(`  ${operationName}(input: ${inputName}!): ${returnType}`);
+  lines.push(`  ${operationName}${inputArg}: ${returnType}`);
   lines.push(`    @soap(service: "${service}", action: "${operationName}")`);
   lines.push('}');
 
