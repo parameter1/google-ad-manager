@@ -2,7 +2,6 @@ const WSDL = require('@parameter1/google-ad-manager-wsdl-parser');
 const { underscore, dasherize } = require('inflected');
 const buildEnum = require('./enum');
 const buildInput = require('./input');
-const buildRootInput = require('./input/root');
 const buildInterface = require('./interface');
 const buildType = require('./type');
 const buildQuery = require('./query');
@@ -25,9 +24,12 @@ module.exports = async ({ url } = {}) => {
   const rootInputElements = wsdl.getAllOperationInputElements();
 
   const inputs = new Map();
+  let inputsUsed = new Set();
   // Build root input definitions from operation elements.
   rootInputElements.forEach((element) => {
-    const input = buildRootInput({ wsdl, element });
+    const input = buildInput({ wsdl, type: element });
+    // merge the used inputs and always inlcude root inputs
+    inputsUsed = new Set([...inputsUsed, input.name, ...input.inputsUsed]);
     inputs.set(input.name, input);
   });
 
@@ -46,7 +48,12 @@ module.exports = async ({ url } = {}) => {
     return !children.length;
   }).forEach((type) => {
     const input = buildInput({ wsdl, type });
+    inputsUsed = new Set([...inputsUsed, ...input.inputsUsed]);
     inputs.set(input.name, input);
+  });
+  inputs.forEach((input) => {
+    const { name } = input;
+    if (!inputsUsed.has(name)) inputs.delete(name);
   });
 
   // Build query and mutation definitions.

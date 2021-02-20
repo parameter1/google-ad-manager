@@ -10,6 +10,7 @@ const cleanDocs = require('../utils/clean-docs');
  * @param {WSDLTypeField} params.field
  */
 module.exports = ({ wsdl, field }) => {
+  const inputsUsed = new Set();
   let type;
   let skip = false;
   if (scalars[field.type]) {
@@ -28,6 +29,7 @@ module.exports = ({ wsdl, field }) => {
       // reference the type input name
       type = createInputName(obj.name);
       if (!obj.hasWriteableFields) skip = true; // skip field ref when nothing is writeable
+      if (!skip) inputsUsed.add(type);
     }
   }
   if (skip) return null;
@@ -37,5 +39,5 @@ module.exports = ({ wsdl, field }) => {
   // only add reference if it has writeable fields.
   if (field.documentation) lines.push(`"${cleanDocs(field.documentation)}"`);
   lines.push(`${field.name}: ${type}`);
-  return lines;
+  return { lines, inputsUsed };
 };

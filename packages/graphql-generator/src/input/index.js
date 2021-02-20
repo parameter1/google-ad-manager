@@ -7,10 +7,11 @@ const cleanDocs = require('../utils/clean-docs');
  *
  * @param {object} params
  * @param {WSDL} params.wsdl
- * @param {WSDLType} params.type
+ * @param {WSDLType|WSDLElement} params.type
  */
 module.exports = ({ wsdl, type } = {}) => {
   const lines = [];
+  let inputsUsed = new Set();
   lines.push(`"${cleanDocs(type.documentation)}"`);
 
   const name = createName(type.name);
@@ -20,10 +21,18 @@ module.exports = ({ wsdl, type } = {}) => {
     if (field.readonly) return;
     const attr = buildAttr({ wsdl, field });
     // allow for lines to be skipped (e.g. fields with references to non-writeable objects)
-    if (attr) attr.forEach((line) => lines.push(`  ${line}`));
+    if (attr) {
+      attr.lines.forEach((line) => lines.push(`  ${line}`));
+      inputsUsed = new Set([...inputsUsed, ...attr.inputsUsed]);
+    }
   });
   lines.push('}');
 
   const contents = lines.join('\n');
-  return { name, hash: fileHash(contents), contents };
+  return {
+    name,
+    hash: fileHash(contents),
+    inputsUsed,
+    contents,
+  };
 };
