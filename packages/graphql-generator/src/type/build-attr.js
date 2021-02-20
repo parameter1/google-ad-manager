@@ -1,6 +1,4 @@
-const createEnumName = require('../enum/create-name');
-const createInterfaceName = require('../interface/create-name');
-const scalars = require('../utils/scalar-type-map');
+const getAttrType = require('../utils/get-attr-type');
 
 /**
 *
@@ -13,30 +11,9 @@ const scalars = require('../utils/scalar-type-map');
 module.exports = ({
   wsdl,
   field,
-  referencedTypes,
   cleanDocs,
 }) => {
-  let type;
-  if (scalars[field.type]) {
-    // explicitally mapped
-    type = scalars[field.type];
-  } else {
-    const typeObj = referencedTypes.get(field.type);
-    if (!typeObj) throw new Error(`Unable to find a reference type for ${field.type}`);
-    if (typeObj.isEnumerated) {
-      // reference the enum
-      type = createEnumName(typeObj.name);
-    } else if (typeObj.abstract) {
-      // when abstract, reference the interface
-      type = createInterfaceName(typeObj.name);
-    } else if (wsdl.getAllChildTypesFor(typeObj.name, false).size) {
-      // if the type has child, extended objects, reference the interface
-      type = createInterfaceName(typeObj.name);
-    } else {
-      // otherwise, use the type as-is
-      type = field.type;
-    }
-  }
+  let type = getAttrType({ wsdl, type: field.type });
   if (field.multiple) type = `[${type}]`;
   if (field.required) type = `${type}!`;
   const lines = [];

@@ -1,7 +1,5 @@
-const createEnumName = require('../enum/create-name');
-const createInterfaceName = require('../interface/create-name');
 const fileHash = require('../utils/file-hash');
-const scalars = require('../utils/scalar-type-map');
+const getAttrType = require('../utils/get-attr-type');
 
 module.exports = ({
   wsdl,
@@ -13,26 +11,7 @@ module.exports = ({
   returnField,
   cleanDocs,
 }) => {
-  let returnType;
-  if (scalars[returnField.type]) {
-    returnType = scalars[returnField.type];
-  } else {
-    const returnFieldType = wsdl.getType(returnField.type, false);
-    if (returnFieldType.isEnumerated) {
-      // reference the enum
-      returnType = createEnumName(returnFieldType.name);
-    } else if (returnFieldType.abstract) {
-      // when abstract, reference the interface
-      returnType = createInterfaceName(returnFieldType.name);
-    } else if (wsdl.getAllChildTypesFor(returnFieldType.name, false).size) {
-      // if the type has child, extended objects, reference the interface
-      returnType = createInterfaceName(returnFieldType.name);
-    } else {
-      // otherwise, use the type as-is
-      returnType = returnFieldType.name;
-    }
-  }
-
+  let returnType = getAttrType({ wsdl, type: returnField.type });
   if (returnField.multiple) returnType = `[${returnType}]`;
 
   const lines = [];
