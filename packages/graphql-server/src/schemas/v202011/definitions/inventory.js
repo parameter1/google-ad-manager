@@ -138,19 +138,16 @@ type AdUnitPage {
 
 "Creates new AdUnit objects. @param adUnits the ad units to create @return the created ad units, with their IDs filled in"
 input CreateAdUnitsInput {
-  _: Boolean
   adUnits: [JSONObject]
 }
 
 "Returns a set of all relevant AdUnitSize objects. The given Statement is currently ignored but may be honored in future versions. @param filterStatement currently ignored but may be honored in future versions @return the ad unit sizes"
 input GetAdUnitSizesByStatementInput {
-  _: Boolean
   filterStatement: JSONObject
 }
 
 "Gets a AdUnitPage of AdUnit objects that satisfy the given Statement#query. The following fields are supported for filtering:   PQL Property Object Property   \`adUnitCode\` AdUnit#adUnitCode   \`id\` AdUnit#id   \`name\` AdUnit#name   \`parentId\` AdUnit#parentId   \`status\` AdUnit#status   \`lastModifiedDateTime\` AdUnit#lastModifiedDateTime   @param filterStatement a Publisher Query Language statement used to filter a set of ad units @return the ad units that match the given filter"
 input GetAdUnitsByStatementInput {
-  _: Boolean
   filterStatement: JSONObject
 }
 
@@ -164,7 +161,6 @@ type LabelFrequencyCap {
 
 "Performs actions on AdUnit objects that match the given Statement#query. @param adUnitAction the action to perform @param filterStatement a Publisher Query Language statement used to filter a set of ad units @return the result of the action performed"
 input PerformAdUnitActionInput {
-  _: Boolean
   adUnitAction: JSONObject
   filterStatement: JSONObject
 }
@@ -183,7 +179,6 @@ enum SmartSizeModeEnum {
 
 "Updates the specified AdUnit objects. @param adUnits the ad units to update @return the updated ad units"
 input UpdateAdUnitsInput {
-  _: Boolean
   adUnits: [JSONObject]
 }
 

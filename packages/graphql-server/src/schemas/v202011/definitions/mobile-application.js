@@ -6,13 +6,11 @@ module.exports = gql`
 
 "Creates and claims mobile applications to be used for targeting in the network. @param mobileApplications the mobileApplications to create @return the created mobileApplications with their IDs filled in"
 input CreateMobileApplicationsInput {
-  _: Boolean
   mobileApplications: [JSONObject]
 }
 
 "Gets a mobileApplicationPage of mobile applications that satisfy the given Statement. The following fields are supported for filtering:   PQL Property Object Property   \`id\` MobileApplication#id   \`displayName\` MobileApplication#displayName   \`appStore\` MobileApplication#appStore   \`appStoreId\` MobileApplication#appStoreId   \`isArchived\` MobileApplication#isArchived   @param filterStatement a Publisher Query Language statement used to filter a set of mobile applications. @return the mobile applications that match the given filter"
 input GetMobileApplicationsByStatementInput {
-  _: Boolean
   filterStatement: JSONObject
 }
 
@@ -78,14 +76,12 @@ enum MobileApplicationStoreEnum {
 
 "Performs an action on mobile applications. @param mobileApplicationAction the action to perform @param filterStatement a Publisher Query Language statement used to filter a set of mobile applications. @return the result of the action performed"
 input PerformMobileApplicationActionInput {
-  _: Boolean
   mobileApplicationAction: JSONObject
   filterStatement: JSONObject
 }
 
 "Updates the specified mobile applications. @param mobileApplications the mobile applications to be updated @return the updated mobileApplications"
 input UpdateMobileApplicationsInput {
-  _: Boolean
   mobileApplications: [JSONObject]
 }
 

@@ -38,19 +38,16 @@ enum ActivityGroupStatusEnum {
 
 "Creates a new ActivityGroup objects. @param activityGroups the activity groups to be created. @return the created activity groups with their IDs filled in."
 input CreateActivityGroupsInput {
-  _: Boolean
   activityGroups: [JSONObject]
 }
 
 "Gets an ActivityGroupPage of ActivityGroup objects that satisfy the given Statement#query. The following fields are supported for filtering:   PQL Property Object Property   \`id\` ActivityGroup#id   \`name\` ActivityGroup#name   \`impressionsLookback\` ActivityGroup#impressionsLookback   \`clicksLookback\` ActivityGroup#clicksLookback   \`status\` ActivityGroup#status   @param filterStatement a statement used to filter a set of activity groups @return the activity groups that match the given filter"
 input GetActivityGroupsByStatementInput {
-  _: Boolean
   filterStatement: JSONObject
 }
 
 "Updates the specified ActivityGroup objects. @param activityGroups the activity groups to update. @return the updated activity groups."
 input UpdateActivityGroupsInput {
-  _: Boolean
   activityGroups: [JSONObject]
 }
 

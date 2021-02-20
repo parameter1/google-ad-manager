@@ -66,19 +66,16 @@ enum ContactStatusEnum {
 
 "Creates new Contact objects. @param contacts the contacts to create @return the created contacts with their IDs filled in"
 input CreateContactsInput {
-  _: Boolean
   contacts: [JSONObject]
 }
 
 "Gets a ContactPage of Contact objects that satisfy the given Statement#query. The following fields are supported for filtering:   PQL Property Object Property   \`name\` Contact#name   \`email\` Contact#email   \`id\` Contact#id   \`comment\` Contact#comment   \`companyId\` Contact#companyId   \`title\` Contact#title   \`cellPhone\` Contact#cellPhone   \`workPhone\` Contact#workPhone   \`faxPhone\` Contact#faxPhone   \`status\` Contact#status   @param filterStatement a Publisher Query Language statement used to filter a set of contacts @return the contacts that match the given filter"
 input GetContactsByStatementInput {
-  _: Boolean
   statement: JSONObject
 }
 
 "Updates the specified Contact objects. @param contacts the contacts to update @return the updated contacts"
 input UpdateContactsInput {
-  _: Boolean
   contacts: [JSONObject]
 }
 

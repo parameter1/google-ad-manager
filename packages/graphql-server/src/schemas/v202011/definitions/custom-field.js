@@ -6,13 +6,11 @@ module.exports = gql`
 
 "Creates new CustomFieldOption objects. The following fields are required:  CustomFieldOption#displayName CustomFieldOption#customFieldId  @param customFieldOptions the custom fields to create @return the created custom field options with their IDs filled in"
 input CreateCustomFieldOptionsInput {
-  _: Boolean
   customFieldOptions: [JSONObject]
 }
 
 "Creates new CustomField objects. The following fields are required:  CustomField#name CustomField#entityType CustomField#dataType CustomField#visibility  @param customFields the custom fields to create @return the created custom fields with their IDs filled in"
 input CreateCustomFieldsInput {
-  _: Boolean
   customFields: [JSONObject]
 }
 
@@ -120,32 +118,27 @@ type DropDownCustomField implements CustomFieldInterface {
 
 "Returns the CustomFieldOption uniquely identified by the given ID. @param customFieldOptionId the ID of the custom field option, which must already exist @return the \`CustomFieldOption\` uniquely identified by the given ID"
 input GetCustomFieldOptionInput {
-  _: Boolean
   customFieldOptionId: BigInt
 }
 
 "Gets a CustomFieldPage of CustomField objects that satisfy the given Statement#query. The following fields are supported for filtering:   PQL Property Object Property   \`id\` CustomField#id   \`entityType\` CustomField#entityType   \`name\` CustomField#name   \`isActive\` CustomField#isActive   \`visibility\` CustomField#visibility   @param filterStatement a Publisher Query Language statement used to filter a set of custom fields. @return the custom fields that match the given filter"
 input GetCustomFieldsByStatementInput {
-  _: Boolean
   filterStatement: JSONObject
 }
 
 "Performs actions on CustomField objects that match the given Statement#query. @param customFieldAction the action to perform @param filterStatement a Publisher Query Language statement used to filter a set of custom fields @return the result of the action performed"
 input PerformCustomFieldActionInput {
-  _: Boolean
   customFieldAction: JSONObject
   filterStatement: JSONObject
 }
 
 "Updates the specified CustomFieldOption objects. @param customFieldOptions the custom field options to update @return the updated custom field options"
 input UpdateCustomFieldOptionsInput {
-  _: Boolean
   customFieldOptions: [JSONObject]
 }
 
 "Updates the specified CustomField objects. @param customFields the custom fields to update @return the updated custom fields"
 input UpdateCustomFieldsInput {
-  _: Boolean
   customFields: [JSONObject]
 }
 

@@ -82,7 +82,6 @@ enum AudienceSegmentTypeEnum {
 
 "Creates new RuleBasedFirstPartyAudienceSegment objects. @param segments first-party audience segments to create @return created first-party audience segments"
 input CreateAudienceSegmentsInput {
-  _: Boolean
   segments: [JSONObject]
 }
 
@@ -124,7 +123,6 @@ type FirstPartyAudienceSegmentRule {
 
 "Gets an AudienceSegmentPage of AudienceSegment objects that satisfy the given Statement#query. The following fields are supported for filtering:   PQL Property Object Property   \`id\` AudienceSegment#id   \`name\` AudienceSegment#name   \`status\` AudienceSegment#status   \`type\` AudienceSegment#type   \`size\` AudienceSegment#size   \`dataProviderName\` AudienceSegmentDataProvider#name   \`segmentType\` AudienceSegment#type   \`approvalStatus\` ThirdPartyAudienceSegment#approvalStatus   \`cost\` ThirdPartyAudienceSegment#cost   \`startDateTime\` ThirdPartyAudienceSegment#startDateTime   \`endDateTime\` ThirdPartyAudienceSegment#endDateTime   @param filterStatement a Publisher Query Language statement used to filter a set of audience segments (the only supported operator is AND) @return the audience segments that match the given filter"
 input GetAudienceSegmentsByStatementInput {
-  _: Boolean
   filterStatement: JSONObject
 }
 
@@ -171,7 +169,6 @@ type NonRuleBasedFirstPartyAudienceSegment implements FirstPartyAudienceSegmentI
 
 "Performs the given AudienceSegmentAction on the set of segments identified by the given statement. @param action AudienceSegmentAction to perform @param filterStatement a Publisher Query Language statement used to filter a set of audience segments (the only supported operator is AND) @return UpdateResult indicating the result"
 input PerformAudienceSegmentActionInput {
-  _: Boolean
   action: JSONObject
   filterStatement: JSONObject
 }
@@ -316,7 +313,6 @@ type ThirdPartyAudienceSegment implements AudienceSegmentInterface {
 
 "Updates the given RuleBasedFirstPartyAudienceSegment objects. @param segments first-party audience segments to update @return updated first-party audience segments"
 input UpdateAudienceSegmentsInput {
-  _: Boolean
   segments: [JSONObject]
 }
 

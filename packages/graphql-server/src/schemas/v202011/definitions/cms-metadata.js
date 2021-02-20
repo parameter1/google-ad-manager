@@ -58,26 +58,22 @@ enum CmsMetadataValueStatusEnum {
 
 "Returns a page of CmsMetadataKeys matching the specified Statement. The following fields are supported for filtering:   PQL Property Object Property   \`id\` CmsMetadataKey#cmsMetadataKeyId   \`cmsKey\` CmsMetadataKey#keyName   \`status\` CmsMetadataKey#status  "
 input GetCmsMetadataKeysByStatementInput {
-  _: Boolean
   statement: JSONObject
 }
 
 "Returns a page of CmsMetadataValues matching the specified Statement. The following fields are supported for filtering:   PQL Property Object Property   \`id\` CmsMetadataValue#cmsMetadataValueId   \`cmsValue\` CmsMetadataValue#valueName   \`cmsKey\` CmsMetadataValue#key#name   \`cmsKeyId\` CmsMetadataValue#key#id   \`keyValueMemberContent\` Content IDs tagged with a CMS metadata key-value   \`status\` CmsMetadataValue#status  "
 input GetCmsMetadataValuesByStatementInput {
-  _: Boolean
   statement: JSONObject
 }
 
 "Performs actions on CmsMetadataKey objects that match the given Statement#query. @param keyAction the action to perform @param filterStatement a Publisher Query Language statement used to filter a set of cms metadata keys. @return the result of the action performed"
 input PerformCmsMetadataKeyActionInput {
-  _: Boolean
   keyAction: JSONObject
   filterStatement: JSONObject
 }
 
 "Performs actions on CmsMetadataValue objects that match the given Statement#query. @param valueAction the action to perform @param filterStatement a Publisher Query Language statement used to filter a set of cms metadata values. @return the result of the action performed"
 input PerformCmsMetadataValueActionInput {
-  _: Boolean
   valueAction: JSONObject
   filterStatement: JSONObject
 }

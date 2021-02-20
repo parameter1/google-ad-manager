@@ -6,7 +6,6 @@ module.exports = gql`
 
 "Gets a LineItemTemplatePage of LineItemTemplate objects that satisfy the given Statement#query. The following fields are supported for filtering:   PQL Property Object Property   \`id\` LineItemTemplate#id   @param filterStatement a Publisher Query Language statement used to filter a set of line item templates @return the line item templates that match the given filter @throws ApiException if a RuntimeException is thrown"
 input GetLineItemTemplatesByStatementInput {
-  _: Boolean
   filterStatement: JSONObject
 }
 

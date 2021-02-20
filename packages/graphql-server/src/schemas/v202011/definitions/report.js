@@ -1322,27 +1322,23 @@ enum DimensionEnum {
 
 "Returns the URL at which the report file can be downloaded.  The report will be generated as a gzip archive, containing the report file itself. @param reportJobId the ID of the ReportJob @param exportFormat the ExportFormat for the report file @return the URL for report file download"
 input GetReportDownloadURLInput {
-  _: Boolean
   reportJobId: BigInt
   exportFormat: JSONObject
 }
 
 "Returns the URL at which the report file can be downloaded, and allows for customization of the downloaded report.  By default, the report will be generated as a gzip archive, containing the report file itself. This can be changed by setting ReportDownloadOptions#useGzipCompression to false. @param reportJobId the ID of the ReportJob @param reportDownloadOptions the ReportDownloadOptions for the request @return the URL for report file download"
 input GetReportDownloadUrlWithOptionsInput {
-  _: Boolean
   reportJobId: BigInt
   reportDownloadOptions: JSONObject
 }
 
 "Returns the ReportJobStatus of the report job with the specified ID."
 input GetReportJobStatusInput {
-  _: Boolean
   reportJobId: BigInt
 }
 
 "Retrieves a page of the saved queries either created by or shared with the current user. Each SavedQuery in the page, if it is compatible with the current API version, will contain a ReportQuery object which can be optionally modified and used to create a ReportJob. This can then be passed to ReportService#runReportJob. The following fields are supported for filtering:   PQL Property Object Property   \`id\` SavedQuery#id   \`name\` SavedQuery#name   @param filterStatement a Publisher Query Language statement used to filter which saved queries should be returned. @return a SavedQueryPage that contains all SavedQuery instances which satisfy the given statement."
 input GetSavedQueriesByStatementInput {
-  _: Boolean
   filterStatement: JSONObject
 }
 
@@ -1406,7 +1402,6 @@ enum ReportQueryAdUnitViewEnum {
 
 "Initiates the execution of a ReportQuery on the server. The following fields are required:  ReportJob#reportQuery  @param reportJob the report job to run @return the report job with its ID filled in"
 input RunReportJobInput {
-  _: Boolean
   reportJob: JSONObject
 }
 

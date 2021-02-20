@@ -6,13 +6,11 @@ module.exports = gql`
 
 "Creates new CustomTargetingKey objects. The following fields are required:  CustomTargetingKey#name CustomTargetingKey#type  @param keys the custom targeting keys to update @return the updated custom targeting keys"
 input CreateCustomTargetingKeysInput {
-  _: Boolean
   keys: [JSONObject]
 }
 
 "Creates new CustomTargetingValue objects. The following fields are required:  CustomTargetingValue#customTargetingKeyId CustomTargetingValue#name  @param values the custom targeting values to update @return the updated custom targeting keys"
 input CreateCustomTargetingValuesInput {
-  _: Boolean
   values: [JSONObject]
 }
 
@@ -118,26 +116,22 @@ enum CustomTargetingValueStatusEnum {
 
 "Gets a CustomTargetingKeyPage of CustomTargetingKey objects that satisfy the given Statement#query. The following fields are supported for filtering:   PQL Property Object Property    \`id\` CustomTargetingKey#id   \`name\` CustomTargetingKey#name   \`displayName\` CustomTargetingKey#displayName   \`type\` CustomTargetingKey#type   @param filterStatement a Publisher Query Language statement used to filter a set of custom targeting keys @return the custom targeting keys that match the given filter"
 input GetCustomTargetingKeysByStatementInput {
-  _: Boolean
   filterStatement: JSONObject
 }
 
 "Gets a CustomTargetingValuePage of CustomTargetingValue objects that satisfy the given Statement#query.  The \`WHERE\` clause in the Statement#query must always contain CustomTargetingValue#customTargetingKeyId as one of its columns in a way that it is AND'ed with the rest of the query. So, if you want to retrieve values for a known set of key ids, valid Statement#query would look like:    'WHERE customTargetingKeyId IN ('17','18','19')' retrieves all values that are associated with keys having ids 17, 18, 19.   'WHERE customTargetingKeyId = '17' AND name = 'red'' retrieves values that are associated with keys having id 17 and value name is 'red'.     The following fields are supported for filtering:    PQL Property Object Property   \`id\` CustomTargetingValue#id   \`customTargetingKeyId\` CustomTargetingValue#customTargetingKeyId   \`name\` CustomTargetingValue#name   \`displayName\` CustomTargetingValue#displayName   \`matchType\` CustomTargetingValue#matchType   @param filterStatement a Publisher Query Language statement used to filter a set of custom targeting values @return the custom targeting values that match the given filter"
 input GetCustomTargetingValuesByStatementInput {
-  _: Boolean
   filterStatement: JSONObject
 }
 
 "Performs actions on CustomTargetingKey objects that match the given Statement#query. @param customTargetingKeyAction the action to perform @param filterStatement a Publisher Query Language statement used to filter a set of custom targeting keys @return the result of the action performed"
 input PerformCustomTargetingKeyActionInput {
-  _: Boolean
   customTargetingKeyAction: JSONObject
   filterStatement: JSONObject
 }
 
 "Performs actions on CustomTargetingValue objects that match the given Statement#query. @param customTargetingValueAction the action to perform @param filterStatement a Publisher Query Language statement used to filter a set of ad units @return the result of the action performed"
 input PerformCustomTargetingValueActionInput {
-  _: Boolean
   customTargetingValueAction: JSONObject
   filterStatement: JSONObject
 }
@@ -155,13 +149,11 @@ enum ReportableTypeEnum {
 
 "Updates the specified CustomTargetingKey objects. @param keys the custom targeting keys to update @return the updated custom targeting keys"
 input UpdateCustomTargetingKeysInput {
-  _: Boolean
   keys: [JSONObject]
 }
 
 "Updates the specified CustomTargetingValue objects. @param values the custom targeting values to update @return the updated custom targeting values"
 input UpdateCustomTargetingValuesInput {
-  _: Boolean
   values: [JSONObject]
 }
 

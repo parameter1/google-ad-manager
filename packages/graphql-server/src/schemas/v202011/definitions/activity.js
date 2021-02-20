@@ -58,19 +58,16 @@ enum ActivityTypeEnum {
 
 "Creates a new Activity objects. @param activities to be created. @return the created activities with its IDs filled in."
 input CreateActivitiesInput {
-  _: Boolean
   activities: [JSONObject]
 }
 
 "Gets an ActivityPage of Activity objects that satisfy the given Statement#query. The following fields are supported for filtering:   PQL Property Object Property   \`id\` Activity#id   \`name\` Activity#name   \`expectedURL\` Activity#expectedURL   \`status\` Activity#status   \`activityGroupId\` Activity#activityGroupId   @param filterStatement a statement used to filter a set of activities. @return the activities that match the given filter."
 input GetActivitiesByStatementInput {
-  _: Boolean
   filterStatement: JSONObject
 }
 
 "Updates the specified Activity objects. @param activities to be updated. @return the updated activities."
 input UpdateActivitiesInput {
-  _: Boolean
   activities: [JSONObject]
 }
 

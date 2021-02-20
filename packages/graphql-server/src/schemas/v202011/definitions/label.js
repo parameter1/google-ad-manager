@@ -16,13 +16,11 @@ type AdCategoryDto {
 
 "Creates new Label objects. @param labels the labels to create @return the created labels with their IDs filled in"
 input CreateLabelsInput {
-  _: Boolean
   labels: [JSONObject]
 }
 
 "Gets a LabelPage of Label objects that satisfy the given Statement#query. The following fields are supported for filtering:   PQL Property Object Property   \`id\` Label#id   \`type\` Label#type   \`name\` Label#name   \`description\` Label#description   \`isActive\` Label#isActive   @param filterStatement a Publisher Query Language statement used to filter a set of labels. @return the labels that match the given filter"
 input GetLabelsByStatementInput {
-  _: Boolean
   filterStatement: JSONObject
 }
 
@@ -70,14 +68,12 @@ enum LabelTypeEnum {
 
 "Performs actions on Label objects that match the given Statement#query. @param labelAction the action to perform @param filterStatement a Publisher Query Language statement used to filter a set of labels @return the result of the action performed"
 input PerformLabelActionInput {
-  _: Boolean
   labelAction: JSONObject
   filterStatement: JSONObject
 }
 
 "Updates the specified Label objects. @param labels the labels to update @return the updated labels"
 input UpdateLabelsInput {
-  _: Boolean
   labels: [JSONObject]
 }
 

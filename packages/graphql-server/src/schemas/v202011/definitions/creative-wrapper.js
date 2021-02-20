@@ -6,7 +6,6 @@ module.exports = gql`
 
 "Creates a new \`CreativeWrapper\` objects. The following fields are required:  CreativeWrapper#labelId CreativeWrapper#ordering CreativeWrapper#header or CreativeWrapper#footer  @param creativeWrappers the creative wrappers to create @return the creative wrappers with their IDs filled in @throws ApiException"
 input CreateCreativeWrappersInput {
-  _: Boolean
   creativeWrappers: [JSONObject]
 }
 
@@ -60,20 +59,17 @@ enum CreativeWrapperStatusEnum {
 
 "Gets a CreativeWrapperPage of CreativeWrapper objects that satisfy the given Statement#query. The following fields are supported for filtering:   PQL Property Object Property   \`id\` CreativeWrapper#id   \`labelId\` CreativeWrapper#labelId   \`status\` CreativeWrapper#status   \`ordering\` CreativeWrapper#ordering   @param filterStatement a Publisher Query Language statement used to filter a set of creative wrappers. @return the creative wrappers that match the given filter"
 input GetCreativeWrappersByStatementInput {
-  _: Boolean
   filterStatement: JSONObject
 }
 
 "Performs actions on CreativeWrapper objects that match the given Statement#query. @param creativeWrapperAction the action to perform @param filterStatement a Publisher Query Language statement used to filter a set of labels @return the result of the action performed"
 input PerformCreativeWrapperActionInput {
-  _: Boolean
   creativeWrapperAction: JSONObject
   filterStatement: JSONObject
 }
 
 "Updates the specified \`CreativeWrapper\` objects. @param creativeWrappers the creative wrappers to update @return the updated creative wrapper objects @throws ApiException"
 input UpdateCreativeWrappersInput {
-  _: Boolean
   creativeWrappers: [JSONObject]
 }
 

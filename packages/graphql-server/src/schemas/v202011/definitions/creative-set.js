@@ -6,7 +6,6 @@ module.exports = gql`
 
 "Creates a new CreativeSet. @param creativeSet the creative set to create @return the creative set with its ID filled in"
 input CreateCreativeSetInput {
-  _: Boolean
   creativeSet: JSONObject
 }
 
@@ -36,13 +35,11 @@ type CreativeSetPage {
 
 "Gets a CreativeSetPage of CreativeSet objects that satisfy the given Statement#query. The following fields are supported for filtering:   PQL Property Object Property   \`id\` CreativeSet#id   \`name\` CreativeSet#name   \`masterCreativeId\` CreativeSet#masterCreativeId   \`lastModifiedDateTime\` CreativeSet#lastModifiedDateTime   @param statement a Publisher Query Language statement used to filter a set of creative sets @return the creative sets that match the given filter"
 input GetCreativeSetsByStatementInput {
-  _: Boolean
   statement: JSONObject
 }
 
 "Updates the specified CreativeSet. @param creativeSet the creative set to update @return the updated creative set"
 input UpdateCreativeSetInput {
-  _: Boolean
   creativeSet: JSONObject
 }
 

@@ -6,19 +6,16 @@ module.exports = gql`
 
 "Creates new Team objects. The following fields are required:  Team#name  @param teams the teams to create @return the created teams with their IDs filled in"
 input CreateTeamsInput {
-  _: Boolean
   teams: [JSONObject]
 }
 
 "Gets a \`TeamPage\` of \`Team\` objects that satisfy the given Statement#query. The following fields are supported for filtering:   PQL Property Object Property   \`id\` Team#id   \`name\` Team#name   \`description\` Team#description   @param filterStatement a Publisher Query Language statement used to filter a set of teams. @return the teams that match the given filter"
 input GetTeamsByStatementInput {
-  _: Boolean
   filterStatement: JSONObject
 }
 
 "Performs actions on Team objects that match the given Statement#query. @param teamAction the action to perform @param filterStatement a Publisher Query Language statement used to filter a set of teams @return the result of the action performed"
 input PerformTeamActionInput {
-  _: Boolean
   teamAction: JSONObject
   filterStatement: JSONObject
 }
@@ -63,7 +60,6 @@ enum TeamStatusEnum {
 
 "Updates the specified Team objects. @param teams the teams to update @return the updated teams"
 input UpdateTeamsInput {
-  _: Boolean
   teams: [JSONObject]
 }
 

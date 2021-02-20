@@ -198,7 +198,6 @@ enum DaiIngestStatusEnum {
 
 "Gets a ContentPage of Content objects that satisfy the given Statement#query. The following fields are supported for filtering:   PQL Property Object Property   \`id\` Content#id   \`status\` Content#status   \`name\` Content#name   \`lastModifiedDateTime\` Content#lastModifiedDateTime   \`lastDaiIngestDateTime\` Content#lastDaiIngestDateTime   \`daiIngestStatus\` Content#daiIngestStatus   @param statement a Publisher Query Language statement used to filter a set of content @return the content that matches the given filter"
 input GetContentByStatementInput {
-  _: Boolean
   statement: JSONObject
 }
 

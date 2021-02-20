@@ -423,7 +423,6 @@ type ConversionEvent_TrackingUrlsMapEntry {
 
 "Creates new Creative objects. @param creatives the creatives to create @return the created creatives with their IDs filled in"
 input CreateCreativesInput {
-  _: Boolean
   creatives: [JSONObject]
 }
 
@@ -589,7 +588,6 @@ enum DestinationUrlTypeEnum {
 
 "Gets a CreativePage of Creative objects that satisfy the given Statement#query. The following fields are supported for filtering:   PQL Property Object Property   \`id\` Creative#id   \`name\` Creative#name   \`advertiserId\` Creative#advertiserId   \`width\` Creative#size   \`height\` Creative#size   \`lastModifiedDateTime\` Creative#lastModifiedDateTime   @param filterStatement a Publisher Query Language statement used to filter a set of creatives @return the creatives that match the given filter"
 input GetCreativesByStatementInput {
-  _: Boolean
   filterStatement: JSONObject
 }
 
@@ -1071,7 +1069,6 @@ enum MimeTypeEnum {
 
 "Performs action on Creative objects that match the given Statement#query. @param creativeAction the action to perform @param filterStatement a Publisher Query Language statement used to filter a set of creatives @return the result of the action performed"
 input PerformCreativeActionInput {
-  _: Boolean
   creativeAction: JSONObject
   filterStatement: JSONObject
 }
@@ -1455,7 +1452,6 @@ type UnsupportedCreative implements CreativeInterface {
 
 "Updates the specified Creative objects. @param creatives the creatives to update @return the updated creatives"
 input UpdateCreativesInput {
-  _: Boolean
   creatives: [JSONObject]
 }
 

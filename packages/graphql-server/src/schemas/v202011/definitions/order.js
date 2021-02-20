@@ -6,13 +6,11 @@ module.exports = gql`
 
 "Creates new Order objects. @param orders the orders to create @return the created orders with their IDs filled in"
 input CreateOrdersInput {
-  _: Boolean
   orders: [JSONObject]
 }
 
 "Gets an OrderPage of Order objects that satisfy the given Statement#query. The following fields are supported for filtering:   PQL Property Object Property   \`advertiserId\` Order#advertiserId   \`endDateTime\` Order#endDateTime   \`id\` Order#id   \`name\` Order#name   \`salespersonId\` Order#salespersonId   \`startDateTime\` Order#startDateTime   \`status\` Order#status   \`traffickerId\` Order#traffickerId   \`lastModifiedDateTime\` Order#lastModifiedDateTime   @param filterStatement a Publisher Query Language statement used to filter a set of orders @return the orders that match the given filter"
 input GetOrdersByStatementInput {
-  _: Boolean
   filterStatement: JSONObject
 }
 
@@ -114,14 +112,12 @@ enum OrderStatusEnum {
 
 "Performs actions on Order objects that match the given Statement#query. @param orderAction the action to perform @param filterStatement a Publisher Query Language statement used to filter a set of orders @return the result of the action performed"
 input PerformOrderActionInput {
-  _: Boolean
   orderAction: JSONObject
   filterStatement: JSONObject
 }
 
 "Updates the specified Order objects. @param orders the orders to update @return the updated orders"
 input UpdateOrdersInput {
-  _: Boolean
   orders: [JSONObject]
 }
 

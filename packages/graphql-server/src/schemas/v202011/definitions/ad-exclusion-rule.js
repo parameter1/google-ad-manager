@@ -44,26 +44,22 @@ enum AdExclusionRuleTypeEnum {
 
 "Creates new AdExclusionRule objects. @param adExclusionRules the ad exclusion rules to create @return the created rules with their IDs filled in"
 input CreateAdExclusionRulesInput {
-  _: Boolean
   adExclusionRules: [JSONObject]
 }
 
 "Gets a AdExclusionRulePage of AdExclusionRule objects that satisfy the given Statement#query. The following fields are supported for filtering:   PQL Property Object Property   \`id\` AdExclusionRule#id   \`name\` AdExclusionRule#name   \`status\` AdExclusionRule#status   @param filterStatement a Publisher Query Language statement used to filter a set of rules @return the rules that match the given filter"
 input GetAdExclusionRulesByStatementInput {
-  _: Boolean
   filterStatement: JSONObject
 }
 
 "Performs action on AdExclusionRule objects that satisfy the given Statement#query. @param adExclusionRuleAction the action to perform @param filterStatement a Publisher Query Language statement used to filter a set of ad exclusion rules @return the result of the action performed"
 input PerformAdExclusionRuleActionInput {
-  _: Boolean
   adExclusionRuleAction: JSONObject
   filterStatement: JSONObject
 }
 
 "Updates the specified AdExclusionRule objects. @param adExclusionRules the ad exclusion rules to update @return the updated rules"
 input UpdateAdExclusionRulesInput {
-  _: Boolean
   adExclusionRules: [JSONObject]
 }
 

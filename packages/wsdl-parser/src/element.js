@@ -9,6 +9,10 @@ class WSDLElement {
     this.fields = fields || new WSDLTypeFields();
   }
 
+  get hasFields() {
+    return Boolean(this.fields.size);
+  }
+
   static fromRaw(element = {}) {
     const { name } = element.$;
     const documentation = cleanDocs(element);

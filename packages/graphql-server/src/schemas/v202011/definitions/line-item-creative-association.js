@@ -6,7 +6,6 @@ module.exports = gql`
 
 "Creates new LineItemCreativeAssociation objects @param lineItemCreativeAssociations the line item creative associations to create @return the created line item creative associations with their IDs filled in"
 input CreateLineItemCreativeAssociationsInput {
-  _: Boolean
   lineItemCreativeAssociations: [JSONObject]
 }
 
@@ -20,13 +19,11 @@ type CreativeNativeStylePreview {
 
 "Gets a LineItemCreativeAssociationPage of LineItemCreativeAssociation objects that satisfy the given Statement#query. The following fields are supported for filtering:   PQL Property Object Property   \`creativeId\` LineItemCreativeAssociation#creativeId   \`manualCreativeRotationWeight\` LineItemCreativeAssociation#manualCreativeRotationWeight   \`destinationUrl\` LineItemCreativeAssociation#destinationUrl   \`lineItemId\` LineItemCreativeAssociation#lineItemId   \`status\` LineItemCreativeAssociation#status   \`lastModifiedDateTime\` LineItemCreativeAssociation#lastModifiedDateTime   @param filterStatement a Publisher Query Language statement used to filter a set of line item creative associations @return the line item creative associations that match the given filter"
 input GetLineItemCreativeAssociationsByStatementInput {
-  _: Boolean
   filterStatement: JSONObject
 }
 
 "Returns an insite preview URL that references the specified site URL with the specified creative from the association served to it. For Creative Set previewing you may specify the master creative Id. @param lineItemId the ID of the line item, which must already exist @param creativeId the ID of the creative, which must already exist @param siteUrl the URL of the site that the creative should be previewed in @return a URL that references the specified site URL with the specified creative served to it"
 input GetPreviewUrlInput {
-  _: Boolean
   lineItemId: BigInt
   creativeId: BigInt
   siteUrl: String
@@ -34,7 +31,6 @@ input GetPreviewUrlInput {
 
 "Returns a list of URLs that reference the specified site URL with the specified creative from the association served to it. For Creative Set previewing you may specify the master creative Id. Each URL corresponds to one available native style for previewing the specified creative. @param lineItemId the ID of the line item, which must already exist @param creativeId the ID of the creative, which must already exist and must be a native creative @param siteUrl the URL of the site that the creative should be previewed in @return the URLs that references the specified site URL and can be used to preview the specified creative with the available native styles"
 input GetPreviewUrlsForNativeStylesInput {
-  _: Boolean
   lineItemId: BigInt
   creativeId: BigInt
   siteUrl: String
@@ -112,14 +108,12 @@ type Long_StatsMapEntry {
 
 "Performs actions on LineItemCreativeAssociation objects that match the given Statement#query. @param lineItemCreativeAssociationAction the action to perform @param filterStatement a Publisher Query Language statement used to filter a set of line item creative associations @return the result of the action performed"
 input PerformLineItemCreativeAssociationActionInput {
-  _: Boolean
   lineItemCreativeAssociationAction: JSONObject
   filterStatement: JSONObject
 }
 
 "Updates the specified LineItemCreativeAssociation objects @param lineItemCreativeAssociations the line item creative associations to update @return the updated line item creative associations"
 input UpdateLineItemCreativeAssociationsInput {
-  _: Boolean
   lineItemCreativeAssociations: [JSONObject]
 }
 

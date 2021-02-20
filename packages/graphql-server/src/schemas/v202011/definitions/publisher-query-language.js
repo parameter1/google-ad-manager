@@ -76,7 +76,6 @@ type Row {
 
 "Retrieves rows of data that satisfy the given Statement#query from the system. @param selectStatement a Publisher Query Language statement used to specify what data needs to returned @return a result set of data that matches the given filter"
 input SelectInput {
-  _: Boolean
   selectStatement: JSONObject
 }
 

@@ -6,13 +6,11 @@ module.exports = gql`
 
 "Creates new NativeStyle objects. @param nativeStyles the native styles to create @return the created native styles with their IDs filled in"
 input CreateNativeStylesInput {
-  _: Boolean
   nativeStyles: [JSONObject]
 }
 
 "Gets a NativeStylePage of NativeStyle objects that satisfy the given Statement. The following fields are supported for filtering:   PQL Property Object Property   \`id\` NativeStyle#id   \`name\` NativeStyle#name   @param filterStatement a Publisher Query Language statement used to filter a set of native styles. @return the native styles that match the given filter"
 input GetNativeStylesByStatementInput {
-  _: Boolean
   filterStatement: JSONObject
 }
 
@@ -62,14 +60,12 @@ enum NativeStyleStatusEnum {
 
 "Performs actions on native styles that match the given Statement. @param nativeStyleAction the action to perform @param filterStatement a Publisher Query Language statement to filter a set of native styles @return the result of the action performed"
 input PerformNativeStyleActionInput {
-  _: Boolean
   nativeStyleAction: JSONObject
   filterStatement: JSONObject
 }
 
 "Updates the specified NativeStyle objects. @param nativeStyles the native styles to be updated @return the updated native styles"
 input UpdateNativeStylesInput {
-  _: Boolean
   nativeStyles: [JSONObject]
 }
 

@@ -6,7 +6,6 @@ module.exports = gql`
 
 "Creates new User objects. @param users the users to create @return the created users with their IDs filled in"
 input CreateUsersInput {
-  _: Boolean
   users: [JSONObject]
 }
 
@@ -22,13 +21,11 @@ input GetCurrentUserInput {
 
 "Gets a UserPage of User objects that satisfy the given Statement#query. The following fields are supported for filtering:   PQL Property Object Property   \`email\` User#email   \`id\` User#id   \`name\` User#name   \`roleId\` User#roleId   \`rolename\` User#roleName   \`status\` \`ACTIVE\` if User#isActive is true; \`INACTIVE\` otherwise   @param filterStatement a Publisher Query Language statement used to filter a set of users @return the users that match the given filter"
 input GetUsersByStatementInput {
-  _: Boolean
   filterStatement: JSONObject
 }
 
 "Performs actions on User objects that match the given Statement#query. @param userAction the action to perform @param filterStatement a Publisher Query Language statement used to filter a set of users @return the result of the action performed"
 input PerformUserActionInput {
-  _: Boolean
   userAction: JSONObject
   filterStatement: JSONObject
 }
@@ -57,7 +54,6 @@ enum RoleStatusEnum {
 
 "Updates the specified User objects. @param users the users to update @return the updated users"
 input UpdateUsersInput {
-  _: Boolean
   users: [JSONObject]
 }
 

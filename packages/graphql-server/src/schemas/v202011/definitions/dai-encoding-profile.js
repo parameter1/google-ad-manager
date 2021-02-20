@@ -30,7 +30,6 @@ enum ContainerTypeEnum {
 
 "Creates new DaiEncodingProfile objects. @param daiEncodingProfiles the profiles to create @return the created profiles with their IDs filled in"
 input CreateDaiEncodingProfilesInput {
-  _: Boolean
   daiEncodingProfiles: [JSONObject]
 }
 
@@ -74,20 +73,17 @@ enum DaiEncodingProfileStatusEnum {
 
 "Gets a DaiEncodingProfilePage of DaiEncodingProfile objects that satisfy the given Statement#query. The following fields are supported for filtering:   PQL Property Object Property   \`id\` DaiEncodingProfile#id   \`status\` DaiEncodingProfile#status   \`name\` DaiEncodingProfile#name   @param filterStatement a Publisher Query Language statement to filter a list of profiles @return the profiles that match the filter"
 input GetDaiEncodingProfilesByStatementInput {
-  _: Boolean
   filterStatement: JSONObject
 }
 
 "Performs actions on DaiEncodingProfile objects that match the given Statement#query. @param daiEncodingProfileAction the action to perform @param filterStatement a Publisher Query Language statement used to filter a set of profiles @return the result of the action performed"
 input PerformDaiEncodingProfileActionInput {
-  _: Boolean
   daiEncodingProfileAction: JSONObject
   filterStatement: JSONObject
 }
 
 "Updates the specified DaiEncodingProfile objects. @param daiEncodingProfiles the content profiles to update @return the updated profiles @throws ApiException if there is an error updating the profiles"
 input UpdateDaiEncodingProfilesInput {
-  _: Boolean
   daiEncodingProfiles: [JSONObject]
 }
 

@@ -34,19 +34,16 @@ type BuyerRfp {
 
 "Creates new Proposal objects. For each proposal, the following fields are required:  Proposal#name  @param proposals the proposals to create @return the created proposals with their IDs filled in"
 input CreateProposalsInput {
-  _: Boolean
   proposals: [JSONObject]
 }
 
 "Gets a MarketplaceCommentPage of MarketplaceComment objects that satisfy the given Statement#query. This method only returns comments already sent to Marketplace, local draft ProposalMarketplaceInfo#marketplaceComment are not included. The following fields are supported for filtering:   PQL Property Object Property   \`proposalId\` MarketplaceComment#proposalId   The query must specify a \`proposalId\`, and only supports a subset of PQL syntax: [WHERE  {AND  ...}] [ORDER BY  [ASC | DESC]] [LIMIT {[,] } | { OFFSET }]       :=  =   :=  IN  Only supports \`ORDER BY\` MarketplaceComment#creationTime. @param filterStatement a Publisher Query Language statement used to filter a set of marketplace comments @return the marketplace comments that match the given filter"
 input GetMarketplaceCommentsByStatementInput {
-  _: Boolean
   filterStatement: JSONObject
 }
 
 "Gets a ProposalPage of Proposal objects that satisfy the given Statement#query. The following fields are supported for filtering:   PQL Property Object Property   \`id\` Proposal#id   \`dfpOrderId\` Proposal#dfpOrderId   \`name\` Proposal#name   \`status\` Proposal#status   \`isArchived\` Proposal#isArchived    \`approvalStatus\` Only applicable for proposals using sales management  Proposal#approvalStatus   \`lastModifiedDateTime\` Proposal#lastModifiedDateTime    \`thirdPartyAdServerId\`  Only applicable for non-programmatic proposals using sales management   Proposal#thirdPartyAdServerId    \`customThirdPartyAdServerName\`  Only applicable for non-programmatic proposals using sales management   Proposal#customThirdPartyAdServerName   \`hasOfflineErrors\` Proposal#hasOfflineErrors   \`isProgrammatic\` Proposal#isProgrammatic    \`negotiationStatus\` Only applicable for programmatic proposals  ProposalMarketplaceInfo#negotiationStatus   @param filterStatement a Publisher Query Language statement used to filter a set of proposals @return the proposals that match the given filter"
 input GetProposalsByStatementInput {
-  _: Boolean
   filterStatement: JSONObject
 }
 
@@ -99,7 +96,6 @@ enum NegotiationStatusEnum {
 
 "Performs actions on Proposal objects that match the given Statement#query. The following fields are also required when submitting proposals for approval:  Proposal#advertiser Proposal#primarySalesperson Proposal#primaryTraffickerId  @param proposalAction the action to perform @param filterStatement a Publisher Query Language statement used to filter a set of proposals @return the result of the action performed"
 input PerformProposalActionInput {
-  _: Boolean
   proposalAction: JSONObject
   filterStatement: JSONObject
 }
@@ -252,7 +248,6 @@ type SalespersonSplit {
 
 "Updates the specified Proposal objects. @param proposals the proposals to update @return the updated proposals"
 input UpdateProposalsInput {
-  _: Boolean
   proposals: [JSONObject]
 }
 

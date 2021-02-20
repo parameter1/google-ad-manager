@@ -6,26 +6,22 @@ module.exports = gql`
 
 "Creates new UserTeamAssociation objects. @param userTeamAssociations the user team associations to create @return the created user team associations with their IDs filled in"
 input CreateUserTeamAssociationsInput {
-  _: Boolean
   userTeamAssociations: [JSONObject]
 }
 
 "Gets a UserTeamAssociationPage of UserTeamAssociation objects that satisfy the given Statement#query. The following fields are supported for filtering:   PQL Property Object Property   \`userId\` UserTeamAssociation#userId   \`teamId\` UserTeamAssociation#teamId   @param filterStatement a Publisher Query Language statement used to filter a set of user team associations @return the user team associations that match the given filter"
 input GetUserTeamAssociationsByStatementInput {
-  _: Boolean
   filterStatement: JSONObject
 }
 
 "Performs actions on UserTeamAssociation objects that match the given Statement#query. @param userTeamAssociationAction the action to perform @param filterStatement a Publisher Query Language statement used to filter a set of user team associations @return the result of the action performed"
 input PerformUserTeamAssociationActionInput {
-  _: Boolean
   userTeamAssociationAction: JSONObject
   statement: JSONObject
 }
 
 "Updates the specified UserTeamAssociation objects. @param userTeamAssociations the user team associations to update @return the updated user team associations"
 input UpdateUserTeamAssociationsInput {
-  _: Boolean
   userTeamAssociations: [JSONObject]
 }
 

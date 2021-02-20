@@ -46,7 +46,6 @@ enum AdServingFormatEnum {
 
 "Creates new LiveStreamEvent objects. The following fields are required:  LiveStreamEvent#name LiveStreamEvent#startDateTime LiveStreamEvent#endDateTime LiveStreamEvent#contentUrls LiveStreamEvent#adTags  @param liveStreamEvents the live stream events to create @return the created live stream events with their IDs filled in"
 input CreateLiveStreamEventsInput {
-  _: Boolean
   liveStreamEvents: [JSONObject]
 }
 
@@ -64,7 +63,6 @@ enum DynamicAdInsertionTypeEnum {
 
 "Gets a LiveStreamEventPage of LiveStreamEvent objects that satisfy the given Statement#query. The following fields are supported for filtering:   PQL Property Object Property   \`id\` LiveStreamEvent#id   \`slateCreativeId\` LiveStreamEvent#slateCreativeId   \`assetKey\` LiveStreamEvent#assetKey   \`streamCreateDaiAuthenticationKeyIds\` LiveStreamEvent#streamCreateDaiAuthenticationKeyIds   \`dynamicAdInsertionType\` LiveStreamEvent#dynamicAdInsertionType   \`streamingFormat\` LiveStreamEvent#streamingFormat   \`customAssetKey\` LiveStreamEvent#customAssetKey   \`daiEncodingProfileIds\` LiveStreamEvent#daiEncodingProfileIds   \`segmentUrlAuthenticationKeyIds\` LiveStreamEvent#segmentUrlAuthenticationKeyIds   @param filterStatement a Publisher Query Language statement to filter a list of live stream events @return the live stream events that match the filter"
 input GetLiveStreamEventsByStatementInput {
-  _: Boolean
   filterStatement: JSONObject
 }
 
@@ -192,7 +190,6 @@ type MasterPlaylistSettings {
 
 "Performs actions on LiveStreamEvent objects that match the given Statement#query. @param liveStreamEventAction the action to perform @param filterStatement a Publisher Query Language statement used to filter a set of live stream events @return the result of the action performed"
 input PerformLiveStreamEventActionInput {
-  _: Boolean
   liveStreamEventAction: JSONObject
   filterStatement: JSONObject
 }
@@ -235,7 +232,6 @@ enum StreamingFormatEnum {
 
 "Updates the specified LiveStreamEvent objects. @param liveStreamEvents the live stream events to update @return the updated live stream events @throws ApiException if there is an error updating the live stream events"
 input UpdateLiveStreamEventsInput {
-  _: Boolean
   liveStreamEvents: [JSONObject]
 }
 

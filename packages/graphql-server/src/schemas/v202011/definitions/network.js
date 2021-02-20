@@ -50,7 +50,6 @@ type Network {
 
 "Updates the specified network. Currently, only the network display name can be updated. @param network the network that needs to be updated @return the updated network"
 input UpdateNetworkInput {
-  _: Boolean
   network: JSONObject
 }
 

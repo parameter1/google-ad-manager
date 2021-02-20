@@ -48,13 +48,11 @@ enum CdnConfigurationTypeEnum {
 
 "Creates new CdnConfiguration objects."
 input CreateCdnConfigurationsInput {
-  _: Boolean
   cdnConfigurations: [JSONObject]
 }
 
 "Gets a CdnConfigurationPage of CdnConfiguration objects that satisfy the given Statement#query. Currently only CDN Configurations of type CdnConfigurationType#LIVE_STREAM_SOURCE_CONTENT will be returned. The following fields are supported for filtering:   PQL Property Object Property   \`id\` CdnConfiguration#id   \`name\` CdnConfiguration#name  "
 input GetCdnConfigurationsByStatementInput {
-  _: Boolean
   statement: JSONObject
 }
 
@@ -82,7 +80,6 @@ enum OriginForwardingTypeEnum {
 
 "Performs actions on CdnConfiguration objects that match the given Statement#query. @param cdnConfigurationAction the action to perform @param filterStatement a Publisher Query Language statement used to filter a set of live stream events @return the result of the action performed"
 input PerformCdnConfigurationActionInput {
-  _: Boolean
   cdnConfigurationAction: JSONObject
   filterStatement: JSONObject
 }
@@ -125,7 +122,6 @@ type SourceContentConfiguration {
 
 "Updates the specified CdnConfiguration objects."
 input UpdateCdnConfigurationsInput {
-  _: Boolean
   cdnConfigurations: [JSONObject]
 }
 

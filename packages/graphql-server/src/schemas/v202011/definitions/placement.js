@@ -6,19 +6,16 @@ module.exports = gql`
 
 "Creates new Placement objects. @param placements the placements to create @return the new placements, with their IDs filled in"
 input CreatePlacementsInput {
-  _: Boolean
   placements: [JSONObject]
 }
 
 "Gets a PlacementPage of Placement objects that satisfy the given Statement#query. The following fields are supported for filtering:   PQL Property Object Property   \`description\` Placement#description   \`id\` Placement#id   \`name\` Placement#name   \`placementCode\` Placement#placementCode   \`status\` Placement#status   \`lastModifiedDateTime\` Placement#lastModifiedDateTime   @param filterStatement a Publisher Query Language statement used to filter a set of placements @return the placements that match the given filter"
 input GetPlacementsByStatementInput {
-  _: Boolean
   filterStatement: JSONObject
 }
 
 "Performs actions on Placement objects that match the given Statement#query. @param placementAction the action to perform @param filterStatement a Publisher Query Language statement used to filter a set of placements @return the result of the action performed"
 input PerformPlacementActionInput {
-  _: Boolean
   placementAction: JSONObject
   filterStatement: JSONObject
 }
@@ -59,7 +56,6 @@ interface SiteTargetingInfoInterface {
 
 "Updates the specified Placement objects. @param placements the placements to update @return the updated placements"
 input UpdatePlacementsInput {
-  _: Boolean
   placements: [JSONObject]
 }
 

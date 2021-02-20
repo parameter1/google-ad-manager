@@ -41,7 +41,6 @@ enum CostTypeEnum {
 
 "Creates new LineItem objects. @param lineItems the line items to create @return the created line items with their IDs filled in"
 input CreateLineItemsInput {
-  _: Boolean
   lineItems: [JSONObject]
 }
 
@@ -94,7 +93,6 @@ enum DeliveryForecastSourceEnum {
 
 "Gets a LineItemPage of LineItem objects that satisfy the given Statement#query. The following fields are supported for filtering:    PQL property Entity property    \`CostType\`   LineItem#costType     \`CreationDateTime\`   LineItem#creationDateTime     \`DeliveryRateType\`   LineItem#deliveryRateType     \`EndDateTime\`   LineItem#endDateTime     \`ExternalId\`   LineItem#externalId     \`Id\`   LineItem#id     \`IsMissingCreatives\`   LineItem#isMissingCreatives     \`IsSetTopBoxEnabled\`   LineItem#isSetTopBoxEnabled     \`LastModifiedDateTime\`   LineItem#lastModifiedDateTime     \`LineItemType\`   LineItem#lineItemType     \`Name\`   LineItem#name     \`OrderId\`   LineItem#orderId     \`StartDateTime\`   LineItem#startDateTime     \`Status\`   LineItem#status     \`UnitsBought\`   LineItem#unitsBought     @param filterStatement a Publisher Query Language statement used to filter a set of line items. @return the line items that match the given filter"
 input GetLineItemsByStatementInput {
-  _: Boolean
   filterStatement: JSONObject
 }
 
@@ -470,14 +468,12 @@ enum PacingDeviceCategorizationTypeEnum {
 
 "Performs actions on LineItem objects that match the given Statement#query. @param lineItemAction the action to perform @param filterStatement a Publisher Query Language statement used to filter a set of line items @return the result of the action performed"
 input PerformLineItemActionInput {
-  _: Boolean
   lineItemAction: JSONObject
   filterStatement: JSONObject
 }
 
 "Updates the specified LineItem objects. @param lineItems the line items to update @return the updated line items"
 input UpdateLineItemsInput {
-  _: Boolean
   lineItems: [JSONObject]
 }
 

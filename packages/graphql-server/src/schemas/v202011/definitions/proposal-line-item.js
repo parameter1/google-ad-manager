@@ -6,25 +6,21 @@ module.exports = gql`
 
 "Creates makegood proposal line items given the specifications provided."
 input CreateMakegoodsInput {
-  _: Boolean
   makegoodInfos: [JSONObject]
 }
 
 "Creates new ProposalLineItem objects. @param proposalLineItems the proposal line items to create @return the created proposal line items with their IDs filled in"
 input CreateProposalLineItemsInput {
-  _: Boolean
   proposalLineItems: [JSONObject]
 }
 
 "Gets a ProposalLineItemPage of ProposalLineItem objects that satisfy the given Statement#query. The following fields are supported for filtering:   PQL Property Object Property   \`id\` ProposalLineItem#id   \`name\` ProposalLineItem#name   \`proposalId\` ProposalLineItem#proposalId   \`startDateTime\` ProposalLineItem#startDateTime   \`endDateTime\` ProposalLineItem#endDateTime   \`isArchived\` ProposalLineItem#isArchived   \`lastModifiedDateTime\` ProposalLineItem#lastModifiedDateTime    \`useThirdPartyAdServerFromProposal\`  Only applicable for non-programmatic proposal line items using sales management   ProposalLineItem#useThirdPartyAdServerFromProposal    \`thirdPartyAdServerId\`  Only applicable for non-programmatic proposal line items using sales management   ProposalLineItem#thirdPartyAdServerId    \`customThirdPartyAdServerName\`  Only applicable for non-programmatic proposal line items using sales management   ProposalLineItem#customThirdPartyAdServerName   \`isProgrammatic\` ProposalLineItem#isProgrammatic   @param filterStatement a Publisher Query Language statement used to filter a set of proposal line items @return the proposal line items that match the given filter"
 input GetProposalLineItemsByStatementInput {
-  _: Boolean
   filterStatement: JSONObject
 }
 
 "Performs actions on ProposalLineItem objects that match the given Statement#query. @param proposalLineItemAction the action to perform @param filterStatement a Publisher Query Language statement used to filter a set of proposal line items @return the result of the action performed"
 input PerformProposalLineItemActionInput {
-  _: Boolean
   proposalLineItemAction: JSONObject
   filterStatement: JSONObject
 }
@@ -183,7 +179,6 @@ enum ReservationStatusEnum {
 
 "Updates the specified ProposalLineItem objects. @param proposalLineItems the proposal line items to update @return the updated proposal line items"
 input UpdateProposalLineItemsInput {
-  _: Boolean
   proposalLineItems: [JSONObject]
 }
 

@@ -6,19 +6,16 @@ module.exports = gql`
 
 "Takes a prospective forecast adjustment and calculates the daily ad opportunity counts corresponding to its provided volume settings. @param forecastAdjustment the prospective forecast adjustment @return a forecast adjustment matching the one passed in, but with its \`calculatedDailyAdOpportunityCounts\` field populated"
 input CalculateDailyAdOpportunityCountsInput {
-  _: Boolean
   forecastAdjustment: JSONObject
 }
 
 "Creates new ForecastAdjustment objects. @param forecastAdjustments the forecast adjustments to create @return the persisted forecast adjustments with their IDs populated @throws ApiException if there is an error creating the forecast adjustments"
 input CreateForecastAdjustmentsInput {
-  _: Boolean
   forecastAdjustments: [JSONObject]
 }
 
 "Creates new TrafficForecastSegment objects. @param trafficForecastSegments the traffic forecast segments to create @return the persisted traffic forecast segments with their IDs populated @throws ApiException if there is an error creating the traffic forecast segments"
 input CreateTrafficForecastSegmentsInput {
-  _: Boolean
   trafficForecastSegments: [JSONObject]
 }
 
@@ -88,13 +85,11 @@ enum ForecastAdjustmentVolumeTypeEnum {
 
 "Gets a ForecastAdjustmentPage of ForecastAdjustment objects that satisfy the given Statement#query. The following fields are supported for filtering:   PQL Property Object Property   \`id\` ForecastAdjustment#id   \`trafficForecastSegmentId\` ForecastAdjustment#trafficForecastSegmentId   \`name\` ForecastAdjustment#name   \`startDate\` ForecastAdjustment#startDate   \`endDate\` ForecastAdjustment#endDate   \`status\` ForecastAdjustment#status   @param filterStatement a Publisher Query Language statement to filter a list of traffic forecast segments @return a page of forecast adjustments that match the filter"
 input GetForecastAdjustmentsByStatementInput {
-  _: Boolean
   filterStatement: JSONObject
 }
 
 "Gets a TrafficForecastSegmentPage of TrafficForecastSegment objects that satisfy the given Statement#query. The following fields are supported for filtering:   PQL Property Object Property   \`id\` TrafficForecastSegment#id   \`name\` TrafficForecastSegment#name   \`creationTime\` TrafficForecastSegment#creationTime   @param filterStatement a Publisher Query Language statement to filter a list of traffic forecast segments @return a page of traffic forecast segments that match the filter"
 input GetTrafficForecastSegmentsByStatementInput {
-  _: Boolean
   filterStatement: JSONObject
 }
 
@@ -112,7 +107,6 @@ type HistoricalBasisVolumeSettings {
 
 "Performs actions on ForecastAdjustment objects that match the given Statement#query. @param forecastAdjustmentAction the action to perform @param filterStatement a Publisher Query Language statement used to filter a set of forecast adjustments @return the result of the action performed"
 input PerformForecastAdjustmentActionInput {
-  _: Boolean
   forecastAdjustmentAction: JSONObject
   filterStatement: JSONObject
 }
@@ -149,13 +143,11 @@ type TrafficForecastSegmentPage {
 
 "Updates the specified ForecastAdjustment objects. @param forecastAdjustments the forecast adjustments to update @return the updated forecast adjustments @throws ApiException if there is an error updating the forecast adjustments"
 input UpdateForecastAdjustmentsInput {
-  _: Boolean
   forecastAdjustments: [JSONObject]
 }
 
 "Updates the specified TrafficForecastSegment objects. @param trafficForecastSegments the traffic forecast segments to update @return the updated traffic forecast segments @throws ApiException if there is an error updating the traffic forecast segments"
 input UpdateTrafficForecastSegmentsInput {
-  _: Boolean
   trafficForecastSegments: [JSONObject]
 }
 

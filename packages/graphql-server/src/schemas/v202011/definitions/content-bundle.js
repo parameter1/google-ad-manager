@@ -40,26 +40,22 @@ enum ContentBundleStatusEnum {
 
 "Creates new ContentBundle objects. @param contentBundles the content bundles to create @return the created content bundles with their IDs filled in"
 input CreateContentBundlesInput {
-  _: Boolean
   contentBundles: [JSONObject]
 }
 
 "Gets a ContentBundlePage of ContentBundle objects that satisfy the given Statement#query. The following fields are supported for filtering:   PQL Property Object Property   \`id\` ContentBundle#id   \`name\` ContentBundle#name   \`status\` ContentBundle#status   @param filterStatement a Publisher Query Language statement used to filter a set of content bundles @return the content bundles that match the given filter"
 input GetContentBundlesByStatementInput {
-  _: Boolean
   filterStatement: JSONObject
 }
 
 "Performs actions on ContentBundle objects that match the given Statement#query. @param contentBundleAction the action to perform @param filterStatement a Publisher Query Language statement used to filter a set of content bundles @return the result of the action performed"
 input PerformContentBundleActionInput {
-  _: Boolean
   contentBundleAction: JSONObject
   filterStatement: JSONObject
 }
 
 "Updates the specified ContentBundle objects. @param contentBundles the content bundles to update @return the updated content bundles"
 input UpdateContentBundlesInput {
-  _: Boolean
   contentBundles: [JSONObject]
 }
 
