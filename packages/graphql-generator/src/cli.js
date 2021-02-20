@@ -1,10 +1,9 @@
 const path = require('path');
 const mkdirp = require('mkdirp');
 const { writeFile } = require('fs').promises;
-const graphQLGenerator = require('@parameter1/google-ad-manager-graphql-generator');
 const inquirer = require('inquirer');
-const loadServices = require('./load-services');
-const loadVersions = require('./load-versions');
+const apiInfo = require('@parameter1/google-ad-manager-api-info');
+const graphQLGenerator = require('./index');
 
 const { log } = console;
 
@@ -27,7 +26,7 @@ const run = async () => {
       name: 'version',
       message: 'Select API version',
       choices: async () => {
-        const versions = await loadVersions();
+        const versions = await apiInfo.versions();
         return versions;
       },
       when: (answers) => answers.actions.includes('generateGraphQL'),
@@ -44,7 +43,7 @@ const run = async () => {
       name: 'servicesToGenerate',
       message: 'Which services would you like to generate?',
       choices: async ({ version }) => {
-        const services = await loadServices({ version });
+        const services = await apiInfo.services({ version });
         return services;
       },
       when: (answers) => !answers.generateAll,
@@ -67,7 +66,7 @@ const run = async () => {
   } = await inquirer.prompt(questions);
 
   if (actions.includes('generateGraphQL')) {
-    const services = await loadServices({ version });
+    const services = await apiInfo.services({ version });
 
     const urls = services
       .filter((service) => {

@@ -1,4 +1,4 @@
-const loadApiInfo = require('./load-api-info');
+const loadApiInfo = require('./load');
 
 module.exports = async () => {
   const $ = await loadApiInfo();
