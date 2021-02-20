@@ -27,5 +27,6 @@ module.exports = () => (str) => {
       // @todo For now just return the text until it can be determine how links should generate.
       return label;
     })
+    .replace(/\u00A0/g, ' ')
     .replace(/"/g, "'");
 };
