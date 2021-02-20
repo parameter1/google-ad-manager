@@ -8,6 +8,8 @@ scalar GAMDateTime
 scalar JSON
 scalar JSONObject
 
+directive @soap(service: String!, action: String!) on FIELD_DEFINITION
+
 directive @find(service: String!, method: String!) on FIELD_DEFINITION
 directive @findById(service: String!, method: String!) on FIELD_DEFINITION
 
