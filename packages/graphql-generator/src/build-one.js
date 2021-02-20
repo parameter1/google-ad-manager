@@ -69,12 +69,7 @@ module.exports = async ({ url } = {}) => {
     const hasChildClasses = Boolean(extendedTypes.size);
 
     if (type.abstract || hasChildClasses) {
-      const interfaceObj = buildInterface({
-        wsdl,
-        type,
-        referencedTypes,
-        cleanDocs,
-      });
+      const interfaceObj = buildInterface({ wsdl, type, cleanDocs });
       o.interfaces.set(interfaceObj.name, interfaceObj);
       return o;
     }
@@ -83,12 +78,7 @@ module.exports = async ({ url } = {}) => {
       o.enums.set(enumObj.name, enumObj);
       return o;
     }
-    const typeObj = buildType({
-      wsdl,
-      type,
-      referencedTypes,
-      cleanDocs,
-    });
+    const typeObj = buildType({ wsdl, type, cleanDocs });
     o.types.set(typeObj.name, typeObj);
     return o;
   }, {

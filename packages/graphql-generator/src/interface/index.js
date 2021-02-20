@@ -7,15 +7,9 @@ const buildAttr = require('../type/build-attr');
  * @param {object} params
  * @param {WSDL} params.wsdl
  * @param {WSDLType} params.type
- * @param {WSDLTypeFields} params.referencedTypes
  * @param {function} params.cleanDocs
  */
-module.exports = ({
-  wsdl,
-  type,
-  referencedTypes,
-  cleanDocs,
-} = {}) => {
+module.exports = ({ wsdl, type, cleanDocs } = {}) => {
   const lines = [];
   lines.push(`"${cleanDocs(type.documentation)}"`);
   const name = createName(type.name);
@@ -30,12 +24,7 @@ module.exports = ({
   if (needsPlaceholder) lines.push('  _: Boolean'); // add placeholder field when empty fieldset
 
   type.fields.forEach((field) => {
-    buildAttr({
-      wsdl,
-      field,
-      referencedTypes,
-      cleanDocs,
-    }).forEach((line) => lines.push(`  ${line}`));
+    buildAttr({ wsdl, field, cleanDocs }).forEach((line) => lines.push(`  ${line}`));
   });
   lines.push('}');
 
