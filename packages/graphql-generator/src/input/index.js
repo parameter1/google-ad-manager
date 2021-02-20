@@ -12,6 +12,7 @@ const cleanDocs = require('../utils/clean-docs');
 module.exports = ({ wsdl, type } = {}) => {
   const lines = [];
   let inputsUsed = new Set();
+  let referencedEnumTypes = new Set();
   lines.push(`"${cleanDocs(type.documentation)}"`);
 
   const name = createName(type.name);
@@ -24,6 +25,7 @@ module.exports = ({ wsdl, type } = {}) => {
     if (attr) {
       attr.lines.forEach((line) => lines.push(`  ${line}`));
       inputsUsed = new Set([...inputsUsed, ...attr.inputsUsed]);
+      referencedEnumTypes = new Set([...referencedEnumTypes, ...attr.referencedEnumTypes]);
     }
   });
   lines.push('}');
@@ -33,6 +35,7 @@ module.exports = ({ wsdl, type } = {}) => {
     name,
     hash: fileHash(contents),
     inputsUsed,
+    referencedEnumTypes,
     contents,
   };
 };

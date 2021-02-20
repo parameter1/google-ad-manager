@@ -25,6 +25,7 @@ module.exports = async ({ url } = {}) => {
 
   const inputs = new Map();
   let inputsUsed = new Set();
+  let referencedEnumTypes = new Set();
   // Build root input definitions from operation elements.
   rootInputElements.forEach((element) => {
     // skip building the root input when the operation doesn't have fields
@@ -32,6 +33,9 @@ module.exports = async ({ url } = {}) => {
     const input = buildInput({ wsdl, type: element });
     // merge the used inputs and always inlcude root inputs
     inputsUsed = new Set([...inputsUsed, input.name, ...input.inputsUsed]);
+    // merge referenced enum types. this is needed in case inputs exclusively
+    // use an enum that regular types do not.
+    referencedEnumTypes = new Set([...referencedEnumTypes, ...input.referencedEnumTypes]);
     inputs.set(input.name, input);
   });
 
@@ -51,6 +55,7 @@ module.exports = async ({ url } = {}) => {
   }).forEach((type) => {
     const input = buildInput({ wsdl, type });
     inputsUsed = new Set([...inputsUsed, ...input.inputsUsed]);
+    referencedEnumTypes = new Set([...referencedEnumTypes, ...input.referencedEnumTypes]);
     inputs.set(input.name, input);
   });
   inputs.forEach((input) => {
@@ -85,7 +90,8 @@ module.exports = async ({ url } = {}) => {
 
   // Recursively find all types related to the return types.
   // This essentially finds all types used by this service.
-  const referencedTypes = wsdl.getAllReferencedTypesFor([...returnTypeNames]);
+  const referencedTypes = wsdl
+    .getAllReferencedTypesFor([...new Set([...returnTypeNames, ...referencedEnumTypes])]);
   const filteredTypes = referencedTypes
     .filter((type) => !treatAsScalars.includes(type.name));
 

@@ -11,6 +11,7 @@ const cleanDocs = require('../utils/clean-docs');
  */
 module.exports = ({ wsdl, field }) => {
   const inputsUsed = new Set();
+  const referencedEnumTypes = new Set();
   let type;
   let skip = false;
   if (scalars[field.type]) {
@@ -22,6 +23,7 @@ module.exports = ({ wsdl, field }) => {
     if (obj.isEnumerated) {
       // enumerated. reference the enum name
       type = createEnumName(obj.name);
+      referencedEnumTypes.add(obj.name);
     } else if (obj.abstract || wsdl.getAllChildTypesFor(obj.name, false).size) {
       // the reference is abstract or uses some form of extensions. force JSONObject.
       type = 'JSONObject';
@@ -39,5 +41,5 @@ module.exports = ({ wsdl, field }) => {
   // only add reference if it has writeable fields.
   if (field.documentation) lines.push(`"${cleanDocs(field.documentation)}"`);
   lines.push(`${field.name}: ${type}`);
-  return { lines, inputsUsed };
+  return { lines, inputsUsed, referencedEnumTypes };
 };
