@@ -7,8 +7,10 @@ module.exports = ({
   jsonKeyFilePath,
   networkCode,
   applicationName,
+  version,
 } = {}) => new GoogleAdManagerSOAP({
   jsonKeyFilePath,
   networkCode,
   applicationName: applicationName ? `${applicationName} (${defaultAppName})` : defaultAppName,
+  version,
 });
