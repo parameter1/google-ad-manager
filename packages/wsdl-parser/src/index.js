@@ -86,6 +86,17 @@ class WSDL {
     }, new ArrayLikeMap());
   }
 
+  getAllOperationInputTypes() {
+    const elements = this.getAllOperationInputElements();
+    const names = elements.reduce((set, element) => {
+      element.fields.forEach((field) => {
+        set.add(field.type);
+      });
+      return set;
+    }, new Set());
+    return this.getAllReferencedTypesFor([...names]);
+  }
+
   getAllReferencedTypesFor(name, types = new WSDLTypes()) {
     const names = isArray(name) ? name : [name];
     names.forEach((n) => {

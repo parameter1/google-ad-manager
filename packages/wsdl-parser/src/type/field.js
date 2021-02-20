@@ -33,6 +33,7 @@ class WSDLTypeField {
     const readonly = [
       /read-only/i,
       /value is readonly/i,
+      /attribute is readonly/i,
     ].some((pattern) => pattern.test(documentation));
 
     const multiple = element.$.maxOccurs === 'unbounded';

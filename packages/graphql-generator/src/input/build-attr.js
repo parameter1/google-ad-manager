@@ -1,25 +1,40 @@
 const scalars = require('../utils/scalar-type-map');
+const createEnumName = require('../enum/create-name');
+const createInputName = require('./create-name');
 const cleanDocs = require('../utils/clean-docs');
 
 /**
  *
  * @param {object} params
+ * @param {WSDL} params.wsdl
  * @param {WSDLTypeField} params.field
  */
-module.exports = ({ field }) => {
+module.exports = ({ wsdl, field }) => {
   let type;
+  let skip = false;
   if (scalars[field.type]) {
-    // explicitally mapped
+    // explicitly mapped to a scalar.
     type = scalars[field.type];
   } else {
-    // Force a JSON input type.
-    // Because the SOAP supports empty objects (e.g. ActivateLineItem: {} <ActiveLineItem />)
-    // we cannot strictly type the inputs because graph doesn't support empty input objects
-    type = 'JSONObject';
+    const obj = wsdl.getType(field.type, true);
+    if (!obj) throw new Error(`Unable to find a type for ${type} when building input attribute type value.`);
+    if (obj.isEnumerated) {
+      // enumerated. reference the enum name
+      type = createEnumName(obj.name);
+    } else if (obj.abstract || wsdl.getAllChildTypesFor(obj.name, false).size) {
+      // the reference is abstract or uses some form of extensions. force JSONObject.
+      type = 'JSONObject';
+    } else {
+      // reference the type input name
+      type = createInputName(obj.name);
+      if (!obj.hasWriteableFields) skip = true; // skip field ref when nothing is writeable
+    }
   }
+  if (skip) return null;
   if (field.multiple) type = `[${type}]`;
   if (field.required) type = `${type}!`;
   const lines = [];
+  // only add reference if it has writeable fields.
   if (field.documentation) lines.push(`"${cleanDocs(field.documentation)}"`);
   lines.push(`${field.name}: ${type}`);
   return lines;

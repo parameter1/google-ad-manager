@@ -2,6 +2,7 @@ const WSDL = require('@parameter1/google-ad-manager-wsdl-parser');
 const { underscore, dasherize } = require('inflected');
 const buildEnum = require('./enum');
 const buildInput = require('./input');
+const buildRootInput = require('./input/root');
 const buildInterface = require('./interface');
 const buildType = require('./type');
 const buildQuery = require('./query');
@@ -16,23 +17,44 @@ const createInputName = require('./input/create-name');
 module.exports = async ({ url } = {}) => {
   const wsdl = await WSDL.loadFromUrl(url);
 
-  // returns as [operationName, WSDLElement]
-  const inputElements = wsdl.getAllOperationInputElements();
+  // Skip Date and DateTime types for Input and Type definitions.
+  // These will be treated as scalars
+  const treatAsScalars = ['Date', 'DateTime'];
 
-  // Build input definitions.
-  const inputs = inputElements
-    .reduce((map, element) => {
-      const inputObj = buildInput({ element });
-      map.set(inputObj.name, inputObj);
-      return map;
-    }, new Map());
+  // returns as [operationName, WSDLElement]
+  const rootInputElements = wsdl.getAllOperationInputElements();
+
+  const inputs = new Map();
+  // Build root input definitions from operation elements.
+  rootInputElements.forEach((element) => {
+    const input = buildRootInput({ wsdl, element });
+    inputs.set(input.name, input);
+  });
+
+  // get all referenced input types, skipping any that are abstract or have child classes.
+  // graphql does not currently support interfaces or unions on inputs.
+  // so these types will ultimately be converted to generic JSONObject inputs.
+  // enums and mapped scalars will also be skipped as these will be referenced directly.
+  // types without any writeable fields will also be skipped,
+  // since these would result in an empty input definitions.
+  wsdl.getAllOperationInputTypes().filter((type) => {
+    if (treatAsScalars.includes(type.name)) return false;
+    if (type.isEnumerated) return false;
+    if (type.abstract) return false;
+    if (!type.hasWriteableFields) return false;
+    const children = wsdl.getAllChildTypesFor(type.name);
+    return !children.length;
+  }).forEach((type) => {
+    const input = buildInput({ wsdl, type });
+    inputs.set(input.name, input);
+  });
 
   // Build query and mutation definitions.
   const mutationPrefixes = ['create', 'perform', 'update'];
   const queries = new Map();
   const mutations = new Map();
   const returnTypeNames = new Set();
-  inputElements.forEach((element, operationName) => {
+  rootInputElements.forEach((element, operationName) => {
     const inputName = createInputName(element.name);
     const returnField = wsdl.getReturnFieldForOperation(operationName);
     // save all return types. will be used to recrusively build types + enums
@@ -55,10 +77,8 @@ module.exports = async ({ url } = {}) => {
   // Recursively find all types related to the return types.
   // This essentially finds all types used by this service.
   const referencedTypes = wsdl.getAllReferencedTypesFor([...returnTypeNames]);
-  // Skip Date and DateTime types... these will be treated as scalars
-  const skip = ['Date', 'DateTime'];
   const filteredTypes = referencedTypes
-    .filter((type) => !skip.includes(type.name));
+    .filter((type) => !treatAsScalars.includes(type.name));
 
   const definitions = filteredTypes.reduce((o, type) => {
     const extendedTypes = wsdl.getAllChildTypesFor(type.name, false);
@@ -81,7 +101,6 @@ module.exports = async ({ url } = {}) => {
     interfaces: new Map(),
     types: new Map(),
     enums: new Map(),
-    inputs,
   });
   const filename = `${dasherize(underscore(wsdl.shortName))}.js`;
   return {
@@ -89,6 +108,7 @@ module.exports = async ({ url } = {}) => {
     shortName: wsdl.shortName,
     filename,
     ...definitions,
+    inputs,
     queries,
     mutations,
   };

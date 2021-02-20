@@ -32,6 +32,12 @@ class WSDLType {
     return Boolean(this.fields.size);
   }
 
+  get hasWriteableFields() {
+    if (this.isEnumerated) return true;
+    if (!this.hasFields) return false;
+    return Boolean(this.fields.filter((field) => !field.readonly).length);
+  }
+
   static fromRaw(type = {}) {
     const name = cleanType(type.$.name);
     const abstract = type.$.abstract === 'true';
