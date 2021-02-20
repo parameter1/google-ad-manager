@@ -1,5 +1,5 @@
 const GoogleAuth = require('@parameter1/google-ad-manager-auth');
-const { ROOT_API_PATH } = require('@parameter1/google-ad-manager-constants');
+const { ROOT_URI } = require('@parameter1/google-ad-manager-constants');
 const GoogleServiceAccount = require('./service-account');
 const GoogleAdManagerService = require('./service');
 const pkg = require('../package.json');
@@ -31,6 +31,7 @@ class GoogleAdManagerSOAP {
       privateKey: this.account.get('private_key'),
       clientEmail: this.account.get('client_email'),
     });
+    this.services = new Map();
   }
 
   /**
@@ -40,16 +41,16 @@ class GoogleAdManagerSOAP {
    */
   service(name) {
     const fullName = `${name}Service`;
-    if (!this.services[fullName]) {
-      const url = `${ROOT_API_PATH}/${this.version}/${fullName}`;
-      this.services[fullName] = new GoogleAdManagerService({
+    if (!this.services.has(fullName)) {
+      const url = `${ROOT_URI}/${this.version}/${fullName}`;
+      this.services.set(fullName, new GoogleAdManagerService({
         url,
         networkCode: this.networkCode,
         applicationName: this.applicationName,
         auth: this.auth,
-      });
+      }));
     }
-    return this.services[fullName];
+    return this.services.get(fullName);
   }
 }
 
