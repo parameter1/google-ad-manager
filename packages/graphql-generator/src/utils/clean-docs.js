@@ -6,7 +6,7 @@ const cheerio = require('cheerio');
  *
  * @param {string} str
  */
-module.exports = () => (str) => {
+module.exports = (str) => {
   if (!str) return str;
   const $ = cheerio.load(str);
   $('a').each(function processLinks() {

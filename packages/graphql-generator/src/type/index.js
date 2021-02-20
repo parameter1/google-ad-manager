@@ -1,15 +1,15 @@
 const createInterfaceName = require('../interface/create-name');
 const fileHash = require('../utils/file-hash');
 const buildAttr = require('./build-attr');
+const cleanDocs = require('../utils/clean-docs');
 
 /**
  *
  * @param {object} params
  * @param {WSDL} params.wsdl
  * @param {WSDLType} params.type
- * @param {function} params.cleanDocs
  */
-module.exports = ({ wsdl, type, cleanDocs } = {}) => {
+module.exports = ({ wsdl, type } = {}) => {
   const lines = [];
   lines.push(`"${cleanDocs(type.documentation)}"`);
 
@@ -23,7 +23,7 @@ module.exports = ({ wsdl, type, cleanDocs } = {}) => {
   if (needsPlaceholder) lines.push('  _: Boolean'); // add placeholder field when empty fieldset
 
   type.fields.forEach((field) => {
-    buildAttr({ wsdl, field, cleanDocs }).forEach((line) => lines.push(`  ${line}`));
+    buildAttr({ wsdl, field }).forEach((line) => lines.push(`  ${line}`));
   });
   lines.push('}');
 

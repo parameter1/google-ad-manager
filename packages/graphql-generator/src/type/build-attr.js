@@ -8,11 +8,9 @@ const getAttrType = require('../utils/get-attr-type');
 * @param {WSDLTypeFields} params.referencedTypes
 * @param {function} params.cleanDocs
 */
-module.exports = ({
-  wsdl,
-  field,
-  cleanDocs,
-}) => {
+const cleanDocs = require('../utils/clean-docs');
+
+module.exports = ({ wsdl, field }) => {
   let type = getAttrType({ wsdl, type: field.type });
   if (field.multiple) type = `[${type}]`;
   if (field.required) type = `${type}!`;

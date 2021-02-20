@@ -5,7 +5,6 @@ const buildInput = require('./input');
 const buildInterface = require('./interface');
 const buildType = require('./type');
 const buildQuery = require('./query');
-const createDocsFn = require('./utils/clean-docs');
 const createInputName = require('./input/create-name');
 
 /**
@@ -17,15 +16,13 @@ const createInputName = require('./input/create-name');
 module.exports = async ({ url } = {}) => {
   const wsdl = await WSDL.loadFromUrl(url);
 
-  const cleanDocs = createDocsFn(wsdl);
-
   // returns as [operationName, WSDLElement]
   const inputElements = wsdl.getAllOperationInputElements();
 
   // Build input definitions.
   const inputs = inputElements
     .reduce((map, element) => {
-      const inputObj = buildInput({ element, cleanDocs });
+      const inputObj = buildInput({ element });
       map.set(inputObj.name, inputObj);
       return map;
     }, new Map());
@@ -50,7 +47,6 @@ module.exports = async ({ url } = {}) => {
       element,
       inputName,
       returnField,
-      cleanDocs,
     });
     const map = isMutation ? mutations : queries;
     map.set(built.name, built);
@@ -69,16 +65,16 @@ module.exports = async ({ url } = {}) => {
     const hasChildClasses = Boolean(extendedTypes.size);
 
     if (type.abstract || hasChildClasses) {
-      const interfaceObj = buildInterface({ wsdl, type, cleanDocs });
+      const interfaceObj = buildInterface({ wsdl, type });
       o.interfaces.set(interfaceObj.name, interfaceObj);
       return o;
     }
     if (type.enumeration.length) {
-      const enumObj = buildEnum({ type, cleanDocs });
+      const enumObj = buildEnum({ type });
       o.enums.set(enumObj.name, enumObj);
       return o;
     }
-    const typeObj = buildType({ wsdl, type, cleanDocs });
+    const typeObj = buildType({ wsdl, type });
     o.types.set(typeObj.name, typeObj);
     return o;
   }, {

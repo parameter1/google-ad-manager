@@ -1,11 +1,12 @@
+const cleanDocs = require('../utils/clean-docs');
+
 /**
  *
  * @param {object} enumeration
  * @param {string} enumeration.value
  * @param {string} enumeration.documentation
- * @param {function} cleanDocs
  */
-module.exports = ({ value, documentation }, cleanDocs) => {
+module.exports = ({ value, documentation }) => {
   const lines = [];
   if (documentation) lines.push(`"${cleanDocs(documentation)}"`);
   lines.push(value);

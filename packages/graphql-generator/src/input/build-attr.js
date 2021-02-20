@@ -1,12 +1,12 @@
 const scalars = require('../utils/scalar-type-map');
+const cleanDocs = require('../utils/clean-docs');
 
 /**
-*
-* @param {WSDLTypeField} field
-* @param {WSDLTypeFields} referencedTypes
-* @param {function} cleanDocs
-*/
-module.exports = (field, cleanDocs) => {
+ *
+ * @param {object} params
+ * @param {WSDLTypeField} params.field
+ */
+module.exports = ({ field }) => {
   let type;
   if (scalars[field.type]) {
     // explicitally mapped

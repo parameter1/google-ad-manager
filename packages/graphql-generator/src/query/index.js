@@ -1,5 +1,6 @@
 const fileHash = require('../utils/file-hash');
 const getAttrType = require('../utils/get-attr-type');
+const cleanDocs = require('../utils/clean-docs');
 
 module.exports = ({
   wsdl,
@@ -9,7 +10,6 @@ module.exports = ({
   element,
   inputName,
   returnField,
-  cleanDocs,
 }) => {
   let returnType = getAttrType({ wsdl, type: returnField.type });
   if (returnField.multiple) returnType = `[${returnType}]`;
