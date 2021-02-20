@@ -46,6 +46,15 @@ type AvailabilityForecast {
   demographicBreakdowns: [GrpDemographicBreakdown]
 }
 
+"Forecasting options for line item availability forecasts."
+input AvailabilityForecastOptionsInput {
+  "When specified, forecast result for the availability line item will also include breakdowns by its targeting in AvailabilityForecast#targetingCriteriaBreakdowns."
+  includeTargetingCriteriaBreakdown: Boolean
+  "When specified, the forecast result for the availability line item will also include contending line items in AvailabilityForecast#contendingLineItems."
+  includeContendingLineItems: Boolean
+  breakdown: ForecastBreakdownOptionsInput
+}
+
 "Represents a single delivery data point, with both available and forecast number."
 type BreakdownForecast {
   matched: BigInt
@@ -67,6 +76,12 @@ type DeliveryForecast {
   lineItemDeliveryForecasts: [LineItemDeliveryForecast]
 }
 
+"Forecasting options for line item delivery forecasts."
+input DeliveryForecastOptionsInput {
+  "Line item IDs to be ignored while performing the delivery simulation."
+  ignoredLineItemIds: [BigInt]
+}
+
 "Represents the breakdown entries for a list of targetings and/or creatives."
 type ForecastBreakdown {
   "The starting time of the represented breakdown."
@@ -85,33 +100,51 @@ type ForecastBreakdownEntry {
   forecast: BreakdownForecast
 }
 
+"Configuration of forecast breakdown."
+input ForecastBreakdownOptionsInput {
+  "The boundaries of time windows to configure time breakdown. By default, the time window of the forecasted LineItem is assumed if none are explicitly specified in this field. But if set, at least two DateTimes are needed to define the boundaries of minimally one time window. Also, the time boundaries are required to be in the same time zone, in strictly ascending order."
+  timeWindows: [GAMDateTime]
+  "For each time window, these are the breakdown targets. If none specified, the targeting of the forecasted LineItem is assumed."
+  targets: [ForecastBreakdownTargetInput]
+}
+
+"Specifies inventory targeted by a breakdown entry."
+input ForecastBreakdownTargetInput {
+  "An optional name for this breakdown target, to be populated in the corresponding ForecastBreakdownEntry#name field."
+  name: String
+  "If specified, the targeting for this breakdown."
+  targeting: TargetingInput
+  "If specified, restrict the breakdown to only inventory matching this creative."
+  creative: CreativePlaceholderInput
+}
+
 "Gets an AvailabilityForecast for an existing LineItem object. An availability forecast reports the maximum number of available units that the line item can be booked with, and also the total number of units matching the line item's targeting. Only line items having type LineItemType#SPONSORSHIP or LineItemType#STANDARD are valid. Other types will result in ReservationDetailsError.Reason#LINE_ITEM_TYPE_NOT_ALLOWED. @param lineItemId the ID of a LineItem to run the forecast on. @param forecastOptions options controlling the forecast"
 input GetAvailabilityForecastByIdInput {
   lineItemId: BigInt
-  forecastOptions: JSONObject
+  forecastOptions: AvailabilityForecastOptionsInput
 }
 
 "Gets the availability forecast for a ProspectiveLineItem. An availability forecast reports the maximum number of available units that the line item can book, and the total number of units matching the line item's targeting. @param lineItem the prospective line item (new or existing) to be forecasted for availability @param forecastOptions options controlling the forecast"
 input GetAvailabilityForecastInput {
-  lineItem: JSONObject
-  forecastOptions: JSONObject
+  lineItem: ProspectiveLineItemInput
+  forecastOptions: AvailabilityForecastOptionsInput
 }
 
 "Gets the delivery forecast for a list of existing LineItem objects in a single delivery simulation. A delivery forecast reports the number of units that will be delivered to each line item given the line item goals and contentions from other line items. @param lineItemIds the IDs of line items to be forecasted for delivery @param forecastOptions options controlling the forecast"
 input GetDeliveryForecastByIdsInput {
   lineItemIds: [BigInt]
-  forecastOptions: JSONObject
+  forecastOptions: DeliveryForecastOptionsInput
 }
 
 "Gets the delivery forecast for a list of ProspectiveLineItem objects in a single delivery simulation with line items potentially contending with each other. A delivery forecast reports the number of units that will be delivered to each line item given the line item goals and contentions from other line items. @param lineItems line items to be forecasted for delivery @param forecastOptions options controlling the forecast"
 input GetDeliveryForecastInput {
-  lineItems: [JSONObject]
-  forecastOptions: JSONObject
+  lineItems: [ProspectiveLineItemInput]
+  forecastOptions: DeliveryForecastOptionsInput
 }
 
 "Returns forecasted and historical traffic data for the segment of traffic specified by the provided request. Calling this endpoint programmatically is only available for Ad Manager 360 networks. @param trafficDataRequest the request specifying the segment of traffic for which data should be returned @return a dto containing forecasted and historical traffic data for the specified segment of traffic"
 input GetTrafficDataInput {
-  trafficDataRequest: JSONObject
+  trafficDataRequest: TrafficDataRequestInput
 }
 
 "The age range associated with a GRP demographic forecast."
@@ -185,6 +218,16 @@ type LineItemDeliveryForecast {
   matchedUnits: BigInt
 }
 
+"Represents a prospective line item to be forecasted."
+input ProspectiveLineItemInput {
+  "The target of the forecast. If LineItem#id is null or no line item exists with that ID, then a forecast is computed for the subject, predicting what would happen if it were added to the network. If a line item already exists with LineItem#id, the forecast is computed for the subject, predicting what would happen if the existing line item's settings were modified to match the subject."
+  lineItem: LineItemInput
+  "The target of the forecast if this prospective line item is a proposal line item. If ProposalLineItem#id is null or no proposal line item exists with that ID, then a forecast is computed for the subject, predicting what would happen if it were added to the network. If a proposal line item already exists with ProposalLineItem#id, the forecast is computed for the subject, predicting what would happen if the existing proposal line item's settings were modified to match the subject. A proposal line item can optionally correspond to an order LineItem, in which case, by forecasting a proposal line item, the corresponding line item is implicitly ignored in the forecasting. Either #lineItem or #proposalLineItem should be specified but not both."
+  proposalLineItem: ProposalLineItemInput
+  "When set, the line item is assumed to be from this advertiser, and unified blocking rules will apply accordingly. If absent, line items without an existing order won't be subject to unified blocking rules."
+  advertiserId: BigInt
+}
+
 "A single targeting criteria breakdown result."
 type TargetingCriteriaBreakdown {
   "The dimension of this breakdown"
@@ -231,6 +274,14 @@ type TimeSeries {
   timeSeriesDateRange: DateRange
   "The daily values constituting the time series. The number of time series values must equal the number of days spanned by the time series date range, inclusive. E.g.: \`timeSeriesDateRange\` of 2001-08-15 to 2001-08-17 should contain one value for the 15th, one value for the 16th, and one value for the 17th."
   values: [BigInt]
+}
+
+"Defines a segment of traffic for which traffic data should be returned."
+input TrafficDataRequestInput {
+  "The TargetingDto that defines a segment of traffic. This attribute is required."
+  targeting: TargetingInput!
+  "The date range for which traffic data are requested. This range may cover historical dates, future dates, or both. The data returned are not guaranteed to cover the entire requested date range. If sufficient data are not available to cover the entire requested date range, a response may be returned with a later start date, earlier end date, or both. This attribute is required."
+  requestedDateRange: DateRangeInput!
 }
 
 "Contains forecasted and historical traffic volume data describing a segment of traffic."

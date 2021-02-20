@@ -6,12 +6,12 @@ module.exports = gql`
 
 "Creates new NativeStyle objects. @param nativeStyles the native styles to create @return the created native styles with their IDs filled in"
 input CreateNativeStylesInput {
-  nativeStyles: [JSONObject]
+  nativeStyles: [NativeStyleInput]
 }
 
 "Gets a NativeStylePage of NativeStyle objects that satisfy the given Statement. The following fields are supported for filtering:   PQL Property Object Property   \`id\` NativeStyle#id   \`name\` NativeStyle#name   @param filterStatement a Publisher Query Language statement used to filter a set of native styles. @return the native styles that match the given filter"
 input GetNativeStylesByStatementInput {
-  filterStatement: JSONObject
+  filterStatement: StatementInput
 }
 
 "Used to define the look and feel of native ads, for both web and apps. Native styles determine how native creatives look for a segment of inventory."
@@ -34,6 +34,22 @@ type NativeStyle {
   status: NativeStyleStatusEnum
   "The size of the native style. This attribute is required."
   size: Size!
+}
+
+"Used to define the look and feel of native ads, for both web and apps. Native styles determine how native creatives look for a segment of inventory."
+input NativeStyleInput {
+  "The name of the native style. This attribute is required and has a maximum length of 255 characters."
+  name: String!
+  "The HTML snippet of the native style with placeholders for the associated variables. This attribute is required."
+  htmlSnippet: String!
+  "The CSS snippet of the native style, with placeholders for the associated variables. This attribute is required."
+  cssSnippet: String!
+  "Whether this is a fluid size native style. If \`true\`, this must be used with 1x1 size."
+  isFluid: Boolean
+  "The targeting criteria for this native style. Only ad unit and key-value targeting are supported at this time."
+  targeting: TargetingInput
+  "The size of the native style. This attribute is required."
+  size: SizeInput!
 }
 
 "Captures a page of NativeStyle objects."
@@ -61,12 +77,12 @@ enum NativeStyleStatusEnum {
 "Performs actions on native styles that match the given Statement. @param nativeStyleAction the action to perform @param filterStatement a Publisher Query Language statement to filter a set of native styles @return the result of the action performed"
 input PerformNativeStyleActionInput {
   nativeStyleAction: JSONObject
-  filterStatement: JSONObject
+  filterStatement: StatementInput
 }
 
 "Updates the specified NativeStyle objects. @param nativeStyles the native styles to be updated @return the updated native styles"
 input UpdateNativeStylesInput {
-  nativeStyles: [JSONObject]
+  nativeStyles: [NativeStyleInput]
 }
 
 extend type Mutation {

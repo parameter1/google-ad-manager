@@ -6,24 +6,40 @@ module.exports = gql`
 
 "Creates new Team objects. The following fields are required:  Team#name  @param teams the teams to create @return the created teams with their IDs filled in"
 input CreateTeamsInput {
-  teams: [JSONObject]
+  teams: [TeamInput]
 }
 
 "Gets a \`TeamPage\` of \`Team\` objects that satisfy the given Statement#query. The following fields are supported for filtering:   PQL Property Object Property   \`id\` Team#id   \`name\` Team#name   \`description\` Team#description   @param filterStatement a Publisher Query Language statement used to filter a set of teams. @return the teams that match the given filter"
 input GetTeamsByStatementInput {
-  filterStatement: JSONObject
+  filterStatement: StatementInput
 }
 
 "Performs actions on Team objects that match the given Statement#query. @param teamAction the action to perform @param filterStatement a Publisher Query Language statement used to filter a set of teams @return the result of the action performed"
 input PerformTeamActionInput {
   teamAction: JSONObject
-  filterStatement: JSONObject
+  filterStatement: StatementInput
 }
 
 "A \`Team\` defines a grouping of users and what entities they have access to. Users are added to teams with UserTeamAssociation objects."
 type Team {
   "The unique ID of the \`Team\`. This value is readonly and is assigned by Google. Teams that are created by Google will have negative IDs."
   id: BigInt!
+  "The name of the \`Team\`. This value is required to create a team and has a maximum length of 106 characters."
+  name: String!
+  "The description of the \`Team\`. This value is optional and has a maximum length of 255 characters."
+  description: String
+  "The status of the Team. This value can be TeamStatus#ACTIVE (default) or TeamStatus#INACTIVE and determines the visibility of the team in the UI."
+  status: TeamStatusEnum
+  "Whether or not users on this team have access to all companies. If this value is true, then an error will be thrown if an attempt is made to associate this team with a Company."
+  hasAllCompanies: Boolean
+  "Whether or not users on this team have access to all inventory. If this value is true, then an error will be thrown if an attempt is made to associate this team with an AdUnit."
+  hasAllInventory: Boolean
+  "The default access to orders, for users on this team."
+  teamAccessType: TeamAccessTypeEnum
+}
+
+"A \`Team\` defines a grouping of users and what entities they have access to. Users are added to teams with UserTeamAssociation objects."
+input TeamInput {
   "The name of the \`Team\`. This value is required to create a team and has a maximum length of 106 characters."
   name: String!
   "The description of the \`Team\`. This value is optional and has a maximum length of 255 characters."
@@ -60,7 +76,7 @@ enum TeamStatusEnum {
 
 "Updates the specified Team objects. @param teams the teams to update @return the updated teams"
 input UpdateTeamsInput {
-  teams: [JSONObject]
+  teams: [TeamInput]
 }
 
 extend type Mutation {

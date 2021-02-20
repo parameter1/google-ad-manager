@@ -4,44 +4,9 @@ const { gql } = require('apollo-server-express');
 
 module.exports = gql`
 
-"Child content eligibility designation. This field is optional and defaults to ChildContentEligibility#DISALLOWED. This field has no effect on serving enforcement unless you opt to 'Child content enforcement' in the network's Child Content settings."
-enum ChildContentEligibilityEnum {
-  "This line item is eligible to serve on requests that are child-directed."
-  ALLOWED
-  "This line item is not eligible to serve on any requests that are child-directed."
-  DISALLOWED
-  UNKNOWN
-}
-
-"The scope to which the assignment of any competitive exclusion labels for a video line item is limited."
-enum CompetitiveConstraintScopeEnum {
-  "The competitive exclusion label applies to all line items within a single pod (or group)."
-  POD
-  "The competitive exclusion label applies to all line items within the entire stream of content."
-  STREAM
-  "The value returned if the actual value is not exposed by the requested API version."
-  UNKNOWN
-}
-
-"Describes the LineItem actions that are billable."
-enum CostTypeEnum {
-  "Cost per action. The LineItem#lineItemType must be one of:  LineItemType#SPONSORSHIP LineItemType#STANDARD LineItemType#BULK LineItemType#NETWORK "
-  CPA
-  "Cost per click. The LineItem#lineItemType must be one of:  LineItemType#SPONSORSHIP LineItemType#STANDARD LineItemType#BULK LineItemType#NETWORK LineItemType#PRICE_PRIORITY LineItemType#HOUSE "
-  CPC
-  "Cost per day. The LineItem#lineItemType must be one of:  LineItemType#SPONSORSHIP LineItemType#NETWORK "
-  CPD
-  "Cost per mille (cost per thousand impressions). The LineItem#lineItemType must be one of:  LineItemType#SPONSORSHIP LineItemType#STANDARD LineItemType#BULK LineItemType#NETWORK LineItemType#PRICE_PRIORITY LineItemType#HOUSE "
-  CPM
-  "The value returned if the actual value is not exposed by the requested API version."
-  UNKNOWN
-  "Cost per thousand Active View viewable impressions. The LineItem#lineItemType must be LineItemType#STANDARD."
-  VCPM
-}
-
 "Creates new LineItem objects. @param lineItems the line items to create @return the created line items with their IDs filled in"
 input CreateLineItemsInput {
-  lineItems: [JSONObject]
+  lineItems: [LineItemInput]
 }
 
 "Represents the creative targeting criteria for a LineItem."
@@ -69,40 +34,9 @@ type CustomPacingGoal {
   amount: BigInt
 }
 
-"Options for the unit of the custom pacing goal amounts."
-enum CustomPacingGoalUnitEnum {
-  "The custom pacing goal amounts represent absolute numbers corresponding to the line item's Goal#unitType."
-  ABSOLUTE
-  "The custom pacing goal amounts represent a millipercent. For example, 15000 millipercent equals 15%."
-  MILLI_PERCENT
-  "The value returned if the actual value is not exposed by the requested API version."
-  UNKNOWN
-}
-
-"Strategies for choosing forecasted traffic shapes to pace line items."
-enum DeliveryForecastSourceEnum {
-  "A user specified custom pacing curve will be used to pace line item delivery."
-  CUSTOM_PACING_CURVE
-  "The line item's projected future traffic will be used to pace line item delivery."
-  FORECASTING
-  "The line item's historical traffic shape will be used to pace line item delivery."
-  HISTORICAL
-  "The value returned if the actual value is not exposed by the requested API version."
-  UNKNOWN
-}
-
 "Gets a LineItemPage of LineItem objects that satisfy the given Statement#query. The following fields are supported for filtering:    PQL property Entity property    \`CostType\`   LineItem#costType     \`CreationDateTime\`   LineItem#creationDateTime     \`DeliveryRateType\`   LineItem#deliveryRateType     \`EndDateTime\`   LineItem#endDateTime     \`ExternalId\`   LineItem#externalId     \`Id\`   LineItem#id     \`IsMissingCreatives\`   LineItem#isMissingCreatives     \`IsSetTopBoxEnabled\`   LineItem#isSetTopBoxEnabled     \`LastModifiedDateTime\`   LineItem#lastModifiedDateTime     \`LineItemType\`   LineItem#lineItemType     \`Name\`   LineItem#name     \`OrderId\`   LineItem#orderId     \`StartDateTime\`   LineItem#startDateTime     \`Status\`   LineItem#status     \`UnitsBought\`   LineItem#unitsBought     @param filterStatement a Publisher Query Language statement used to filter a set of line items. @return the line items that match the given filter"
 input GetLineItemsByStatementInput {
-  filterStatement: JSONObject
-}
-
-"Represents available GRP providers that a line item will have its target demographic measured by."
-enum GrpProviderEnum {
-  "Renamed to \`GOOGLE\` beginning in V201608."
-  GOOGLE
-  NIELSEN
-  "The value returned if the actual value is not exposed by the requested API version."
-  UNKNOWN
+  filterStatement: StatementInput
 }
 
 "\`GrpSettings\` contains information for a line item that will have a target demographic when serving. This information will be used to set up tracking and enable reporting on the demographic information."
@@ -122,18 +56,6 @@ type GrpSettings {
   "Specifies whether to use Google or Nielsen device breakdown in Nielsen Line Item auto pacing."
   pacingDeviceCategorizationType: PacingDeviceCategorizationTypeEnum
   applyTrueCoview: Boolean
-}
-
-"Represents the target gender for a GRP demographic targeted line item."
-enum GrpTargetGenderEnum {
-  "Indicates that the GRP target gender is both male and female."
-  BOTH
-  "Indicates that the GRP target gender is Female."
-  FEMALE
-  "Indicates that the GRP target gender is Male."
-  MALE
-  "The value returned if the actual value is not exposed by the requested API version."
-  UNKNOWN
 }
 
 "\`LineItem\` is an advertiser's commitment to purchase a specific number of ad impressions, clicks, or time."
@@ -287,14 +209,6 @@ type LineItemDealInfoDto {
   externalDealId: BigInt
 }
 
-"Describes the possible discount types on the cost of booking a LineItem."
-enum LineItemDiscountTypeEnum {
-  "An absolute value will be discounted from the line item's cost."
-  ABSOLUTE_VALUE
-  "A percentage of the cost will be applied as discount for booking the line item."
-  PERCENTAGE
-}
-
 "Captures a page of LineItem objects."
 type LineItemPage {
   "The size of the total result set to which this page belongs."
@@ -444,37 +358,15 @@ enum LineItemSummaryReservationStatusEnum {
   UNRESERVED
 }
 
-"Represents the pacing computation method for impressions on connected devices for a Nielsen measured line item. This only applies when Nielsen measurement is enabled for connected devices."
-enum NielsenCtvPacingTypeEnum {
-  "Indicates that Nielsen impressions on connected devices are included, and we apply coviewing in pacing."
-  COVIEW
-  "The value returned if Nielsen measurement is disabled for connected devices."
-  NONE
-  "Indicates that Nielsen impressions on connected devices are included, and we apply strict coviewing in pacing."
-  STRICT_COVIEW
-  "The value returned if the actual value is not exposed by the requested API version."
-  UNKNOWN
-}
-
-"Represents whose device categorization to use on Nielsen measured line item with auto-pacing enabled."
-enum PacingDeviceCategorizationTypeEnum {
-  "Use Google's device categorization in auto-pacing."
-  GOOGLE
-  "Use Nielsen device categorization in auto-pacing"
-  NIELSEN
-  "The value returned if the actual value is not exposed by the requested API version."
-  UNKNOWN
-}
-
 "Performs actions on LineItem objects that match the given Statement#query. @param lineItemAction the action to perform @param filterStatement a Publisher Query Language statement used to filter a set of line items @return the result of the action performed"
 input PerformLineItemActionInput {
   lineItemAction: JSONObject
-  filterStatement: JSONObject
+  filterStatement: StatementInput
 }
 
 "Updates the specified LineItem objects. @param lineItems the line items to update @return the updated line items"
 input UpdateLineItemsInput {
-  lineItems: [JSONObject]
+  lineItems: [LineItemInput]
 }
 
 extend type Mutation {

@@ -16,22 +16,31 @@ enum ApprovalStatusEnum {
 
 "Creates new Site objects. @param sites the sites to create @return the created sites with their IDs filled in"
 input CreateSitesInput {
-  sites: [JSONObject]
+  sites: [SiteInput]
 }
 
 "Gets a SitePage of Site objects that satisfy the given Statement#query. The following fields are supported for filtering:   PQL Property Object Property   \`id\` Site#id   \`url\` Site#url   \`childNetworkCode\` Site#childNetworkCode   \`approvalStatus\` Site#approvalStatus   \`active\` Site#active   @param filterStatement a Publisher Query Language statement used to filter a set of sites @return the sites that match the given filter"
 input GetSitesByStatementInput {
-  filterStatement: JSONObject
+  filterStatement: StatementInput
 }
 
 "Performs actions on Site objects that match the given Statement#query. @param siteAction the action to perform @param filterStatement a Publisher Query Language statement used to filter a set of sites @return the result of the action performed"
 input PerformSiteActionInput {
   siteAction: JSONObject
-  filterStatement: JSONObject
+  filterStatement: StatementInput
 }
 
 ""
 type Site {
+  id: BigInt!
+  url: String
+  childNetworkCode: String
+  approvalStatus: ApprovalStatusEnum
+  active: Boolean
+}
+
+""
+input SiteInput {
   id: BigInt!
   url: String
   childNetworkCode: String
@@ -48,7 +57,7 @@ type SitePage {
 
 "Updates the specified Site objects. @param sites the sites to update @return the updated sites"
 input UpdateSitesInput {
-  sites: [JSONObject]
+  sites: [SiteInput]
 }
 
 extend type Mutation {

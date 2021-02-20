@@ -92,7 +92,7 @@ interface CreativeTemplateVariableInterface {
 
 "Gets a CreativeTemplatePage of CreativeTemplate objects that satisfy the given Statement#query. The following fields are supported for filtering:   PQL Property Object Property   \`id\` CreativeTemplate#id   \`name\` CreativeTemplate#name   \`type\` CreativeTemplate#type   \`status\` CreativeTemplate#status   @param filterStatement a Publisher Query Language statement used to filter a set of creative templates. @return the creative templates that match the given filter"
 input GetCreativeTemplatesByStatementInput {
-  filterStatement: JSONObject
+  filterStatement: StatementInput
 }
 
 "Represents a list variable defined in a creative template. This is similar to StringCreativeTemplateVariable, except that there are possible choices to choose from. Use StringCreativeTemplateVariableValue to specify the value for this variable when creating a TemplateCreative from a CreativeTemplate."

@@ -6,7 +6,7 @@ module.exports = gql`
 
 "Gets a TargetingPresetPage of TargetingPreset objects that satisfy the given Statement#query. The following fields are supported for filtering:   PQL Property Object Property   \`id\` TargetingPreset#id   \`name\` TargetingPreset#name   @param filterStatement a Publisher Query Language statement used to filter a set of labels. @return the targeting presets that match the given filter"
 input GetTargetingPresetsByStatementInput {
-  filterStatement: JSONObject
+  filterStatement: StatementInput
 }
 
 "User-defined preset targeting criteria."

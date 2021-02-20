@@ -46,6 +46,16 @@ enum BillingSourceEnum {
   UNKNOWN
 }
 
+"A \`ChildPublisher\` represents a network being managed as part of Multiple Customer Management."
+input ChildPublisherInput {
+  "Type of delegation the parent has proposed to have over the child, pending approval of the child network. Set the value of this field to the delegation type you intend this network to have over the child network. Upon approval by the child network, its value is copied to \`approvedDelegationType\`, and \`proposedDelegationType\` is set to null."
+  proposedDelegationType: DelegationTypeEnum
+  "Status of the delegation relationship between parent and child."
+  status: DelegationStatusEnum
+  "Network code of child network."
+  childNetworkCode: String
+}
+
 "A \`Company\` represents an agency, a single advertiser or an entire advertising network."
 type Company {
   "Uniquely identifies the \`Company\`. This value is read-only and is assigned by Google when the company is created. This attribute is required for updates."
@@ -100,6 +110,44 @@ enum CompanyCreditStatusEnum {
   ON_HOLD
 }
 
+"A \`Company\` represents an agency, a single advertiser or an entire advertising network."
+input CompanyInput {
+  "The full name of the company. This attribute is required and has a maximum length of 127 characters."
+  name: String!
+  "Specifies what kind of company this is. This attribute is required."
+  type: CompanyTypeEnum!
+  "Specifies the address of the company. This attribute is optional and has a maximum length of 65,535 characters."
+  address: String
+  "Specifies the email of the company. This attribute is optional and has a maximum length of 128 characters."
+  email: String
+  "Specifies the fax phone number of the company. This attribute is optional and has a maximum length of 63 characters."
+  faxPhone: String
+  "Specifies the primary phone number of the company. This attribute is optional and has a maximum length of 63 characters."
+  primaryPhone: String
+  "Specifies the external ID of the company. This attribute is optional and has a maximum length of 255 characters."
+  externalId: String
+  "Specifies the comment of the company. This attribute is optional and has a maximum length of 1024 characters."
+  comment: String
+  "Specifies the company's credit status. This attribute is optional and defaults to CreditStatus#ACTIVE when basic credit status settings are enabled, and CreditStatus#ON_HOLD when advanced credit status settings are enabled."
+  creditStatus: CompanyCreditStatusEnum
+  "Specifies the default billing settings of this \`Company\`. This attribute is optional."
+  settings: CompanySettingsInput
+  "The set of labels applied to this company."
+  appliedLabels: [AppliedLabelInput]
+  "The ID of the Contact who is acting as the primary contact for this company. This attribute is optional."
+  primaryContactId: BigInt
+  "The IDs of all teams that this company is on directly."
+  appliedTeamIds: [BigInt]
+  "Specifies the ID of the Google-recognized canonicalized form of this company. This attribute is optional."
+  thirdPartyCompanyId: Int
+  "The date and time this company was last modified."
+  lastModifiedDateTime: GAMDateTime
+  "Info required for when Company Type is CHILD_PUBLISHER."
+  childPublisher: ChildPublisherInput
+  "Info required for when Company Type is VIEWABILITY_PROVIDER."
+  viewabilityProvider: ViewabilityProviderInput
+}
+
 "Captures a page of Company objects."
 type CompanyPage {
   "The size of the total result set to which this page belongs."
@@ -112,6 +160,22 @@ type CompanyPage {
 
 "Settings for a Company."
 type CompanySettings {
+  "Default billing cap for proposals created by the Company of type Company.Type#ADVERTISER in Sales Manager. Return null if default billing setting feature is disabled or BillingSource is BillingSource#CONTRACTED. It is allowed that all of the BillingCap, BillingSchedule, BillingSource are null when the company has no setting about these values."
+  billingCap: BillingCapEnum
+  "Default billing schedule for proposals created by the Company of type Company.Type#ADVERTISER in Sales Manager. Return null if default billing setting feature is disabled or BillingSource is not BillingSource#CONTRACTED. It is allowed that all of the BillingCap, BillingSchedule, BillingSource are null when the company has no setting about these values."
+  billingSchedule: BillingScheduleEnum
+  "Default billing source for proposals created by the Company of type Company.Type#ADVERTISER in Sales Manager. Return null if default billing setting feature is disabled. It is allowed that all of the BillingCap, BillingSchedule, BillingSource are null when the company has no setting about these values."
+  billingSource: BillingSourceEnum
+  "Default advertiser discount for proposals created by the Company of type Company.Type#ADVERTISER in Sales Manager. Return null if default billing setting feature is disabled or the company has no setting on this value. It presents in millipercentage (values 0 to 100000)."
+  advertiserDiscount: BigInt
+  "Default value added tax for proposals created by the Company of type Company.Type#ADVERTISER in Sales Manager. Return null if default billing setting feature is disabled or the company has no setting on this value. It presents in millipercentage (values 0 to 100000)."
+  valueAddedTax: BigInt
+  "Default agency commission for proposals associated with the Company of type Company.Type#AGENCY in Sales Manager. Return null if the default billing setting feature is disabled or the company has no setting on this value. It presents in millipercentage (values 0 to 100000)."
+  agencyCommission: BigInt
+}
+
+"Settings for a Company."
+input CompanySettingsInput {
   "Default billing cap for proposals created by the Company of type Company.Type#ADVERTISER in Sales Manager. Return null if default billing setting feature is disabled or BillingSource is BillingSource#CONTRACTED. It is allowed that all of the BillingCap, BillingSchedule, BillingSource are null when the company has no setting about these values."
   billingCap: BillingCapEnum
   "Default billing schedule for proposals created by the Company of type Company.Type#ADVERTISER in Sales Manager. Return null if default billing setting feature is disabled or BillingSource is not BillingSource#CONTRACTED. It is allowed that all of the BillingCap, BillingSchedule, BillingSource are null when the company has no setting about these values."
@@ -150,27 +214,39 @@ enum CompanyTypeEnum {
 
 "Creates new Company objects. @param companies the companies to create @return the created companies with their IDs filled in"
 input CreateCompaniesInput {
-  companies: [JSONObject]
+  companies: [CompanyInput]
 }
 
 "Gets a CompanyPage of Company objects that satisfy the given Statement#query. The following fields are supported for filtering:   PQL Property Object Property   \`id\` Company#id   \`name\` Company#name   \`type\` Company#type   \`lastModifiedDateTime\` Company#lastModifiedDateTime   @param filterStatement a Publisher Query Language statement used to filter a set of companies @return the companies that match the given filter"
 input GetCompaniesByStatementInput {
-  filterStatement: JSONObject
+  filterStatement: StatementInput
 }
 
 "Performs actions on Company objects that match the given \`Statement\`. @param companyAction the action to perform @param statement a PQL statement used to filter companies @return the result of the action performed @throws ApiException"
 input PerformCompanyActionInput {
   companyAction: JSONObject
-  statement: JSONObject
+  statement: StatementInput
 }
 
 "Updates the specified Company objects. @param companies the companies to update @return the updated companies"
 input UpdateCompaniesInput {
-  companies: [JSONObject]
+  companies: [CompanyInput]
 }
 
 "Information required for Company of Type VIEWABILITY_PROVIDER. It contains all of the data needed to capture viewability metrics."
 type ViewabilityProvider {
+  "The key for this ad verification vendor."
+  vendorKey: String
+  "The URL that hosts the verification script for this vendor."
+  verificationScriptUrl: String
+  "The parameters that will be passed to the verification script."
+  verificationParameters: String
+  "The URL that should be pinged if the verification script cannot be run."
+  verificationRejectionTrackerUrl: String
+}
+
+"Information required for Company of Type VIEWABILITY_PROVIDER. It contains all of the data needed to capture viewability metrics."
+input ViewabilityProviderInput {
   "The key for this ad verification vendor."
   vendorKey: String
   "The URL that hosts the verification script for this vendor."

@@ -38,6 +38,36 @@ type AdRule {
   postroll: BaseAdRuleSlotInterface!
 }
 
+"An AdRule contains data that the ad server will use to generate a playlist of video ads."
+input AdRuleInput {
+  "The unique name of the AdRule. This attribute is required to create an ad rule and has a maximum length of 255 characters."
+  name: String!
+  "The priority of the AdRule. This attribute is required and can range from 1 to 1000, with 1 being the highest possible priority. Changing an ad rule's priority can affect the priorities of other ad rules. For example, increasing an ad rule's priority from 5 to 1 will shift the ad rules that were previously in priority positions 1 through 4 down one."
+  priority: Int!
+  "The targeting criteria of the AdRule. This attribute is required."
+  targeting: TargetingInput!
+  "This AdRule object's start date and time. This attribute is required and must be a date in the future for new ad rules."
+  startDateTime: GAMDateTime!
+  "Specifies whether to start using the AdRule right away, in an hour, etc. This attribute is optional and defaults to StartDateTimeType#USE_START_DATE_TIME."
+  startDateTimeType: StartDateTimeTypeEnum
+  "This AdRule object's end date and time. This attribute is required unless \`unlimitedEndDateTime\` is set to \`true\`. If specified, it must be after the \`startDateTime\`."
+  endDateTime: GAMDateTime!
+  "Specifies whether the AdRule has an end time. This attribute is optional and defaults to false."
+  unlimitedEndDateTime: Boolean
+  "The FrequencyCapBehavior of the AdRule. This attribute is optional and defaults to FrequencyCapBehavior#DEFER."
+  frequencyCapBehavior: FrequencyCapBehaviorEnum
+  "This AdRule object's frequency cap for the maximum impressions per stream. This attribute is optional and defaults to 0."
+  maxImpressionsPerLineItemPerStream: Int
+  "This AdRule object's frequency cap for the maximum impressions per pod. This attribute is optional and defaults to 0."
+  maxImpressionsPerLineItemPerPod: Int
+  "This AdRule object's pre-roll slot. This attribute is required."
+  preroll: JSONObject!
+  "This AdRule object's mid-roll slot. This attribute is required."
+  midroll: JSONObject!
+  "This AdRule object's post-roll slot. This attribute is required."
+  postroll: JSONObject!
+}
+
 "Captures a page of AdRule objects."
 type AdRulePage {
   "The size of the total result set to which this page belongs."
@@ -122,6 +152,30 @@ enum AdSpotFillTypeEnum {
   UNKNOWN
 }
 
+"A AdSpot is a targetable entity used in the creation of AdRule objects. A ad spot contains a variable number of ads and has constraints (ad duration, reservation type, etc) on the ads that can appear in it."
+input AdSpotInput {
+  "Name of the AdSpot. The name is case insenstive and can be referenced in ad tags. This value is required if \`customSpot\` is true, and cannot be set otherwise. You can use alphanumeric characters and symbols other than the following: ', ', =, !, +, #, *, ~, ;, ^, (, ), <, >, [, ], the white space character."
+  name: String!
+  "Descriptive name for the AdSpot.This value is optional if \`customSpot\` is true, and cannot be set otherwise."
+  displayName: String
+  "Whether this ad spot is a custom spot. This field is optional and defaults to false. Custom spots can be reused and targeted in the targeting picker."
+  customSpot: Boolean
+  "Whether this ad spot is a flexible spot. This field is optional and defaults to false. Flexible spots are allowed to have no max number of ads."
+  flexible: Boolean
+  "The maximum total duration for this AdSpot. This field is optional, defaults to 0, and supports precision to the nearest second."
+  maxDurationMillis: BigInt
+  "The maximum number of ads allowed in the AdSpot. This field is optional and defaults to O. A \`maxNumberOfAds\` of 0 means that there is no maximum for the number of ads in the ad spot. No max ads is only supported for ad spots that have \`flexible\` set to true."
+  maxNumberOfAds: Int
+  "The SubpodTargetingType determines how this ad spot can be targeted. This field is required."
+  targetingType: AdSpotTargetingTypeEnum
+  "Whether backfill is blocked in this ad spot. This field is optional and defaults to false."
+  backfillBlocked: Boolean
+  "The set of line item types that may appear in the ad spot. This field is optional and defaults to an empty set, which means that all types are allowed. Note, backfill reservation types are controlled via the \`backfillBlocked\` field."
+  allowedLineItemTypes: [LineItemTypeEnum]
+  "Whether inventory sharing is blocked in this ad spot. This field is optional and defaults to false."
+  inventorySharingBlocked: Boolean
+}
+
 "Captures a page of AdSpot objects."
 type AdSpotPage {
   "The size of the total result set to which this page belongs."
@@ -188,6 +242,26 @@ type BreakTemplateBreakTemplateMember {
   adSpotFillType: AdSpotFillTypeEnum
 }
 
+"A building block of a pod template."
+input BreakTemplateBreakTemplateMemberInput {
+  "The ID of the AdSpot that has the settings about what kinds of ads can appear in this position of the BreakTemplate."
+  adSpotId: BigInt
+  "The behavior for how the AdSpot should be filled in the context of the BreakTemplate."
+  adSpotFillType: AdSpotFillTypeEnum
+}
+
+"A BreakTemplate defines what kinds of ads show at which positions within a pod. Break templates are made up of AdSpot objects. A break template must have a single ad spot that has \`AdSpot#flexible\` set to true."
+input BreakTemplateInput {
+  "Whether this is custom template. Custom templates get created outside of the ad rule workflow and can be referenced in ad tags. Only custom templates can have names and display names."
+  customTemplate: Boolean
+  "Name of the BreakTemplate. The name is case insenstive and can be referenced in ad tags. This value is required if \`customTemplate\` is true, and cannot be set otherwise. You can use alphanumeric characters and symbols other than the following: ', ', =, !, +, #, *, ~, ;, ^, (, ), <, >, [, ], the white space character."
+  name: String!
+  "Descriptive name for the BreakTemplateDto. This value is optional if \`customTemplate\` is true, and cannot be set otherwise."
+  displayName: String
+  "The list of the BreakTemplateMember objects in the order in which they should appear in the ad pod. Each BreakTemplateMember has a reference to a AdSpot, which defines what kinds of ads can appear at that position, as well as other metadata that defines how each ad spot should be filled."
+  breakTemplateMembers: [BreakTemplateBreakTemplateMemberInput]
+}
+
 "Captures a page of BreakTemplate objects."
 type BreakTemplatePage {
   "The size of the total result set to which this page belongs."
@@ -200,17 +274,17 @@ type BreakTemplatePage {
 
 "Creates new AdRule objects. @param adRules the ad rules to create @return the created ad rules with their IDs filled in"
 input CreateAdRulesInput {
-  adRules: [JSONObject]
+  adRules: [AdRuleInput]
 }
 
 "Creates new AdSpot objects. @param adSpots the ad spots to create @return the created ad spots with their IDs filled in"
 input CreateAdSpotsInput {
-  adSpots: [JSONObject]
+  adSpots: [AdSpotInput]
 }
 
 "Creates new breakTemplate objects. @param breakTemplate the break template to create @return the created break template with their IDs filled in"
 input CreateBreakTemplatesInput {
-  breakTemplate: [JSONObject]
+  breakTemplate: [BreakTemplateInput]
 }
 
 "Types of behavior for frequency caps within ad rules."
@@ -227,17 +301,17 @@ enum FrequencyCapBehaviorEnum {
 
 "Gets an AdRulePage of AdRule objects that satisfy the given Statement#query. The following fields are supported for filtering:   PQL Property Object Property   \`id\` AdRule#id (AdRule#adRuleId beginning in v201702)   \`name\` AdRule#name   \`priority\` AdRule#priority   \`status\` AdRule#status  @param filterStatement a Publisher Query Language statement used to filter a set of ad rules @return the ad rules that match the given filter @throws ApiException if the ID of the active network does not exist or there is a backend error"
 input GetAdRulesByStatementInput {
-  statement: JSONObject
+  statement: StatementInput
 }
 
 "Gets a AdSpotPage of AdSpot objects that satisfy the given Statement#query. @param filterStatement a Publisher Query Language statement to filter a list of ad spots @return the ad spots that match the filter"
 input GetAdSpotsByStatementInput {
-  filterStatement: JSONObject
+  filterStatement: StatementInput
 }
 
 "Gets a BreakTemplatePage of BreakTemplate objects that satisfy the given Statement#query. @param filterStatement a Publisher Query Language statement to filter a list of breakTemplate @return the break template that match the filter"
 input GetBreakTemplatesByStatementInput {
-  filterStatement: JSONObject
+  filterStatement: StatementInput
 }
 
 "Frequency types for mid-roll ad rule slots."
@@ -303,7 +377,7 @@ type OptimizedPoddingAdRuleSlot implements BaseAdRuleSlotInterface {
 "Performs actions on AdRule objects that match the given Statement#query. @param adRuleAction the action to perform @param filterStatement a Publisher Query Language statement used to filter a set of ad rules @return the result of the action performed"
 input PerformAdRuleActionInput {
   adRuleAction: JSONObject
-  filterStatement: JSONObject
+  filterStatement: StatementInput
 }
 
 "An ad rule slot with standard podding. A standard pod is a series of video ads played back to back. Standard pods are defined by a BaseAdRuleSlot#maxAdsInPod and a BaseAdRuleSlot#maxVideoAdDuration."
@@ -352,17 +426,17 @@ type UnknownAdRuleSlot implements BaseAdRuleSlotInterface {
 
 "Updates the specified AdRule objects. @param adRules the ad rules to update @return the updated ad rules @throws ApiException if there is an error updating the ad rules"
 input UpdateAdRulesInput {
-  adRules: [JSONObject]
+  adRules: [AdRuleInput]
 }
 
 "Updates the specified AdSpot objects. @param adSpots the ad spots to update @return the updated ad spots @throws ApiException if there is an error updating the ad spots"
 input UpdateAdSpotsInput {
-  adSpots: [JSONObject]
+  adSpots: [AdSpotInput]
 }
 
 "Updates the specified breakTemplate objects. @param breakTemplate the break template to update @return the updated break template"
 input UpdateBreakTemplatesInput {
-  breakTemplate: [JSONObject]
+  breakTemplate: [BreakTemplateInput]
 }
 
 extend type Mutation {

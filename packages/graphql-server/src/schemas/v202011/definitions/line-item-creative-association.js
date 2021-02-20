@@ -6,7 +6,7 @@ module.exports = gql`
 
 "Creates new LineItemCreativeAssociation objects @param lineItemCreativeAssociations the line item creative associations to create @return the created line item creative associations with their IDs filled in"
 input CreateLineItemCreativeAssociationsInput {
-  lineItemCreativeAssociations: [JSONObject]
+  lineItemCreativeAssociations: [LineItemCreativeAssociationInput]
 }
 
 "Represents the NativeStyle of a Creative and its corresponding preview URL."
@@ -19,7 +19,7 @@ type CreativeNativeStylePreview {
 
 "Gets a LineItemCreativeAssociationPage of LineItemCreativeAssociation objects that satisfy the given Statement#query. The following fields are supported for filtering:   PQL Property Object Property   \`creativeId\` LineItemCreativeAssociation#creativeId   \`manualCreativeRotationWeight\` LineItemCreativeAssociation#manualCreativeRotationWeight   \`destinationUrl\` LineItemCreativeAssociation#destinationUrl   \`lineItemId\` LineItemCreativeAssociation#lineItemId   \`status\` LineItemCreativeAssociation#status   \`lastModifiedDateTime\` LineItemCreativeAssociation#lastModifiedDateTime   @param filterStatement a Publisher Query Language statement used to filter a set of line item creative associations @return the line item creative associations that match the given filter"
 input GetLineItemCreativeAssociationsByStatementInput {
-  filterStatement: JSONObject
+  filterStatement: StatementInput
 }
 
 "Returns an insite preview URL that references the specified site URL with the specified creative from the association served to it. For Creative Set previewing you may specify the master creative Id. @param lineItemId the ID of the line item, which must already exist @param creativeId the ID of the creative, which must already exist @param siteUrl the URL of the site that the creative should be previewed in @return a URL that references the specified site URL with the specified creative served to it"
@@ -68,6 +68,34 @@ type LineItemCreativeAssociation {
   targetingName: String
 }
 
+"A \`LineItemCreativeAssociation\` associates a Creative or CreativeSet with a LineItem so that the creative can be served in ad units targeted by the line item."
+input LineItemCreativeAssociationInput {
+  "The ID of the LineItem to which the Creative should be associated. This attribute is required."
+  lineItemId: BigInt!
+  "The ID of the Creative being associated with a LineItem.  This attribute is required if this is an association between a line item and a creative.  This attribute is ignored if this is an association between a line item and a creative set.  If this is an association between a line item and a creative, when retrieving the line item creative association, the #creativeId will be the creative's ID.  If this is an association between a line item and a creative set, when retrieving the line item creative association, the #creativeId will be the ID of the master creative."
+  creativeId: BigInt!
+  "The ID of the CreativeSet being associated with a LineItem. This attribute is required if this is an association between a line item and a creative set.  This field will be \`null\` when retrieving associations between line items and creatives not belonging to a set."
+  creativeSetId: BigInt!
+  "The weight of the Creative. This value is only used if the line item's \`creativeRotationType\` is set to CreativeRotationType#MANUAL. This attribute is optional and defaults to 10."
+  manualCreativeRotationWeight: Float
+  "The sequential rotation index of the Creative. This value is used only if the associated line item's LineItem#creativeRotationType is set to CreativeRotationType#SEQUENTIAL. This attribute is optional and defaults to 1."
+  sequentialCreativeRotationIndex: Int
+  "Overrides the value set for LineItem#startDateTime. This value is optional and is only valid for Ad Manager 360 networks."
+  startDateTime: GAMDateTime
+  "Specifies whether to start serving to the \`LineItemCreativeAssociation\` right away, in an hour, etc. This attribute is optional and defaults to StartDateTimeType#USE_START_DATE_TIME."
+  startDateTimeType: StartDateTimeTypeEnum
+  "Overrides LineItem#endDateTime. This value is optional and is only valid for Ad Manager 360 networks."
+  endDateTime: GAMDateTime
+  "Overrides the value set for HasDestinationUrlCreative#destinationUrl. This value is optional and is only valid for Ad Manager 360 networks."
+  destinationUrl: String
+  "Overrides the value set for Creative#size, which allows the creative to be served to ad units that would otherwise not be compatible for its actual size. This value is optional."
+  sizes: [SizeInput]
+  "The date and time this association was last modified."
+  lastModifiedDateTime: GAMDateTime
+  "Specifies CreativeTargeting for this line item creative association. This attribute is optional. It should match the creative targeting specified on the corresponding CreativePlaceholder in the LineItem that is being associated with the Creative."
+  targetingName: String
+}
+
 "Captures a page of LineItemCreativeAssociation objects."
 type LineItemCreativeAssociationPage {
   "The size of the total result set to which this page belongs."
@@ -106,15 +134,35 @@ type Long_StatsMapEntry {
   value: Stats
 }
 
+"This represents an entry in a map with a key of type Long and value of type Stats."
+input Long_StatsMapEntryInput {
+  key: BigInt
+  value: StatsInput
+}
+
 "Performs actions on LineItemCreativeAssociation objects that match the given Statement#query. @param lineItemCreativeAssociationAction the action to perform @param filterStatement a Publisher Query Language statement used to filter a set of line item creative associations @return the result of the action performed"
 input PerformLineItemCreativeAssociationActionInput {
   lineItemCreativeAssociationAction: JSONObject
-  filterStatement: JSONObject
+  filterStatement: StatementInput
+}
+
+"\`Stats\` contains trafficking statistics for LineItem and LineItemCreativeAssociation objects"
+input StatsInput {
+  "The number of impressions delivered."
+  impressionsDelivered: BigInt
+  "The number of clicks delivered."
+  clicksDelivered: BigInt
+  "The number of video completions delivered."
+  videoCompletionsDelivered: BigInt
+  "The number of video starts delivered."
+  videoStartsDelivered: BigInt
+  "The number of viewable impressions delivered."
+  viewableImpressionsDelivered: BigInt
 }
 
 "Updates the specified LineItemCreativeAssociation objects @param lineItemCreativeAssociations the line item creative associations to update @return the updated line item creative associations"
 input UpdateLineItemCreativeAssociationsInput {
-  lineItemCreativeAssociations: [JSONObject]
+  lineItemCreativeAssociations: [LineItemCreativeAssociationInput]
 }
 
 extend type Mutation {

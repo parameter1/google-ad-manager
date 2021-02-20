@@ -20,6 +20,18 @@ type Activity {
   type: ActivityTypeEnum
 }
 
+"An activity is a specific user action that an advertiser wants to track, such as the completion of a purchase or a visit to a webpage. You create and manage activities in Ad Manager. When a user performs the action after seeing an advertiser's ad, that's a conversion. For example, you set up an activity in Ad Manager to track how many users visit an advertiser's promotional website after viewing or clicking on an ad. When a user views an ad, then visits the page, that's one conversion."
+input ActivityInput {
+  "The ID of the ActivityGroup that this Activity belongs to."
+  activityGroupId: BigInt
+  "The name of the \`Activity\`. This attribute is required and has a maximum length of 255 characters."
+  name: String!
+  "The URL of the webpage where the tags from this activity will be placed. This attribute is optional."
+  expectedURL: String
+  "The activity type. This attribute is optional and defaults to Activity.Type#PAGE_VIEWS"
+  type: ActivityTypeEnum
+}
+
 "Captures a page of Activity objects."
 type ActivityPage {
   "The size of the total result set to which this page belongs."
@@ -58,17 +70,17 @@ enum ActivityTypeEnum {
 
 "Creates a new Activity objects. @param activities to be created. @return the created activities with its IDs filled in."
 input CreateActivitiesInput {
-  activities: [JSONObject]
+  activities: [ActivityInput]
 }
 
 "Gets an ActivityPage of Activity objects that satisfy the given Statement#query. The following fields are supported for filtering:   PQL Property Object Property   \`id\` Activity#id   \`name\` Activity#name   \`expectedURL\` Activity#expectedURL   \`status\` Activity#status   \`activityGroupId\` Activity#activityGroupId   @param filterStatement a statement used to filter a set of activities. @return the activities that match the given filter."
 input GetActivitiesByStatementInput {
-  filterStatement: JSONObject
+  filterStatement: StatementInput
 }
 
 "Updates the specified Activity objects. @param activities to be updated. @return the updated activities."
 input UpdateActivitiesInput {
-  activities: [JSONObject]
+  activities: [ActivityInput]
 }
 
 extend type Mutation {

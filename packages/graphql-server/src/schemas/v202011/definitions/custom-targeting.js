@@ -6,12 +6,12 @@ module.exports = gql`
 
 "Creates new CustomTargetingKey objects. The following fields are required:  CustomTargetingKey#name CustomTargetingKey#type  @param keys the custom targeting keys to update @return the updated custom targeting keys"
 input CreateCustomTargetingKeysInput {
-  keys: [JSONObject]
+  keys: [CustomTargetingKeyInput]
 }
 
 "Creates new CustomTargetingValue objects. The following fields are required:  CustomTargetingValue#customTargetingKeyId CustomTargetingValue#name  @param values the custom targeting values to update @return the updated custom targeting keys"
 input CreateCustomTargetingValuesInput {
-  values: [JSONObject]
+  values: [CustomTargetingValueInput]
 }
 
 "\`CustomTargetingKey\` represents a key used for custom targeting."
@@ -28,6 +28,20 @@ type CustomTargetingKey {
   valueDeclarationType: ValueDeclarationTypeEnum
   "Status of the \`CustomTargetingKey\`. This field is read-only. A key can be activated and deactivated by calling CustomTargetingService#performCustomTargetingKeyAction."
   status: CustomTargetingKeyStatusEnum
+  "Reportable state of a {@CustomTargetingKey} as defined in ReportableType."
+  reportableType: ReportableTypeEnum
+}
+
+"\`CustomTargetingKey\` represents a key used for custom targeting."
+input CustomTargetingKeyInput {
+  "Name of the key. This can be used for encoding . If you don't want users to be able to see potentially sensitive targeting information in the ad tags of your site, you can encode your key/values. For example, you can create key/value g1=abc to represent gender=female. Keys can contain up to 10 characters each. You can use alphanumeric characters and symbols other than the following: ', ', =, !, +, #, *, ~, ;, ^, (, ), <, >, [, ], the white space character."
+  name: String
+  "Descriptive name for the key."
+  displayName: String
+  "Indicates whether users will select from predefined values or create new targeting values, while specifying targeting criteria for a line item."
+  type: CustomTargetingKeyTypeEnum
+  "Indicates the type of values being passed for this key in ad requests. This field is nullable for a key until it is set, after which it cannot be reset back to null."
+  valueDeclarationType: ValueDeclarationTypeEnum
   "Reportable state of a {@CustomTargetingKey} as defined in ReportableType."
   reportableType: ReportableTypeEnum
 }
@@ -76,6 +90,18 @@ type CustomTargetingValue {
   status: CustomTargetingValueStatusEnum
 }
 
+"\`CustomTargetingValue\` represents a value used for custom targeting."
+input CustomTargetingValueInput {
+  "The ID of the \`CustomTargetingKey\` for which this is the value."
+  customTargetingKeyId: BigInt
+  "Name of the value. This can be used for encoding . If you don't want users to be able to see potentially sensitive targeting information in the ad tags of your site, you can encode your key/values. For example, you can create key/value g1=abc to represent gender=female. Values can contain up to 40 characters each. You can use alphanumeric characters and symbols other than the following: ', ', =, !, +, #, *, ~, ;, ^, (, ), <, >, [, ]. Values are not data-specific; all values are treated as string. For example, instead of using 'age>=18 AND <=34', try '18-34'"
+  name: String
+  "Descriptive name for the value."
+  displayName: String
+  "The way in which the CustomTargetingValue#name strings will be matched."
+  matchType: CustomTargetingValueMatchTypeEnum
+}
+
 "Represents the ways in which CustomTargetingValue#name strings will be matched with ad requests."
 enum CustomTargetingValueMatchTypeEnum {
   "Used for lenient matching when at least one of the words in the ad request matches the targeted value. The targeting value \`car=honda\` will match to ad requests containing the word \`honda\`. So ad requests \`car=honda\` or \`car=honda civic\` or \`car=buy honda\` or \`car=how much does a honda cost\` will all have the line item delivered. This match type can not be used within an audience segment rule."
@@ -116,24 +142,24 @@ enum CustomTargetingValueStatusEnum {
 
 "Gets a CustomTargetingKeyPage of CustomTargetingKey objects that satisfy the given Statement#query. The following fields are supported for filtering:   PQL Property Object Property    \`id\` CustomTargetingKey#id   \`name\` CustomTargetingKey#name   \`displayName\` CustomTargetingKey#displayName   \`type\` CustomTargetingKey#type   @param filterStatement a Publisher Query Language statement used to filter a set of custom targeting keys @return the custom targeting keys that match the given filter"
 input GetCustomTargetingKeysByStatementInput {
-  filterStatement: JSONObject
+  filterStatement: StatementInput
 }
 
 "Gets a CustomTargetingValuePage of CustomTargetingValue objects that satisfy the given Statement#query.  The \`WHERE\` clause in the Statement#query must always contain CustomTargetingValue#customTargetingKeyId as one of its columns in a way that it is AND'ed with the rest of the query. So, if you want to retrieve values for a known set of key ids, valid Statement#query would look like:    'WHERE customTargetingKeyId IN ('17','18','19')' retrieves all values that are associated with keys having ids 17, 18, 19.   'WHERE customTargetingKeyId = '17' AND name = 'red'' retrieves values that are associated with keys having id 17 and value name is 'red'.     The following fields are supported for filtering:    PQL Property Object Property   \`id\` CustomTargetingValue#id   \`customTargetingKeyId\` CustomTargetingValue#customTargetingKeyId   \`name\` CustomTargetingValue#name   \`displayName\` CustomTargetingValue#displayName   \`matchType\` CustomTargetingValue#matchType   @param filterStatement a Publisher Query Language statement used to filter a set of custom targeting values @return the custom targeting values that match the given filter"
 input GetCustomTargetingValuesByStatementInput {
-  filterStatement: JSONObject
+  filterStatement: StatementInput
 }
 
 "Performs actions on CustomTargetingKey objects that match the given Statement#query. @param customTargetingKeyAction the action to perform @param filterStatement a Publisher Query Language statement used to filter a set of custom targeting keys @return the result of the action performed"
 input PerformCustomTargetingKeyActionInput {
   customTargetingKeyAction: JSONObject
-  filterStatement: JSONObject
+  filterStatement: StatementInput
 }
 
 "Performs actions on CustomTargetingValue objects that match the given Statement#query. @param customTargetingValueAction the action to perform @param filterStatement a Publisher Query Language statement used to filter a set of ad units @return the result of the action performed"
 input PerformCustomTargetingValueActionInput {
   customTargetingValueAction: JSONObject
-  filterStatement: JSONObject
+  filterStatement: StatementInput
 }
 
 "Represents the reportable state of a custom key."
@@ -149,12 +175,12 @@ enum ReportableTypeEnum {
 
 "Updates the specified CustomTargetingKey objects. @param keys the custom targeting keys to update @return the updated custom targeting keys"
 input UpdateCustomTargetingKeysInput {
-  keys: [JSONObject]
+  keys: [CustomTargetingKeyInput]
 }
 
 "Updates the specified CustomTargetingValue objects. @param values the custom targeting values to update @return the updated custom targeting values"
 input UpdateCustomTargetingValuesInput {
-  values: [JSONObject]
+  values: [CustomTargetingValueInput]
 }
 
 "Enum to represent the type of values that will be passed for this key."

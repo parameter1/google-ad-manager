@@ -6,13 +6,25 @@ module.exports = gql`
 
 "Creates a new CreativeSet. @param creativeSet the creative set to create @return the creative set with its ID filled in"
 input CreateCreativeSetInput {
-  creativeSet: JSONObject
+  creativeSet: CreativeSetInput
 }
 
 "A creative set is comprised of a master creative and its companion creatives."
 type CreativeSet {
   "Uniquely identifies the \`CreativeSet\`. This attribute is read-only and is assigned by Google when a creative set is created."
   id: BigInt!
+  "The name of the creative set. This attribute is required and has a maximum length of 255 characters."
+  name: String!
+  "The ID of the master creative associated with this creative set. This attribute is required."
+  masterCreativeId: BigInt!
+  "The IDs of the companion creatives associated with this creative set. This attribute is required."
+  companionCreativeIds: [BigInt]!
+  "The date and time this creative set was last modified."
+  lastModifiedDateTime: GAMDateTime
+}
+
+"A creative set is comprised of a master creative and its companion creatives."
+input CreativeSetInput {
   "The name of the creative set. This attribute is required and has a maximum length of 255 characters."
   name: String!
   "The ID of the master creative associated with this creative set. This attribute is required."
@@ -35,12 +47,12 @@ type CreativeSetPage {
 
 "Gets a CreativeSetPage of CreativeSet objects that satisfy the given Statement#query. The following fields are supported for filtering:   PQL Property Object Property   \`id\` CreativeSet#id   \`name\` CreativeSet#name   \`masterCreativeId\` CreativeSet#masterCreativeId   \`lastModifiedDateTime\` CreativeSet#lastModifiedDateTime   @param statement a Publisher Query Language statement used to filter a set of creative sets @return the creative sets that match the given filter"
 input GetCreativeSetsByStatementInput {
-  statement: JSONObject
+  statement: StatementInput
 }
 
 "Updates the specified CreativeSet. @param creativeSet the creative set to update @return the updated creative set"
 input UpdateCreativeSetInput {
-  creativeSet: JSONObject
+  creativeSet: CreativeSetInput
 }
 
 extend type Mutation {

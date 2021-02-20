@@ -14,14 +14,24 @@ type AdCategoryDto {
   parentId: BigInt
 }
 
+"A canonical ad category."
+input AdCategoryDtoInput {
+  "Canonical ID of the ad category."
+  id: BigInt!
+  "Localized name of the category."
+  displayName: String
+  "ID of the category's parent, or 0 if it has no parent."
+  parentId: BigInt
+}
+
 "Creates new Label objects. @param labels the labels to create @return the created labels with their IDs filled in"
 input CreateLabelsInput {
-  labels: [JSONObject]
+  labels: [LabelInput]
 }
 
 "Gets a LabelPage of Label objects that satisfy the given Statement#query. The following fields are supported for filtering:   PQL Property Object Property   \`id\` Label#id   \`type\` Label#type   \`name\` Label#name   \`description\` Label#description   \`isActive\` Label#isActive   @param filterStatement a Publisher Query Language statement used to filter a set of labels. @return the labels that match the given filter"
 input GetLabelsByStatementInput {
-  filterStatement: JSONObject
+  filterStatement: StatementInput
 }
 
 "A \`Label\` is additional information that can be added to an entity."
@@ -36,6 +46,18 @@ type Label {
   isActive: Boolean
   "Indicates the Ad Category associated with the label."
   adCategory: AdCategoryDto
+  "The types of the \`Label\`."
+  types: [LabelTypeEnum]
+}
+
+"A \`Label\` is additional information that can be added to an entity."
+input LabelInput {
+  "Name of the \`Label\`. This is value is required to create a label and has a maximum length of 127 characters."
+  name: String!
+  "A description of the label. This value is optional and its maximum length is 255 characters."
+  description: String
+  "Indicates the Ad Category associated with the label."
+  adCategory: AdCategoryDtoInput
   "The types of the \`Label\`."
   types: [LabelTypeEnum]
 }
@@ -69,12 +91,12 @@ enum LabelTypeEnum {
 "Performs actions on Label objects that match the given Statement#query. @param labelAction the action to perform @param filterStatement a Publisher Query Language statement used to filter a set of labels @return the result of the action performed"
 input PerformLabelActionInput {
   labelAction: JSONObject
-  filterStatement: JSONObject
+  filterStatement: StatementInput
 }
 
 "Updates the specified Label objects. @param labels the labels to update @return the updated labels"
 input UpdateLabelsInput {
-  labels: [JSONObject]
+  labels: [LabelInput]
 }
 
 extend type Mutation {

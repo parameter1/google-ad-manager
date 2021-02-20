@@ -6,23 +6,23 @@ module.exports = gql`
 
 "Creates makegood proposal line items given the specifications provided."
 input CreateMakegoodsInput {
-  makegoodInfos: [JSONObject]
+  makegoodInfos: [ProposalLineItemMakegoodInfoInput]
 }
 
 "Creates new ProposalLineItem objects. @param proposalLineItems the proposal line items to create @return the created proposal line items with their IDs filled in"
 input CreateProposalLineItemsInput {
-  proposalLineItems: [JSONObject]
+  proposalLineItems: [ProposalLineItemInput]
 }
 
 "Gets a ProposalLineItemPage of ProposalLineItem objects that satisfy the given Statement#query. The following fields are supported for filtering:   PQL Property Object Property   \`id\` ProposalLineItem#id   \`name\` ProposalLineItem#name   \`proposalId\` ProposalLineItem#proposalId   \`startDateTime\` ProposalLineItem#startDateTime   \`endDateTime\` ProposalLineItem#endDateTime   \`isArchived\` ProposalLineItem#isArchived   \`lastModifiedDateTime\` ProposalLineItem#lastModifiedDateTime    \`useThirdPartyAdServerFromProposal\`  Only applicable for non-programmatic proposal line items using sales management   ProposalLineItem#useThirdPartyAdServerFromProposal    \`thirdPartyAdServerId\`  Only applicable for non-programmatic proposal line items using sales management   ProposalLineItem#thirdPartyAdServerId    \`customThirdPartyAdServerName\`  Only applicable for non-programmatic proposal line items using sales management   ProposalLineItem#customThirdPartyAdServerName   \`isProgrammatic\` ProposalLineItem#isProgrammatic   @param filterStatement a Publisher Query Language statement used to filter a set of proposal line items @return the proposal line items that match the given filter"
 input GetProposalLineItemsByStatementInput {
-  filterStatement: JSONObject
+  filterStatement: StatementInput
 }
 
 "Performs actions on ProposalLineItem objects that match the given Statement#query. @param proposalLineItemAction the action to perform @param filterStatement a Publisher Query Language statement used to filter a set of proposal line items @return the result of the action performed"
 input PerformProposalLineItemActionInput {
   proposalLineItemAction: JSONObject
-  filterStatement: JSONObject
+  filterStatement: StatementInput
 }
 
 "A \`ProposalLineItem\` is an instance of sales Product. It belongs to a Proposal and is created according to a Product and RateCard. When the proposal is turned into an Order, this object is turned into a LineItem."
@@ -179,7 +179,7 @@ enum ReservationStatusEnum {
 
 "Updates the specified ProposalLineItem objects. @param proposalLineItems the proposal line items to update @return the updated proposal line items"
 input UpdateProposalLineItemsInput {
-  proposalLineItems: [JSONObject]
+  proposalLineItems: [ProposalLineItemInput]
 }
 
 extend type Mutation {

@@ -76,7 +76,7 @@ type Row {
 
 "Retrieves rows of data that satisfy the given Statement#query from the system. @param selectStatement a Publisher Query Language statement used to specify what data needs to returned @return a result set of data that matches the given filter"
 input SelectInput {
-  selectStatement: JSONObject
+  selectStatement: StatementInput
 }
 
 "Contains a Targeting value. This object is experimental! TargetingValue is an experimental, innovative, and rapidly changing new feature for Ad Manager. Unfortunately, being on the bleeding edge means that we may make backwards-incompatible changes to TargetingValue. We will inform the community when this feature is no longer experimental."

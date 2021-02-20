@@ -1320,16 +1320,30 @@ enum DimensionEnum {
   YIELD_PARTNER_TAG
 }
 
+"The file formats available for creating the report."
+enum ExportFormatEnum {
+  "The report file is generated as a list of Comma Separated Values, to be used with automated machine processing.   There is no pretty printing for the output, and no total row. Column headers are the qualified name e.g. 'Dimension.ORDER_NAME'. Network currency Monetary amounts are represented as micros in the currency of the network. Starting from v201705, local currency Monetary amounts are represented as currency symbol + ' ' + micros.  Dates are formatted according to the ISO 8601 standard YYYY-MM-DD DateTimes are formatted according to the ISO 8601 standard YYYY-MM-DDThh:mm:ss[+-]hh:mm "
+  CSV_DUMP
+  "The report file is generated as a list of Tab Separated Values."
+  TSV
+  "The report file is generated as a list of tab-separated values for Excel."
+  TSV_EXCEL
+  "The report file is generated as an Office Open XML spreadsheet designed for Excel 2007+."
+  XLSX
+  "The report file is generated as XML."
+  XML
+}
+
 "Returns the URL at which the report file can be downloaded.  The report will be generated as a gzip archive, containing the report file itself. @param reportJobId the ID of the ReportJob @param exportFormat the ExportFormat for the report file @return the URL for report file download"
 input GetReportDownloadURLInput {
   reportJobId: BigInt
-  exportFormat: JSONObject
+  exportFormat: ExportFormatEnum
 }
 
 "Returns the URL at which the report file can be downloaded, and allows for customization of the downloaded report.  By default, the report will be generated as a gzip archive, containing the report file itself. This can be changed by setting ReportDownloadOptions#useGzipCompression to false. @param reportJobId the ID of the ReportJob @param reportDownloadOptions the ReportDownloadOptions for the request @return the URL for report file download"
 input GetReportDownloadUrlWithOptionsInput {
   reportJobId: BigInt
-  reportDownloadOptions: JSONObject
+  reportDownloadOptions: ReportDownloadOptionsInput
 }
 
 "Returns the ReportJobStatus of the report job with the specified ID."
@@ -1339,7 +1353,19 @@ input GetReportJobStatusInput {
 
 "Retrieves a page of the saved queries either created by or shared with the current user. Each SavedQuery in the page, if it is compatible with the current API version, will contain a ReportQuery object which can be optionally modified and used to create a ReportJob. This can then be passed to ReportService#runReportJob. The following fields are supported for filtering:   PQL Property Object Property   \`id\` SavedQuery#id   \`name\` SavedQuery#name   @param filterStatement a Publisher Query Language statement used to filter which saved queries should be returned. @return a SavedQueryPage that contains all SavedQuery instances which satisfy the given statement."
 input GetSavedQueriesByStatementInput {
-  filterStatement: JSONObject
+  filterStatement: StatementInput
+}
+
+"Represents the options for an API report download request. See ReportService#getReportDownloadUrlWithOptions."
+input ReportDownloadOptionsInput {
+  "The ExportFormat used to generate the report. Default value is ExportFormat#CSV_DUMP."
+  exportFormat: ExportFormatEnum
+  "Whether or not to include the report properties (e.g. network, user, date generated...) in the generated report. Default is false."
+  includeReportProperties: Boolean
+  "Whether or not to include the totals row. Default is true for all formats except ExportFormat#CSV_DUMP."
+  includeTotalsRow: Boolean
+  "Whether or not to compress the report file to a gzip file. Default is true.  Regardless of value, gzip http compression is available from the URL by normal means."
+  useGzipCompression: Boolean
 }
 
 "Represents a report job that will be run to retrieve performance and statistics information about ad campaigns, networks, inventory and sales."
@@ -1348,6 +1374,12 @@ type ReportJob {
   id: BigInt!
   "Holds the filtering criteria."
   reportQuery: ReportQuery
+}
+
+"Represents a report job that will be run to retrieve performance and statistics information about ad campaigns, networks, inventory and sales."
+input ReportJobInput {
+  "Holds the filtering criteria."
+  reportQuery: ReportQueryInput
 }
 
 "Represents the status of a ReportJob running on the server."
@@ -1400,9 +1432,39 @@ enum ReportQueryAdUnitViewEnum {
   TOP_LEVEL
 }
 
+"A \`ReportQuery\` object allows you to specify the selection criteria for generating a report. Only reports with at least one Column are supported."
+input ReportQueryInput {
+  "The list of break-down types being requested in the report. The generated report will contain the dimensions in the same order as requested. This field is required."
+  dimensions: [DimensionEnum]
+  "The ad unit view for the report. Defaults to AdUnitView#TOP_LEVEL."
+  adUnitView: ReportQueryAdUnitViewEnum
+  "The list of trafficking statistics and revenue information being requested in the report. The generated report will contain the columns in the same order as requested. This field is required."
+  columns: [ColumnEnum]
+  "The list of break-down attributes being requested in this report. Some DimensionAttribute values can only be used with certain Dimension values that must be included in the #dimensions attribute. The generated report will contain the attributes in the same order as requested."
+  dimensionAttributes: [DimensionAttributeEnum]
+  "The list of CustomField#id being requested in this report. To add a CustomField to the report, you must include its corresponding Dimension, determined by the CustomField#entityType, as a dimension.   CustomFieldEntityType#entityType   CustomFieldEntityType#LINE_ITEMDimension#LINE_ITEM_NAME   CustomFieldEntityType#ORDERDimension#ORDER_NAME   CustomFieldEntityType#CREATIVEDimension#CREATIVE_NAME  "
+  customFieldIds: [BigInt]
+  "The list of content CMS metadata key IDs being requested in this report. Each of these IDs must have been defined in the CMS metadata key. This will include dimensions in the form of \`CMS_METADATA_KEY[id]_ID\` and \`CMS_METADATA_KEY[id]_VALUE\` where where \`ID\` is the ID of the CMS metadata value and \`VALUE\` is the name.  To add IDs, you must include Dimension#CMS_METADATA in #dimensions, and specify a non-empty list of content CMS metadata key IDs. The order of content CMS metadata columns in the report correspond to the place of Dimension#CMS_METADATA in #dimensions. For example, if #dimensions contains the following dimensions in the order: Dimension#ADVERTISER_NAME, Dimension#CMS_METADATA and Dimension#COUNTRY_NAME, and #cmsMetadataKeyIds contains the following IDs in the order: 1001 and 1002. The order of dimensions in the report will be: Dimension.ADVERTISER_NAME, Dimension.CMS_METADATA_KEY[1001]_VALUE, Dimension.CMS_METADATA_KEY[1002]_VALUE, Dimension.COUNTRY_NAME, Dimension.ADVERTISER_ID, Dimension.CMS_METADATA_KEY[1001]_ID, Dimension.CMS_METADATA_KEY[1002]_ID, Dimension.COUNTRY_CRITERIA_ID"
+  cmsMetadataKeyIds: [BigInt]
+  "The list of custom dimension custom targeting key IDs being requested in this report. This will include dimensions in the form of \`TOP_LEVEL_DIMENSION_KEY[id]_ID\` and \`TOP_LEVEL_DIMENSION_KEY[id]_VALUE\` where \`ID\` is the ID of the custom targeting value and \`VALUE\` is the name. To add IDs, you must include Dimension#CUSTOM_DIMENSION in #dimensions, and specify a non-empty list of custom targeting key IDs. The order of cusotm dimension columns in the report correspond to the place of Dimension#CUSTOM_DIMENSION in #dimensions. For example, if #dimensions contains the following dimensions in the order: Dimension#ADVERTISER_NAME, Dimension#CUSTOM_DIMENSION and Dimension#COUNTRY_NAME, and #customCriteriaCustomTargetingKeyIds contains the following IDs in the order: 1001 and 1002. The order of dimensions in the report will be: Dimension.ADVERTISER_NAME, Dimension.TOP_LEVEL_DIMENSION_KEY[1001]_VALUE, Dimension.TOP_LEVEL_DIMENSION_KEY[1002]_VALUE, Dimension.COUNTRY_NAME, Dimension.ADVERTISER_ID, Dimension.TOP_LEVEL_DIMENSION_KEY[1001]_ID, Dimension.TOP_LEVEL_DIMENSION_KEY[1002]_ID, Dimension.COUNTRY_CRITERIA_ID."
+  customDimensionKeyIds: [BigInt]
+  "The start date from which the reporting information is gathered. The \`ReportQuery#dateRangeType\` field must be set to DateRangeType#CUSTOM_DATE in order to use this."
+  startDate: Date
+  "The end date upto which the reporting information is gathered. The \`ReportQuery#dateRangeType\` field must be set to DateRangeType#CUSTOM_DATE in order to use this."
+  endDate: Date
+  "The period of time for which the reporting data is being generated. In order to define custom time periods, set this to DateRangeType#CUSTOM_DATE. If set to DateRangeType#CUSTOM_DATE, then ReportQuery#startDate and ReportQuery#endDate will be used."
+  dateRangeType: DateRangeTypeEnum
+  "Specifies a filter to use for reporting on data. This filter will be used in conjunction (joined with an AND statement) with the date range selected through #dateRangeType, #startDate, and #endDate. The syntax currently allowed for Statement#query is  [WHERE  {AND  ...}]       :=  =        :=  =   :=  IN   := :  where property is the enumeration name of a Dimension that can be filtered.  For example, the statement 'WHERE LINE_ITEM_ID IN (34344, 23235)' can be used to generate a report for a specific set of line items  Filtering on IDs is highly recommended over filtering on names, especially for geographical entities. When filtering on names, matching is case sensitive."
+  statement: StatementInput
+  "The currency for Ad Exchange revenue metrics. This field is only valid for Ad Exchange metrics, and an exception will be thrown if this field is used with non-Ad Exchange metrics. Defaults to the network currency if left \`null\`. The supported currency codes can be found in [ this Help Center article.](https://support.google.com/adxseller/answer/6019533)"
+  adxReportCurrency: String
+  "Gets the TimeZoneType for this report, which determines the time zone used for the report's date range. Defaults to TimeZoneType.PUBLISHER."
+  timeZoneType: TimeZoneTypeEnum
+}
+
 "Initiates the execution of a ReportQuery on the server. The following fields are required:  ReportJob#reportQuery  @param reportJob the report job to run @return the report job with its ID filled in"
 input RunReportJobInput {
-  reportJob: JSONObject
+  reportJob: ReportJobInput
 }
 
 "A saved ReportQuery representing the selection criteria for running a report."

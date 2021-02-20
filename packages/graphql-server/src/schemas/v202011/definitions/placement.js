@@ -6,18 +6,18 @@ module.exports = gql`
 
 "Creates new Placement objects. @param placements the placements to create @return the new placements, with their IDs filled in"
 input CreatePlacementsInput {
-  placements: [JSONObject]
+  placements: [PlacementInput]
 }
 
 "Gets a PlacementPage of Placement objects that satisfy the given Statement#query. The following fields are supported for filtering:   PQL Property Object Property   \`description\` Placement#description   \`id\` Placement#id   \`name\` Placement#name   \`placementCode\` Placement#placementCode   \`status\` Placement#status   \`lastModifiedDateTime\` Placement#lastModifiedDateTime   @param filterStatement a Publisher Query Language statement used to filter a set of placements @return the placements that match the given filter"
 input GetPlacementsByStatementInput {
-  filterStatement: JSONObject
+  filterStatement: StatementInput
 }
 
 "Performs actions on Placement objects that match the given Statement#query. @param placementAction the action to perform @param filterStatement a Publisher Query Language statement used to filter a set of placements @return the result of the action performed"
 input PerformPlacementActionInput {
   placementAction: JSONObject
-  filterStatement: JSONObject
+  filterStatement: StatementInput
 }
 
 "A \`Placement\` groups related \`AdUnit\` objects."
@@ -33,6 +33,18 @@ type Placement implements SiteTargetingInfoInterface {
   placementCode: String
   "The status of the \`Placement\`. This attribute is read-only."
   status: InventoryStatusEnum
+  "The collection of \`AdUnit\` object IDs that constitute the \`Placement\`."
+  targetedAdUnitIds: [String]
+  "The date and time this placement was last modified."
+  lastModifiedDateTime: GAMDateTime
+}
+
+"A \`Placement\` groups related \`AdUnit\` objects."
+input PlacementInput {
+  "The name of the \`Placement\`. This value is required and has a maximum length of 255 characters."
+  name: String!
+  "A description of the \`Placement\`. This value is optional and its maximum length is 65,535 characters."
+  description: String
   "The collection of \`AdUnit\` object IDs that constitute the \`Placement\`."
   targetedAdUnitIds: [String]
   "The date and time this placement was last modified."
@@ -56,7 +68,7 @@ interface SiteTargetingInfoInterface {
 
 "Updates the specified Placement objects. @param placements the placements to update @return the updated placements"
 input UpdatePlacementsInput {
-  placements: [JSONObject]
+  placements: [PlacementInput]
 }
 
 extend type Mutation {

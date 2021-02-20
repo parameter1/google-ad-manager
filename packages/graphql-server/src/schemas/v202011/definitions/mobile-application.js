@@ -6,12 +6,12 @@ module.exports = gql`
 
 "Creates and claims mobile applications to be used for targeting in the network. @param mobileApplications the mobileApplications to create @return the created mobileApplications with their IDs filled in"
 input CreateMobileApplicationsInput {
-  mobileApplications: [JSONObject]
+  mobileApplications: [MobileApplicationInput]
 }
 
 "Gets a mobileApplicationPage of mobile applications that satisfy the given Statement. The following fields are supported for filtering:   PQL Property Object Property   \`id\` MobileApplication#id   \`displayName\` MobileApplication#displayName   \`appStore\` MobileApplication#appStore   \`appStoreId\` MobileApplication#appStoreId   \`isArchived\` MobileApplication#isArchived   @param filterStatement a Publisher Query Language statement used to filter a set of mobile applications. @return the mobile applications that match the given filter"
 input GetMobileApplicationsByStatementInput {
-  filterStatement: JSONObject
+  filterStatement: StatementInput
 }
 
 "A mobile application that has been added to or 'claimed' by the network to be used for targeting purposes. These mobile apps can come from various app stores."
@@ -36,6 +36,12 @@ type MobileApplication {
   isFree: Boolean
   "The download URL of the mobile application on the app store it belongs to. This attribute is read-only and populated by Google."
   downloadUrl: String
+}
+
+"A mobile application that has been added to or 'claimed' by the network to be used for targeting purposes. These mobile apps can come from various app stores."
+input MobileApplicationInput {
+  "The display name of the mobile application. This attribute is required and has a maximum length of 255 characters."
+  displayName: String!
 }
 
 "Captures a page of mobile applications."
@@ -77,12 +83,12 @@ enum MobileApplicationStoreEnum {
 "Performs an action on mobile applications. @param mobileApplicationAction the action to perform @param filterStatement a Publisher Query Language statement used to filter a set of mobile applications. @return the result of the action performed"
 input PerformMobileApplicationActionInput {
   mobileApplicationAction: JSONObject
-  filterStatement: JSONObject
+  filterStatement: StatementInput
 }
 
 "Updates the specified mobile applications. @param mobileApplications the mobile applications to be updated @return the updated mobileApplications"
 input UpdateMobileApplicationsInput {
-  mobileApplications: [JSONObject]
+  mobileApplications: [MobileApplicationInput]
 }
 
 extend type Mutation {

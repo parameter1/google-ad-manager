@@ -34,17 +34,17 @@ type BuyerRfp {
 
 "Creates new Proposal objects. For each proposal, the following fields are required:  Proposal#name  @param proposals the proposals to create @return the created proposals with their IDs filled in"
 input CreateProposalsInput {
-  proposals: [JSONObject]
+  proposals: [ProposalInput]
 }
 
 "Gets a MarketplaceCommentPage of MarketplaceComment objects that satisfy the given Statement#query. This method only returns comments already sent to Marketplace, local draft ProposalMarketplaceInfo#marketplaceComment are not included. The following fields are supported for filtering:   PQL Property Object Property   \`proposalId\` MarketplaceComment#proposalId   The query must specify a \`proposalId\`, and only supports a subset of PQL syntax: [WHERE  {AND  ...}] [ORDER BY  [ASC | DESC]] [LIMIT {[,] } | { OFFSET }]       :=  =   :=  IN  Only supports \`ORDER BY\` MarketplaceComment#creationTime. @param filterStatement a Publisher Query Language statement used to filter a set of marketplace comments @return the marketplace comments that match the given filter"
 input GetMarketplaceCommentsByStatementInput {
-  filterStatement: JSONObject
+  filterStatement: StatementInput
 }
 
 "Gets a ProposalPage of Proposal objects that satisfy the given Statement#query. The following fields are supported for filtering:   PQL Property Object Property   \`id\` Proposal#id   \`dfpOrderId\` Proposal#dfpOrderId   \`name\` Proposal#name   \`status\` Proposal#status   \`isArchived\` Proposal#isArchived    \`approvalStatus\` Only applicable for proposals using sales management  Proposal#approvalStatus   \`lastModifiedDateTime\` Proposal#lastModifiedDateTime    \`thirdPartyAdServerId\`  Only applicable for non-programmatic proposals using sales management   Proposal#thirdPartyAdServerId    \`customThirdPartyAdServerName\`  Only applicable for non-programmatic proposals using sales management   Proposal#customThirdPartyAdServerName   \`hasOfflineErrors\` Proposal#hasOfflineErrors   \`isProgrammatic\` Proposal#isProgrammatic    \`negotiationStatus\` Only applicable for programmatic proposals  ProposalMarketplaceInfo#negotiationStatus   @param filterStatement a Publisher Query Language statement used to filter a set of proposals @return the proposals that match the given filter"
 input GetProposalsByStatementInput {
-  filterStatement: JSONObject
+  filterStatement: StatementInput
 }
 
 "A comment associated with a programmatic Proposal that has been sent to Marketplace."
@@ -97,7 +97,7 @@ enum NegotiationStatusEnum {
 "Performs actions on Proposal objects that match the given Statement#query. The following fields are also required when submitting proposals for approval:  Proposal#advertiser Proposal#primarySalesperson Proposal#primaryTraffickerId  @param proposalAction the action to perform @param filterStatement a Publisher Query Language statement used to filter a set of proposals @return the result of the action performed"
 input PerformProposalActionInput {
   proposalAction: JSONObject
-  filterStatement: JSONObject
+  filterStatement: StatementInput
 }
 
 "A \`Proposal\` represents an agreement between an interactive advertising seller and a buyer that specifies the details of an advertising campaign."
@@ -168,6 +168,16 @@ type ProposalCompanyAssociation {
   contactIds: [BigInt]
 }
 
+"A \`ProposalCompanyAssociation\` represents a Company associated with the Proposal and a set of Contact objects belonging to the company."
+input ProposalCompanyAssociationInput {
+  "The unique ID of the Company associated with the Proposal. This attribute is required."
+  companyId: BigInt!
+  "The association type of the Company and Proposal. This attribute is required."
+  type: ProposalCompanyAssociationTypeEnum!
+  "List of unique IDs for Contact objects of the Company."
+  contactIds: [BigInt]
+}
+
 "Describes the type of a Company associated with a Proposal."
 enum ProposalCompanyAssociationTypeEnum {
   "The company is advertiser."
@@ -182,6 +192,42 @@ enum ProposalCompanyAssociationTypeEnum {
   PRIMARY_AGENCY
   "The value returned if the actual value is not exposed by the requested API version."
   UNKNOWN
+}
+
+"A \`Proposal\` represents an agreement between an interactive advertising seller and a buyer that specifies the details of an advertising campaign."
+input ProposalInput {
+  "Flag that specifies whether this \`Proposal\` is for programmatic deals. This value is default to \`false\`."
+  isProgrammatic: Boolean
+  "The name of the \`Proposal\`. This value has a maximum length of 255 characters. This value is copied to Order#name when the proposal turns into an order. This attribute can be configured as editable after the proposal has been submitted. Please check with your network administrator for editable fields configuration. This attribute is required."
+  name: String!
+  "The advertiser, to which this \`Proposal\` belongs, and a set of Contact objects associated with the advertiser. The ProposalCompanyAssociation#type of this attribute should be ProposalCompanyAssociationType#ADVERTISER. This attribute is required when the proposal turns into an order, and its ProposalCompanyAssociation#companyId will be copied to Order#advertiserId. This attribute becomes readonly once the \`Proposal\` has been pushed."
+  advertiser: ProposalCompanyAssociationInput!
+  "List of agencies and the set of Contact objects associated with each agency. This attribute is optional. A \`Proposal\` only has at most one Company with ProposalCompanyAssociationType#PRIMARY_AGENCY type, but a Company can appear more than once with different ProposalCompanyAssociationType values. If primary agency exists, its ProposalCompanyAssociation#companyId will be copied to Order#agencyId when the proposal turns into an order."
+  agencies: [ProposalCompanyAssociationInput]
+  "Provides any additional notes that may annotate the \`Proposal\`. This attribute is optional and has a maximum length of 65,535 characters. This attribute can be configured as editable after the proposal has been submitted. Please check with your network administrator for editable fields configuration."
+  internalNotes: String
+  "The primary salesperson who brokered the transaction with the #advertiser. This attribute is required when the proposal turns into an order. This attribute can be configured as editable after the proposal has been submitted. Please check with your network administrator for editable fields configuration."
+  primarySalesperson: SalespersonSplitInput!
+  "List of unique IDs of User objects who are the sales planners of the \`Proposal\`. This attribute is optional. A proposal could have 8 sales planners at most. This attribute can be configured as editable after the proposal has been submitted. Please check with your network administrator for editable fields configuration."
+  salesPlannerIds: [BigInt]
+  "The unique ID of the User who is primary trafficker and is responsible for trafficking the \`Proposal\`. This attribute is required when the proposal turns into an order, and will be copied to Order#primaryTraffickerId . This attribute can be configured as editable after the proposal has been submitted. Please check with your network administrator for editable fields configuration."
+  primaryTraffickerId: BigInt!
+  "users who are the seller's contacts. This attribute is applicable when:using programmatic guaranteed, using sales management.using programmatic guaranteed, not using sales management.using preferred deals, not using sales management."
+  sellerContactIds: [BigInt]
+  "The IDs of all teams that the \`Proposal\` is on directly. This attribute is optional. This attribute can be configured as editable after the proposal has been submitted. Please check with your network administrator for editable fields configuration."
+  appliedTeamIds: [BigInt]
+  "The values of the custom fields associated with the \`Proposal\`. This attribute is optional. This attribute can be configured as editable after the proposal has been submitted. Please check with your network administrator for editable fields configuration."
+  customFieldValues: [JSONObject]
+  "The set of labels applied directly to the \`Proposal\`. This attribute is optional."
+  appliedLabels: [AppliedLabelInput]
+  "The currency code of this \`Proposal\`. This attribute is optional and defaults to network's currency code."
+  currencyCode: String
+  "Set this field to \`true\` to update the #exchangeRate to the latest exchange rate when updating the proposal. This attribute is optional and defaults to \`false\`. This attribute is ignored if the feature is not enabled."
+  refreshExchangeRate: Boolean
+  "The marketplace info of this proposal if it has a corresponding order in Marketplace. This attribute is applicable when:using programmatic guaranteed, using sales management.using programmatic guaranteed, not using sales management."
+  marketplaceInfo: ProposalMarketplaceInfoInput
+  "Whether a Proposal contains a BuyerRfp field. If this field is true, it indicates that the Proposal in question orignated from a buyer. This attribute is applicable when:using programmatic guaranteed, not using sales management.using preferred deals, not using sales management."
+  hasBuyerRfp: Boolean
 }
 
 "Marketplace info for a proposal with a corresponding order in Marketplace."
@@ -202,6 +248,14 @@ type ProposalMarketplaceInfo {
   buyerAccountId: BigInt!
   "The ID used to represent Display & Video 360 client buyer partner ID (if Display & Video 360) or Authorized Buyers client buyer account ID. This field is readonly and assigned by Google. This attribute is read-only."
   partnerClientId: String
+}
+
+"Marketplace info for a proposal with a corresponding order in Marketplace."
+input ProposalMarketplaceInfoInput {
+  "The comment on the Proposal to be sent to the buyer."
+  marketplaceComment: String
+  "The Authorized Buyers ID of the buyer that this \`Proposal\` is being negotiated with. This attribute is required."
+  buyerAccountId: BigInt!
 }
 
 "Captures a page of Proposal objects."
@@ -228,6 +282,14 @@ enum ProposalStatusEnum {
   UNKNOWN
 }
 
+"Details describing why a Proposal was retracted."
+input RetractionDetailsInput {
+  "The ID of the reason for why the Proposal was retracted."
+  retractionReasonId: BigInt
+  "Comments on why the Proposal was retracted. This field is optional and has a maximum length of 1023 characters."
+  comments: String
+}
+
 "Decribes the type of BuyerRfp."
 enum RfpTypeEnum {
   "Indicates the BuyerRfp is a Preferred Deal RFP."
@@ -246,9 +308,17 @@ type SalespersonSplit {
   split: Int
 }
 
+"A \`SalespersonSplit\` represents a salesperson and their split."
+input SalespersonSplitInput {
+  "The unique ID of the User responsible for the sales of the Proposal. This attribute is required."
+  userId: BigInt!
+  "The split can be attributed to the salesperson. The percentage value is stored as millipercents, and must be multiples of 10 with the range from 0 to 100000. The default value is 0."
+  split: Int
+}
+
 "Updates the specified Proposal objects. @param proposals the proposals to update @return the updated proposals"
 input UpdateProposalsInput {
-  proposals: [JSONObject]
+  proposals: [ProposalInput]
 }
 
 extend type Mutation {

@@ -16,6 +16,18 @@ type AudioSettings {
   sampleRateHertz: BigInt
 }
 
+"Information about the audio settings of an encoding profile."
+input AudioSettingsInput {
+  "The RFC6381 codec string of the audio."
+  codec: String
+  "The bitrate of the audio, in bits per second. Required. This value must be between 8kbps and 250 Mbps."
+  bitrate: BigInt
+  "The number of audio channels, including low frequency channels. This value has a maximum of 8."
+  channels: BigInt
+  "The audio sample rate in hertz. Must be between 44kHz and 100kHz."
+  sampleRateHertz: BigInt
+}
+
 "Describes the digital media container type of the underlying media."
 enum ContainerTypeEnum {
   "Fragmented MPEG-4 (fMP4) output container."
@@ -30,7 +42,7 @@ enum ContainerTypeEnum {
 
 "Creates new DaiEncodingProfile objects. @param daiEncodingProfiles the profiles to create @return the created profiles with their IDs filled in"
 input CreateDaiEncodingProfilesInput {
-  daiEncodingProfiles: [JSONObject]
+  daiEncodingProfiles: [DaiEncodingProfileInput]
 }
 
 "A DaiEncodingProfile contains data about a publisher's encoding profiles. Ad Manager Dynamic Ad Insertion (DAI) uses the profile information about the content to select an appropriate ad transcode to play for the particular video."
@@ -49,6 +61,22 @@ type DaiEncodingProfile {
   videoSettings: VideoSettings
   "Information about the audio media, if present. This field will only be set if the media contains audio. Only \`MEDIA\` and \`IFRAME\` variant types can set audio."
   audioSettings: AudioSettings
+}
+
+"A DaiEncodingProfile contains data about a publisher's encoding profiles. Ad Manager Dynamic Ad Insertion (DAI) uses the profile information about the content to select an appropriate ad transcode to play for the particular video."
+input DaiEncodingProfileInput {
+  "The name of the DaiEncodingProfile. This value is required to create an encoding profile and may be at most 64 characters. The name field can contain alphanumeric characters and symbols other than the following: ', ', =, !, +, #, *, ~, ;, ^, (, ), <, >, [, ], the white space character."
+  name: String!
+  "The status of this DaiEncodingProfile. DAI encoding profiles are created in the DaiEncodingProfileStatus#ACTIVE state. The status can only be modified through the DaiEncodingProfileService#performDaiEncodingProfileAction method. Only active profiles will be allowed to be associated with live streams."
+  status: DaiEncodingProfileStatusEnum
+  "The variant playlist type that this DaiEncodingProfile represents."
+  variantType: VariantTypeEnum
+  "The digital container type of the underlying media. This is required for \`MEDIA\` and \`IFRAME\` variant types."
+  containerType: ContainerTypeEnum
+  "Information about the video media, if present. This field will only be set if the media contains video, or is an \`IFRAME\` variant type."
+  videoSettings: VideoSettingsInput
+  "Information about the audio media, if present. This field will only be set if the media contains audio. Only \`MEDIA\` and \`IFRAME\` variant types can set audio."
+  audioSettings: AudioSettingsInput
 }
 
 "Captures a page of DaiEncodingProfile objects."
@@ -73,18 +101,18 @@ enum DaiEncodingProfileStatusEnum {
 
 "Gets a DaiEncodingProfilePage of DaiEncodingProfile objects that satisfy the given Statement#query. The following fields are supported for filtering:   PQL Property Object Property   \`id\` DaiEncodingProfile#id   \`status\` DaiEncodingProfile#status   \`name\` DaiEncodingProfile#name   @param filterStatement a Publisher Query Language statement to filter a list of profiles @return the profiles that match the filter"
 input GetDaiEncodingProfilesByStatementInput {
-  filterStatement: JSONObject
+  filterStatement: StatementInput
 }
 
 "Performs actions on DaiEncodingProfile objects that match the given Statement#query. @param daiEncodingProfileAction the action to perform @param filterStatement a Publisher Query Language statement used to filter a set of profiles @return the result of the action performed"
 input PerformDaiEncodingProfileActionInput {
   daiEncodingProfileAction: JSONObject
-  filterStatement: JSONObject
+  filterStatement: StatementInput
 }
 
 "Updates the specified DaiEncodingProfile objects. @param daiEncodingProfiles the content profiles to update @return the updated profiles @throws ApiException if there is an error updating the profiles"
 input UpdateDaiEncodingProfilesInput {
-  daiEncodingProfiles: [JSONObject]
+  daiEncodingProfiles: [DaiEncodingProfileInput]
 }
 
 "Describes the variant playlist type that the profile represents."
@@ -109,6 +137,18 @@ type VideoSettings {
   framesPerSecond: Float
   "The resolution of the video, in pixels."
   resolution: Size
+}
+
+"Information about the video settings of an encoding profile."
+input VideoSettingsInput {
+  "The RFC6381 codec string of the audio."
+  codec: String
+  "The bitrate of the audio, in bits per second. This value must be between 56kbps and 250 Mbps."
+  bitrate: BigInt
+  "The frames per second of the video. This value will be truncated to three decimal places."
+  framesPerSecond: Float
+  "The resolution of the video, in pixels."
+  resolution: SizeInput
 }
 
 extend type Mutation {
