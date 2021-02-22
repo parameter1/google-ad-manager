@@ -1,7 +1,6 @@
 const GraphQLBigInt = require('apollo-type-bigint');
 const GraphQLDate = require('@parameter1/graphql-type-date');
-const GraphQLJSON = require('graphql-type-json');
-const { GraphQLGAMDateTime, GraphQLJSONObject } = require('./types');
+const { GraphQLGAMDateTime, GraphQLJSONObject, GraphQLJSON } = require('./types');
 
 module.exports = {
   BigInt: GraphQLBigInt,
