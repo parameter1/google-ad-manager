@@ -50,7 +50,7 @@ module.exports = async ({ urls } = {}) => {
       'module.exports = gql`',
     );
     items.push('`;');
-    fileMap.set(filename, `${items.join('\n\n')}\n`.replace(/\\\\/g, '\\'));
+    fileMap.set(`definitions/${filename}`, `${items.join('\n\n')}\n`.replace(/\\\\/g, '\\'));
     const file = filename.replace('.js', '');
     filenames.push({ filename: file, varName: camelize(underscore(file), false) });
   });
@@ -73,7 +73,35 @@ module.exports = async ({ urls } = {}) => {
   index.push(...filenames.map(({ varName }) => `\${${varName}}`));
   index.push('\n`;');
 
-  fileMap.set('index.js', `${index.join('\n')}\n`);
+  fileMap.set('definitions/index.js', `${index.join('\n')}\n`);
+
+  const resolvers = [];
+  resolvers.push(
+    '// THIS FILE IS GENERATED. DO NOT EDIT.',
+    "const merge = require('lodash.merge');",
+    "const common = require('../../../resolvers');",
+    '',
+    'module.exports = merge(',
+    '  common,',
+    ');',
+  );
+  fileMap.set('resolvers/index.js', `${resolvers.join('\n')}\n`);
+
+  const root = [];
+  root.push(
+    '// THIS FILE IS GENERATED. DO NOT EDIT.',
+    "const { makeExecutableSchema } = require('apollo-server-express');",
+    "const resolvers = require('./resolvers');",
+    "const schemaDirectives = require('../../directives');",
+    "const typeDefs = require('./definitions');",
+    '',
+    'module.exports = makeExecutableSchema({',
+    '  typeDefs,',
+    '  schemaDirectives,',
+    '  resolvers,',
+    '});',
+  );
+  fileMap.set('index.js', `${root.join('\n')}\n`);
 
   return fileMap;
 };

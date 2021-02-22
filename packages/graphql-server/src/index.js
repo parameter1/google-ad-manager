@@ -23,6 +23,7 @@ module.exports = ({
   formatError,
 
   beforeApply,
+  afterApply,
 } = {}) => {
   const app = express();
 
@@ -55,5 +56,6 @@ module.exports = ({
   });
   if (isFn(beforeApply)) beforeApply({ app, server });
   server.applyMiddleware({ app, path });
+  if (isFn(beforeApply)) afterApply({ app, server });
   return { app, server };
 };

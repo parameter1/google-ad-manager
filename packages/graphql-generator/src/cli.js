@@ -52,7 +52,7 @@ const run = async () => {
       type: 'input',
       name: 'directory',
       message: 'Enter a directory to save the generated files to',
-      default: (answers) => path.resolve(__dirname, `../../graphql-server/src/schemas/${answers.version}/definitions`),
+      default: (answers) => path.resolve(__dirname, `../../graphql-server/src/schemas/${answers.version}`),
       when: (answers) => answers.actions.includes('generateGraphQL'),
     },
   ];
