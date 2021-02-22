@@ -8,6 +8,8 @@ const {
   VERSION,
 } = require('./env');
 
+const { log } = console;
+
 const path = '/';
 const { app } = createServer({
   jsonKeyFilePath: JSON_KEY_FILE_PATH,
@@ -22,6 +24,8 @@ const { app } = createServer({
     express.set('trust proxy', ['loopback', 'linklocal', 'uniquelocal']);
     express.use(helmet({ contentSecurityPolicy: false }));
   },
+
+  afterApply: () => log(`Using GAM API version ${VERSION}`),
 });
 
 module.exports = http.createServer(app);

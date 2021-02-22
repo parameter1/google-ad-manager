@@ -13,5 +13,5 @@ module.exports = cleanEnv(process.env, {
   NEW_RELIC_LICENSE_KEY: str({ desc: 'The license key for New Relic.', devDefault: '(unset)' }),
   NETWORK_CODE: num({ desc: 'The Google Ad Manager network code to access.' }),
   PORT: port({ desc: 'The port that the service will run on.', default: 80 }),
-  VERSION: str({ desc: 'The Google Ad Manager API version to use.', default: 'v202011' }),
+  VERSION: str({ desc: 'The Google Ad Manager API version to use.' }),
 });
