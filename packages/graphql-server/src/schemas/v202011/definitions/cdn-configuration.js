@@ -171,6 +171,25 @@ input UpdateCdnConfigurationsInput {
   cdnConfigurations: [CdnConfigurationInput]
 }
 
+type _CdnConfigurationConnection {
+  totalCount: Int!
+  nodes: [CdnConfiguration!]!
+  statement: _StatementInfo!
+  pageInfo: _PageInfo!
+}
+
+extend type Query {
+  "Finds a single \`CdnConfiguration\` by ID."
+  _cdnConfiguration(input: _SingleRecordQueryInput!): CdnConfiguration
+    @findById(service: "CdnConfiguration", action: "getCdnConfigurationsByStatement")
+}
+
+extend type Query {
+  "Finds multiple \`CdnConfiguration\` objects based on the optional input parameters."
+  _cdnConfigurations(input: _MultipleRecordsQueryInput!): _CdnConfigurationConnection!
+    @find(service: "CdnConfiguration", action: "getCdnConfigurationsByStatement")
+}
+
 extend type Mutation {
   "Creates new CdnConfiguration objects."
   createCdnConfigurations(input: CreateCdnConfigurationsInput!): [CdnConfiguration]

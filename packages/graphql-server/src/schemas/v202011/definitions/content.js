@@ -201,6 +201,25 @@ input GetContentByStatementInput {
   statement: StatementInput
 }
 
+type _ContentConnection {
+  totalCount: Int!
+  nodes: [Content!]!
+  statement: _StatementInfo!
+  pageInfo: _PageInfo!
+}
+
+extend type Query {
+  "Finds a single \`Content\` by ID."
+  _content(input: _SingleRecordQueryInput!): Content
+    @findById(service: "Content", action: "getContentByStatement")
+}
+
+extend type Query {
+  "Finds multiple \`Content\` objects based on the optional input parameters."
+  _contents(input: _MultipleRecordsQueryInput!): _ContentConnection!
+    @find(service: "Content", action: "getContentByStatement")
+}
+
 extend type Query {
   "Gets a ContentPage of Content objects that satisfy the given Statement#query. The following fields are supported for filtering:   PQL Property Object Property   \`id\` Content#id   \`status\` Content#status   \`name\` Content#name   \`lastModifiedDateTime\` Content#lastModifiedDateTime   \`lastDaiIngestDateTime\` Content#lastDaiIngestDateTime   \`daiIngestStatus\` Content#daiIngestStatus   @param statement a Publisher Query Language statement used to filter a set of content @return the content that matches the given filter"
   getContentByStatement(input: GetContentByStatementInput!): ContentPage

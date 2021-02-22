@@ -111,6 +111,25 @@ interface UserRecordInterface {
   roleName: String
 }
 
+type _UserConnection {
+  totalCount: Int!
+  nodes: [User!]!
+  statement: _StatementInfo!
+  pageInfo: _PageInfo!
+}
+
+extend type Query {
+  "Finds a single \`User\` by ID."
+  _user(input: _SingleRecordQueryInput!): User
+    @findById(service: "User", action: "getUsersByStatement")
+}
+
+extend type Query {
+  "Finds multiple \`User\` objects based on the optional input parameters."
+  _users(input: _MultipleRecordsQueryInput!): _UserConnection!
+    @find(service: "User", action: "getUsersByStatement")
+}
+
 extend type Mutation {
   "Creates new User objects. @param users the users to create @return the created users with their IDs filled in"
   createUsers(input: CreateUsersInput!): [User]

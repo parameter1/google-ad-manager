@@ -203,6 +203,44 @@ input UpdateTrafficForecastSegmentsInput {
   trafficForecastSegments: [TrafficForecastSegmentInput]
 }
 
+type _ForecastAdjustmentConnection {
+  totalCount: Int!
+  nodes: [ForecastAdjustment!]!
+  statement: _StatementInfo!
+  pageInfo: _PageInfo!
+}
+
+type _TrafficForecastSegmentConnection {
+  totalCount: Int!
+  nodes: [TrafficForecastSegment!]!
+  statement: _StatementInfo!
+  pageInfo: _PageInfo!
+}
+
+extend type Query {
+  "Finds a single \`ForecastAdjustment\` by ID."
+  _forecastAdjustment(input: _SingleRecordQueryInput!): ForecastAdjustment
+    @findById(service: "Adjustment", action: "getForecastAdjustmentsByStatement")
+}
+
+extend type Query {
+  "Finds multiple \`ForecastAdjustment\` objects based on the optional input parameters."
+  _forecastAdjustments(input: _MultipleRecordsQueryInput!): _ForecastAdjustmentConnection!
+    @find(service: "Adjustment", action: "getForecastAdjustmentsByStatement")
+}
+
+extend type Query {
+  "Finds a single \`TrafficForecastSegment\` by ID."
+  _trafficForecastSegment(input: _SingleRecordQueryInput!): TrafficForecastSegment
+    @findById(service: "Adjustment", action: "getTrafficForecastSegmentsByStatement")
+}
+
+extend type Query {
+  "Finds multiple \`TrafficForecastSegment\` objects based on the optional input parameters."
+  _trafficForecastSegments(input: _MultipleRecordsQueryInput!): _TrafficForecastSegmentConnection!
+    @find(service: "Adjustment", action: "getTrafficForecastSegmentsByStatement")
+}
+
 extend type Query {
   "Takes a prospective forecast adjustment and calculates the daily ad opportunity counts corresponding to its provided volume settings. @param forecastAdjustment the prospective forecast adjustment @return a forecast adjustment matching the one passed in, but with its \`calculatedDailyAdOpportunityCounts\` field populated"
   calculateDailyAdOpportunityCounts(input: CalculateDailyAdOpportunityCountsInput!): ForecastAdjustment

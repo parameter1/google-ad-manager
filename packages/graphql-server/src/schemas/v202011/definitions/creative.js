@@ -1722,6 +1722,25 @@ type VideoRedirectCreative implements BaseVideoCreativeInterface & HasDestinatio
   mezzanineFile: VideoRedirectAsset
 }
 
+type _CreativeInterfaceConnection {
+  totalCount: Int!
+  nodes: [CreativeInterface!]!
+  statement: _StatementInfo!
+  pageInfo: _PageInfo!
+}
+
+extend type Query {
+  "Finds a single \`CreativeInterface\` by ID."
+  _creative(input: _SingleRecordQueryInput!): CreativeInterface
+    @findById(service: "Creative", action: "getCreativesByStatement")
+}
+
+extend type Query {
+  "Finds multiple \`CreativeInterface\` objects based on the optional input parameters."
+  _creatives(input: _MultipleRecordsQueryInput!): _CreativeInterfaceConnection!
+    @find(service: "Creative", action: "getCreativesByStatement")
+}
+
 extend type Mutation {
   "Creates new Creative objects. @param creatives the creatives to create @return the created creatives with their IDs filled in"
   createCreatives(input: CreateCreativesInput!): [CreativeInterface]

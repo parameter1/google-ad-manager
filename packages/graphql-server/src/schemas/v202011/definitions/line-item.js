@@ -369,6 +369,25 @@ input UpdateLineItemsInput {
   lineItems: [LineItemInput]
 }
 
+type _LineItemConnection {
+  totalCount: Int!
+  nodes: [LineItem!]!
+  statement: _StatementInfo!
+  pageInfo: _PageInfo!
+}
+
+extend type Query {
+  "Finds a single \`LineItem\` by ID."
+  _lineItem(input: _SingleRecordQueryInput!): LineItem
+    @findById(service: "LineItem", action: "getLineItemsByStatement")
+}
+
+extend type Query {
+  "Finds multiple \`LineItem\` objects based on the optional input parameters."
+  _lineItems(input: _MultipleRecordsQueryInput!): _LineItemConnection!
+    @find(service: "LineItem", action: "getLineItemsByStatement")
+}
+
 extend type Mutation {
   "Creates new LineItem objects. @param lineItems the line items to create @return the created line items with their IDs filled in"
   createLineItems(input: CreateLineItemsInput!): [LineItem]

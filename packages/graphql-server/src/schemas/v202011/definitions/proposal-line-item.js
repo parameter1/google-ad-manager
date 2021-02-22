@@ -182,6 +182,25 @@ input UpdateProposalLineItemsInput {
   proposalLineItems: [ProposalLineItemInput]
 }
 
+type _ProposalLineItemConnection {
+  totalCount: Int!
+  nodes: [ProposalLineItem!]!
+  statement: _StatementInfo!
+  pageInfo: _PageInfo!
+}
+
+extend type Query {
+  "Finds a single \`ProposalLineItem\` by ID."
+  _proposalLineItem(input: _SingleRecordQueryInput!): ProposalLineItem
+    @findById(service: "ProposalLineItem", action: "getProposalLineItemsByStatement")
+}
+
+extend type Query {
+  "Finds multiple \`ProposalLineItem\` objects based on the optional input parameters."
+  _proposalLineItems(input: _MultipleRecordsQueryInput!): _ProposalLineItemConnection!
+    @find(service: "ProposalLineItem", action: "getProposalLineItemsByStatement")
+}
+
 extend type Mutation {
   "Creates makegood proposal line items given the specifications provided."
   createMakegoods(input: CreateMakegoodsInput!): [ProposalLineItem]

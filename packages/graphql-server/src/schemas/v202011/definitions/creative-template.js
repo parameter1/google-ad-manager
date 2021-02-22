@@ -165,6 +165,25 @@ type UrlCreativeTemplateVariable implements CreativeTemplateVariableInterface {
   isTrackingUrl: Boolean
 }
 
+type _CreativeTemplateConnection {
+  totalCount: Int!
+  nodes: [CreativeTemplate!]!
+  statement: _StatementInfo!
+  pageInfo: _PageInfo!
+}
+
+extend type Query {
+  "Finds a single \`CreativeTemplate\` by ID."
+  _creativeTemplate(input: _SingleRecordQueryInput!): CreativeTemplate
+    @findById(service: "CreativeTemplate", action: "getCreativeTemplatesByStatement")
+}
+
+extend type Query {
+  "Finds multiple \`CreativeTemplate\` objects based on the optional input parameters."
+  _creativeTemplates(input: _MultipleRecordsQueryInput!): _CreativeTemplateConnection!
+    @find(service: "CreativeTemplate", action: "getCreativeTemplatesByStatement")
+}
+
 extend type Query {
   "Gets a CreativeTemplatePage of CreativeTemplate objects that satisfy the given Statement#query. The following fields are supported for filtering:   PQL Property Object Property   \`id\` CreativeTemplate#id   \`name\` CreativeTemplate#name   \`type\` CreativeTemplate#type   \`status\` CreativeTemplate#status   @param filterStatement a Publisher Query Language statement used to filter a set of creative templates. @return the creative templates that match the given filter"
   getCreativeTemplatesByStatement(input: GetCreativeTemplatesByStatementInput!): CreativeTemplatePage

@@ -78,6 +78,44 @@ input PerformCmsMetadataValueActionInput {
   filterStatement: StatementInput
 }
 
+type _CmsMetadataKeyConnection {
+  totalCount: Int!
+  nodes: [CmsMetadataKey!]!
+  statement: _StatementInfo!
+  pageInfo: _PageInfo!
+}
+
+type _CmsMetadataValueConnection {
+  totalCount: Int!
+  nodes: [CmsMetadataValue!]!
+  statement: _StatementInfo!
+  pageInfo: _PageInfo!
+}
+
+extend type Query {
+  "Finds a single \`CmsMetadataKey\` by ID."
+  _cmsMetadataKey(input: _SingleRecordQueryInput!): CmsMetadataKey
+    @findById(service: "CmsMetadata", action: "getCmsMetadataKeysByStatement")
+}
+
+extend type Query {
+  "Finds multiple \`CmsMetadataKey\` objects based on the optional input parameters."
+  _cmsMetadataKeys(input: _MultipleRecordsQueryInput!): _CmsMetadataKeyConnection!
+    @find(service: "CmsMetadata", action: "getCmsMetadataKeysByStatement")
+}
+
+extend type Query {
+  "Finds a single \`CmsMetadataValue\` by ID."
+  _cmsMetadataValue(input: _SingleRecordQueryInput!): CmsMetadataValue
+    @findById(service: "CmsMetadata", action: "getCmsMetadataValuesByStatement")
+}
+
+extend type Query {
+  "Finds multiple \`CmsMetadataValue\` objects based on the optional input parameters."
+  _cmsMetadataValues(input: _MultipleRecordsQueryInput!): _CmsMetadataValueConnection!
+    @find(service: "CmsMetadata", action: "getCmsMetadataValuesByStatement")
+}
+
 extend type Query {
   "Returns a page of CmsMetadataKeys matching the specified Statement. The following fields are supported for filtering:   PQL Property Object Property   \`id\` CmsMetadataKey#cmsMetadataKeyId   \`cmsKey\` CmsMetadataKey#keyName   \`status\` CmsMetadataKey#status  "
   getCmsMetadataKeysByStatement(input: GetCmsMetadataKeysByStatementInput!): CmsMetadataKeyPage

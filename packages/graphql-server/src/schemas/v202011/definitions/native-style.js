@@ -85,6 +85,25 @@ input UpdateNativeStylesInput {
   nativeStyles: [NativeStyleInput]
 }
 
+type _NativeStyleConnection {
+  totalCount: Int!
+  nodes: [NativeStyle!]!
+  statement: _StatementInfo!
+  pageInfo: _PageInfo!
+}
+
+extend type Query {
+  "Finds a single \`NativeStyle\` by ID."
+  _nativeStyle(input: _SingleRecordQueryInput!): NativeStyle
+    @findById(service: "NativeStyle", action: "getNativeStylesByStatement")
+}
+
+extend type Query {
+  "Finds multiple \`NativeStyle\` objects based on the optional input parameters."
+  _nativeStyles(input: _MultipleRecordsQueryInput!): _NativeStyleConnection!
+    @find(service: "NativeStyle", action: "getNativeStylesByStatement")
+}
+
 extend type Mutation {
   "Creates new NativeStyle objects. @param nativeStyles the native styles to create @return the created native styles with their IDs filled in"
   createNativeStyles(input: CreateNativeStylesInput!): [NativeStyle]

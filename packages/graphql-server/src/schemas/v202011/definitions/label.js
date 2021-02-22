@@ -99,6 +99,25 @@ input UpdateLabelsInput {
   labels: [LabelInput]
 }
 
+type _LabelConnection {
+  totalCount: Int!
+  nodes: [Label!]!
+  statement: _StatementInfo!
+  pageInfo: _PageInfo!
+}
+
+extend type Query {
+  "Finds a single \`Label\` by ID."
+  _label(input: _SingleRecordQueryInput!): Label
+    @findById(service: "Label", action: "getLabelsByStatement")
+}
+
+extend type Query {
+  "Finds multiple \`Label\` objects based on the optional input parameters."
+  _labels(input: _MultipleRecordsQueryInput!): _LabelConnection!
+    @find(service: "Label", action: "getLabelsByStatement")
+}
+
 extend type Mutation {
   "Creates new Label objects. @param labels the labels to create @return the created labels with their IDs filled in"
   createLabels(input: CreateLabelsInput!): [Label]

@@ -67,6 +67,25 @@ type UserTeamAssociationPage {
   results: [UserTeamAssociation]
 }
 
+type _UserTeamAssociationConnection {
+  totalCount: Int!
+  nodes: [UserTeamAssociation!]!
+  statement: _StatementInfo!
+  pageInfo: _PageInfo!
+}
+
+extend type Query {
+  "Finds a single \`UserTeamAssociation\` by ID."
+  _userTeamAssociation(input: _SingleRecordQueryInput!): UserTeamAssociation
+    @findById(service: "UserTeamAssociation", action: "getUserTeamAssociationsByStatement")
+}
+
+extend type Query {
+  "Finds multiple \`UserTeamAssociation\` objects based on the optional input parameters."
+  _userTeamAssociations(input: _MultipleRecordsQueryInput!): _UserTeamAssociationConnection!
+    @find(service: "UserTeamAssociation", action: "getUserTeamAssociationsByStatement")
+}
+
 extend type Mutation {
   "Creates new UserTeamAssociation objects. @param userTeamAssociations the user team associations to create @return the created user team associations with their IDs filled in"
   createUserTeamAssociations(input: CreateUserTeamAssociationsInput!): [UserTeamAssociation]

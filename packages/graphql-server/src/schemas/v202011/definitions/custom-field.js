@@ -150,6 +150,25 @@ input UpdateCustomFieldsInput {
   customFields: [JSONObject]
 }
 
+type _CustomFieldInterfaceConnection {
+  totalCount: Int!
+  nodes: [CustomFieldInterface!]!
+  statement: _StatementInfo!
+  pageInfo: _PageInfo!
+}
+
+extend type Query {
+  "Finds a single \`CustomFieldInterface\` by ID."
+  _customField(input: _SingleRecordQueryInput!): CustomFieldInterface
+    @findById(service: "CustomField", action: "getCustomFieldsByStatement")
+}
+
+extend type Query {
+  "Finds multiple \`CustomFieldInterface\` objects based on the optional input parameters."
+  _customFields(input: _MultipleRecordsQueryInput!): _CustomFieldInterfaceConnection!
+    @find(service: "CustomField", action: "getCustomFieldsByStatement")
+}
+
 extend type Mutation {
   "Creates new CustomFieldOption objects. The following fields are required:  CustomFieldOption#displayName CustomFieldOption#customFieldId  @param customFieldOptions the custom fields to create @return the created custom field options with their IDs filled in"
   createCustomFieldOptions(input: CreateCustomFieldOptionsInput!): [CustomFieldOption]

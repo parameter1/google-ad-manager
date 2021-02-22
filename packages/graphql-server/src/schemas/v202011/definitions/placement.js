@@ -71,6 +71,25 @@ input UpdatePlacementsInput {
   placements: [PlacementInput]
 }
 
+type _PlacementConnection {
+  totalCount: Int!
+  nodes: [Placement!]!
+  statement: _StatementInfo!
+  pageInfo: _PageInfo!
+}
+
+extend type Query {
+  "Finds a single \`Placement\` by ID."
+  _placement(input: _SingleRecordQueryInput!): Placement
+    @findById(service: "Placement", action: "getPlacementsByStatement")
+}
+
+extend type Query {
+  "Finds multiple \`Placement\` objects based on the optional input parameters."
+  _placements(input: _MultipleRecordsQueryInput!): _PlacementConnection!
+    @find(service: "Placement", action: "getPlacementsByStatement")
+}
+
 extend type Mutation {
   "Creates new Placement objects. @param placements the placements to create @return the new placements, with their IDs filled in"
   createPlacements(input: CreatePlacementsInput!): [Placement]

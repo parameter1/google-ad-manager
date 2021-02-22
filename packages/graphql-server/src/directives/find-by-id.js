@@ -13,7 +13,7 @@ class FindByIdDirective extends SchemaDirectiveVisitor {
       const { id, strict } = input;
 
       const query = new StatementBuilder({ where: `id = ${id}`, limit: 1 }).build();
-      const { data } = await service.request(this.args.method, { filterStatement: { query } });
+      const { data } = await service.request(this.args.action, { filterStatement: { query } });
       const { results } = data;
       const obj = results && results[0] ? results[0] : null;
       if (strict && !obj) {

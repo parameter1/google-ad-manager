@@ -282,6 +282,25 @@ enum ValueSourceTypeEnum {
   UNKNOWN
 }
 
+type _AdUnitConnection {
+  totalCount: Int!
+  nodes: [AdUnit!]!
+  statement: _StatementInfo!
+  pageInfo: _PageInfo!
+}
+
+extend type Query {
+  "Finds a single \`AdUnit\` by ID."
+  _adUnit(input: _SingleRecordQueryInput!): AdUnit
+    @findById(service: "Inventory", action: "getAdUnitsByStatement")
+}
+
+extend type Query {
+  "Finds multiple \`AdUnit\` objects based on the optional input parameters."
+  _adUnits(input: _MultipleRecordsQueryInput!): _AdUnitConnection!
+    @find(service: "Inventory", action: "getAdUnitsByStatement")
+}
+
 extend type Mutation {
   "Creates new AdUnit objects. @param adUnits the ad units to create @return the created ad units, with their IDs filled in"
   createAdUnits(input: CreateAdUnitsInput!): [AdUnit]

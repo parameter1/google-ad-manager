@@ -193,6 +193,44 @@ enum ValueDeclarationTypeEnum {
   USER_ID
 }
 
+type _CustomTargetingKeyConnection {
+  totalCount: Int!
+  nodes: [CustomTargetingKey!]!
+  statement: _StatementInfo!
+  pageInfo: _PageInfo!
+}
+
+type _CustomTargetingValueConnection {
+  totalCount: Int!
+  nodes: [CustomTargetingValue!]!
+  statement: _StatementInfo!
+  pageInfo: _PageInfo!
+}
+
+extend type Query {
+  "Finds a single \`CustomTargetingKey\` by ID."
+  _customTargetingKey(input: _SingleRecordQueryInput!): CustomTargetingKey
+    @findById(service: "CustomTargeting", action: "getCustomTargetingKeysByStatement")
+}
+
+extend type Query {
+  "Finds multiple \`CustomTargetingKey\` objects based on the optional input parameters."
+  _customTargetingKeys(input: _MultipleRecordsQueryInput!): _CustomTargetingKeyConnection!
+    @find(service: "CustomTargeting", action: "getCustomTargetingKeysByStatement")
+}
+
+extend type Query {
+  "Finds a single \`CustomTargetingValue\` by ID."
+  _customTargetingValue(input: _SingleRecordQueryInput!): CustomTargetingValue
+    @findById(service: "CustomTargeting", action: "getCustomTargetingValuesByStatement")
+}
+
+extend type Query {
+  "Finds multiple \`CustomTargetingValue\` objects based on the optional input parameters."
+  _customTargetingValues(input: _MultipleRecordsQueryInput!): _CustomTargetingValueConnection!
+    @find(service: "CustomTargeting", action: "getCustomTargetingValuesByStatement")
+}
+
 extend type Mutation {
   "Creates new CustomTargetingKey objects. The following fields are required:  CustomTargetingKey#name CustomTargetingKey#type  @param keys the custom targeting keys to update @return the updated custom targeting keys"
   createCustomTargetingKeys(input: CreateCustomTargetingKeysInput!): [CustomTargetingKey]

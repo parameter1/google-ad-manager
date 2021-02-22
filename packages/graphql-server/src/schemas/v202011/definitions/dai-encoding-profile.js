@@ -151,6 +151,25 @@ input VideoSettingsInput {
   resolution: SizeInput
 }
 
+type _DaiEncodingProfileConnection {
+  totalCount: Int!
+  nodes: [DaiEncodingProfile!]!
+  statement: _StatementInfo!
+  pageInfo: _PageInfo!
+}
+
+extend type Query {
+  "Finds a single \`DaiEncodingProfile\` by ID."
+  _daiEncodingProfile(input: _SingleRecordQueryInput!): DaiEncodingProfile
+    @findById(service: "DaiEncodingProfile", action: "getDaiEncodingProfilesByStatement")
+}
+
+extend type Query {
+  "Finds multiple \`DaiEncodingProfile\` objects based on the optional input parameters."
+  _daiEncodingProfiles(input: _MultipleRecordsQueryInput!): _DaiEncodingProfileConnection!
+    @find(service: "DaiEncodingProfile", action: "getDaiEncodingProfilesByStatement")
+}
+
 extend type Mutation {
   "Creates new DaiEncodingProfile objects. @param daiEncodingProfiles the profiles to create @return the created profiles with their IDs filled in"
   createDaiEncodingProfiles(input: CreateDaiEncodingProfilesInput!): [DaiEncodingProfile]

@@ -257,6 +257,25 @@ input ViewabilityProviderInput {
   verificationRejectionTrackerUrl: String
 }
 
+type _CompanyConnection {
+  totalCount: Int!
+  nodes: [Company!]!
+  statement: _StatementInfo!
+  pageInfo: _PageInfo!
+}
+
+extend type Query {
+  "Finds multiple \`Company\` objects based on the optional input parameters."
+  _companies(input: _MultipleRecordsQueryInput!): _CompanyConnection!
+    @find(service: "Company", action: "getCompaniesByStatement")
+}
+
+extend type Query {
+  "Finds a single \`Company\` by ID."
+  _company(input: _SingleRecordQueryInput!): Company
+    @findById(service: "Company", action: "getCompaniesByStatement")
+}
+
 extend type Mutation {
   "Creates new Company objects. @param companies the companies to create @return the created companies with their IDs filled in"
   createCompanies(input: CreateCompaniesInput!): [Company]

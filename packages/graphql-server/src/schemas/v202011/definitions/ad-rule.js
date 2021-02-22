@@ -439,6 +439,63 @@ input UpdateBreakTemplatesInput {
   breakTemplate: [BreakTemplateInput]
 }
 
+type _AdRuleConnection {
+  totalCount: Int!
+  nodes: [AdRule!]!
+  statement: _StatementInfo!
+  pageInfo: _PageInfo!
+}
+
+type _AdSpotConnection {
+  totalCount: Int!
+  nodes: [AdSpot!]!
+  statement: _StatementInfo!
+  pageInfo: _PageInfo!
+}
+
+type _BreakTemplateConnection {
+  totalCount: Int!
+  nodes: [BreakTemplate!]!
+  statement: _StatementInfo!
+  pageInfo: _PageInfo!
+}
+
+extend type Query {
+  "Finds a single \`AdRule\` by ID."
+  _adRule(input: _SingleRecordQueryInput!): AdRule
+    @findById(service: "AdRule", action: "getAdRulesByStatement")
+}
+
+extend type Query {
+  "Finds multiple \`AdRule\` objects based on the optional input parameters."
+  _adRules(input: _MultipleRecordsQueryInput!): _AdRuleConnection!
+    @find(service: "AdRule", action: "getAdRulesByStatement")
+}
+
+extend type Query {
+  "Finds a single \`AdSpot\` by ID."
+  _adSpot(input: _SingleRecordQueryInput!): AdSpot
+    @findById(service: "AdRule", action: "getAdSpotsByStatement")
+}
+
+extend type Query {
+  "Finds multiple \`AdSpot\` objects based on the optional input parameters."
+  _adSpots(input: _MultipleRecordsQueryInput!): _AdSpotConnection!
+    @find(service: "AdRule", action: "getAdSpotsByStatement")
+}
+
+extend type Query {
+  "Finds a single \`BreakTemplate\` by ID."
+  _breakTemplate(input: _SingleRecordQueryInput!): BreakTemplate
+    @findById(service: "AdRule", action: "getBreakTemplatesByStatement")
+}
+
+extend type Query {
+  "Finds multiple \`BreakTemplate\` objects based on the optional input parameters."
+  _breakTemplates(input: _MultipleRecordsQueryInput!): _BreakTemplateConnection!
+    @find(service: "AdRule", action: "getBreakTemplatesByStatement")
+}
+
 extend type Mutation {
   "Creates new AdRule objects. @param adRules the ad rules to create @return the created ad rules with their IDs filled in"
   createAdRules(input: CreateAdRulesInput!): [AdRule]

@@ -10,8 +10,8 @@ scalar JSONObject
 
 directive @soap(service: String!, action: String!) on FIELD_DEFINITION
 
-directive @find(service: String!, method: String!) on FIELD_DEFINITION
-directive @findById(service: String!, method: String!) on FIELD_DEFINITION
+directive @find(service: String!, action: String!) on FIELD_DEFINITION
+directive @findById(service: String!, action: String!) on FIELD_DEFINITION
 
 # directive @refOne(service: String!, localField: String) on FIELD_DEFINITION
 
@@ -25,14 +25,14 @@ type Mutation {
   ping: String!
 }
 
-type PageInfo {
+type _PageInfo {
   hasNextPage: Boolean!
   hasPreviousPage: Boolean!
   nextOffset: Int
   previousOffset: Int
 }
 
-type StatementInfo {
+type _StatementInfo {
   query: String
   where: String
   orderBy: String
@@ -40,14 +40,14 @@ type StatementInfo {
   offset: Int
 }
 
-input SingleRecordQueryInput {
+input _SingleRecordQueryInput {
   "The ID of the record to retrieve."
   id: BigInt!
   "When in strict mode (default), the query will throw an error when the item is not found."
   strict: Boolean = true
 }
 
-input MultipleRecordsQueryInput {
+input _MultipleRecordsQueryInput {
   "An (optional) where clause to add to the query statement."
   where: String
   "An (optiona) order by clause to add to the query statement."

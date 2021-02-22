@@ -63,6 +63,25 @@ input UpdateActivityGroupsInput {
   activityGroups: [ActivityGroupInput]
 }
 
+type _ActivityGroupConnection {
+  totalCount: Int!
+  nodes: [ActivityGroup!]!
+  statement: _StatementInfo!
+  pageInfo: _PageInfo!
+}
+
+extend type Query {
+  "Finds a single \`ActivityGroup\` by ID."
+  _activityGroup(input: _SingleRecordQueryInput!): ActivityGroup
+    @findById(service: "ActivityGroup", action: "getActivityGroupsByStatement")
+}
+
+extend type Query {
+  "Finds multiple \`ActivityGroup\` objects based on the optional input parameters."
+  _activityGroups(input: _MultipleRecordsQueryInput!): _ActivityGroupConnection!
+    @find(service: "ActivityGroup", action: "getActivityGroupsByStatement")
+}
+
 extend type Mutation {
   "Creates a new ActivityGroup objects. @param activityGroups the activity groups to be created. @return the created activity groups with their IDs filled in."
   createActivityGroups(input: CreateActivityGroupsInput!): [ActivityGroup]

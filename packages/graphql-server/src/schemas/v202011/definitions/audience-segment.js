@@ -324,6 +324,25 @@ input UpdateAudienceSegmentsInput {
   segments: [JSONObject]
 }
 
+type _AudienceSegmentInterfaceConnection {
+  totalCount: Int!
+  nodes: [AudienceSegmentInterface!]!
+  statement: _StatementInfo!
+  pageInfo: _PageInfo!
+}
+
+extend type Query {
+  "Finds a single \`AudienceSegmentInterface\` by ID."
+  _audienceSegment(input: _SingleRecordQueryInput!): AudienceSegmentInterface
+    @findById(service: "AudienceSegment", action: "getAudienceSegmentsByStatement")
+}
+
+extend type Query {
+  "Finds multiple \`AudienceSegmentInterface\` objects based on the optional input parameters."
+  _audienceSegments(input: _MultipleRecordsQueryInput!): _AudienceSegmentInterfaceConnection!
+    @find(service: "AudienceSegment", action: "getAudienceSegmentsByStatement")
+}
+
 extend type Mutation {
   "Creates new RuleBasedFirstPartyAudienceSegment objects. @param segments first-party audience segments to create @return created first-party audience segments"
   createAudienceSegments(input: CreateAudienceSegmentsInput!): [FirstPartyAudienceSegmentInterface]

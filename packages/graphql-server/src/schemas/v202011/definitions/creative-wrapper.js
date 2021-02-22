@@ -91,6 +91,25 @@ input UpdateCreativeWrappersInput {
   creativeWrappers: [CreativeWrapperInput]
 }
 
+type _CreativeWrapperConnection {
+  totalCount: Int!
+  nodes: [CreativeWrapper!]!
+  statement: _StatementInfo!
+  pageInfo: _PageInfo!
+}
+
+extend type Query {
+  "Finds a single \`CreativeWrapper\` by ID."
+  _creativeWrapper(input: _SingleRecordQueryInput!): CreativeWrapper
+    @findById(service: "CreativeWrapper", action: "getCreativeWrappersByStatement")
+}
+
+extend type Query {
+  "Finds multiple \`CreativeWrapper\` objects based on the optional input parameters."
+  _creativeWrappers(input: _MultipleRecordsQueryInput!): _CreativeWrapperConnection!
+    @find(service: "CreativeWrapper", action: "getCreativeWrappersByStatement")
+}
+
 extend type Mutation {
   "Creates a new \`CreativeWrapper\` objects. The following fields are required:  CreativeWrapper#labelId CreativeWrapper#ordering CreativeWrapper#header or CreativeWrapper#footer  @param creativeWrappers the creative wrappers to create @return the creative wrappers with their IDs filled in @throws ApiException"
   createCreativeWrappers(input: CreateCreativeWrappersInput!): [CreativeWrapper]

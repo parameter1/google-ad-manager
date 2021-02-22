@@ -43,6 +43,25 @@ type LineItemTemplatePage {
   results: [LineItemTemplate]
 }
 
+type _LineItemTemplateConnection {
+  totalCount: Int!
+  nodes: [LineItemTemplate!]!
+  statement: _StatementInfo!
+  pageInfo: _PageInfo!
+}
+
+extend type Query {
+  "Finds a single \`LineItemTemplate\` by ID."
+  _lineItemTemplate(input: _SingleRecordQueryInput!): LineItemTemplate
+    @findById(service: "LineItemTemplate", action: "getLineItemTemplatesByStatement")
+}
+
+extend type Query {
+  "Finds multiple \`LineItemTemplate\` objects based on the optional input parameters."
+  _lineItemTemplates(input: _MultipleRecordsQueryInput!): _LineItemTemplateConnection!
+    @find(service: "LineItemTemplate", action: "getLineItemTemplatesByStatement")
+}
+
 extend type Query {
   "Gets a LineItemTemplatePage of LineItemTemplate objects that satisfy the given Statement#query. The following fields are supported for filtering:   PQL Property Object Property   \`id\` LineItemTemplate#id   @param filterStatement a Publisher Query Language statement used to filter a set of line item templates @return the line item templates that match the given filter @throws ApiException if a RuntimeException is thrown"
   getLineItemTemplatesByStatement(input: GetLineItemTemplatesByStatementInput!): LineItemTemplatePage

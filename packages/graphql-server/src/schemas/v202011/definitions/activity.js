@@ -83,6 +83,25 @@ input UpdateActivitiesInput {
   activities: [ActivityInput]
 }
 
+type _ActivityConnection {
+  totalCount: Int!
+  nodes: [Activity!]!
+  statement: _StatementInfo!
+  pageInfo: _PageInfo!
+}
+
+extend type Query {
+  "Finds multiple \`Activity\` objects based on the optional input parameters."
+  _activities(input: _MultipleRecordsQueryInput!): _ActivityConnection!
+    @find(service: "Activity", action: "getActivitiesByStatement")
+}
+
+extend type Query {
+  "Finds a single \`Activity\` by ID."
+  _activity(input: _SingleRecordQueryInput!): Activity
+    @findById(service: "Activity", action: "getActivitiesByStatement")
+}
+
 extend type Mutation {
   "Creates a new Activity objects. @param activities to be created. @return the created activities with its IDs filled in."
   createActivities(input: CreateActivitiesInput!): [Activity]

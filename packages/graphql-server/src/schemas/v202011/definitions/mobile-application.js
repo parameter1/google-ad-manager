@@ -91,6 +91,25 @@ input UpdateMobileApplicationsInput {
   mobileApplications: [MobileApplicationInput]
 }
 
+type _MobileApplicationConnection {
+  totalCount: Int!
+  nodes: [MobileApplication!]!
+  statement: _StatementInfo!
+  pageInfo: _PageInfo!
+}
+
+extend type Query {
+  "Finds a single \`MobileApplication\` by ID."
+  _mobileApplication(input: _SingleRecordQueryInput!): MobileApplication
+    @findById(service: "MobileApplication", action: "getMobileApplicationsByStatement")
+}
+
+extend type Query {
+  "Finds multiple \`MobileApplication\` objects based on the optional input parameters."
+  _mobileApplications(input: _MultipleRecordsQueryInput!): _MobileApplicationConnection!
+    @find(service: "MobileApplication", action: "getMobileApplicationsByStatement")
+}
+
 extend type Mutation {
   "Creates and claims mobile applications to be used for targeting in the network. @param mobileApplications the mobileApplications to create @return the created mobileApplications with their IDs filled in"
   createMobileApplications(input: CreateMobileApplicationsInput!): [MobileApplication]

@@ -1513,6 +1513,25 @@ enum TimeZoneTypeEnum {
   UNKNOWN
 }
 
+type _SavedQueryConnection {
+  totalCount: Int!
+  nodes: [SavedQuery!]!
+  statement: _StatementInfo!
+  pageInfo: _PageInfo!
+}
+
+extend type Query {
+  "Finds multiple \`SavedQuery\` objects based on the optional input parameters."
+  _savedQueries(input: _MultipleRecordsQueryInput!): _SavedQueryConnection!
+    @find(service: "Report", action: "getSavedQueriesByStatement")
+}
+
+extend type Query {
+  "Finds a single \`SavedQuery\` by ID."
+  _savedQuery(input: _SingleRecordQueryInput!): SavedQuery
+    @findById(service: "Report", action: "getSavedQueriesByStatement")
+}
+
 extend type Query {
   "Returns the URL at which the report file can be downloaded.  The report will be generated as a gzip archive, containing the report file itself. @param reportJobId the ID of the ReportJob @param exportFormat the ExportFormat for the report file @return the URL for report file download"
   getReportDownloadURL(input: GetReportDownloadURLInput!): String

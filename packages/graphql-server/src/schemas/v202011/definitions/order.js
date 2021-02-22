@@ -165,6 +165,25 @@ input UpdateOrdersInput {
   orders: [OrderInput]
 }
 
+type _OrderConnection {
+  totalCount: Int!
+  nodes: [Order!]!
+  statement: _StatementInfo!
+  pageInfo: _PageInfo!
+}
+
+extend type Query {
+  "Finds a single \`Order\` by ID."
+  _order(input: _SingleRecordQueryInput!): Order
+    @findById(service: "Order", action: "getOrdersByStatement")
+}
+
+extend type Query {
+  "Finds multiple \`Order\` objects based on the optional input parameters."
+  _orders(input: _MultipleRecordsQueryInput!): _OrderConnection!
+    @find(service: "Order", action: "getOrdersByStatement")
+}
+
 extend type Mutation {
   "Creates new Order objects. @param orders the orders to create @return the created orders with their IDs filled in"
   createOrders(input: CreateOrdersInput!): [Order]

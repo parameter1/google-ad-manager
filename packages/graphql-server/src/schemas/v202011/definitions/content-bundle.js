@@ -65,6 +65,25 @@ input UpdateContentBundlesInput {
   contentBundles: [ContentBundleInput]
 }
 
+type _ContentBundleConnection {
+  totalCount: Int!
+  nodes: [ContentBundle!]!
+  statement: _StatementInfo!
+  pageInfo: _PageInfo!
+}
+
+extend type Query {
+  "Finds a single \`ContentBundle\` by ID."
+  _contentBundle(input: _SingleRecordQueryInput!): ContentBundle
+    @findById(service: "ContentBundle", action: "getContentBundlesByStatement")
+}
+
+extend type Query {
+  "Finds multiple \`ContentBundle\` objects based on the optional input parameters."
+  _contentBundles(input: _MultipleRecordsQueryInput!): _ContentBundleConnection!
+    @find(service: "ContentBundle", action: "getContentBundlesByStatement")
+}
+
 extend type Mutation {
   "Creates new ContentBundle objects. @param contentBundles the content bundles to create @return the created content bundles with their IDs filled in"
   createContentBundles(input: CreateContentBundlesInput!): [ContentBundle]

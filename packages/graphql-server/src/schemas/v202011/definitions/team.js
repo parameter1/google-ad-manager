@@ -79,6 +79,25 @@ input UpdateTeamsInput {
   teams: [TeamInput]
 }
 
+type _TeamConnection {
+  totalCount: Int!
+  nodes: [Team!]!
+  statement: _StatementInfo!
+  pageInfo: _PageInfo!
+}
+
+extend type Query {
+  "Finds a single \`Team\` by ID."
+  _team(input: _SingleRecordQueryInput!): Team
+    @findById(service: "Team", action: "getTeamsByStatement")
+}
+
+extend type Query {
+  "Finds multiple \`Team\` objects based on the optional input parameters."
+  _teams(input: _MultipleRecordsQueryInput!): _TeamConnection!
+    @find(service: "Team", action: "getTeamsByStatement")
+}
+
 extend type Mutation {
   "Creates new Team objects. The following fields are required:  Team#name  @param teams the teams to create @return the created teams with their IDs filled in"
   createTeams(input: CreateTeamsInput!): [Team]

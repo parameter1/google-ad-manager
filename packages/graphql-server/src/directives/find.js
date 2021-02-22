@@ -18,7 +18,7 @@ class FindDirective extends SchemaDirectiveVisitor {
         offset: input.offset,
       });
       const query = statement.build();
-      const { data } = await service.request(this.args.method, { filterStatement: { query } });
+      const { data } = await service.request(this.args.action, { filterStatement: { query } });
       const results = data.results || [];
       const { totalResultSetSize: totalCount } = data;
       const { clauses } = statement;

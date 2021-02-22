@@ -1,6 +1,9 @@
 const WSDL = require('@parameter1/google-ad-manager-wsdl-parser');
 const { underscore, dasherize } = require('inflected');
+const buildConnectionType = require('./type/connection');
 const buildEnum = require('./enum');
+const buildFindByIdQuery = require('./query/find-by-id');
+const buildFindQuery = require('./query/find');
 const buildInput = require('./input');
 const buildInterface = require('./interface');
 const buildType = require('./type');
@@ -117,6 +120,36 @@ module.exports = async ({ url } = {}) => {
     types: new Map(),
     enums: new Map(),
   });
+
+  // Create custom findById and find queries
+  const queryPattern = /^get([A-Za-z].+)ByStatement$/;
+  rootInputElements.forEach((element, opName) => {
+    const matches = queryPattern.exec(opName);
+    if (!matches) return;
+
+    const page = wsdl.getReturnFieldForOperation(opName);
+    const resultField = wsdl.getType(page.type).fields.get('results');
+    if (!resultField) return; // skip operations that do not have a paging result type
+    const resultType = wsdl.getType(resultField.type);
+
+    const findById = buildFindByIdQuery({
+      wsdl,
+      service: wsdl.shortName,
+      action: opName,
+      resultType,
+    });
+    queries.set(findById.name, findById);
+    const find = buildFindQuery({
+      wsdl,
+      service: wsdl.shortName,
+      action: opName,
+      resultType,
+    });
+    queries.set(find.name, find);
+    const connection = buildConnectionType({ wsdl, resultType });
+    definitions.types.set(connection.name, connection);
+  });
+
   const filename = `${dasherize(underscore(wsdl.shortName))}.js`;
   return {
     name: wsdl.name,

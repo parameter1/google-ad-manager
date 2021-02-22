@@ -321,6 +321,44 @@ input UpdateProposalsInput {
   proposals: [ProposalInput]
 }
 
+type _MarketplaceCommentConnection {
+  totalCount: Int!
+  nodes: [MarketplaceComment!]!
+  statement: _StatementInfo!
+  pageInfo: _PageInfo!
+}
+
+type _ProposalConnection {
+  totalCount: Int!
+  nodes: [Proposal!]!
+  statement: _StatementInfo!
+  pageInfo: _PageInfo!
+}
+
+extend type Query {
+  "Finds a single \`MarketplaceComment\` by ID."
+  _marketplaceComment(input: _SingleRecordQueryInput!): MarketplaceComment
+    @findById(service: "Proposal", action: "getMarketplaceCommentsByStatement")
+}
+
+extend type Query {
+  "Finds multiple \`MarketplaceComment\` objects based on the optional input parameters."
+  _marketplaceComments(input: _MultipleRecordsQueryInput!): _MarketplaceCommentConnection!
+    @find(service: "Proposal", action: "getMarketplaceCommentsByStatement")
+}
+
+extend type Query {
+  "Finds a single \`Proposal\` by ID."
+  _proposal(input: _SingleRecordQueryInput!): Proposal
+    @findById(service: "Proposal", action: "getProposalsByStatement")
+}
+
+extend type Query {
+  "Finds multiple \`Proposal\` objects based on the optional input parameters."
+  _proposals(input: _MultipleRecordsQueryInput!): _ProposalConnection!
+    @find(service: "Proposal", action: "getProposalsByStatement")
+}
+
 extend type Mutation {
   "Creates new Proposal objects. For each proposal, the following fields are required:  Proposal#name  @param proposals the proposals to create @return the created proposals with their IDs filled in"
   createProposals(input: CreateProposalsInput!): [Proposal]

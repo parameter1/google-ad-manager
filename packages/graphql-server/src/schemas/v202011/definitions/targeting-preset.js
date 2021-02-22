@@ -29,6 +29,25 @@ type TargetingPresetPage {
   results: [TargetingPreset]
 }
 
+type _TargetingPresetConnection {
+  totalCount: Int!
+  nodes: [TargetingPreset!]!
+  statement: _StatementInfo!
+  pageInfo: _PageInfo!
+}
+
+extend type Query {
+  "Finds a single \`TargetingPreset\` by ID."
+  _targetingPreset(input: _SingleRecordQueryInput!): TargetingPreset
+    @findById(service: "TargetingPreset", action: "getTargetingPresetsByStatement")
+}
+
+extend type Query {
+  "Finds multiple \`TargetingPreset\` objects based on the optional input parameters."
+  _targetingPresets(input: _MultipleRecordsQueryInput!): _TargetingPresetConnection!
+    @find(service: "TargetingPreset", action: "getTargetingPresetsByStatement")
+}
+
 extend type Query {
   "Gets a TargetingPresetPage of TargetingPreset objects that satisfy the given Statement#query. The following fields are supported for filtering:   PQL Property Object Property   \`id\` TargetingPreset#id   \`name\` TargetingPreset#name   @param filterStatement a Publisher Query Language statement used to filter a set of labels. @return the targeting presets that match the given filter"
   getTargetingPresetsByStatement(input: GetTargetingPresetsByStatementInput!): TargetingPresetPage

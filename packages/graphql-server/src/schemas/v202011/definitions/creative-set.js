@@ -55,6 +55,25 @@ input UpdateCreativeSetInput {
   creativeSet: CreativeSetInput
 }
 
+type _CreativeSetConnection {
+  totalCount: Int!
+  nodes: [CreativeSet!]!
+  statement: _StatementInfo!
+  pageInfo: _PageInfo!
+}
+
+extend type Query {
+  "Finds a single \`CreativeSet\` by ID."
+  _creativeSet(input: _SingleRecordQueryInput!): CreativeSet
+    @findById(service: "CreativeSet", action: "getCreativeSetsByStatement")
+}
+
+extend type Query {
+  "Finds multiple \`CreativeSet\` objects based on the optional input parameters."
+  _creativeSets(input: _MultipleRecordsQueryInput!): _CreativeSetConnection!
+    @find(service: "CreativeSet", action: "getCreativeSetsByStatement")
+}
+
 extend type Mutation {
   "Creates a new CreativeSet. @param creativeSet the creative set to create @return the creative set with its ID filled in"
   createCreativeSet(input: CreateCreativeSetInput!): CreativeSet

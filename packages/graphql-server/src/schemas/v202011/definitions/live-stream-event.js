@@ -329,6 +329,25 @@ input UpdateLiveStreamEventsInput {
   liveStreamEvents: [LiveStreamEventInput]
 }
 
+type _LiveStreamEventConnection {
+  totalCount: Int!
+  nodes: [LiveStreamEvent!]!
+  statement: _StatementInfo!
+  pageInfo: _PageInfo!
+}
+
+extend type Query {
+  "Finds a single \`LiveStreamEvent\` by ID."
+  _liveStreamEvent(input: _SingleRecordQueryInput!): LiveStreamEvent
+    @findById(service: "LiveStreamEvent", action: "getLiveStreamEventsByStatement")
+}
+
+extend type Query {
+  "Finds multiple \`LiveStreamEvent\` objects based on the optional input parameters."
+  _liveStreamEvents(input: _MultipleRecordsQueryInput!): _LiveStreamEventConnection!
+    @find(service: "LiveStreamEvent", action: "getLiveStreamEventsByStatement")
+}
+
 extend type Mutation {
   "Creates new LiveStreamEvent objects. The following fields are required:  LiveStreamEvent#name LiveStreamEvent#startDateTime LiveStreamEvent#endDateTime LiveStreamEvent#contentUrls LiveStreamEvent#adTags  @param liveStreamEvents the live stream events to create @return the created live stream events with their IDs filled in"
   createLiveStreamEvents(input: CreateLiveStreamEventsInput!): [LiveStreamEvent]

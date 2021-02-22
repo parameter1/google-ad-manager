@@ -77,6 +77,25 @@ input UpdateAdExclusionRulesInput {
   adExclusionRules: [AdExclusionRuleInput]
 }
 
+type _AdExclusionRuleConnection {
+  totalCount: Int!
+  nodes: [AdExclusionRule!]!
+  statement: _StatementInfo!
+  pageInfo: _PageInfo!
+}
+
+extend type Query {
+  "Finds a single \`AdExclusionRule\` by ID."
+  _adExclusionRule(input: _SingleRecordQueryInput!): AdExclusionRule
+    @findById(service: "AdExclusionRule", action: "getAdExclusionRulesByStatement")
+}
+
+extend type Query {
+  "Finds multiple \`AdExclusionRule\` objects based on the optional input parameters."
+  _adExclusionRules(input: _MultipleRecordsQueryInput!): _AdExclusionRuleConnection!
+    @find(service: "AdExclusionRule", action: "getAdExclusionRulesByStatement")
+}
+
 extend type Mutation {
   "Creates new AdExclusionRule objects. @param adExclusionRules the ad exclusion rules to create @return the created rules with their IDs filled in"
   createAdExclusionRules(input: CreateAdExclusionRulesInput!): [AdExclusionRule]

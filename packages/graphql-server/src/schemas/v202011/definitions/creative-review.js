@@ -32,6 +32,25 @@ input PerformCreativeReviewActionInput {
   filterStatement: StatementInput
 }
 
+type _CreativeReviewConnection {
+  totalCount: Int!
+  nodes: [CreativeReview!]!
+  statement: _StatementInfo!
+  pageInfo: _PageInfo!
+}
+
+extend type Query {
+  "Finds a single \`CreativeReview\` by ID."
+  _creativeReview(input: _SingleRecordQueryInput!): CreativeReview
+    @findById(service: "CreativeReview", action: "getCreativeReviewsByStatement")
+}
+
+extend type Query {
+  "Finds multiple \`CreativeReview\` objects based on the optional input parameters."
+  _creativeReviews(input: _MultipleRecordsQueryInput!): _CreativeReviewConnection!
+    @find(service: "CreativeReview", action: "getCreativeReviewsByStatement")
+}
+
 extend type Query {
   "Gets a CreativeReviewPage of CreativeReview objects that satisfy the given Statement#query. This will allow you to review creatives that have displayed (or could have displayed) on your pages or apps in the last 30 days. To ensure that you are always reviewing the most important creatives first, the CreativeReview objects are ranked according to the number of impressions that they've received. @param statement a Publisher Query Language statement used to specify the page of CreativeReview to be fetch. Only \`LIMIT\` is supported. @return the CreativeReviews that match the given filter"
   getCreativeReviewsByStatement(input: GetCreativeReviewsByStatementInput!): CreativeReviewPage

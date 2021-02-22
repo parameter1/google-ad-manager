@@ -61,6 +61,25 @@ enum TargetPlatformEnum {
   WEB
 }
 
+type _SuggestedAdUnitConnection {
+  totalCount: Int!
+  nodes: [SuggestedAdUnit!]!
+  statement: _StatementInfo!
+  pageInfo: _PageInfo!
+}
+
+extend type Query {
+  "Finds a single \`SuggestedAdUnit\` by ID."
+  _suggestedAdUnit(input: _SingleRecordQueryInput!): SuggestedAdUnit
+    @findById(service: "SuggestedAdUnit", action: "getSuggestedAdUnitsByStatement")
+}
+
+extend type Query {
+  "Finds multiple \`SuggestedAdUnit\` objects based on the optional input parameters."
+  _suggestedAdUnits(input: _MultipleRecordsQueryInput!): _SuggestedAdUnitConnection!
+    @find(service: "SuggestedAdUnit", action: "getSuggestedAdUnitsByStatement")
+}
+
 extend type Query {
   "Gets a SuggestedAdUnitPage of SuggestedAdUnit objects that satisfy the filter query. There is a system-enforced limit of 1000 on the number of suggested ad units that are suggested at any one time.   PQL Property Object Property   \`id\` SuggestedAdUnit#id   \`numRequests\` SuggestedAdUnit#numRequests   Note: After API version 201311, the \`id\` field will only be numerical. @param filterStatement a Publisher Query Language statement used to filter a set of suggested ad units @return the suggested ad units that match the given filter"
   getSuggestedAdUnitsByStatement(input: GetSuggestedAdUnitsByStatementInput!): SuggestedAdUnitPage

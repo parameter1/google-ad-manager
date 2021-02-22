@@ -165,6 +165,25 @@ input UpdateLineItemCreativeAssociationsInput {
   lineItemCreativeAssociations: [LineItemCreativeAssociationInput]
 }
 
+type _LineItemCreativeAssociationConnection {
+  totalCount: Int!
+  nodes: [LineItemCreativeAssociation!]!
+  statement: _StatementInfo!
+  pageInfo: _PageInfo!
+}
+
+extend type Query {
+  "Finds a single \`LineItemCreativeAssociation\` by ID."
+  _lineItemCreativeAssociation(input: _SingleRecordQueryInput!): LineItemCreativeAssociation
+    @findById(service: "LineItemCreativeAssociation", action: "getLineItemCreativeAssociationsByStatement")
+}
+
+extend type Query {
+  "Finds multiple \`LineItemCreativeAssociation\` objects based on the optional input parameters."
+  _lineItemCreativeAssociations(input: _MultipleRecordsQueryInput!): _LineItemCreativeAssociationConnection!
+    @find(service: "LineItemCreativeAssociation", action: "getLineItemCreativeAssociationsByStatement")
+}
+
 extend type Mutation {
   "Creates new LineItemCreativeAssociation objects @param lineItemCreativeAssociations the line item creative associations to create @return the created line item creative associations with their IDs filled in"
   createLineItemCreativeAssociations(input: CreateLineItemCreativeAssociationsInput!): [LineItemCreativeAssociation]

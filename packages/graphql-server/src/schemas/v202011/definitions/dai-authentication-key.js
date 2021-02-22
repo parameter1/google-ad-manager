@@ -79,6 +79,25 @@ input UpdateDaiAuthenticationKeysInput {
   daiAuthenticationKeys: [DaiAuthenticationKeyInput]
 }
 
+type _DaiAuthenticationKeyConnection {
+  totalCount: Int!
+  nodes: [DaiAuthenticationKey!]!
+  statement: _StatementInfo!
+  pageInfo: _PageInfo!
+}
+
+extend type Query {
+  "Finds a single \`DaiAuthenticationKey\` by ID."
+  _daiAuthenticationKey(input: _SingleRecordQueryInput!): DaiAuthenticationKey
+    @findById(service: "DaiAuthenticationKey", action: "getDaiAuthenticationKeysByStatement")
+}
+
+extend type Query {
+  "Finds multiple \`DaiAuthenticationKey\` objects based on the optional input parameters."
+  _daiAuthenticationKeys(input: _MultipleRecordsQueryInput!): _DaiAuthenticationKeyConnection!
+    @find(service: "DaiAuthenticationKey", action: "getDaiAuthenticationKeysByStatement")
+}
+
 extend type Mutation {
   "Creates new DaiAuthenticationKey objects. The following fields are required:  DaiAuthenticationKey#name  @param daiAuthenticationKeys the DAI authentication keys to create @return the created DAI authentication keys with their IDs filled in"
   createDaiAuthenticationKeys(input: CreateDaiAuthenticationKeysInput!): [DaiAuthenticationKey]

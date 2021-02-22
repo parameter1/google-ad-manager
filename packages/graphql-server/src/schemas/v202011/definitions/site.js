@@ -60,6 +60,25 @@ input UpdateSitesInput {
   sites: [SiteInput]
 }
 
+type _SiteConnection {
+  totalCount: Int!
+  nodes: [Site!]!
+  statement: _StatementInfo!
+  pageInfo: _PageInfo!
+}
+
+extend type Query {
+  "Finds a single \`Site\` by ID."
+  _site(input: _SingleRecordQueryInput!): Site
+    @findById(service: "Site", action: "getSitesByStatement")
+}
+
+extend type Query {
+  "Finds multiple \`Site\` objects based on the optional input parameters."
+  _sites(input: _MultipleRecordsQueryInput!): _SiteConnection!
+    @find(service: "Site", action: "getSitesByStatement")
+}
+
 extend type Mutation {
   "Creates new Site objects. @param sites the sites to create @return the created sites with their IDs filled in"
   createSites(input: CreateSitesInput!): [Site]

@@ -101,6 +101,25 @@ input UpdateContactsInput {
   contacts: [ContactInput]
 }
 
+type _ContactConnection {
+  totalCount: Int!
+  nodes: [Contact!]!
+  statement: _StatementInfo!
+  pageInfo: _PageInfo!
+}
+
+extend type Query {
+  "Finds a single \`Contact\` by ID."
+  _contact(input: _SingleRecordQueryInput!): Contact
+    @findById(service: "Contact", action: "getContactsByStatement")
+}
+
+extend type Query {
+  "Finds multiple \`Contact\` objects based on the optional input parameters."
+  _contacts(input: _MultipleRecordsQueryInput!): _ContactConnection!
+    @find(service: "Contact", action: "getContactsByStatement")
+}
+
 extend type Mutation {
   "Creates new Contact objects. @param contacts the contacts to create @return the created contacts with their IDs filled in"
   createContacts(input: CreateContactsInput!): [Contact]
