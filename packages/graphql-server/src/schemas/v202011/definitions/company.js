@@ -89,7 +89,7 @@ type Company {
   "Specifies the ID of the Google-recognized canonicalized form of this company. This attribute is optional."
   thirdPartyCompanyId: Int
   "The date and time this company was last modified."
-  lastModifiedDateTime: GAMDateTime
+  lastModifiedDateTime: DateTime
   "Info required for when Company Type is CHILD_PUBLISHER."
   childPublisher: ChildPublisher
   "Info required for when Company Type is VIEWABILITY_PROVIDER."
@@ -141,7 +141,7 @@ input CompanyInput {
   "Specifies the ID of the Google-recognized canonicalized form of this company. This attribute is optional."
   thirdPartyCompanyId: Int
   "The date and time this company was last modified."
-  lastModifiedDateTime: GAMDateTime
+  lastModifiedDateTime: DateTime
   "Info required for when Company Type is CHILD_PUBLISHER."
   childPublisher: ChildPublisherInput
   "Info required for when Company Type is VIEWABILITY_PROVIDER."

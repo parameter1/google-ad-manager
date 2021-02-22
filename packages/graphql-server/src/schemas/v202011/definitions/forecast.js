@@ -85,9 +85,9 @@ input DeliveryForecastOptionsInput {
 "Represents the breakdown entries for a list of targetings and/or creatives."
 type ForecastBreakdown {
   "The starting time of the represented breakdown."
-  startTime: GAMDateTime
+  startTime: DateTime
   "The end time of the represented breakdown."
-  endTime: GAMDateTime
+  endTime: DateTime
   "The forecast breakdown entries in the same order as in the ForecastBreakdownOptions#targets field."
   breakdownEntries: [ForecastBreakdownEntry]
 }
@@ -103,7 +103,7 @@ type ForecastBreakdownEntry {
 "Configuration of forecast breakdown."
 input ForecastBreakdownOptionsInput {
   "The boundaries of time windows to configure time breakdown. By default, the time window of the forecasted LineItem is assumed if none are explicitly specified in this field. But if set, at least two DateTimes are needed to define the boundaries of minimally one time window. Also, the time boundaries are required to be in the same time zone, in strictly ascending order."
-  timeWindows: [GAMDateTime]
+  timeWindows: [DateTime]
   "For each time window, these are the breakdown targets. If none specified, the targeting of the forecasted LineItem is assumed."
   targets: [ForecastBreakdownTargetInput]
 }

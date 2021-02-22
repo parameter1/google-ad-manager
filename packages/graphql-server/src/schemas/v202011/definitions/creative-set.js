@@ -20,7 +20,7 @@ type CreativeSet {
   "The IDs of the companion creatives associated with this creative set. This attribute is required."
   companionCreativeIds: [BigInt]!
   "The date and time this creative set was last modified."
-  lastModifiedDateTime: GAMDateTime
+  lastModifiedDateTime: DateTime
 }
 
 "A creative set is comprised of a master creative and its companion creatives."
@@ -32,7 +32,7 @@ input CreativeSetInput {
   "The IDs of the companion creatives associated with this creative set. This attribute is required."
   companionCreativeIds: [BigInt]!
   "The date and time this creative set was last modified."
-  lastModifiedDateTime: GAMDateTime
+  lastModifiedDateTime: DateTime
 }
 
 "Captures a page of CreativeSet objects."

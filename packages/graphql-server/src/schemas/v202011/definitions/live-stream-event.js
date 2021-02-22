@@ -91,15 +91,15 @@ type LiveStreamEvent {
   "The status of this \`LiveStreamEvent\`. This attribute is read-only and is assigned by Google. Live stream events are created in the LiveStreamEventStatus#PAUSED state."
   status: LiveStreamEventStatusEnum
   "The date and time this \`LiveStreamEvent\` was created. This attribute is read-only."
-  creationDateTime: GAMDateTime
+  creationDateTime: DateTime
   "The date and time this \`LiveStreamEvent\` was last modified. This attribute is read-only."
-  lastModifiedDateTime: GAMDateTime
+  lastModifiedDateTime: DateTime
   "The start date and time of this \`LiveStreamEvent\`. This attribute is required if the LiveStreamEvent#startDateTimeType is StartDateTimeType#USE_START_DATE_TIME and is ignored for all other values of StartDateTimeType. Modifying this attribute for an active live stream can impact traffic."
-  startDateTime: GAMDateTime!
+  startDateTime: DateTime!
   "Specifies whether to start the LiveStreamEvent right away, in an hour, etc. This attribute is optional and defaults to StartDateTimeType#USE_START_DATE_TIME."
   startDateTimeType: StartDateTimeTypeEnum
   "The scheduled end date and time of this \`LiveStreamEvent\`. This attribute is required if \`unlimitedEndDateTime\` is false and ignored if \`unlimitedEndDateTime\` is true. Modifying this attribute for an active live stream can impact traffic."
-  endDateTime: GAMDateTime!
+  endDateTime: DateTime!
   "Whether the LiveStreamEvent has an end time. This attribute is optional and defaults to false. If this field is true, \`endDateTime\` is ignored."
   unlimitedEndDateTime: Boolean
   "The total number of concurrent users expected to watch this live stream across all regions. This attribute is optional and default value is 0."
@@ -171,11 +171,11 @@ input LiveStreamEventInput {
   "The name of the \`LiveStreamEvent\`. This value is required to create a live stream event and has a maximum length of 255 characters."
   name: String!
   "The start date and time of this \`LiveStreamEvent\`. This attribute is required if the LiveStreamEvent#startDateTimeType is StartDateTimeType#USE_START_DATE_TIME and is ignored for all other values of StartDateTimeType. Modifying this attribute for an active live stream can impact traffic."
-  startDateTime: GAMDateTime!
+  startDateTime: DateTime!
   "Specifies whether to start the LiveStreamEvent right away, in an hour, etc. This attribute is optional and defaults to StartDateTimeType#USE_START_DATE_TIME."
   startDateTimeType: StartDateTimeTypeEnum
   "The scheduled end date and time of this \`LiveStreamEvent\`. This attribute is required if \`unlimitedEndDateTime\` is false and ignored if \`unlimitedEndDateTime\` is true. Modifying this attribute for an active live stream can impact traffic."
-  endDateTime: GAMDateTime!
+  endDateTime: DateTime!
   "Whether the LiveStreamEvent has an end time. This attribute is optional and defaults to false. If this field is true, \`endDateTime\` is ignored."
   unlimitedEndDateTime: Boolean
   "The total number of concurrent users expected to watch this live stream across all regions. This attribute is optional and default value is 0."

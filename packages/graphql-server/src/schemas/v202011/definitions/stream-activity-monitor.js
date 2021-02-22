@@ -13,7 +13,7 @@ type AdBreak {
   adBreakDurationMillis: BigInt
   filledDurationMillis: BigInt
   servedDurationMillis: BigInt
-  startDateTime: GAMDateTime
+  startDateTime: DateTime
   startTimeOffsetMillis: BigInt
   samError: SamError
   midrollIndex: Int
@@ -76,8 +76,8 @@ type LinearStreamCreateRequest implements StreamCreateRequestInterface {
   liveStreamEventAssetKey: String
   eventName: String
   liveStreamEventId: BigInt
-  eventStartDateTime: GAMDateTime
-  eventEndDateTime: GAMDateTime
+  eventStartDateTime: DateTime
+  eventEndDateTime: DateTime
 }
 
 "Registers the specified list of \`sessionIds\` for monitoring. Once the session IDs have been registered, all logged information about the sessions will be persisted and can be viewed via the Ad Manager UI. A session ID is a unique identifier of a single user watching a live stream event. @param sessionIds a list of session IDs to register for monitoring @return the list of session IDs that were registered for monitoring @throws ApiException if there is an error registering any of the session IDs"
@@ -131,7 +131,7 @@ type SamSession {
   isVodSession: Boolean
   streamCreateRequest: StreamCreateRequestInterface
   adBreaks: [AdBreak]
-  startDateTime: GAMDateTime
+  startDateTime: DateTime
   sessionDurationMillis: BigInt
   contentDurationMillis: BigInt
 }

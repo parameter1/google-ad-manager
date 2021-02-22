@@ -6,5 +6,5 @@ module.exports = {
   'xsd:int': 'Int',
   'xsd:base64Binary': 'String',
   Date: 'Date',
-  DateTime: 'GAMDateTime',
+  DateTime: 'DateTime',
 };

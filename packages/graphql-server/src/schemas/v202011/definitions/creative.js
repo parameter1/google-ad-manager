@@ -22,7 +22,7 @@ type AdExchangeCreative implements HasHtmlSnippetDynamicAllocationCreativeInterf
   "The set of labels applied to this creative."
   appliedLabels: [AppliedLabel]
   "The date and time this creative was last modified."
-  lastModifiedDateTime: GAMDateTime
+  lastModifiedDateTime: DateTime
   "The values of the custom fields associated with this creative."
   customFieldValues: [BaseCustomFieldValueInterface]
   "The third party companies associated with this creative. This is distinct from any associated companies that Google may detect programmatically."
@@ -65,7 +65,7 @@ type AdSenseCreative implements HasHtmlSnippetDynamicAllocationCreativeInterface
   "The set of labels applied to this creative."
   appliedLabels: [AppliedLabel]
   "The date and time this creative was last modified."
-  lastModifiedDateTime: GAMDateTime
+  lastModifiedDateTime: DateTime
   "The values of the custom fields associated with this creative."
   customFieldValues: [BaseCustomFieldValueInterface]
   "The third party companies associated with this creative. This is distinct from any associated companies that Google may detect programmatically."
@@ -91,7 +91,7 @@ type AspectRatioImageCreative implements HasDestinationUrlCreativeInterface & Cr
   "The set of labels applied to this creative."
   appliedLabels: [AppliedLabel]
   "The date and time this creative was last modified."
-  lastModifiedDateTime: GAMDateTime
+  lastModifiedDateTime: DateTime
   "The values of the custom fields associated with this creative."
   customFieldValues: [BaseCustomFieldValueInterface]
   "The third party companies associated with this creative. This is distinct from any associated companies that Google may detect programmatically."
@@ -146,7 +146,7 @@ interface BaseDynamicAllocationCreativeInterface implements CreativeInterface {
   "The set of labels applied to this creative."
   appliedLabels: [AppliedLabel]
   "The date and time this creative was last modified."
-  lastModifiedDateTime: GAMDateTime
+  lastModifiedDateTime: DateTime
   "The values of the custom fields associated with this creative."
   customFieldValues: [BaseCustomFieldValueInterface]
   "The third party companies associated with this creative. This is distinct from any associated companies that Google may detect programmatically."
@@ -170,7 +170,7 @@ interface BaseImageCreativeInterface implements HasDestinationUrlCreativeInterfa
   "The set of labels applied to this creative."
   appliedLabels: [AppliedLabel]
   "The date and time this creative was last modified."
-  lastModifiedDateTime: GAMDateTime
+  lastModifiedDateTime: DateTime
   "The values of the custom fields associated with this creative."
   customFieldValues: [BaseCustomFieldValueInterface]
   "The third party companies associated with this creative. This is distinct from any associated companies that Google may detect programmatically."
@@ -202,7 +202,7 @@ interface BaseImageRedirectCreativeInterface implements HasDestinationUrlCreativ
   "The set of labels applied to this creative."
   appliedLabels: [AppliedLabel]
   "The date and time this creative was last modified."
-  lastModifiedDateTime: GAMDateTime
+  lastModifiedDateTime: DateTime
   "The values of the custom fields associated with this creative."
   customFieldValues: [BaseCustomFieldValueInterface]
   "The third party companies associated with this creative. This is distinct from any associated companies that Google may detect programmatically."
@@ -232,7 +232,7 @@ interface BaseRichMediaStudioCreativeInterface implements CreativeInterface {
   "The set of labels applied to this creative."
   appliedLabels: [AppliedLabel]
   "The date and time this creative was last modified."
-  lastModifiedDateTime: GAMDateTime
+  lastModifiedDateTime: DateTime
   "The values of the custom fields associated with this creative."
   customFieldValues: [BaseCustomFieldValueInterface]
   "The third party companies associated with this creative. This is distinct from any associated companies that Google may detect programmatically."
@@ -290,7 +290,7 @@ interface BaseVideoCreativeInterface implements HasDestinationUrlCreativeInterfa
   "The set of labels applied to this creative."
   appliedLabels: [AppliedLabel]
   "The date and time this creative was last modified."
-  lastModifiedDateTime: GAMDateTime
+  lastModifiedDateTime: DateTime
   "The values of the custom fields associated with this creative."
   customFieldValues: [BaseCustomFieldValueInterface]
   "The third party companies associated with this creative. This is distinct from any associated companies that Google may detect programmatically."
@@ -348,7 +348,7 @@ type ClickTrackingCreative implements CreativeInterface {
   "The set of labels applied to this creative."
   appliedLabels: [AppliedLabel]
   "The date and time this creative was last modified."
-  lastModifiedDateTime: GAMDateTime
+  lastModifiedDateTime: DateTime
   "The values of the custom fields associated with this creative."
   customFieldValues: [BaseCustomFieldValueInterface]
   "The third party companies associated with this creative. This is distinct from any associated companies that Google may detect programmatically."
@@ -481,7 +481,7 @@ interface CreativeInterface {
   "The set of labels applied to this creative."
   appliedLabels: [AppliedLabel]
   "The date and time this creative was last modified."
-  lastModifiedDateTime: GAMDateTime
+  lastModifiedDateTime: DateTime
   "The values of the custom fields associated with this creative."
   customFieldValues: [BaseCustomFieldValueInterface]
   "The third party companies associated with this creative. This is distinct from any associated companies that Google may detect programmatically."
@@ -555,7 +555,7 @@ type CustomCreative implements HasDestinationUrlCreativeInterface & CreativeInte
   "The set of labels applied to this creative."
   appliedLabels: [AppliedLabel]
   "The date and time this creative was last modified."
-  lastModifiedDateTime: GAMDateTime
+  lastModifiedDateTime: DateTime
   "The values of the custom fields associated with this creative."
   customFieldValues: [BaseCustomFieldValueInterface]
   "The third party companies associated with this creative. This is distinct from any associated companies that Google may detect programmatically."
@@ -634,7 +634,7 @@ interface HasDestinationUrlCreativeInterface implements CreativeInterface {
   "The set of labels applied to this creative."
   appliedLabels: [AppliedLabel]
   "The date and time this creative was last modified."
-  lastModifiedDateTime: GAMDateTime
+  lastModifiedDateTime: DateTime
   "The values of the custom fields associated with this creative."
   customFieldValues: [BaseCustomFieldValueInterface]
   "The third party companies associated with this creative. This is distinct from any associated companies that Google may detect programmatically."
@@ -663,7 +663,7 @@ interface HasHtmlSnippetDynamicAllocationCreativeInterface implements BaseDynami
   "The set of labels applied to this creative."
   appliedLabels: [AppliedLabel]
   "The date and time this creative was last modified."
-  lastModifiedDateTime: GAMDateTime
+  lastModifiedDateTime: DateTime
   "The values of the custom fields associated with this creative."
   customFieldValues: [BaseCustomFieldValueInterface]
   "The third party companies associated with this creative. This is distinct from any associated companies that Google may detect programmatically."
@@ -689,7 +689,7 @@ type Html5Creative implements CreativeInterface {
   "The set of labels applied to this creative."
   appliedLabels: [AppliedLabel]
   "The date and time this creative was last modified."
-  lastModifiedDateTime: GAMDateTime
+  lastModifiedDateTime: DateTime
   "The values of the custom fields associated with this creative."
   customFieldValues: [BaseCustomFieldValueInterface]
   "The third party companies associated with this creative. This is distinct from any associated companies that Google may detect programmatically."
@@ -729,7 +729,7 @@ type ImageCreative implements BaseImageCreativeInterface & HasDestinationUrlCrea
   "The set of labels applied to this creative."
   appliedLabels: [AppliedLabel]
   "The date and time this creative was last modified."
-  lastModifiedDateTime: GAMDateTime
+  lastModifiedDateTime: DateTime
   "The values of the custom fields associated with this creative."
   customFieldValues: [BaseCustomFieldValueInterface]
   "The third party companies associated with this creative. This is distinct from any associated companies that Google may detect programmatically."
@@ -779,7 +779,7 @@ type ImageOverlayCreative implements BaseImageCreativeInterface & HasDestination
   "The set of labels applied to this creative."
   appliedLabels: [AppliedLabel]
   "The date and time this creative was last modified."
-  lastModifiedDateTime: GAMDateTime
+  lastModifiedDateTime: DateTime
   "The values of the custom fields associated with this creative."
   customFieldValues: [BaseCustomFieldValueInterface]
   "The third party companies associated with this creative. This is distinct from any associated companies that Google may detect programmatically."
@@ -823,7 +823,7 @@ type ImageRedirectCreative implements BaseImageRedirectCreativeInterface & HasDe
   "The set of labels applied to this creative."
   appliedLabels: [AppliedLabel]
   "The date and time this creative was last modified."
-  lastModifiedDateTime: GAMDateTime
+  lastModifiedDateTime: DateTime
   "The values of the custom fields associated with this creative."
   customFieldValues: [BaseCustomFieldValueInterface]
   "The third party companies associated with this creative. This is distinct from any associated companies that Google may detect programmatically."
@@ -857,7 +857,7 @@ type ImageRedirectOverlayCreative implements BaseImageRedirectCreativeInterface 
   "The set of labels applied to this creative."
   appliedLabels: [AppliedLabel]
   "The date and time this creative was last modified."
-  lastModifiedDateTime: GAMDateTime
+  lastModifiedDateTime: DateTime
   "The values of the custom fields associated with this creative."
   customFieldValues: [BaseCustomFieldValueInterface]
   "The third party companies associated with this creative. This is distinct from any associated companies that Google may detect programmatically."
@@ -899,7 +899,7 @@ type InternalRedirectCreative implements CreativeInterface {
   "The set of labels applied to this creative."
   appliedLabels: [AppliedLabel]
   "The date and time this creative was last modified."
-  lastModifiedDateTime: GAMDateTime
+  lastModifiedDateTime: DateTime
   "The values of the custom fields associated with this creative."
   customFieldValues: [BaseCustomFieldValueInterface]
   "The third party companies associated with this creative. This is distinct from any associated companies that Google may detect programmatically."
@@ -939,7 +939,7 @@ type LegacyDfpCreative implements CreativeInterface {
   "The set of labels applied to this creative."
   appliedLabels: [AppliedLabel]
   "The date and time this creative was last modified."
-  lastModifiedDateTime: GAMDateTime
+  lastModifiedDateTime: DateTime
   "The values of the custom fields associated with this creative."
   customFieldValues: [BaseCustomFieldValueInterface]
   "The third party companies associated with this creative. This is distinct from any associated companies that Google may detect programmatically."
@@ -1116,7 +1116,7 @@ type ProgrammaticCreative implements CreativeInterface {
   "The set of labels applied to this creative."
   appliedLabels: [AppliedLabel]
   "The date and time this creative was last modified."
-  lastModifiedDateTime: GAMDateTime
+  lastModifiedDateTime: DateTime
   "The values of the custom fields associated with this creative."
   customFieldValues: [BaseCustomFieldValueInterface]
   "The third party companies associated with this creative. This is distinct from any associated companies that Google may detect programmatically."
@@ -1175,7 +1175,7 @@ type RichMediaStudioCreative implements BaseRichMediaStudioCreativeInterface & C
   "The set of labels applied to this creative."
   appliedLabels: [AppliedLabel]
   "The date and time this creative was last modified."
-  lastModifiedDateTime: GAMDateTime
+  lastModifiedDateTime: DateTime
   "The values of the custom fields associated with this creative."
   customFieldValues: [BaseCustomFieldValueInterface]
   "The third party companies associated with this creative. This is distinct from any associated companies that Google may detect programmatically."
@@ -1295,7 +1295,7 @@ type SetTopBoxCreative implements BaseVideoCreativeInterface & HasDestinationUrl
   "The set of labels applied to this creative."
   appliedLabels: [AppliedLabel]
   "The date and time this creative was last modified."
-  lastModifiedDateTime: GAMDateTime
+  lastModifiedDateTime: DateTime
   "The values of the custom fields associated with this creative."
   customFieldValues: [BaseCustomFieldValueInterface]
   "The third party companies associated with this creative. This is distinct from any associated companies that Google may detect programmatically."
@@ -1333,9 +1333,9 @@ type SetTopBoxCreative implements BaseVideoCreativeInterface & HasDestinationUrl
   "IDs of regions where the creative is available to serve from a local cable video-on-demand server. This attribute is optional."
   availabilityRegionIds: [String]
   "The date and time that this creative can begin serving from a local cable video-on-demand server. This attribute is optional."
-  licenseWindowStartDateTime: GAMDateTime
+  licenseWindowStartDateTime: DateTime
   "The date and time that this creative can no longer be served from a local cable video-on-demand server. This attribute is optional."
-  licenseWindowEndDateTime: GAMDateTime
+  licenseWindowEndDateTime: DateTime
 }
 
 "Enum to store the creative SSL compatibility manual override. Its three states are similar to that of SslScanResult."
@@ -1381,7 +1381,7 @@ type TemplateCreative implements CreativeInterface {
   "The set of labels applied to this creative."
   appliedLabels: [AppliedLabel]
   "The date and time this creative was last modified."
-  lastModifiedDateTime: GAMDateTime
+  lastModifiedDateTime: DateTime
   "The values of the custom fields associated with this creative."
   customFieldValues: [BaseCustomFieldValueInterface]
   "The third party companies associated with this creative. This is distinct from any associated companies that Google may detect programmatically."
@@ -1423,7 +1423,7 @@ type ThirdPartyCreative implements CreativeInterface {
   "The set of labels applied to this creative."
   appliedLabels: [AppliedLabel]
   "The date and time this creative was last modified."
-  lastModifiedDateTime: GAMDateTime
+  lastModifiedDateTime: DateTime
   "The values of the custom fields associated with this creative."
   customFieldValues: [BaseCustomFieldValueInterface]
   "The third party companies associated with this creative. This is distinct from any associated companies that Google may detect programmatically."
@@ -1473,7 +1473,7 @@ type UnsupportedCreative implements CreativeInterface {
   "The set of labels applied to this creative."
   appliedLabels: [AppliedLabel]
   "The date and time this creative was last modified."
-  lastModifiedDateTime: GAMDateTime
+  lastModifiedDateTime: DateTime
   "The values of the custom fields associated with this creative."
   customFieldValues: [BaseCustomFieldValueInterface]
   "The third party companies associated with this creative. This is distinct from any associated companies that Google may detect programmatically."
@@ -1512,7 +1512,7 @@ type VastRedirectCreative implements CreativeInterface {
   "The set of labels applied to this creative."
   appliedLabels: [AppliedLabel]
   "The date and time this creative was last modified."
-  lastModifiedDateTime: GAMDateTime
+  lastModifiedDateTime: DateTime
   "The values of the custom fields associated with this creative."
   customFieldValues: [BaseCustomFieldValueInterface]
   "The third party companies associated with this creative. This is distinct from any associated companies that Google may detect programmatically."
@@ -1564,7 +1564,7 @@ type VideoCreative implements BaseVideoCreativeInterface & HasDestinationUrlCrea
   "The set of labels applied to this creative."
   appliedLabels: [AppliedLabel]
   "The date and time this creative was last modified."
-  lastModifiedDateTime: GAMDateTime
+  lastModifiedDateTime: DateTime
   "The values of the custom fields associated with this creative."
   customFieldValues: [BaseCustomFieldValueInterface]
   "The third party companies associated with this creative. This is distinct from any associated companies that Google may detect programmatically."
@@ -1685,7 +1685,7 @@ type VideoRedirectCreative implements BaseVideoCreativeInterface & HasDestinatio
   "The set of labels applied to this creative."
   appliedLabels: [AppliedLabel]
   "The date and time this creative was last modified."
-  lastModifiedDateTime: GAMDateTime
+  lastModifiedDateTime: DateTime
   "The values of the custom fields associated with this creative."
   customFieldValues: [BaseCustomFieldValueInterface]
   "The third party companies associated with this creative. This is distinct from any associated companies that Google may detect programmatically."

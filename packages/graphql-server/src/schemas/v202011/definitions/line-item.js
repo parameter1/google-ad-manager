@@ -28,7 +28,7 @@ type CustomPacingCurve {
 "An interval of a CustomPacingCurve. A custom pacing goal contains a start time and an amount. The goal will apply until either the next custom pacing goal's \`getStartTime\` or the line item's end time if it is the last goal."
 type CustomPacingGoal {
   "The start date and time of the goal. This field is required unless \`useLineItemStartDateTime\` is true."
-  startDateTime: GAMDateTime
+  startDateTime: DateTime
   "Whether the LineItem#startDateTime should be used for the start date and time of this goal. This field is not persisted and if it is set to true, the \`startDateTime\` field will be populated by the line item's start time."
   useLineItemStartDateTime: Boolean
   amount: BigInt
@@ -71,11 +71,11 @@ type LineItem implements LineItemSummaryInterface {
   "The name of the Order. This value is read-only."
   orderName: String
   "The date and time on which the \`LineItem\` is enabled to begin serving. This attribute is required and must be in the future."
-  startDateTime: GAMDateTime!
+  startDateTime: DateTime!
   "Specifies whether to start serving to the \`LineItem\` right away, in an hour, etc. This attribute is optional and defaults to StartDateTimeType#USE_START_DATE_TIME."
   startDateTimeType: StartDateTimeTypeEnum
   "The date and time on which the \`LineItem\` will stop serving. This attribute is required unless LineItem#unlimitedEndDateTime is set to \`true\`. If specified, it must be after the LineItem#startDateTime. This end date and time does not include auto extension days."
-  endDateTime: GAMDateTime!
+  endDateTime: DateTime!
   "The number of days to allow a line item to deliver past its #endDateTime. A maximum of 7 days is allowed. This is feature is only available for Ad Manager 360 accounts."
   autoExtensionDays: Int
   "Specifies whether or not the \`LineItem\` has an end time. This attribute is optional and defaults to false. It can be be set to \`true\` for only line items of type LineItemType#SPONSORSHIP, LineItemType#NETWORK, LineItemType#PRICE_PRIORITY and LineItemType#HOUSE."
@@ -157,9 +157,9 @@ type LineItem implements LineItemSummaryInterface {
   "The \`CompetitiveConstraintScope\` for the competitive exclusion labels assigned to this line item. This field is optional, defaults to CompetitiveConstraintScope#POD, and only applies to video line items."
   competitiveConstraintScope: CompetitiveConstraintScopeEnum
   "The date and time this line item was last modified."
-  lastModifiedDateTime: GAMDateTime
+  lastModifiedDateTime: DateTime
   "This attribute may be \`null\` for line items created before this feature was introduced."
-  creationDateTime: GAMDateTime
+  creationDateTime: DateTime
   "Whether an AdExchange line item has prioritized preferred deals enabled. This attribute is optional and defaults to false."
   isPrioritizedPreferredDealsEnabled: Boolean
   "The priority at which an Ad Exchange line item enters the open Ad Exchange auction if the preferred deal fails to transact. This attribute is optional. If prioritized preferred deals are enabled, it defaults to 12. Otherwise, it is ignored."
@@ -232,11 +232,11 @@ interface LineItemSummaryInterface {
   "The name of the Order. This value is read-only."
   orderName: String
   "The date and time on which the \`LineItem\` is enabled to begin serving. This attribute is required and must be in the future."
-  startDateTime: GAMDateTime!
+  startDateTime: DateTime!
   "Specifies whether to start serving to the \`LineItem\` right away, in an hour, etc. This attribute is optional and defaults to StartDateTimeType#USE_START_DATE_TIME."
   startDateTimeType: StartDateTimeTypeEnum
   "The date and time on which the \`LineItem\` will stop serving. This attribute is required unless LineItem#unlimitedEndDateTime is set to \`true\`. If specified, it must be after the LineItem#startDateTime. This end date and time does not include auto extension days."
-  endDateTime: GAMDateTime!
+  endDateTime: DateTime!
   "The number of days to allow a line item to deliver past its #endDateTime. A maximum of 7 days is allowed. This is feature is only available for Ad Manager 360 accounts."
   autoExtensionDays: Int
   "Specifies whether or not the \`LineItem\` has an end time. This attribute is optional and defaults to false. It can be be set to \`true\` for only line items of type LineItemType#SPONSORSHIP, LineItemType#NETWORK, LineItemType#PRICE_PRIORITY and LineItemType#HOUSE."
@@ -318,9 +318,9 @@ interface LineItemSummaryInterface {
   "The \`CompetitiveConstraintScope\` for the competitive exclusion labels assigned to this line item. This field is optional, defaults to CompetitiveConstraintScope#POD, and only applies to video line items."
   competitiveConstraintScope: CompetitiveConstraintScopeEnum
   "The date and time this line item was last modified."
-  lastModifiedDateTime: GAMDateTime
+  lastModifiedDateTime: DateTime
   "This attribute may be \`null\` for line items created before this feature was introduced."
-  creationDateTime: GAMDateTime
+  creationDateTime: DateTime
   "Whether an AdExchange line item has prioritized preferred deals enabled. This attribute is optional and defaults to false."
   isPrioritizedPreferredDealsEnabled: Boolean
   "The priority at which an Ad Exchange line item enters the open Ad Exchange auction if the preferred deal fails to transact. This attribute is optional. If prioritized preferred deals are enabled, it defaults to 12. Otherwise, it is ignored."

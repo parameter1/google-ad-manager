@@ -314,9 +314,9 @@ type ThirdPartyAudienceSegment implements AudienceSegmentInterface {
   "Specifies the license type of the external segment. This attribute is read-only."
   licenseType: LicenseTypeEnum
   "Specifies the date and time at which this segment becomes available for use. This attribute is readonly and is assigned by the data provider."
-  startDateTime: GAMDateTime
+  startDateTime: DateTime
   "Specifies the date and time at which this segment ceases to be available for use. This attribute is readonly and is assigned by the data provider."
-  endDateTime: GAMDateTime
+  endDateTime: DateTime
 }
 
 "Updates the given RuleBasedFirstPartyAudienceSegment objects. @param segments first-party audience segments to update @return updated first-party audience segments"

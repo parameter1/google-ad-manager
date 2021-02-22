@@ -15,11 +15,11 @@ type AdRule {
   "The targeting criteria of the AdRule. This attribute is required."
   targeting: Targeting!
   "This AdRule object's start date and time. This attribute is required and must be a date in the future for new ad rules."
-  startDateTime: GAMDateTime!
+  startDateTime: DateTime!
   "Specifies whether to start using the AdRule right away, in an hour, etc. This attribute is optional and defaults to StartDateTimeType#USE_START_DATE_TIME."
   startDateTimeType: StartDateTimeTypeEnum
   "This AdRule object's end date and time. This attribute is required unless \`unlimitedEndDateTime\` is set to \`true\`. If specified, it must be after the \`startDateTime\`."
-  endDateTime: GAMDateTime!
+  endDateTime: DateTime!
   "Specifies whether the AdRule has an end time. This attribute is optional and defaults to false."
   unlimitedEndDateTime: Boolean
   "The AdRuleStatus of the ad rule. This attribute is read-only and defaults to AdRuleStatus#INACTIVE."
@@ -47,11 +47,11 @@ input AdRuleInput {
   "The targeting criteria of the AdRule. This attribute is required."
   targeting: TargetingInput!
   "This AdRule object's start date and time. This attribute is required and must be a date in the future for new ad rules."
-  startDateTime: GAMDateTime!
+  startDateTime: DateTime!
   "Specifies whether to start using the AdRule right away, in an hour, etc. This attribute is optional and defaults to StartDateTimeType#USE_START_DATE_TIME."
   startDateTimeType: StartDateTimeTypeEnum
   "This AdRule object's end date and time. This attribute is required unless \`unlimitedEndDateTime\` is set to \`true\`. If specified, it must be after the \`startDateTime\`."
-  endDateTime: GAMDateTime!
+  endDateTime: DateTime!
   "Specifies whether the AdRule has an end time. This attribute is optional and defaults to false."
   unlimitedEndDateTime: Boolean
   "The FrequencyCapBehavior of the AdRule. This attribute is optional and defaults to FrequencyCapBehavior#DEFER."

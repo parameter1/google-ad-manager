@@ -21,9 +21,9 @@ type Order {
   "The name of the \`Order\`. This value is required to create an order and has a maximum length of 255 characters."
   name: String!
   "The date and time at which the \`Order\` and its associated line items are eligible to begin serving. This attribute is readonly and is derived from the line item of the order which has the earliest LineItem#startDateTime."
-  startDateTime: GAMDateTime
+  startDateTime: DateTime
   "The date and time at which the \`Order\` and its associated line items stop being served. This attribute is readonly and is derived from the line item of the order which has the latest LineItem#endDateTime."
-  endDateTime: GAMDateTime
+  endDateTime: DateTime
   "Specifies whether or not the \`Order\` has an unlimited end date. This attribute is readonly and is \`true\` if any of the order's line items has LineItem#unlimitedEndDateTime set to \`true\`."
   unlimitedEndDateTime: Boolean
   "The status of the \`Order\`. This attribute is read-only."
@@ -75,7 +75,7 @@ type Order {
   "The IDs of all teams that this order is on directly."
   appliedTeamIds: [BigInt]
   "The date and time this order was last modified."
-  lastModifiedDateTime: GAMDateTime
+  lastModifiedDateTime: DateTime
   "The values of the custom fields associated with this order."
   customFieldValues: [BaseCustomFieldValueInterface]
 }
@@ -119,7 +119,7 @@ input OrderInput {
   "The IDs of all teams that this order is on directly."
   appliedTeamIds: [BigInt]
   "The date and time this order was last modified."
-  lastModifiedDateTime: GAMDateTime
+  lastModifiedDateTime: DateTime
   "The values of the custom fields associated with this order."
   customFieldValues: [JSONObject]
 }

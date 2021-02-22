@@ -172,7 +172,7 @@ type TrafficForecastSegment {
   "The number of active forecast adjustments associated with the TrafficForecastSegment. This attribute is read-only."
   activeForecastAdjustmentCount: Int
   "The date and time that the TrafficForecastSegment was created. This attribute is read-only."
-  creationDateTime: GAMDateTime
+  creationDateTime: DateTime
 }
 
 "An entity that defines a segment of traffic that will be adjusted or explored."

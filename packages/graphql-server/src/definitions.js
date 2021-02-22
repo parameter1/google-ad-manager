@@ -4,7 +4,7 @@ module.exports = gql`
 
 scalar BigInt
 scalar Date
-scalar GAMDateTime
+scalar DateTime
 scalar JSON
 scalar JSONObject
 

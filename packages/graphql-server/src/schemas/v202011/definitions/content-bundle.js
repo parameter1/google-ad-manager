@@ -13,7 +13,7 @@ type ContentBundle {
   "The ContentBundleStatus of the \`ContentBundle\`. This attribute is read-only and defaults to ContentBundleStatus#INACTIVE."
   status: ContentBundleStatusEnum
   "The date and time at which this content bundle was last modified. New content that matches this bundle will not update this field. This attribute is read-only."
-  lastModifiedDateTime: GAMDateTime
+  lastModifiedDateTime: DateTime
 }
 
 "A \`ContentBundle\` is a grouping of individual Content. A \`ContentBundle\` is defined as including the \`Content\` that match certain filter rules, along with the option to explicitly include or exclude certain \`Content\` IDs."

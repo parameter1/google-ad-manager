@@ -49,11 +49,11 @@ type LineItemCreativeAssociation {
   "The sequential rotation index of the Creative. This value is used only if the associated line item's LineItem#creativeRotationType is set to CreativeRotationType#SEQUENTIAL. This attribute is optional and defaults to 1."
   sequentialCreativeRotationIndex: Int
   "Overrides the value set for LineItem#startDateTime. This value is optional and is only valid for Ad Manager 360 networks."
-  startDateTime: GAMDateTime
+  startDateTime: DateTime
   "Specifies whether to start serving to the \`LineItemCreativeAssociation\` right away, in an hour, etc. This attribute is optional and defaults to StartDateTimeType#USE_START_DATE_TIME."
   startDateTimeType: StartDateTimeTypeEnum
   "Overrides LineItem#endDateTime. This value is optional and is only valid for Ad Manager 360 networks."
-  endDateTime: GAMDateTime
+  endDateTime: DateTime
   "Overrides the value set for HasDestinationUrlCreative#destinationUrl. This value is optional and is only valid for Ad Manager 360 networks."
   destinationUrl: String
   "Overrides the value set for Creative#size, which allows the creative to be served to ad units that would otherwise not be compatible for its actual size. This value is optional."
@@ -63,7 +63,7 @@ type LineItemCreativeAssociation {
   "Contains trafficking statistics for the association. This attribute is readonly and is populated by Google. This will be \`null\` in case there are no statistics for the association yet."
   stats: LineItemCreativeAssociationStats
   "The date and time this association was last modified."
-  lastModifiedDateTime: GAMDateTime
+  lastModifiedDateTime: DateTime
   "Specifies CreativeTargeting for this line item creative association. This attribute is optional. It should match the creative targeting specified on the corresponding CreativePlaceholder in the LineItem that is being associated with the Creative."
   targetingName: String
 }
@@ -81,17 +81,17 @@ input LineItemCreativeAssociationInput {
   "The sequential rotation index of the Creative. This value is used only if the associated line item's LineItem#creativeRotationType is set to CreativeRotationType#SEQUENTIAL. This attribute is optional and defaults to 1."
   sequentialCreativeRotationIndex: Int
   "Overrides the value set for LineItem#startDateTime. This value is optional and is only valid for Ad Manager 360 networks."
-  startDateTime: GAMDateTime
+  startDateTime: DateTime
   "Specifies whether to start serving to the \`LineItemCreativeAssociation\` right away, in an hour, etc. This attribute is optional and defaults to StartDateTimeType#USE_START_DATE_TIME."
   startDateTimeType: StartDateTimeTypeEnum
   "Overrides LineItem#endDateTime. This value is optional and is only valid for Ad Manager 360 networks."
-  endDateTime: GAMDateTime
+  endDateTime: DateTime
   "Overrides the value set for HasDestinationUrlCreative#destinationUrl. This value is optional and is only valid for Ad Manager 360 networks."
   destinationUrl: String
   "Overrides the value set for Creative#size, which allows the creative to be served to ad units that would otherwise not be compatible for its actual size. This value is optional."
   sizes: [SizeInput]
   "The date and time this association was last modified."
-  lastModifiedDateTime: GAMDateTime
+  lastModifiedDateTime: DateTime
   "Specifies CreativeTargeting for this line item creative association. This attribute is optional. It should match the creative targeting specified on the corresponding CreativePlaceholder in the LineItem that is being associated with the Creative."
   targetingName: String
 }

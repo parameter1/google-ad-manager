@@ -139,7 +139,7 @@ type AdUnit {
   "The IDs of all teams that this ad unit is on directly."
   appliedTeamIds: [BigInt]
   "The date and time this ad unit was last modified."
-  lastModifiedDateTime: GAMDateTime
+  lastModifiedDateTime: DateTime
   "The smart size mode for this ad unit. This attribute is optional and defaults to SmartSizeMode#NONE for fixed sizes."
   smartSizeMode: SmartSizeModeEnum
   "The interval in seconds which ad units in mobile apps automatically refresh. Valid values are between 30 and 120 seconds. This attribute is optional and only applies to ad units in mobile apps. If this value is not set, then the mobile app ad will not refresh."
@@ -187,7 +187,7 @@ input AdUnitInput {
   "The IDs of all teams that this ad unit is on directly."
   appliedTeamIds: [BigInt]
   "The date and time this ad unit was last modified."
-  lastModifiedDateTime: GAMDateTime
+  lastModifiedDateTime: DateTime
   "The smart size mode for this ad unit. This attribute is optional and defaults to SmartSizeMode#NONE for fixed sizes."
   smartSizeMode: SmartSizeModeEnum
   "The interval in seconds which ad units in mobile apps automatically refresh. Valid values are between 30 and 120 seconds. This attribute is optional and only applies to ad units in mobile apps. If this value is not set, then the mobile app ad will not refresh."

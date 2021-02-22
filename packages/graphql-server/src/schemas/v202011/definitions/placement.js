@@ -36,7 +36,7 @@ type Placement implements SiteTargetingInfoInterface {
   "The collection of \`AdUnit\` object IDs that constitute the \`Placement\`."
   targetedAdUnitIds: [String]
   "The date and time this placement was last modified."
-  lastModifiedDateTime: GAMDateTime
+  lastModifiedDateTime: DateTime
 }
 
 "A \`Placement\` groups related \`AdUnit\` objects."
@@ -48,7 +48,7 @@ input PlacementInput {
   "The collection of \`AdUnit\` object IDs that constitute the \`Placement\`."
   targetedAdUnitIds: [String]
   "The date and time this placement was last modified."
-  lastModifiedDateTime: GAMDateTime
+  lastModifiedDateTime: DateTime
 }
 
 "Captures a page of Placement objects."

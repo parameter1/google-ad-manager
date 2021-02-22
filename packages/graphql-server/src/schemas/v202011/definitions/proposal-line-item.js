@@ -34,9 +34,9 @@ type ProposalLineItem {
   "The name of the \`ProposalLineItem\` which should be unique under the same Proposal. This attribute has a maximum length of 255 characters. This attribute can be configured as editable after the proposal has been submitted. Please check with your network administrator for editable fields configuration. This attribute is required."
   name: String!
   "The date and time at which the line item associated with the \`ProposalLineItem\` is enabled to begin serving. This attribute is optional during creation, but required and must be in the future when it turns into a line item. The DateTime#timeZoneID is required if start date time is not \`null\`. This attribute becomes readonly once the \`ProposalLineItem\` has started delivering."
-  startDateTime: GAMDateTime
+  startDateTime: DateTime
   "The date and time at which the line item associated with the \`ProposalLineItem\` stops beening served. This attribute is optional during creation, but required and must be after the #startDateTime. The DateTime#timeZoneID is required if end date time is not \`null\`."
-  endDateTime: GAMDateTime
+  endDateTime: DateTime
   "The time zone ID in tz database format (e.g. 'America/Los_Angeles') for this \`ProposalLineItem\`. The number of serving days is calculated in this time zone. So if #rateType is RateType#CPD, it will affect the cost calculation. The #startDateTime and #endDateTime will be returned in this time zone. This attribute is optional and defaults to the network's time zone. This attribute is read-only when:using programmatic guaranteed, using sales management.using programmatic guaranteed, not using sales management."
   timeZoneId: String
   "Provides any additional notes that may annotate the \`ProposalLineItem\`. This attribute is optional and has a maximum length of 65,535 characters. This attribute can be configured as editable after the proposal has been submitted. Please check with your network administrator for editable fields configuration."
@@ -92,11 +92,11 @@ type ProposalLineItem {
   "The status of the LineItem generated from this proposal line item. This will be \`null\` if the proposal line item has not pushed to Ad Manager. This attribute is read-only."
   computedStatus: ComputedStatusEnum
   "The date and time this \`ProposalLineItem\` was last modified. This attribute is assigned by Google when a \`ProposalLineItem\` is updated. This attribute is read-only."
-  lastModifiedDateTime: GAMDateTime
+  lastModifiedDateTime: DateTime
   "The reservation status of the ProposalLineItem. This attribute is read-only."
   reservationStatus: ReservationStatusEnum
   "The last DateTime when the ProposalLineItem reserved inventory. This attribute is read-only."
-  lastReservationDateTime: GAMDateTime
+  lastReservationDateTime: DateTime
   "The environment that the \`ProposalLineItem\` is targeting. The default value is EnvironmentType#BROWSER. If this value is EnvironmentType#VIDEO_PLAYER, then this \`ProposalLineItem\` can only target ad units that have sizes whose AdUnitSize#environmentType is also EnvironmentType#VIDEO_PLAYER. This field can only be changed if the #linkStatus is LinkStatus#UNLINKED. Otherwise its value is read-only and set to Product#environmentType of the product this proposal line item was created from."
   environmentType: EnvironmentTypeEnum
   "The set of AllowedFormats that this proposal line item can have. If the set is empty, this proposal line item allows all formats."

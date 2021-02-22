@@ -16,7 +16,7 @@ type DaiAuthenticationKey {
   "The value of the secure key. This value is read-only and is assigned by Google."
   key: String
   "The date and time this DaiAuthenticationKey was created. This value is read-only and is assigned by Google."
-  creationDateTime: GAMDateTime
+  creationDateTime: DateTime
   "The status of this DaiAuthenticationKey. This value is read-only and is assigned by Google. DAI authentication keys are created in the DaiAuthenticationKeyStatus#ACTIVE state. The status can only be modified through the DaiAuthenticationKeyService#performDaiAuthenticationKeyAction method. Only active keys will be accepted by the IMA SDK API as valid."
   status: DaiAuthenticationKeyStatusEnum
   "The name for this DaiAuthenticationKey."

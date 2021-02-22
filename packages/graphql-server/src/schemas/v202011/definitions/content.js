@@ -29,17 +29,17 @@ type Content {
   "The list of any errors that occurred during the most recent DAI ingestion process of the HLS media. This attribute is read-only and will be null if the #hlsIngestStatus is DaiIngestStatus#STATUS_SUCCESS or if the content is not eligible for dynamic ad insertion or if the content does not have HLS media."
   hlsIngestErrors: [DaiIngestError]
   "The date and time at which this content's HLS media was last ingested for DAI. This attribute is read-only and will be null if the content is not eligible for dynamic ad insertion or if the content does not have HLS media."
-  lastHlsIngestDateTime: GAMDateTime
+  lastHlsIngestDateTime: DateTime
   "The current DAI ingest status of the DASH media for the \`content\`. This attribute is read-only and is null if the content is not eligible for dynamic ad insertion or if the content does not have DASH media."
   dashIngestStatus: DaiIngestStatusEnum
   "The list of any errors that occurred during the most recent DAI ingestion process of the DASH media. This attribute is read-only and will be null if the #hlsIngestStatus is DaiIngestStatus#STATUS_SUCCESS or if the content is not eligible for dynamic ad insertion or if the content does not have DASH media."
   dashIngestErrors: [DaiIngestError]
   "The date and time at which this content's DASH media was last ingested for DAI. This attribute is read-only and will be null if the content is not eligible for dynamic ad insertion or if the content does not have DASH media."
-  lastDashIngestDateTime: GAMDateTime
+  lastDashIngestDateTime: DateTime
   "The date and time at which this content was published. This attribute is read-only."
-  importDateTime: GAMDateTime
+  importDateTime: DateTime
   "The date and time at which this content was last modified. The last modified date time will always be updated when a ContentBundle association is changed, but will not always be updated when a CmsMetadataValue value is changed. This attribute is read-only."
-  lastModifiedDateTime: GAMDateTime
+  lastModifiedDateTime: DateTime
   "Information about the content from the CMS it was ingested from. This attribute is read-only."
   cmsSources: [CmsContent]
   "IDs of the ContentBundle of which this content is a member. This attribute is read-only."

@@ -15,9 +15,9 @@ type BuyerRfp {
   "Currency code for this deal's budget and CPM. This attribute is read-only when:using programmatic guaranteed, not using sales management.using preferred deals, not using sales management."
   currencyCode: String
   "The DateTime in which the proposed deal should start serving. This attribute is read-only when:using programmatic guaranteed, not using sales management.using preferred deals, not using sales management."
-  startDateTime: GAMDateTime
+  startDateTime: DateTime
   "The DateTime in which the proposed deal should end serving. This attribute is read-only when:using programmatic guaranteed, not using sales management.using preferred deals, not using sales management."
-  endDateTime: GAMDateTime
+  endDateTime: DateTime
   "A description of the proposed deal. This can be used for the buyer to tell the publisher more detailed information about the deal in question. This attribute is read-only when:using programmatic guaranteed, not using sales management.using preferred deals, not using sales management."
   description: String
   "A list of inventory sizes in which creatives will be eventually served. This attribute is read-only when:using programmatic guaranteed, not using sales management.using preferred deals, not using sales management."
@@ -54,7 +54,7 @@ type MarketplaceComment {
   "The comment made on the Proposal."
   comment: String
   "The creation DateTime of this \`MarketplaceComment\`."
-  creationTime: GAMDateTime
+  creationTime: DateTime
   "Indicates whether the \`MarketplaceComment\` was created by seller."
   createdBySeller: Boolean
 }
@@ -111,9 +111,9 @@ type Proposal {
   "The name of the \`Proposal\`. This value has a maximum length of 255 characters. This value is copied to Order#name when the proposal turns into an order. This attribute can be configured as editable after the proposal has been submitted. Please check with your network administrator for editable fields configuration. This attribute is required."
   name: String!
   "The date and time at which the order and line items associated with the \`Proposal\` are eligible to begin serving. This attribute is derived from the proposal line item of the proposal which has the earliest ProposalLineItem#startDateTime. This attribute will be null, if this proposal has no related line items, or none of its line items have a start time. This attribute is read-only."
-  startDateTime: GAMDateTime
+  startDateTime: DateTime
   "The date and time at which the order and line items associated with the \`Proposal\` stop being served. This attribute is derived from the proposal line item of the proposal which has the latest ProposalLineItem#endDateTime. This attribute will be null, if this proposal has no related line items, or none of its line items have an end time. This attribute is read-only."
-  endDateTime: GAMDateTime
+  endDateTime: DateTime
   "The status of the \`Proposal\`. This attribute is read-only."
   status: ProposalStatusEnum
   "The archival status of the \`Proposal\`. This attribute is read-only."
@@ -149,7 +149,7 @@ type Proposal {
   "Indicates whether the proposal has been sold, i.e., corresponds to whether the status of an Order is OrderStatus#APPROVED or OrderStatus#PAUSED. This attribute is read-only."
   isSold: Boolean
   "The date and time this \`Proposal\` was last modified. This attribute is read-only."
-  lastModifiedDateTime: GAMDateTime
+  lastModifiedDateTime: DateTime
   "The marketplace info of this proposal if it has a corresponding order in Marketplace. This attribute is applicable when:using programmatic guaranteed, using sales management.using programmatic guaranteed, not using sales management."
   marketplaceInfo: ProposalMarketplaceInfo
   "The buyer RFP associated with this \`Proposal\`, which is optional. This field will be null if the proposal is not initiated from RFP. This attribute is applicable when:using programmatic guaranteed, not using sales management.using preferred deals, not using sales management."
