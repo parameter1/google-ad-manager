@@ -8,7 +8,7 @@ _production-job: &production-job
   script: scripts/deploy.js SERVICE_NAME
   install: skip
   env:
-    - "ENVIRONMENT=production RANCHER_CLUSTERID=c-dz9lj"
+    - "ENVIRONMENT=production"
 
 stages:
   - name: test
@@ -31,7 +31,6 @@ jobs:
       stage: production-started
       name: Deployment Started
       script: npx @parameter1/base-cms-website-deployment-tool notify-started
-
 
     #############################
     # vvv ADD SERVICES HERE vvv #
