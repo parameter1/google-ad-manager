@@ -1,6 +1,6 @@
 {
   "name": "@parameter1/google-ad-manager-graphql-server",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "The GraphQL server library for the Google Ad Manager API",
   "author": "Jacob Bare <jacob@parameter1.com>",
   "homepage": "https://github.com/parameter1/google-ad-manager/tree/main/packages/graphql-server#readme",
@@ -16,7 +16,7 @@
     "test": "yarn lint"
   },
   "dependencies": {
-    "@parameter1/google-ad-manager-soap": "^0.0.0",
+    "@parameter1/google-ad-manager-soap": "^0.1.0",
     "@parameter1/graphql-type-date": "^1.0.11",
     "@parameter1/utils": "^1.1.12",
     "apollo-server-express": "^2.21.0",
