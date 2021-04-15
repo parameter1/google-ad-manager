@@ -1,5 +1,5 @@
 const soap = require('soap');
-const { getAsObject } = require('@parameter1/utils');
+const { get, getAsObject } = require('@parameter1/utils');
 const { serviceUrlInfo } = require('@parameter1/google-ad-manager-wsdl-parser/utils');
 
 class GoogleAdManagerService {
@@ -42,7 +42,7 @@ class GoogleAdManagerService {
     const method = `${action}Async`;
     const [result, rawResponse, soapHeader, rawRequest] = await client[method](params);
     return {
-      data: getAsObject(result, 'rval'),
+      data: get(result, 'rval'),
       headers: getAsObject(soapHeader, 'ResponseHeader'),
       raw: { request: rawRequest, response: rawResponse },
     };
