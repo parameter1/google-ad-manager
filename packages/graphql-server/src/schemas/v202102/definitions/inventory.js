@@ -97,13 +97,13 @@ type AdUnit {
   "Uniquely identifies the \`AdUnit\`. This value is read-only and is assigned by Google when an ad unit is created. This attribute is required for updates."
   id: String!
   "The ID of the ad unit's parent. Every ad unit has a parent except for the root ad unit, which is created by Google. This attribute is required when creating the ad unit. Once the ad unit is created this value will be read-only."
-  parentId: String!
+  parentId: String
   "This field is set to \`true\` if the ad unit has any children. This attribute is read-only and is populated by Google."
   hasChildren: Boolean
   "The path to this ad unit in the ad unit hierarchy represented as a list from the root to this ad unit's parent. For root ad units, this list is empty. This attribute is read-only and is populated by Google."
   parentPath: [AdUnitParent]
   "The name of the ad unit. This attribute is required and its maximum length is 255 characters. This attribute must also be case-insensitive unique."
-  name: String!
+  name: String
   "A description of the ad unit. This value is optional and its maximum length is 65,535 characters."
   description: String
   "The value to use for the HTML link's \`target\` attribute. This value is optional and will be interpreted as TargetWindow#TOP if left blank."
@@ -153,7 +153,7 @@ type AdUnit {
 "An \`AdUnit\` represents a chunk of identified inventory for the publisher. It contains all the settings that need to be associated with inventory in order to serve ads to it. An \`AdUnit\` can also be the parent of other ad units in the inventory hierarchy."
 input AdUnitInput {
   "The name of the ad unit. This attribute is required and its maximum length is 255 characters. This attribute must also be case-insensitive unique."
-  name: String!
+  name: String
   "A description of the ad unit. This value is optional and its maximum length is 65,535 characters."
   description: String
   "The value to use for the HTML link's \`target\` attribute. This value is optional and will be interpreted as TargetWindow#TOP if left blank."

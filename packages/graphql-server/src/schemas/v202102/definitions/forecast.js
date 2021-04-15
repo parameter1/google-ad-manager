@@ -279,9 +279,9 @@ type TimeSeries {
 "Defines a segment of traffic for which traffic data should be returned."
 input TrafficDataRequestInput {
   "The TargetingDto that defines a segment of traffic. This attribute is required."
-  targeting: TargetingInput!
+  targeting: TargetingInput
   "The date range for which traffic data are requested. This range may cover historical dates, future dates, or both. The data returned are not guaranteed to cover the entire requested date range. If sufficient data are not available to cover the entire requested date range, a response may be returned with a later start date, earlier end date, or both. This attribute is required."
-  requestedDateRange: DateRangeInput!
+  requestedDateRange: DateRangeInput
 }
 
 "Contains forecasted and historical traffic volume data describing a segment of traffic."

@@ -39,11 +39,11 @@ input GetPreviewUrlsForNativeStylesInput {
 "A \`LineItemCreativeAssociation\` associates a Creative or CreativeSet with a LineItem so that the creative can be served in ad units targeted by the line item."
 type LineItemCreativeAssociation {
   "The ID of the LineItem to which the Creative should be associated. This attribute is required."
-  lineItemId: BigInt!
+  lineItemId: BigInt
   "The ID of the Creative being associated with a LineItem.  This attribute is required if this is an association between a line item and a creative.  This attribute is ignored if this is an association between a line item and a creative set.  If this is an association between a line item and a creative, when retrieving the line item creative association, the #creativeId will be the creative's ID.  If this is an association between a line item and a creative set, when retrieving the line item creative association, the #creativeId will be the ID of the master creative."
-  creativeId: BigInt!
+  creativeId: BigInt
   "The ID of the CreativeSet being associated with a LineItem. This attribute is required if this is an association between a line item and a creative set.  This field will be \`null\` when retrieving associations between line items and creatives not belonging to a set."
-  creativeSetId: BigInt!
+  creativeSetId: BigInt
   "The weight of the Creative. This value is only used if the line item's \`creativeRotationType\` is set to CreativeRotationType#MANUAL. This attribute is optional and defaults to 10."
   manualCreativeRotationWeight: Float
   "The sequential rotation index of the Creative. This value is used only if the associated line item's LineItem#creativeRotationType is set to CreativeRotationType#SEQUENTIAL. This attribute is optional and defaults to 1."
@@ -71,11 +71,11 @@ type LineItemCreativeAssociation {
 "A \`LineItemCreativeAssociation\` associates a Creative or CreativeSet with a LineItem so that the creative can be served in ad units targeted by the line item."
 input LineItemCreativeAssociationInput {
   "The ID of the LineItem to which the Creative should be associated. This attribute is required."
-  lineItemId: BigInt!
+  lineItemId: BigInt
   "The ID of the Creative being associated with a LineItem.  This attribute is required if this is an association between a line item and a creative.  This attribute is ignored if this is an association between a line item and a creative set.  If this is an association between a line item and a creative, when retrieving the line item creative association, the #creativeId will be the creative's ID.  If this is an association between a line item and a creative set, when retrieving the line item creative association, the #creativeId will be the ID of the master creative."
-  creativeId: BigInt!
+  creativeId: BigInt
   "The ID of the CreativeSet being associated with a LineItem. This attribute is required if this is an association between a line item and a creative set.  This field will be \`null\` when retrieving associations between line items and creatives not belonging to a set."
-  creativeSetId: BigInt!
+  creativeSetId: BigInt
   "The weight of the Creative. This value is only used if the line item's \`creativeRotationType\` is set to CreativeRotationType#MANUAL. This attribute is optional and defaults to 10."
   manualCreativeRotationWeight: Float
   "The sequential rotation index of the Creative. This value is used only if the associated line item's LineItem#creativeRotationType is set to CreativeRotationType#SEQUENTIAL. This attribute is optional and defaults to 1."

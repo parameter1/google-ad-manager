@@ -9,7 +9,7 @@ type ContentBundle {
   "ID that uniquely identifies the \`ContentBundle\`. This attribute is read-only and is assigned by Google when a content bundle is created."
   id: BigInt!
   "The name of the \`ContentBundle\`. This attribute is required and has a maximum length of 255 characters."
-  name: String!
+  name: String
   "The ContentBundleStatus of the \`ContentBundle\`. This attribute is read-only and defaults to ContentBundleStatus#INACTIVE."
   status: ContentBundleStatusEnum
   "The date and time at which this content bundle was last modified. New content that matches this bundle will not update this field. This attribute is read-only."
@@ -19,7 +19,7 @@ type ContentBundle {
 "A \`ContentBundle\` is a grouping of individual Content. A \`ContentBundle\` is defined as including the \`Content\` that match certain filter rules, along with the option to explicitly include or exclude certain \`Content\` IDs."
 input ContentBundleInput {
   "The name of the \`ContentBundle\`. This attribute is required and has a maximum length of 255 characters."
-  name: String!
+  name: String
 }
 
 "Captures a page of ContentBundle objects."

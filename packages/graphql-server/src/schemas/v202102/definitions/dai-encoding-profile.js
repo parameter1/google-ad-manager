@@ -50,7 +50,7 @@ type DaiEncodingProfile {
   "The unique ID of the DaiEncodingProfile. This value is read-only and is assigned by Google."
   id: BigInt!
   "The name of the DaiEncodingProfile. This value is required to create an encoding profile and may be at most 64 characters. The name field can contain alphanumeric characters and symbols other than the following: ', ', =, !, +, #, *, ~, ;, ^, (, ), <, >, [, ], the white space character."
-  name: String!
+  name: String
   "The status of this DaiEncodingProfile. DAI encoding profiles are created in the DaiEncodingProfileStatus#ACTIVE state. The status can only be modified through the DaiEncodingProfileService#performDaiEncodingProfileAction method. Only active profiles will be allowed to be associated with live streams."
   status: DaiEncodingProfileStatusEnum
   "The variant playlist type that this DaiEncodingProfile represents."
@@ -66,7 +66,7 @@ type DaiEncodingProfile {
 "A DaiEncodingProfile contains data about a publisher's encoding profiles. Ad Manager Dynamic Ad Insertion (DAI) uses the profile information about the content to select an appropriate ad transcode to play for the particular video."
 input DaiEncodingProfileInput {
   "The name of the DaiEncodingProfile. This value is required to create an encoding profile and may be at most 64 characters. The name field can contain alphanumeric characters and symbols other than the following: ', ', =, !, +, #, *, ~, ;, ^, (, ), <, >, [, ], the white space character."
-  name: String!
+  name: String
   "The status of this DaiEncodingProfile. DAI encoding profiles are created in the DaiEncodingProfileStatus#ACTIVE state. The status can only be modified through the DaiEncodingProfileService#performDaiEncodingProfileAction method. Only active profiles will be allowed to be associated with live streams."
   status: DaiEncodingProfileStatusEnum
   "The variant playlist type that this DaiEncodingProfile represents."

@@ -14,23 +14,23 @@ type LineItemTemplate {
   "Uniquely identifies the \`LineItemTemplate\`. This attribute is read-only and is assigned by Google when a template is created."
   id: BigInt!
   "The name of the \`LineItemTemplate\`. This attribute is required."
-  name: String!
+  name: String
   "Whether or not the \`LineItemTemplate\` represents the default choices for creating a \`LineItem\`. Only one default \`LineItemTemplate\` is allowed per \`Network\`. This attribute is readonly."
   isDefault: Boolean
   "The default name of a new \`LineItem\`. This attribute is optional and has a maximum length of 127 characters."
   lineItemName: String
   "The default value for the LineItem#enabledForSameAdvertiserException field of a new \`LineItem\`. This attribute is required."
-  enabledForSameAdvertiserException: Boolean!
+  enabledForSameAdvertiserException: Boolean
   "The default notes for a new \`LineItem\`. This attribute is optional and has a maximum length of 65,535 characters."
   notes: String
   "The default type of a new \`LineItem\`. This attribute is required."
-  lineItemType: LineItemTypeEnum!
+  lineItemType: LineItemTypeEnum
   "The default delivery strategy for a new \`LineItem\`. This attribute is required."
-  deliveryRateType: DeliveryRateTypeEnum!
+  deliveryRateType: DeliveryRateTypeEnum
   "The default roadblocking strategy for a new \`LineItem\`. This attribute is required."
-  roadblockingType: RoadblockingTypeEnum!
+  roadblockingType: RoadblockingTypeEnum
   "The default creative rotation strategy for a new \`LineItem\`. This attribute is required."
-  creativeRotationType: CreativeRotationTypeEnum!
+  creativeRotationType: CreativeRotationTypeEnum
 }
 
 "Captures a page of LineItemTemplate objects."

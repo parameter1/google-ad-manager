@@ -26,7 +26,7 @@ type Placement implements SiteTargetingInfoInterface {
   "Uniquely identifies the \`Placement\`. This attribute is read-only and is assigned by Google when a placement is created."
   id: BigInt!
   "The name of the \`Placement\`. This value is required and has a maximum length of 255 characters."
-  name: String!
+  name: String
   "A description of the \`Placement\`. This value is optional and its maximum length is 65,535 characters."
   description: String
   "A string used to uniquely identify the \`Placement\` for purposes of serving the ad. This attribute is read-only and is assigned by Google when a placement is created."
@@ -42,7 +42,7 @@ type Placement implements SiteTargetingInfoInterface {
 "A \`Placement\` groups related \`AdUnit\` objects."
 input PlacementInput {
   "The name of the \`Placement\`. This value is required and has a maximum length of 255 characters."
-  name: String!
+  name: String
   "A description of the \`Placement\`. This value is optional and its maximum length is 65,535 characters."
   description: String
   "The collection of \`AdUnit\` object IDs that constitute the \`Placement\`."

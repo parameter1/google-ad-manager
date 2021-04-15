@@ -19,13 +19,13 @@ type NativeStyle {
   "Uniquely identifies the \`NativeStyle\`. This attribute is read-only and is assigned by Google when a native style is created."
   id: BigInt!
   "The name of the native style. This attribute is required and has a maximum length of 255 characters."
-  name: String!
+  name: String
   "The HTML snippet of the native style with placeholders for the associated variables. This attribute is required."
-  htmlSnippet: String!
+  htmlSnippet: String
   "The CSS snippet of the native style, with placeholders for the associated variables. This attribute is required."
-  cssSnippet: String!
+  cssSnippet: String
   "The creative template ID this native style associated with. This attribute is required on creation and is read-only afterwards."
-  creativeTemplateId: BigInt!
+  creativeTemplateId: BigInt
   "Whether this is a fluid size native style. If \`true\`, this must be used with 1x1 size."
   isFluid: Boolean
   "The targeting criteria for this native style. Only ad unit and key-value targeting are supported at this time."
@@ -33,23 +33,23 @@ type NativeStyle {
   "The status of the native style. This attribute is read-only."
   status: NativeStyleStatusEnum
   "The size of the native style. This attribute is required."
-  size: Size!
+  size: Size
 }
 
 "Used to define the look and feel of native ads, for both web and apps. Native styles determine how native creatives look for a segment of inventory."
 input NativeStyleInput {
   "The name of the native style. This attribute is required and has a maximum length of 255 characters."
-  name: String!
+  name: String
   "The HTML snippet of the native style with placeholders for the associated variables. This attribute is required."
-  htmlSnippet: String!
+  htmlSnippet: String
   "The CSS snippet of the native style, with placeholders for the associated variables. This attribute is required."
-  cssSnippet: String!
+  cssSnippet: String
   "Whether this is a fluid size native style. If \`true\`, this must be used with 1x1 size."
   isFluid: Boolean
   "The targeting criteria for this native style. Only ad unit and key-value targeting are supported at this time."
   targeting: TargetingInput
   "The size of the native style. This attribute is required."
-  size: SizeInput!
+  size: SizeInput
 }
 
 "Captures a page of NativeStyle objects."

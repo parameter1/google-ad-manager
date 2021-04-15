@@ -30,9 +30,9 @@ type ProposalLineItem {
   "The unique ID of the \`ProposalLineItem\`. This attribute is read-only."
   id: BigInt!
   "The unique ID of the Proposal, to which the \`ProposalLineItem\` belongs. This attribute is required for creation and then is readonly. This attribute is required."
-  proposalId: BigInt!
+  proposalId: BigInt
   "The name of the \`ProposalLineItem\` which should be unique under the same Proposal. This attribute has a maximum length of 255 characters. This attribute can be configured as editable after the proposal has been submitted. Please check with your network administrator for editable fields configuration. This attribute is required."
-  name: String!
+  name: String
   "The date and time at which the line item associated with the \`ProposalLineItem\` is enabled to begin serving. This attribute is optional during creation, but required and must be in the future when it turns into a line item. The DateTime#timeZoneID is required if start date time is not \`null\`. This attribute becomes readonly once the \`ProposalLineItem\` has started delivering."
   startDateTime: DateTime
   "The date and time at which the line item associated with the \`ProposalLineItem\` stops beening served. This attribute is optional during creation, but required and must be after the #startDateTime. The DateTime#timeZoneID is required if end date time is not \`null\`."
@@ -44,9 +44,9 @@ type ProposalLineItem {
   "The archival status of the \`ProposalLineItem\`. This attribute is read-only."
   isArchived: Boolean
   "The goal(i.e. contracted quantity, quantity or limit) that this \`ProposalLineItem\` is associated with, which is used in its pacing and budgeting. Goal#units must be greater than 0 when the proposal line item turns into a line item, Goal#goalType and Goal#unitType are readonly. For a Preferred deal \`ProposalLineItem\`, the goal type can only be GoalType#NONE. This attribute is required."
-  goal: Goal!
+  goal: Goal
   "The contracted number of impressions or clicks. If this is a LineItemType#SPONSORSHIP \`ProposalLineItem\`, has RateType#CPD as a rate type, and #isProgrammatic is false, then this represents the lifetime minimum impression. If this is a LineItemType#SPONSORSHIP \`ProposalLineItem\`, has RateType#CPD as a rate type, and #isProgrammatic is true, then this represents the daily minimum impression. This attribute is required for percentage-based-goal proposal line items. It does not impact ad-serving and is for reporting purposes only."
-  contractedUnitsBought: BigInt!
+  contractedUnitsBought: BigInt
   "The strategy for delivering ads over the course of the \`ProposalLineItem\`'s duration. This attribute is optional and default value is DeliveryRateType#EVENLY. For a Preferred deal \`ProposalLineItem\`, the value can only be DeliveryRateType#FRONTLOADED."
   deliveryRateType: DeliveryRateTypeEnum
   "The strategy for serving roadblocked creatives, i.e. instances where multiple creatives must be served together on a single web page. This attribute is optional during creation and defaults to the product's roadblocking type, or RoadblockingType#ONE_OR_MORE if not specified by the product."
@@ -62,13 +62,13 @@ type ProposalLineItem {
   "The unique ID of corresponding LineItem. This will be \`null\` if the Proposal has not been pushed to Ad Manager. This attribute is read-only."
   dfpLineItemId: BigInt
   "The corresponding LineItemType of the \`ProposalLineItem\`. For a programmatic \`ProposalLineItem\`, the value can only be one of:  LineItemType#SPONSORSHIP LineItemType#STANDARD LineItemType#PREFERRED_DEAL  This attribute is required."
-  lineItemType: LineItemTypeEnum!
+  lineItemType: LineItemTypeEnum
   "The priority for the corresponding LineItem of the \`ProposalLineItem\`. This attribute is optional during creation and defaults to the product's priority, or a default value assigned by Google. See LineItem#priority for more information."
   lineItemPriority: Int
   "The method used for billing the \`ProposalLineItem\`. This attribute is read-only when:using programmatic guaranteed, using sales management.not using programmatic, using sales management. This attribute is required when:using programmatic guaranteed, not using sales management."
-  rateType: RateTypeEnum!
+  rateType: RateTypeEnum
   "Details about the creatives that are expected to serve through the \`ProposalLineItem\`. This attribute is optional during creation and defaults to the product's creative placeholders. This attribute is required when:using programmatic guaranteed, not using sales management."
-  creativePlaceholders: [CreativePlaceholder]!
+  creativePlaceholders: [CreativePlaceholder]
   "Contains the targeting criteria for the \`ProposalLineItem\`. This attribute is optional during creation and defaults to the product's targeting."
   targeting: Targeting
   "The values of the custom fields associated with the \`ProposalLineItem\`. This attribute is optional. This attribute can be configured as editable after the proposal has been submitted. Please check with your network administrator for editable fields configuration."
@@ -104,7 +104,7 @@ type ProposalLineItem {
   "Whether or not the Proposal for this \`ProposalLineItem\` is a programmatic deal. This attribute is populated from Proposal#isProgrammatic. This attribute is read-only."
   isProgrammatic: Boolean
   "The marketplace info if this proposal line item is programmatic, null otherwise. This attribute is applicable when:using programmatic guaranteed, using sales management.using programmatic guaranteed, not using sales management. This attribute is required when:using programmatic guaranteed, using sales management.using programmatic guaranteed, not using sales management."
-  marketplaceInfo: ProposalLineItemMarketplaceInfo!
+  marketplaceInfo: ProposalLineItemMarketplaceInfo
   "Additional terms shown to the buyer in Marketplace. This attribute is applicable when:using programmatic guaranteed, using sales management.using programmatic guaranteed, not using sales management."
   additionalTerms: String
   "Indicates the ProgrammaticCreativeSource of the programmatic line item. This attribute is applicable when:using programmatic guaranteed, using sales management.using programmatic guaranteed, not using sales management."

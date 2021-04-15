@@ -12,9 +12,9 @@ input CreateLineItemsInput {
 "Represents the creative targeting criteria for a LineItem."
 type CreativeTargeting {
   "The name of this creative targeting. This attribute is required."
-  name: String!
+  name: String
   "The Targeting criteria of this creative targeting. This attribute is required."
-  targeting: Targeting!
+  targeting: Targeting
 }
 
 "A curve consisting of CustomPacingGoal objects that is used to pace line item delivery."
@@ -61,27 +61,27 @@ type GrpSettings {
 "\`LineItem\` is an advertiser's commitment to purchase a specific number of ad impressions, clicks, or time."
 type LineItem implements LineItemSummaryInterface {
   "The ID of the Order to which the \`LineItem\` belongs. This attribute is required."
-  orderId: BigInt!
+  orderId: BigInt
   "Uniquely identifies the \`LineItem\`. This attribute is read-only and is assigned by Google when a line item is created."
   id: BigInt!
   "The name of the line item. This attribute is required and has a maximum length of 255 characters."
-  name: String!
+  name: String
   "An identifier for the \`LineItem\` that is meaningful to the publisher. This attribute is optional and has a maximum length of 255 characters."
   externalId: String
   "The name of the Order. This value is read-only."
   orderName: String
   "The date and time on which the \`LineItem\` is enabled to begin serving. This attribute is required and must be in the future."
-  startDateTime: DateTime!
+  startDateTime: DateTime
   "Specifies whether to start serving to the \`LineItem\` right away, in an hour, etc. This attribute is optional and defaults to StartDateTimeType#USE_START_DATE_TIME."
   startDateTimeType: StartDateTimeTypeEnum
   "The date and time on which the \`LineItem\` will stop serving. This attribute is required unless LineItem#unlimitedEndDateTime is set to \`true\`. If specified, it must be after the LineItem#startDateTime. This end date and time does not include auto extension days."
-  endDateTime: DateTime!
+  endDateTime: DateTime
   "The number of days to allow a line item to deliver past its #endDateTime. A maximum of 7 days is allowed. This is feature is only available for Ad Manager 360 accounts."
   autoExtensionDays: Int
   "Specifies whether or not the \`LineItem\` has an end time. This attribute is optional and defaults to false. It can be be set to \`true\` for only line items of type LineItemType#SPONSORSHIP, LineItemType#NETWORK, LineItemType#PRICE_PRIORITY and LineItemType#HOUSE."
   unlimitedEndDateTime: Boolean
   "The strategy used for displaying multiple Creative objects that are associated with the \`LineItem\`. This attribute is required."
-  creativeRotationType: CreativeRotationTypeEnum!
+  creativeRotationType: CreativeRotationTypeEnum
   "The strategy for delivering ads over the course of the line item's duration. This attribute is optional and defaults to DeliveryRateType#EVENLY or DeliveryRateType#FRONTLOADED depending on the network's configuration."
   deliveryRateType: DeliveryRateTypeEnum
   "Strategy for choosing forecasted traffic shapes to pace line items. This field is optional and defaults to DeliveryForecastSource#HISTORICAL."
@@ -95,15 +95,15 @@ type LineItem implements LineItemSummaryInterface {
   "The set of frequency capping units for this \`LineItem\`. This attribute is optional."
   frequencyCaps: [FrequencyCap]
   "Indicates the line item type of a \`LineItem\`. This attribute is required. The line item type determines the default priority of the line item. More information can be found on the [ Ad Manager Help Center](https://support.google.com/dfp_premium/answer/177279)."
-  lineItemType: LineItemTypeEnum!
+  lineItemType: LineItemTypeEnum
   "The priority for the line item. Valid values range from 1 to 16. This field is optional and defaults to the default priority of the LineItemType. The following table shows the default, minimum, and maximum priority values are for each line item type:    LineItemType - default priority (minimum priority, maximum priority)    LineItemType#SPONSORSHIP 4 (2, 5)   LineItemType#STANDARD 8 (6, 10)   LineItemType#NETWORK 12 (11, 14)   LineItemType#BULK 12 (11, 14)   LineItemType#PRICE_PRIORITY 12 (11, 14)   LineItemType#HOUSE 16 (15, 16)   LineItemType#CLICK_TRACKING 16 (1, 16)   LineItemType#AD_EXCHANGE 12 (1, 16)  LineItemType#ADSENSE 12 (1, 16)  LineItemType#BUMPER 16 (15, 16)   This field can only be edited by certain networks, otherwise a PermissionError will occur."
   priority: Int
   "The amount of money to spend per impression or click. This attribute is required for creating a \`LineItem\`."
-  costPerUnit: Money!
+  costPerUnit: Money
   "An amount to help the adserver rank inventory. LineItem#valueCostPerUnit artificially raises the value of inventory over the LineItem#costPerUnit but avoids raising the actual LineItem#costPerUnit. This attribute is optional and defaults to a Money object in the local currency with Money#microAmount 0."
   valueCostPerUnit: Money
   "The method used for billing this \`LineItem\`. This attribute is required."
-  costType: CostTypeEnum!
+  costType: CostTypeEnum
   "The type of discount being applied to a \`LineItem\`, either percentage based or absolute. This attribute is optional and defaults to LineItemDiscountType#PERCENTAGE."
   discountType: LineItemDiscountTypeEnum
   "The number here is either a percentage or an absolute value depending on the \`LineItemDiscountType\`. If the \`LineItemDiscountType\` is LineItemDiscountType#PERCENTAGE, then only non-fractional values are supported."
@@ -111,9 +111,9 @@ type LineItem implements LineItemSummaryInterface {
   "This attribute is only applicable for certain line item types and acts as an 'FYI' or note, which does not impact adserving or other backend systems.  For LineItemType#SPONSORSHIP line items, this represents the minimum quantity, which is a lifetime impression volume goal for reporting purposes only.  For LineItemType#STANDARD line items, this represent the contracted quantity, which is the number of units specified in the contract the advertiser has bought for this \`LineItem\`. This field is just a 'FYI' for traffickers to manually intervene with the \`LineItem\` when needed. This attribute is only available for LineItemType#STANDARD line items if you have this feature enabled on your network."
   contractedUnitsBought: BigInt
   "Details about the creatives that are expected to serve through this \`LineItem\`. This attribute is required and replaces the \`creativeSizes\` attribute."
-  creativePlaceholders: [CreativePlaceholder]!
+  creativePlaceholders: [CreativePlaceholder]
   "This attribute is required and meaningful only if the LineItem#costType is CostType.CPA."
-  activityAssociations: [LineItemActivityAssociation]!
+  activityAssociations: [LineItemActivityAssociation]
   "The environment that the \`LineItem\` is targeting. The default value is EnvironmentType#BROWSER. If this value is EnvironmentType#VIDEO_PLAYER, then this line item can only target \`AdUnits\` that have \`AdUnitSizes\` whose \`environmentType\` is also \`VIDEO_PLAYER\`."
   environmentType: EnvironmentTypeEnum
   "The set of allowedFormats that this programmatic line item can have. If the set is empty, this line item allows all formats."
@@ -168,7 +168,7 @@ type LineItem implements LineItemSummaryInterface {
   programmaticCreativeSource: ProgrammaticCreativeSourceEnum
   thirdPartyMeasurementSettings: ThirdPartyMeasurementSettings
   "The max duration of a video creative associated with this \`LineItem\` in milliseconds. This attribute is only meaningful for video line items. For version v202011 and earlier, this attribute is optional and defaults to 0. For version v202102 and later, this attribute is required for video line items and must be greater than 0."
-  videoMaxDuration: BigInt!
+  videoMaxDuration: BigInt
   "The primary goal that this \`LineItem\` is associated with, which is used in its pacing and budgeting."
   primaryGoal: Goal
   "The secondary goals that this \`LineItem\` is associated with. It is required and meaningful only if the LineItem#costType is CostType.CPA or if the LineItem#lineItemType is LineItemType#SPONSORSHIP and LineItem#costType is CostType.CPM."
@@ -184,7 +184,7 @@ type LineItem implements LineItemSummaryInterface {
   "Custom XML to be rendered in a custom VAST response at serving time."
   customVastExtension: String
   "Contains the targeting criteria for the ad campaign. This attribute is required."
-  targeting: Targeting!
+  targeting: Targeting
   "A list of CreativeTargeting objects that can be used to specify creative level targeting for this line item. Creative level targeting is specified in a creative placeholder's CreativePlaceholder#targetingName field by referencing the creative targeting's name. It also needs to be re-specified in the LineItemCreativeAssociation#targetingName field when associating a line item with a creative that fits into that placeholder."
   creativeTargetings: [CreativeTargeting]
 }
@@ -192,11 +192,11 @@ type LineItem implements LineItemSummaryInterface {
 "A \`LineItemActivityAssociation\` associates a LineItem with an Activity so that the conversions of the Activity can be counted against the LineItem."
 type LineItemActivityAssociation {
   "The ID of the Activity to which the LineItem should be associated. This attribute is required."
-  activityId: Int!
+  activityId: Int
   "The amount of money to attribute per click through conversion. This attribute is required for creating a \`LineItemActivityAssociation\`. The currency code is readonly and should match the LineItem."
-  clickThroughConversionCost: Money!
+  clickThroughConversionCost: Money
   "The amount of money to attribute per view through conversion. This attribute is required for creating a \`LineItemActivityAssociation\`. The currency code is readonly and should match the LineItem."
-  viewThroughConversionCost: Money!
+  viewThroughConversionCost: Money
 }
 
 "Data transfer object for the exchange deal info of a line item."
@@ -218,27 +218,27 @@ type LineItemPage {
 "The \`LineItemSummary\` represents the base class from which a \`LineItem\` is derived."
 interface LineItemSummaryInterface {
   "The ID of the Order to which the \`LineItem\` belongs. This attribute is required."
-  orderId: BigInt!
+  orderId: BigInt
   "Uniquely identifies the \`LineItem\`. This attribute is read-only and is assigned by Google when a line item is created."
   id: BigInt!
   "The name of the line item. This attribute is required and has a maximum length of 255 characters."
-  name: String!
+  name: String
   "An identifier for the \`LineItem\` that is meaningful to the publisher. This attribute is optional and has a maximum length of 255 characters."
   externalId: String
   "The name of the Order. This value is read-only."
   orderName: String
   "The date and time on which the \`LineItem\` is enabled to begin serving. This attribute is required and must be in the future."
-  startDateTime: DateTime!
+  startDateTime: DateTime
   "Specifies whether to start serving to the \`LineItem\` right away, in an hour, etc. This attribute is optional and defaults to StartDateTimeType#USE_START_DATE_TIME."
   startDateTimeType: StartDateTimeTypeEnum
   "The date and time on which the \`LineItem\` will stop serving. This attribute is required unless LineItem#unlimitedEndDateTime is set to \`true\`. If specified, it must be after the LineItem#startDateTime. This end date and time does not include auto extension days."
-  endDateTime: DateTime!
+  endDateTime: DateTime
   "The number of days to allow a line item to deliver past its #endDateTime. A maximum of 7 days is allowed. This is feature is only available for Ad Manager 360 accounts."
   autoExtensionDays: Int
   "Specifies whether or not the \`LineItem\` has an end time. This attribute is optional and defaults to false. It can be be set to \`true\` for only line items of type LineItemType#SPONSORSHIP, LineItemType#NETWORK, LineItemType#PRICE_PRIORITY and LineItemType#HOUSE."
   unlimitedEndDateTime: Boolean
   "The strategy used for displaying multiple Creative objects that are associated with the \`LineItem\`. This attribute is required."
-  creativeRotationType: CreativeRotationTypeEnum!
+  creativeRotationType: CreativeRotationTypeEnum
   "The strategy for delivering ads over the course of the line item's duration. This attribute is optional and defaults to DeliveryRateType#EVENLY or DeliveryRateType#FRONTLOADED depending on the network's configuration."
   deliveryRateType: DeliveryRateTypeEnum
   "Strategy for choosing forecasted traffic shapes to pace line items. This field is optional and defaults to DeliveryForecastSource#HISTORICAL."
@@ -252,15 +252,15 @@ interface LineItemSummaryInterface {
   "The set of frequency capping units for this \`LineItem\`. This attribute is optional."
   frequencyCaps: [FrequencyCap]
   "Indicates the line item type of a \`LineItem\`. This attribute is required. The line item type determines the default priority of the line item. More information can be found on the [ Ad Manager Help Center](https://support.google.com/dfp_premium/answer/177279)."
-  lineItemType: LineItemTypeEnum!
+  lineItemType: LineItemTypeEnum
   "The priority for the line item. Valid values range from 1 to 16. This field is optional and defaults to the default priority of the LineItemType. The following table shows the default, minimum, and maximum priority values are for each line item type:    LineItemType - default priority (minimum priority, maximum priority)    LineItemType#SPONSORSHIP 4 (2, 5)   LineItemType#STANDARD 8 (6, 10)   LineItemType#NETWORK 12 (11, 14)   LineItemType#BULK 12 (11, 14)   LineItemType#PRICE_PRIORITY 12 (11, 14)   LineItemType#HOUSE 16 (15, 16)   LineItemType#CLICK_TRACKING 16 (1, 16)   LineItemType#AD_EXCHANGE 12 (1, 16)  LineItemType#ADSENSE 12 (1, 16)  LineItemType#BUMPER 16 (15, 16)   This field can only be edited by certain networks, otherwise a PermissionError will occur."
   priority: Int
   "The amount of money to spend per impression or click. This attribute is required for creating a \`LineItem\`."
-  costPerUnit: Money!
+  costPerUnit: Money
   "An amount to help the adserver rank inventory. LineItem#valueCostPerUnit artificially raises the value of inventory over the LineItem#costPerUnit but avoids raising the actual LineItem#costPerUnit. This attribute is optional and defaults to a Money object in the local currency with Money#microAmount 0."
   valueCostPerUnit: Money
   "The method used for billing this \`LineItem\`. This attribute is required."
-  costType: CostTypeEnum!
+  costType: CostTypeEnum
   "The type of discount being applied to a \`LineItem\`, either percentage based or absolute. This attribute is optional and defaults to LineItemDiscountType#PERCENTAGE."
   discountType: LineItemDiscountTypeEnum
   "The number here is either a percentage or an absolute value depending on the \`LineItemDiscountType\`. If the \`LineItemDiscountType\` is LineItemDiscountType#PERCENTAGE, then only non-fractional values are supported."
@@ -268,9 +268,9 @@ interface LineItemSummaryInterface {
   "This attribute is only applicable for certain line item types and acts as an 'FYI' or note, which does not impact adserving or other backend systems.  For LineItemType#SPONSORSHIP line items, this represents the minimum quantity, which is a lifetime impression volume goal for reporting purposes only.  For LineItemType#STANDARD line items, this represent the contracted quantity, which is the number of units specified in the contract the advertiser has bought for this \`LineItem\`. This field is just a 'FYI' for traffickers to manually intervene with the \`LineItem\` when needed. This attribute is only available for LineItemType#STANDARD line items if you have this feature enabled on your network."
   contractedUnitsBought: BigInt
   "Details about the creatives that are expected to serve through this \`LineItem\`. This attribute is required and replaces the \`creativeSizes\` attribute."
-  creativePlaceholders: [CreativePlaceholder]!
+  creativePlaceholders: [CreativePlaceholder]
   "This attribute is required and meaningful only if the LineItem#costType is CostType.CPA."
-  activityAssociations: [LineItemActivityAssociation]!
+  activityAssociations: [LineItemActivityAssociation]
   "The environment that the \`LineItem\` is targeting. The default value is EnvironmentType#BROWSER. If this value is EnvironmentType#VIDEO_PLAYER, then this line item can only target \`AdUnits\` that have \`AdUnitSizes\` whose \`environmentType\` is also \`VIDEO_PLAYER\`."
   environmentType: EnvironmentTypeEnum
   "The set of allowedFormats that this programmatic line item can have. If the set is empty, this line item allows all formats."
@@ -325,7 +325,7 @@ interface LineItemSummaryInterface {
   programmaticCreativeSource: ProgrammaticCreativeSourceEnum
   thirdPartyMeasurementSettings: ThirdPartyMeasurementSettings
   "The max duration of a video creative associated with this \`LineItem\` in milliseconds. This attribute is only meaningful for video line items. For version v202011 and earlier, this attribute is optional and defaults to 0. For version v202102 and later, this attribute is required for video line items and must be greater than 0."
-  videoMaxDuration: BigInt!
+  videoMaxDuration: BigInt
   "The primary goal that this \`LineItem\` is associated with, which is used in its pacing and budgeting."
   primaryGoal: Goal
   "The secondary goals that this \`LineItem\` is associated with. It is required and meaningful only if the LineItem#costType is CostType.CPA or if the LineItem#lineItemType is LineItemType#SPONSORSHIP and LineItem#costType is CostType.CPM."

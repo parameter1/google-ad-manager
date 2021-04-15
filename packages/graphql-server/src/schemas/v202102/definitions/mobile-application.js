@@ -19,11 +19,11 @@ type MobileApplication {
   "Uniquely identifies the mobile application. This attribute is read-only and is assigned by Google when a mobile application is claimed."
   id: BigInt!
   "The display name of the mobile application. This attribute is required and has a maximum length of 255 characters."
-  displayName: String!
+  displayName: String
   "The app store ID of the app to claim. This attribute is required for creation and then is read-only."
-  appStoreId: String!
+  appStoreId: String
   "The app store the mobile application belongs to. This attribute is required for creation and then is read-only."
-  appStore: MobileApplicationStoreEnum!
+  appStore: MobileApplicationStoreEnum
   "The archival status of the mobile application. This attribute is read-only."
   isArchived: Boolean
   "The name of the application on the app store. This attribute is read-only and populated by Google."
@@ -41,7 +41,7 @@ type MobileApplication {
 "A mobile application that has been added to or 'claimed' by the network to be used for targeting purposes. These mobile apps can come from various app stores."
 input MobileApplicationInput {
   "The display name of the mobile application. This attribute is required and has a maximum length of 255 characters."
-  displayName: String!
+  displayName: String
 }
 
 "Captures a page of mobile applications."

@@ -25,7 +25,7 @@ type Team {
   "The unique ID of the \`Team\`. This value is readonly and is assigned by Google. Teams that are created by Google will have negative IDs."
   id: BigInt!
   "The name of the \`Team\`. This value is required to create a team and has a maximum length of 106 characters."
-  name: String!
+  name: String
   "The description of the \`Team\`. This value is optional and has a maximum length of 255 characters."
   description: String
   "The status of the Team. This value can be TeamStatus#ACTIVE (default) or TeamStatus#INACTIVE and determines the visibility of the team in the UI."
@@ -41,7 +41,7 @@ type Team {
 "A \`Team\` defines a grouping of users and what entities they have access to. Users are added to teams with UserTeamAssociation objects."
 input TeamInput {
   "The name of the \`Team\`. This value is required to create a team and has a maximum length of 106 characters."
-  name: String!
+  name: String
   "The description of the \`Team\`. This value is optional and has a maximum length of 255 characters."
   description: String
   "The status of the Team. This value can be TeamStatus#ACTIVE (default) or TeamStatus#INACTIVE and determines the visibility of the team in the UI."

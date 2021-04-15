@@ -53,7 +53,7 @@ interface CustomFieldInterface {
   "Unique ID of the \`CustomField\`. This value is readonly and is assigned by Google."
   id: BigInt!
   "Name of the \`CustomField\`. This is value is required to create a custom field. The max length is 127 characters."
-  name: String!
+  name: String
   "A description of the custom field. This value is optional. The maximum length is 511 characters"
   description: String
   "Specifies whether or not the custom fields is active. This attribute is read-only."
@@ -109,7 +109,7 @@ type DropDownCustomField implements CustomFieldInterface {
   "Unique ID of the \`CustomField\`. This value is readonly and is assigned by Google."
   id: BigInt!
   "Name of the \`CustomField\`. This is value is required to create a custom field. The max length is 127 characters."
-  name: String!
+  name: String
   "A description of the custom field. This value is optional. The maximum length is 511 characters"
   description: String
   "Specifies whether or not the custom fields is active. This attribute is read-only."

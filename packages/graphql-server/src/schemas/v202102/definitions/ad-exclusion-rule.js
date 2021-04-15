@@ -9,11 +9,11 @@ type AdExclusionRule {
   "The unique ID of the \`AdExclusionRule\`. This attribute is readonly and is assigned by Google."
   id: BigInt!
   "The name of the \`AdExclusionRule\`. This attribute is required."
-  name: String!
+  name: String
   "Whether or not the \`AdExclusionRule\` is active. An inactive rule will have no effect on adserving. This attribute is readonly."
   isActive: Boolean
   "The targeting information about which AdUnitTargeting objects this rule is in effect for. Any AdUnitTargeting objects included here will have their children included implicitly. Children of a targeted ad unit can be excluded. This attribute is required."
-  inventoryTargeting: InventoryTargeting!
+  inventoryTargeting: InventoryTargeting
   "Whether or not this rule blocks all ads from serving other than the labels or advertisers specified. This attribute is optional and defaults to false."
   isBlockAll: Boolean
   "The labels that will be blocked from serving. Any advertiser, order or line item with one of these labels will not serve on the relevant ad units and their children."
@@ -27,9 +27,9 @@ type AdExclusionRule {
 "Represents an inventory blocking rule, which prevents certain ads from being served to specified ad units."
 input AdExclusionRuleInput {
   "The name of the \`AdExclusionRule\`. This attribute is required."
-  name: String!
+  name: String
   "The targeting information about which AdUnitTargeting objects this rule is in effect for. Any AdUnitTargeting objects included here will have their children included implicitly. Children of a targeted ad unit can be excluded. This attribute is required."
-  inventoryTargeting: InventoryTargetingInput!
+  inventoryTargeting: InventoryTargetingInput
   "Whether or not this rule blocks all ads from serving other than the labels or advertisers specified. This attribute is optional and defaults to false."
   isBlockAll: Boolean
   "The labels that will be blocked from serving. Any advertiser, order or line item with one of these labels will not serve on the relevant ad units and their children."

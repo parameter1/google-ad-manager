@@ -14,9 +14,9 @@ type TargetingPreset {
   "The unique ID of the \`TargetingPreset\`. This value is readonly and is assigned by Google."
   id: BigInt!
   "The name of the \`TargetingPreset\`. This value is required to create a targeting preset and has a maximum length of 255 characters."
-  name: String!
+  name: String
   "Contains the targeting criteria for the \`TargetingPreset\`. This attribute is required."
-  targeting: Targeting!
+  targeting: Targeting
 }
 
 "Captures a paged query of TargetingPresetDto objects."
