@@ -9,17 +9,17 @@ type AdRule {
   "The unique ID of the AdRule. This value is readonly and is assigned by Google."
   id: BigInt!
   "The unique name of the AdRule. This attribute is required to create an ad rule and has a maximum length of 255 characters."
-  name: String!
+  name: String
   "The priority of the AdRule. This attribute is required and can range from 1 to 1000, with 1 being the highest possible priority. Changing an ad rule's priority can affect the priorities of other ad rules. For example, increasing an ad rule's priority from 5 to 1 will shift the ad rules that were previously in priority positions 1 through 4 down one."
-  priority: Int!
+  priority: Int
   "The targeting criteria of the AdRule. This attribute is required."
-  targeting: Targeting!
+  targeting: Targeting
   "This AdRule object's start date and time. This attribute is required and must be a date in the future for new ad rules."
-  startDateTime: DateTime!
+  startDateTime: DateTime
   "Specifies whether to start using the AdRule right away, in an hour, etc. This attribute is optional and defaults to StartDateTimeType#USE_START_DATE_TIME."
   startDateTimeType: StartDateTimeTypeEnum
   "This AdRule object's end date and time. This attribute is required unless \`unlimitedEndDateTime\` is set to \`true\`. If specified, it must be after the \`startDateTime\`."
-  endDateTime: DateTime!
+  endDateTime: DateTime
   "Specifies whether the AdRule has an end time. This attribute is optional and defaults to false."
   unlimitedEndDateTime: Boolean
   "The AdRuleStatus of the ad rule. This attribute is read-only and defaults to AdRuleStatus#INACTIVE."
@@ -31,27 +31,27 @@ type AdRule {
   "This AdRule object's frequency cap for the maximum impressions per pod. This attribute is optional and defaults to 0."
   maxImpressionsPerLineItemPerPod: Int
   "This AdRule object's pre-roll slot. This attribute is required."
-  preroll: BaseAdRuleSlotInterface!
+  preroll: BaseAdRuleSlotInterface
   "This AdRule object's mid-roll slot. This attribute is required."
-  midroll: BaseAdRuleSlotInterface!
+  midroll: BaseAdRuleSlotInterface
   "This AdRule object's post-roll slot. This attribute is required."
-  postroll: BaseAdRuleSlotInterface!
+  postroll: BaseAdRuleSlotInterface
 }
 
 "An AdRule contains data that the ad server will use to generate a playlist of video ads."
 input AdRuleInput {
   "The unique name of the AdRule. This attribute is required to create an ad rule and has a maximum length of 255 characters."
-  name: String!
+  name: String
   "The priority of the AdRule. This attribute is required and can range from 1 to 1000, with 1 being the highest possible priority. Changing an ad rule's priority can affect the priorities of other ad rules. For example, increasing an ad rule's priority from 5 to 1 will shift the ad rules that were previously in priority positions 1 through 4 down one."
-  priority: Int!
+  priority: Int
   "The targeting criteria of the AdRule. This attribute is required."
-  targeting: TargetingInput!
+  targeting: TargetingInput
   "This AdRule object's start date and time. This attribute is required and must be a date in the future for new ad rules."
-  startDateTime: DateTime!
+  startDateTime: DateTime
   "Specifies whether to start using the AdRule right away, in an hour, etc. This attribute is optional and defaults to StartDateTimeType#USE_START_DATE_TIME."
   startDateTimeType: StartDateTimeTypeEnum
   "This AdRule object's end date and time. This attribute is required unless \`unlimitedEndDateTime\` is set to \`true\`. If specified, it must be after the \`startDateTime\`."
-  endDateTime: DateTime!
+  endDateTime: DateTime
   "Specifies whether the AdRule has an end time. This attribute is optional and defaults to false."
   unlimitedEndDateTime: Boolean
   "The FrequencyCapBehavior of the AdRule. This attribute is optional and defaults to FrequencyCapBehavior#DEFER."
@@ -61,11 +61,11 @@ input AdRuleInput {
   "This AdRule object's frequency cap for the maximum impressions per pod. This attribute is optional and defaults to 0."
   maxImpressionsPerLineItemPerPod: Int
   "This AdRule object's pre-roll slot. This attribute is required."
-  preroll: JSONObject!
+  preroll: JSONObject
   "This AdRule object's mid-roll slot. This attribute is required."
-  midroll: JSONObject!
+  midroll: JSONObject
   "This AdRule object's post-roll slot. This attribute is required."
-  postroll: JSONObject!
+  postroll: JSONObject
 }
 
 "Captures a page of AdRule objects."
@@ -121,7 +121,7 @@ type AdSpot {
   "The unique ID of the AdSpot. This value is readonly and is assigned by Google."
   id: BigInt!
   "Name of the AdSpot. The name is case insenstive and can be referenced in ad tags. This value is required if \`customSpot\` is true, and cannot be set otherwise. You can use alphanumeric characters and symbols other than the following: ', ', =, !, +, #, *, ~, ;, ^, (, ), <, >, [, ], the white space character."
-  name: String!
+  name: String
   "Descriptive name for the AdSpot.This value is optional if \`customSpot\` is true, and cannot be set otherwise."
   displayName: String
   "Whether this ad spot is a custom spot. This field is optional and defaults to false. Custom spots can be reused and targeted in the targeting picker."
@@ -155,7 +155,7 @@ enum AdSpotFillTypeEnum {
 "A AdSpot is a targetable entity used in the creation of AdRule objects. A ad spot contains a variable number of ads and has constraints (ad duration, reservation type, etc) on the ads that can appear in it."
 input AdSpotInput {
   "Name of the AdSpot. The name is case insenstive and can be referenced in ad tags. This value is required if \`customSpot\` is true, and cannot be set otherwise. You can use alphanumeric characters and symbols other than the following: ', ', =, !, +, #, *, ~, ;, ^, (, ), <, >, [, ], the white space character."
-  name: String!
+  name: String
   "Descriptive name for the AdSpot.This value is optional if \`customSpot\` is true, and cannot be set otherwise."
   displayName: String
   "Whether this ad spot is a custom spot. This field is optional and defaults to false. Custom spots can be reused and targeted in the targeting picker."
@@ -205,9 +205,9 @@ interface BaseAdRuleSlotInterface {
   "The maximum duration in milliseconds of video ads within this slot. This attribute is optional and defaults to 0."
   maxVideoAdDuration: BigInt
   "The frequency type for video ads in this ad rule slot. This attribute is required for mid-rolls, but if this is not a mid-roll, the value is set to MidrollFrequencyType#NONE."
-  videoMidrollFrequencyType: MidrollFrequencyTypeEnum!
+  videoMidrollFrequencyType: MidrollFrequencyTypeEnum
   "The mid-roll frequency of this ad rule slot for video ads. This attribute is required for mid-rolls, but if MidrollFrequencyType is set to MidrollFrequencyType#NONE, this value should be ignored. For example, if this slot has a frequency type of MidrollFrequencyType#EVERY_N_SECONDS and \`#videoMidrollFrequency\` = '60', this would mean ' play a mid-roll every 60 seconds.'"
-  videoMidrollFrequency: String!
+  videoMidrollFrequency: String
   "The AdRuleSlotBumper for this slot. This attribute is optional and defaults to AdRuleSlotBumper#NONE."
   bumper: AdRuleSlotBumperEnum
   "The maximum duration of bumper ads within this slot. This attribute is optional and defaults to 0."
@@ -227,7 +227,7 @@ type BreakTemplate {
   "Whether this is custom template. Custom templates get created outside of the ad rule workflow and can be referenced in ad tags. Only custom templates can have names and display names."
   customTemplate: Boolean
   "Name of the BreakTemplate. The name is case insenstive and can be referenced in ad tags. This value is required if \`customTemplate\` is true, and cannot be set otherwise. You can use alphanumeric characters and symbols other than the following: ', ', =, !, +, #, *, ~, ;, ^, (, ), <, >, [, ], the white space character."
-  name: String!
+  name: String
   "Descriptive name for the BreakTemplateDto. This value is optional if \`customTemplate\` is true, and cannot be set otherwise."
   displayName: String
   "The list of the BreakTemplateMember objects in the order in which they should appear in the ad pod. Each BreakTemplateMember has a reference to a AdSpot, which defines what kinds of ads can appear at that position, as well as other metadata that defines how each ad spot should be filled."
@@ -255,7 +255,7 @@ input BreakTemplateInput {
   "Whether this is custom template. Custom templates get created outside of the ad rule workflow and can be referenced in ad tags. Only custom templates can have names and display names."
   customTemplate: Boolean
   "Name of the BreakTemplate. The name is case insenstive and can be referenced in ad tags. This value is required if \`customTemplate\` is true, and cannot be set otherwise. You can use alphanumeric characters and symbols other than the following: ', ', =, !, +, #, *, ~, ;, ^, (, ), <, >, [, ], the white space character."
-  name: String!
+  name: String
   "Descriptive name for the BreakTemplateDto. This value is optional if \`customTemplate\` is true, and cannot be set otherwise."
   displayName: String
   "The list of the BreakTemplateMember objects in the order in which they should appear in the ad pod. Each BreakTemplateMember has a reference to a AdSpot, which defines what kinds of ads can appear at that position, as well as other metadata that defines how each ad spot should be filled."
@@ -337,9 +337,9 @@ type NoPoddingAdRuleSlot implements BaseAdRuleSlotInterface {
   "The maximum duration in milliseconds of video ads within this slot. This attribute is optional and defaults to 0."
   maxVideoAdDuration: BigInt
   "The frequency type for video ads in this ad rule slot. This attribute is required for mid-rolls, but if this is not a mid-roll, the value is set to MidrollFrequencyType#NONE."
-  videoMidrollFrequencyType: MidrollFrequencyTypeEnum!
+  videoMidrollFrequencyType: MidrollFrequencyTypeEnum
   "The mid-roll frequency of this ad rule slot for video ads. This attribute is required for mid-rolls, but if MidrollFrequencyType is set to MidrollFrequencyType#NONE, this value should be ignored. For example, if this slot has a frequency type of MidrollFrequencyType#EVERY_N_SECONDS and \`#videoMidrollFrequency\` = '60', this would mean ' play a mid-roll every 60 seconds.'"
-  videoMidrollFrequency: String!
+  videoMidrollFrequency: String
   "The AdRuleSlotBumper for this slot. This attribute is optional and defaults to AdRuleSlotBumper#NONE."
   bumper: AdRuleSlotBumperEnum
   "The maximum duration of bumper ads within this slot. This attribute is optional and defaults to 0."
@@ -359,9 +359,9 @@ type OptimizedPoddingAdRuleSlot implements BaseAdRuleSlotInterface {
   "The maximum duration in milliseconds of video ads within this slot. This attribute is optional and defaults to 0."
   maxVideoAdDuration: BigInt
   "The frequency type for video ads in this ad rule slot. This attribute is required for mid-rolls, but if this is not a mid-roll, the value is set to MidrollFrequencyType#NONE."
-  videoMidrollFrequencyType: MidrollFrequencyTypeEnum!
+  videoMidrollFrequencyType: MidrollFrequencyTypeEnum
   "The mid-roll frequency of this ad rule slot for video ads. This attribute is required for mid-rolls, but if MidrollFrequencyType is set to MidrollFrequencyType#NONE, this value should be ignored. For example, if this slot has a frequency type of MidrollFrequencyType#EVERY_N_SECONDS and \`#videoMidrollFrequency\` = '60', this would mean ' play a mid-roll every 60 seconds.'"
-  videoMidrollFrequency: String!
+  videoMidrollFrequency: String
   "The AdRuleSlotBumper for this slot. This attribute is optional and defaults to AdRuleSlotBumper#NONE."
   bumper: AdRuleSlotBumperEnum
   "The maximum duration of bumper ads within this slot. This attribute is optional and defaults to 0."
@@ -387,9 +387,9 @@ type StandardPoddingAdRuleSlot implements BaseAdRuleSlotInterface {
   "The maximum duration in milliseconds of video ads within this slot. This attribute is optional and defaults to 0."
   maxVideoAdDuration: BigInt
   "The frequency type for video ads in this ad rule slot. This attribute is required for mid-rolls, but if this is not a mid-roll, the value is set to MidrollFrequencyType#NONE."
-  videoMidrollFrequencyType: MidrollFrequencyTypeEnum!
+  videoMidrollFrequencyType: MidrollFrequencyTypeEnum
   "The mid-roll frequency of this ad rule slot for video ads. This attribute is required for mid-rolls, but if MidrollFrequencyType is set to MidrollFrequencyType#NONE, this value should be ignored. For example, if this slot has a frequency type of MidrollFrequencyType#EVERY_N_SECONDS and \`#videoMidrollFrequency\` = '60', this would mean ' play a mid-roll every 60 seconds.'"
-  videoMidrollFrequency: String!
+  videoMidrollFrequency: String
   "The AdRuleSlotBumper for this slot. This attribute is optional and defaults to AdRuleSlotBumper#NONE."
   bumper: AdRuleSlotBumperEnum
   "The maximum duration of bumper ads within this slot. This attribute is optional and defaults to 0."
@@ -409,9 +409,9 @@ type UnknownAdRuleSlot implements BaseAdRuleSlotInterface {
   "The maximum duration in milliseconds of video ads within this slot. This attribute is optional and defaults to 0."
   maxVideoAdDuration: BigInt
   "The frequency type for video ads in this ad rule slot. This attribute is required for mid-rolls, but if this is not a mid-roll, the value is set to MidrollFrequencyType#NONE."
-  videoMidrollFrequencyType: MidrollFrequencyTypeEnum!
+  videoMidrollFrequencyType: MidrollFrequencyTypeEnum
   "The mid-roll frequency of this ad rule slot for video ads. This attribute is required for mid-rolls, but if MidrollFrequencyType is set to MidrollFrequencyType#NONE, this value should be ignored. For example, if this slot has a frequency type of MidrollFrequencyType#EVERY_N_SECONDS and \`#videoMidrollFrequency\` = '60', this would mean ' play a mid-roll every 60 seconds.'"
-  videoMidrollFrequency: String!
+  videoMidrollFrequency: String
   "The AdRuleSlotBumper for this slot. This attribute is optional and defaults to AdRuleSlotBumper#NONE."
   bumper: AdRuleSlotBumperEnum
   "The maximum duration of bumper ads within this slot. This attribute is optional and defaults to 0."

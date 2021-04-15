@@ -19,7 +19,7 @@ type Order {
   "The unique ID of the \`Order\`. This value is readonly and is assigned by Google."
   id: BigInt!
   "The name of the \`Order\`. This value is required to create an order and has a maximum length of 255 characters."
-  name: String!
+  name: String
   "The date and time at which the \`Order\` and its associated line items are eligible to begin serving. This attribute is readonly and is derived from the line item of the order which has the earliest LineItem#startDateTime."
   startDateTime: DateTime
   "The date and time at which the \`Order\` and its associated line items stop being served. This attribute is readonly and is derived from the line item of the order which has the latest LineItem#endDateTime."
@@ -39,7 +39,7 @@ type Order {
   "The ISO currency code for the currency used by the \`Order\`. This value is read-only and is the network's currency code."
   currencyCode: String
   "The unique ID of the Company, which is of type Company.Type#ADVERTISER, to which this order belongs. This attribute is required."
-  advertiserId: BigInt!
+  advertiserId: BigInt
   "List of IDs for advertiser contacts of the order."
   advertiserContactIds: [BigInt]
   "The unique ID of the Company, which is of type Company.Type#AGENCY, with which this order is associated. This attribute is optional."
@@ -49,7 +49,7 @@ type Order {
   "The unique ID of the User who created the \`Order\` on behalf of the advertiser. This value is readonly and is assigned by Google."
   creatorId: BigInt
   "The unique ID of the User responsible for trafficking the \`Order\`. This value is required for creating an order."
-  traffickerId: BigInt!
+  traffickerId: BigInt
   "The IDs of the secondary traffickers associated with the order. This value is optional."
   secondaryTraffickerIds: [BigInt]
   "The unique ID of the User responsible for the sales of the \`Order\`. This value is optional."
@@ -83,7 +83,7 @@ type Order {
 "An \`Order\` represents a grouping of individual LineItem objects, each of which fulfill an ad request from a particular advertiser."
 input OrderInput {
   "The name of the \`Order\`. This value is required to create an order and has a maximum length of 255 characters."
-  name: String!
+  name: String
   "Provides any additional notes that may annotate the \`Order\`. This attribute is optional and has a maximum length of 65,535 characters."
   notes: String
   "An arbitrary ID to associate to the \`Order\`, which can be used as a key to an external system. This value is optional."
@@ -91,7 +91,7 @@ input OrderInput {
   "The purchase order number for the \`Order\`. This value is optional and has a maximum length of 63 characters."
   poNumber: String
   "The unique ID of the Company, which is of type Company.Type#ADVERTISER, to which this order belongs. This attribute is required."
-  advertiserId: BigInt!
+  advertiserId: BigInt
   "List of IDs for advertiser contacts of the order."
   advertiserContactIds: [BigInt]
   "The unique ID of the Company, which is of type Company.Type#AGENCY, with which this order is associated. This attribute is optional."
@@ -99,7 +99,7 @@ input OrderInput {
   "List of IDs for agency contacts of the order."
   agencyContactIds: [BigInt]
   "The unique ID of the User responsible for trafficking the \`Order\`. This value is required for creating an order."
-  traffickerId: BigInt!
+  traffickerId: BigInt
   "The IDs of the secondary traffickers associated with the order. This value is optional."
   secondaryTraffickerIds: [BigInt]
   "The unique ID of the User responsible for the sales of the \`Order\`. This value is optional."

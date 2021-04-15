@@ -7,11 +7,11 @@ module.exports = gql`
 "Represents a file asset variable defined in a creative template.  Use AssetCreativeTemplateVariableValue to specify the value for this variable when creating TemplateCreative from the TemplateCreative."
 type AssetCreativeTemplateVariable implements CreativeTemplateVariableInterface {
   "Label that is displayed to users when creating TemplateCreative from the CreativeTemplate. This attribute is required and has a maximum length of 127 characters."
-  label: String!
+  label: String
   "Unique name used to identify the variable. This attribute is read-only and is assigned by Google, by deriving from label, when a creative template variable is created."
   uniqueName: String
   "A descriptive help text that is displayed to users along with the label. This attribute is required and has a maximum length of 255 characters."
-  description: String!
+  description: String
   "\`true\` if this variable is required to be filled in by users when creating TemplateCreative from the CreativeTemplate."
   isRequired: Boolean
   "A set of supported mime types. This set can be empty or null if there's no constraint, meaning files of any mime types are allowed."
@@ -31,13 +31,13 @@ type CreativeTemplate {
   "Uniquely identifies the \`CreativeTemplate\`. This attribute is read-only and is assigned by Google when a creative template is created."
   id: BigInt!
   "The name of the creative template. This attribute is required and has a maximum length of 255 characters."
-  name: String!
+  name: String
   "The description of the creative template. This attribute is optional."
   description: String
   "The list of creative template variables. This attribute is required."
-  variables: [CreativeTemplateVariableInterface]!
+  variables: [CreativeTemplateVariableInterface]
   "The snippet of the creative template, with placeholders for the associated variables. This attribute is required."
-  snippet: String!
+  snippet: String
   "The status of the \`CreativeTemplate\`. This attribute is read-only and is assigned by Google."
   status: CreativeTemplateStatusEnum
   "The type of the \`CreativeTemplate\`. Publisher can only create user-defined template"
@@ -81,11 +81,11 @@ enum CreativeTemplateTypeEnum {
 "Represents a variable defined in a creative template."
 interface CreativeTemplateVariableInterface {
   "Label that is displayed to users when creating TemplateCreative from the CreativeTemplate. This attribute is required and has a maximum length of 127 characters."
-  label: String!
+  label: String
   "Unique name used to identify the variable. This attribute is read-only and is assigned by Google, by deriving from label, when a creative template variable is created."
   uniqueName: String
   "A descriptive help text that is displayed to users along with the label. This attribute is required and has a maximum length of 255 characters."
-  description: String!
+  description: String
   "\`true\` if this variable is required to be filled in by users when creating TemplateCreative from the CreativeTemplate."
   isRequired: Boolean
 }
@@ -98,11 +98,11 @@ input GetCreativeTemplatesByStatementInput {
 "Represents a list variable defined in a creative template. This is similar to StringCreativeTemplateVariable, except that there are possible choices to choose from. Use StringCreativeTemplateVariableValue to specify the value for this variable when creating a TemplateCreative from a CreativeTemplate."
 type ListStringCreativeTemplateVariable implements StringCreativeTemplateVariableInterface & CreativeTemplateVariableInterface {
   "Label that is displayed to users when creating TemplateCreative from the CreativeTemplate. This attribute is required and has a maximum length of 127 characters."
-  label: String!
+  label: String
   "Unique name used to identify the variable. This attribute is read-only and is assigned by Google, by deriving from label, when a creative template variable is created."
   uniqueName: String
   "A descriptive help text that is displayed to users along with the label. This attribute is required and has a maximum length of 255 characters."
-  description: String!
+  description: String
   "\`true\` if this variable is required to be filled in by users when creating TemplateCreative from the CreativeTemplate."
   isRequired: Boolean
   "Default value to be filled in when creating creatives from the creative template."
@@ -116,19 +116,19 @@ type ListStringCreativeTemplateVariable implements StringCreativeTemplateVariabl
 "Stores variable choices that users can select from"
 type ListStringCreativeTemplateVariableVariableChoice {
   "Label that users can select from. This is displayed to users when creating a TemplateCreative. This attribute is intended to be more descriptive than #value. This attribute is required and has a maximum length of 255 characters."
-  label: String!
+  label: String
   "Value that users can select from. When creating a TemplateCreative, the value in StringCreativeTemplateVariableValue should match this value, if you intend to select this value. This attribute is required and has a maximum length of 255 characters."
-  value: String!
+  value: String
 }
 
 "Represents a long variable defined in a creative template."
 type LongCreativeTemplateVariable implements CreativeTemplateVariableInterface {
   "Label that is displayed to users when creating TemplateCreative from the CreativeTemplate. This attribute is required and has a maximum length of 127 characters."
-  label: String!
+  label: String
   "Unique name used to identify the variable. This attribute is read-only and is assigned by Google, by deriving from label, when a creative template variable is created."
   uniqueName: String
   "A descriptive help text that is displayed to users along with the label. This attribute is required and has a maximum length of 255 characters."
-  description: String!
+  description: String
   "\`true\` if this variable is required to be filled in by users when creating TemplateCreative from the CreativeTemplate."
   isRequired: Boolean
   "Default value to be filled in when creating creatives from the creative template."
@@ -138,11 +138,11 @@ type LongCreativeTemplateVariable implements CreativeTemplateVariableInterface {
 "Represents a string variable defined in a creative template.  Use StringCreativeTemplateVariableValue to specify the value for this variable when creating TemplateCreative from the TemplateCreative."
 interface StringCreativeTemplateVariableInterface implements CreativeTemplateVariableInterface {
   "Label that is displayed to users when creating TemplateCreative from the CreativeTemplate. This attribute is required and has a maximum length of 127 characters."
-  label: String!
+  label: String
   "Unique name used to identify the variable. This attribute is read-only and is assigned by Google, by deriving from label, when a creative template variable is created."
   uniqueName: String
   "A descriptive help text that is displayed to users along with the label. This attribute is required and has a maximum length of 255 characters."
-  description: String!
+  description: String
   "\`true\` if this variable is required to be filled in by users when creating TemplateCreative from the CreativeTemplate."
   isRequired: Boolean
   "Default value to be filled in when creating creatives from the creative template."
@@ -152,11 +152,11 @@ interface StringCreativeTemplateVariableInterface implements CreativeTemplateVar
 "Represents a url variable defined in a creative template.  Use UrlCreativeTemplateVariableValue to specify the value for this variable when creating TemplateCreative from the TemplateCreative"
 type UrlCreativeTemplateVariable implements CreativeTemplateVariableInterface {
   "Label that is displayed to users when creating TemplateCreative from the CreativeTemplate. This attribute is required and has a maximum length of 127 characters."
-  label: String!
+  label: String
   "Unique name used to identify the variable. This attribute is read-only and is assigned by Google, by deriving from label, when a creative template variable is created."
   uniqueName: String
   "A descriptive help text that is displayed to users along with the label. This attribute is required and has a maximum length of 255 characters."
-  description: String!
+  description: String
   "\`true\` if this variable is required to be filled in by users when creating TemplateCreative from the CreativeTemplate."
   isRequired: Boolean
   "Default value to be filled in when creating creatives from the creative template."

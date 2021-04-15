@@ -122,9 +122,9 @@ input AppliedLabelInput {
 type AudienceSegmentCriteria implements CustomCriteriaLeafInterface & CustomCriteriaNodeInterface {
   _: Boolean
   "The comparison operator. This attribute is required."
-  operator: AudienceSegmentCriteriaComparisonOperatorEnum!
+  operator: AudienceSegmentCriteriaComparisonOperatorEnum
   "The ids of AudienceSegment objects used to target audience segments. This attribute is required."
-  audienceSegmentIds: [BigInt]!
+  audienceSegmentIds: [BigInt]
 }
 
 "Specifies the available comparison operators."
@@ -160,7 +160,7 @@ input BandwidthGroupTargetingInput {
 "The value of a CustomField for a particular entity."
 interface BaseCustomFieldValueInterface {
   "Id of the \`CustomField\` to which this value belongs. This attribute is required."
-  customFieldId: BigInt!
+  customFieldId: BigInt
 }
 
 "Contains a boolean value."
@@ -255,9 +255,9 @@ type ChildPublisher {
 type CmsMetadataCriteria implements CustomCriteriaLeafInterface & CustomCriteriaNodeInterface {
   _: Boolean
   "The comparison operator. This attribute is required."
-  operator: CmsMetadataCriteriaComparisonOperatorEnum!
+  operator: CmsMetadataCriteriaComparisonOperatorEnum
   "The ids of CmsMetadataValue objects used to target CMS metadata. This attribute is required."
-  cmsMetadataValueIds: [BigInt]!
+  cmsMetadataValueIds: [BigInt]
 }
 
 "Specifies the available comparison operators."
@@ -357,7 +357,7 @@ enum CostTypeEnum {
 "A \`CreativePlaceholder\` describes a slot that a creative is expected to fill. This is used primarily to help in forecasting, and also to validate that the correct creatives are associated with the line item. A \`CreativePlaceholder\` must contain a size, and it can optionally contain companions. Companions are only valid if the line item's environment type is EnvironmentType#VIDEO_PLAYER."
 type CreativePlaceholder {
   "The dimensions that the creative is expected to have. This attribute is required."
-  size: Size!
+  size: Size
   "The native creative template ID. This value is only required if #creativeSizeType is CreativeSizeType#NATIVE."
   creativeTemplateId: BigInt
   "The companions that the creative is expected to have. This attribute can only be set if the line item it belongs to has a LineItem#environmentType of EnvironmentType#VIDEO_PLAYER or LineItem#roadblockingType of RoadblockingType#CREATIVE_SET."
@@ -379,7 +379,7 @@ type CreativePlaceholder {
 "A \`CreativePlaceholder\` describes a slot that a creative is expected to fill. This is used primarily to help in forecasting, and also to validate that the correct creatives are associated with the line item. A \`CreativePlaceholder\` must contain a size, and it can optionally contain companions. Companions are only valid if the line item's environment type is EnvironmentType#VIDEO_PLAYER."
 input CreativePlaceholderInput {
   "The dimensions that the creative is expected to have. This attribute is required."
-  size: SizeInput!
+  size: SizeInput
   "The native creative template ID. This value is only required if #creativeSizeType is CreativeSizeType#NATIVE."
   creativeTemplateId: BigInt
   "The companions that the creative is expected to have. This attribute can only be set if the line item it belongs to has a LineItem#environmentType of EnvironmentType#VIDEO_PLAYER or LineItem#roadblockingType of RoadblockingType#CREATIVE_SET."
@@ -427,20 +427,20 @@ enum CreativeSizeTypeEnum {
 "Represents the creative targeting criteria for a LineItem."
 input CreativeTargetingInput {
   "The name of this creative targeting. This attribute is required."
-  name: String!
+  name: String
   "The Targeting criteria of this creative targeting. This attribute is required."
-  targeting: TargetingInput!
+  targeting: TargetingInput
 }
 
 "A CustomCriteria object is used to perform custom criteria targeting on custom targeting keys of type CustomTargetingKey.Type#PREDEFINED or CustomTargetingKey.Type#FREEFORM."
 type CustomCriteria implements CustomCriteriaLeafInterface & CustomCriteriaNodeInterface {
   _: Boolean
   "The CustomTargetingKey#id of the CustomTargetingKey object that was created using CustomTargetingService. This attribute is required."
-  keyId: BigInt!
+  keyId: BigInt
   "The ids of CustomTargetingValue objects to target the custom targeting key with id CustomCriteria#keyId. This attribute is required."
-  valueIds: [BigInt]!
+  valueIds: [BigInt]
   "The comparison operator. This attribute is required."
-  operator: CustomCriteriaComparisonOperatorEnum!
+  operator: CustomCriteriaComparisonOperatorEnum
 }
 
 "Specifies the available comparison operators."
@@ -463,17 +463,17 @@ interface CustomCriteriaNodeInterface {
 type CustomCriteriaSet implements CustomCriteriaNodeInterface {
   _: Boolean
   "The logical operator to be applied to CustomCriteriaSet#children. This attribute is required. This attribute is required."
-  logicalOperator: CustomCriteriaSetLogicalOperatorEnum!
+  logicalOperator: CustomCriteriaSetLogicalOperatorEnum
   "The custom criteria. This attribute is required."
-  children: [CustomCriteriaNodeInterface]!
+  children: [CustomCriteriaNodeInterface]
 }
 
 "A CustomCriteriaSet comprises of a set of CustomCriteriaNode objects combined by the CustomCriteriaSet.LogicalOperator#logicalOperator. The custom criteria targeting tree is subject to the rules defined on Targeting#customTargeting."
 input CustomCriteriaSetInput {
   "The logical operator to be applied to CustomCriteriaSet#children. This attribute is required. This attribute is required."
-  logicalOperator: CustomCriteriaSetLogicalOperatorEnum!
+  logicalOperator: CustomCriteriaSetLogicalOperatorEnum
   "The custom criteria. This attribute is required."
-  children: [JSONObject]!
+  children: [JSONObject]
 }
 
 "Specifies the available logical operators."
@@ -485,7 +485,7 @@ enum CustomCriteriaSetLogicalOperatorEnum {
 "The value of a CustomField that does not have a CustomField#dataType of CustomFieldDataType#DROP_DOWN."
 type CustomFieldValue implements BaseCustomFieldValueInterface {
   "Id of the \`CustomField\` to which this value belongs. This attribute is required."
-  customFieldId: BigInt!
+  customFieldId: BigInt
   "The value for this field. The appropriate type of \`Value\` is determined by the CustomField#dataType of the \`CustomField\` that this conforms to.  CustomFieldDataTypeValue type STRINGTextValue NUMBERNumberValue TOGGLEBooleanValue "
   value: ValueInterface
 }
@@ -780,7 +780,7 @@ input DeviceManufacturerTargetingInput {
 "A CustomFieldValue for a CustomField that has a CustomField#dataType of CustomFieldDataType#DROP_DOWN"
 type DropDownCustomFieldValue implements BaseCustomFieldValueInterface {
   "Id of the \`CustomField\` to which this value belongs. This attribute is required."
-  customFieldId: BigInt!
+  customFieldId: BigInt
   "The ID of the CustomFieldOption for this value."
   customFieldOptionId: BigInt
 }
@@ -934,11 +934,11 @@ input InventoryTargetingInput {
 "A \`LineItemActivityAssociation\` associates a LineItem with an Activity so that the conversions of the Activity can be counted against the LineItem."
 input LineItemActivityAssociationInput {
   "The ID of the Activity to which the LineItem should be associated. This attribute is required."
-  activityId: Int!
+  activityId: Int
   "The amount of money to attribute per click through conversion. This attribute is required for creating a \`LineItemActivityAssociation\`. The currency code is readonly and should match the LineItem."
-  clickThroughConversionCost: MoneyInput!
+  clickThroughConversionCost: MoneyInput
   "The amount of money to attribute per view through conversion. This attribute is required for creating a \`LineItemActivityAssociation\`. The currency code is readonly and should match the LineItem."
-  viewThroughConversionCost: MoneyInput!
+  viewThroughConversionCost: MoneyInput
 }
 
 "Describes the possible discount types on the cost of booking a LineItem."
@@ -952,23 +952,23 @@ enum LineItemDiscountTypeEnum {
 "\`LineItem\` is an advertiser's commitment to purchase a specific number of ad impressions, clicks, or time."
 input LineItemInput {
   "The ID of the Order to which the \`LineItem\` belongs. This attribute is required."
-  orderId: BigInt!
+  orderId: BigInt
   "The name of the line item. This attribute is required and has a maximum length of 255 characters."
-  name: String!
+  name: String
   "An identifier for the \`LineItem\` that is meaningful to the publisher. This attribute is optional and has a maximum length of 255 characters."
   externalId: String
   "The date and time on which the \`LineItem\` is enabled to begin serving. This attribute is required and must be in the future."
-  startDateTime: DateTime!
+  startDateTime: DateTime
   "Specifies whether to start serving to the \`LineItem\` right away, in an hour, etc. This attribute is optional and defaults to StartDateTimeType#USE_START_DATE_TIME."
   startDateTimeType: StartDateTimeTypeEnum
   "The date and time on which the \`LineItem\` will stop serving. This attribute is required unless LineItem#unlimitedEndDateTime is set to \`true\`. If specified, it must be after the LineItem#startDateTime. This end date and time does not include auto extension days."
-  endDateTime: DateTime!
+  endDateTime: DateTime
   "The number of days to allow a line item to deliver past its #endDateTime. A maximum of 7 days is allowed. This is feature is only available for Ad Manager 360 accounts."
   autoExtensionDays: Int
   "Specifies whether or not the \`LineItem\` has an end time. This attribute is optional and defaults to false. It can be be set to \`true\` for only line items of type LineItemType#SPONSORSHIP, LineItemType#NETWORK, LineItemType#PRICE_PRIORITY and LineItemType#HOUSE."
   unlimitedEndDateTime: Boolean
   "The strategy used for displaying multiple Creative objects that are associated with the \`LineItem\`. This attribute is required."
-  creativeRotationType: CreativeRotationTypeEnum!
+  creativeRotationType: CreativeRotationTypeEnum
   "The strategy for delivering ads over the course of the line item's duration. This attribute is optional and defaults to DeliveryRateType#EVENLY or DeliveryRateType#FRONTLOADED depending on the network's configuration."
   deliveryRateType: DeliveryRateTypeEnum
   "Strategy for choosing forecasted traffic shapes to pace line items. This field is optional and defaults to DeliveryForecastSource#HISTORICAL."
@@ -982,15 +982,15 @@ input LineItemInput {
   "The set of frequency capping units for this \`LineItem\`. This attribute is optional."
   frequencyCaps: [FrequencyCapInput]
   "Indicates the line item type of a \`LineItem\`. This attribute is required. The line item type determines the default priority of the line item. More information can be found on the [ Ad Manager Help Center](https://support.google.com/dfp_premium/answer/177279)."
-  lineItemType: LineItemTypeEnum!
+  lineItemType: LineItemTypeEnum
   "The priority for the line item. Valid values range from 1 to 16. This field is optional and defaults to the default priority of the LineItemType. The following table shows the default, minimum, and maximum priority values are for each line item type:    LineItemType - default priority (minimum priority, maximum priority)    LineItemType#SPONSORSHIP 4 (2, 5)   LineItemType#STANDARD 8 (6, 10)   LineItemType#NETWORK 12 (11, 14)   LineItemType#BULK 12 (11, 14)   LineItemType#PRICE_PRIORITY 12 (11, 14)   LineItemType#HOUSE 16 (15, 16)   LineItemType#CLICK_TRACKING 16 (1, 16)   LineItemType#AD_EXCHANGE 12 (1, 16)  LineItemType#ADSENSE 12 (1, 16)  LineItemType#BUMPER 16 (15, 16)   This field can only be edited by certain networks, otherwise a PermissionError will occur."
   priority: Int
   "The amount of money to spend per impression or click. This attribute is required for creating a \`LineItem\`."
-  costPerUnit: MoneyInput!
+  costPerUnit: MoneyInput
   "An amount to help the adserver rank inventory. LineItem#valueCostPerUnit artificially raises the value of inventory over the LineItem#costPerUnit but avoids raising the actual LineItem#costPerUnit. This attribute is optional and defaults to a Money object in the local currency with Money#microAmount 0."
   valueCostPerUnit: MoneyInput
   "The method used for billing this \`LineItem\`. This attribute is required."
-  costType: CostTypeEnum!
+  costType: CostTypeEnum
   "The type of discount being applied to a \`LineItem\`, either percentage based or absolute. This attribute is optional and defaults to LineItemDiscountType#PERCENTAGE."
   discountType: LineItemDiscountTypeEnum
   "The number here is either a percentage or an absolute value depending on the \`LineItemDiscountType\`. If the \`LineItemDiscountType\` is LineItemDiscountType#PERCENTAGE, then only non-fractional values are supported."
@@ -998,9 +998,9 @@ input LineItemInput {
   "This attribute is only applicable for certain line item types and acts as an 'FYI' or note, which does not impact adserving or other backend systems.  For LineItemType#SPONSORSHIP line items, this represents the minimum quantity, which is a lifetime impression volume goal for reporting purposes only.  For LineItemType#STANDARD line items, this represent the contracted quantity, which is the number of units specified in the contract the advertiser has bought for this \`LineItem\`. This field is just a 'FYI' for traffickers to manually intervene with the \`LineItem\` when needed. This attribute is only available for LineItemType#STANDARD line items if you have this feature enabled on your network."
   contractedUnitsBought: BigInt
   "Details about the creatives that are expected to serve through this \`LineItem\`. This attribute is required and replaces the \`creativeSizes\` attribute."
-  creativePlaceholders: [CreativePlaceholderInput]!
+  creativePlaceholders: [CreativePlaceholderInput]
   "This attribute is required and meaningful only if the LineItem#costType is CostType.CPA."
-  activityAssociations: [LineItemActivityAssociationInput]!
+  activityAssociations: [LineItemActivityAssociationInput]
   "The environment that the \`LineItem\` is targeting. The default value is EnvironmentType#BROWSER. If this value is EnvironmentType#VIDEO_PLAYER, then this line item can only target \`AdUnits\` that have \`AdUnitSizes\` whose \`environmentType\` is also \`VIDEO_PLAYER\`."
   environmentType: EnvironmentTypeEnum
   "The set of allowedFormats that this programmatic line item can have. If the set is empty, this line item allows all formats."
@@ -1043,7 +1043,7 @@ input LineItemInput {
   isMissingCreatives: Boolean
   thirdPartyMeasurementSettings: ThirdPartyMeasurementSettingsInput
   "The max duration of a video creative associated with this \`LineItem\` in milliseconds. This attribute is only meaningful for video line items. For version v202011 and earlier, this attribute is optional and defaults to 0. For version v202102 and later, this attribute is required for video line items and must be greater than 0."
-  videoMaxDuration: BigInt!
+  videoMaxDuration: BigInt
   "The primary goal that this \`LineItem\` is associated with, which is used in its pacing and budgeting."
   primaryGoal: GoalInput
   "The secondary goals that this \`LineItem\` is associated with. It is required and meaningful only if the LineItem#costType is CostType.CPA or if the LineItem#lineItemType is LineItemType#SPONSORSHIP and LineItem#costType is CostType.CPM."
@@ -1057,7 +1057,7 @@ input LineItemInput {
   "Custom XML to be rendered in a custom VAST response at serving time."
   customVastExtension: String
   "Contains the targeting criteria for the ad campaign. This attribute is required."
-  targeting: TargetingInput!
+  targeting: TargetingInput
   "A list of CreativeTargeting objects that can be used to specify creative level targeting for this line item. Creative level targeting is specified in a creative placeholder's CreativePlaceholder#targetingName field by referencing the creative targeting's name. It also needs to be re-specified in the LineItemCreativeAssociation#targetingName field when associating a line item with a creative that fits into that placeholder."
   creativeTargetings: [CreativeTargetingInput]
 }
@@ -1341,9 +1341,9 @@ enum ProgrammaticCreativeSourceEnum {
 "A \`ProposalLineItem\` is an instance of sales Product. It belongs to a Proposal and is created according to a Product and RateCard. When the proposal is turned into an Order, this object is turned into a LineItem."
 input ProposalLineItemInput {
   "The unique ID of the Proposal, to which the \`ProposalLineItem\` belongs. This attribute is required for creation and then is readonly. This attribute is required."
-  proposalId: BigInt!
+  proposalId: BigInt
   "The name of the \`ProposalLineItem\` which should be unique under the same Proposal. This attribute has a maximum length of 255 characters. This attribute can be configured as editable after the proposal has been submitted. Please check with your network administrator for editable fields configuration. This attribute is required."
-  name: String!
+  name: String
   "The date and time at which the line item associated with the \`ProposalLineItem\` is enabled to begin serving. This attribute is optional during creation, but required and must be in the future when it turns into a line item. The DateTime#timeZoneID is required if start date time is not \`null\`. This attribute becomes readonly once the \`ProposalLineItem\` has started delivering."
   startDateTime: DateTime
   "The date and time at which the line item associated with the \`ProposalLineItem\` stops beening served. This attribute is optional during creation, but required and must be after the #startDateTime. The DateTime#timeZoneID is required if end date time is not \`null\`."
@@ -1351,9 +1351,9 @@ input ProposalLineItemInput {
   "Provides any additional notes that may annotate the \`ProposalLineItem\`. This attribute is optional and has a maximum length of 65,535 characters. This attribute can be configured as editable after the proposal has been submitted. Please check with your network administrator for editable fields configuration."
   internalNotes: String
   "The goal(i.e. contracted quantity, quantity or limit) that this \`ProposalLineItem\` is associated with, which is used in its pacing and budgeting. Goal#units must be greater than 0 when the proposal line item turns into a line item, Goal#goalType and Goal#unitType are readonly. For a Preferred deal \`ProposalLineItem\`, the goal type can only be GoalType#NONE. This attribute is required."
-  goal: GoalInput!
+  goal: GoalInput
   "The contracted number of impressions or clicks. If this is a LineItemType#SPONSORSHIP \`ProposalLineItem\`, has RateType#CPD as a rate type, and #isProgrammatic is false, then this represents the lifetime minimum impression. If this is a LineItemType#SPONSORSHIP \`ProposalLineItem\`, has RateType#CPD as a rate type, and #isProgrammatic is true, then this represents the daily minimum impression. This attribute is required for percentage-based-goal proposal line items. It does not impact ad-serving and is for reporting purposes only."
-  contractedUnitsBought: BigInt!
+  contractedUnitsBought: BigInt
   "The strategy for delivering ads over the course of the \`ProposalLineItem\`'s duration. This attribute is optional and default value is DeliveryRateType#EVENLY. For a Preferred deal \`ProposalLineItem\`, the value can only be DeliveryRateType#FRONTLOADED."
   deliveryRateType: DeliveryRateTypeEnum
   "The strategy for serving roadblocked creatives, i.e. instances where multiple creatives must be served together on a single web page. This attribute is optional during creation and defaults to the product's roadblocking type, or RoadblockingType#ONE_OR_MORE if not specified by the product."
@@ -1367,11 +1367,11 @@ input ProposalLineItemInput {
   "The set of frequency capping units for this \`ProposalLineItem\`. This attribute is optional during creation and defaults to the product's frequency caps if Product#allowFrequencyCapsCustomization is \`false\`."
   frequencyCaps: [FrequencyCapInput]
   "The corresponding LineItemType of the \`ProposalLineItem\`. For a programmatic \`ProposalLineItem\`, the value can only be one of:  LineItemType#SPONSORSHIP LineItemType#STANDARD LineItemType#PREFERRED_DEAL  This attribute is required."
-  lineItemType: LineItemTypeEnum!
+  lineItemType: LineItemTypeEnum
   "The priority for the corresponding LineItem of the \`ProposalLineItem\`. This attribute is optional during creation and defaults to the product's priority, or a default value assigned by Google. See LineItem#priority for more information."
   lineItemPriority: Int
   "Details about the creatives that are expected to serve through the \`ProposalLineItem\`. This attribute is optional during creation and defaults to the product's creative placeholders. This attribute is required when:using programmatic guaranteed, not using sales management."
-  creativePlaceholders: [CreativePlaceholderInput]!
+  creativePlaceholders: [CreativePlaceholderInput]
   "Contains the targeting criteria for the \`ProposalLineItem\`. This attribute is optional during creation and defaults to the product's targeting."
   targeting: TargetingInput
   "The values of the custom fields associated with the \`ProposalLineItem\`. This attribute is optional. This attribute can be configured as editable after the proposal has been submitted. Please check with your network administrator for editable fields configuration."
@@ -1387,7 +1387,7 @@ input ProposalLineItemInput {
   "The set of AllowedFormats that this proposal line item can have. If the set is empty, this proposal line item allows all formats."
   allowedFormats: [AllowedFormatsEnum]
   "The marketplace info if this proposal line item is programmatic, null otherwise. This attribute is applicable when:using programmatic guaranteed, using sales management.using programmatic guaranteed, not using sales management. This attribute is required when:using programmatic guaranteed, using sales management.using programmatic guaranteed, not using sales management."
-  marketplaceInfo: ProposalLineItemMarketplaceInfoInput!
+  marketplaceInfo: ProposalLineItemMarketplaceInfoInput
   "Additional terms shown to the buyer in Marketplace. This attribute is applicable when:using programmatic guaranteed, using sales management.using programmatic guaranteed, not using sales management."
   additionalTerms: String
   "Indicates the ProgrammaticCreativeSource of the programmatic line item. This attribute is applicable when:using programmatic guaranteed, using sales management.using programmatic guaranteed, not using sales management."
@@ -1408,8 +1408,8 @@ input ProposalLineItemMakegoodInfoInput {
 
 "Marketplace info for ProposalLineItem with a corresponding deal in Marketplace."
 input ProposalLineItemMarketplaceInfoInput {
-  "The AdExchangeEnvironment of the marketplace web property that is associated with this line item. This is only for proposal line items with a corresponding deal in Marketplace. This attribute is required."
-  adExchangeEnvironment: AdExchangeEnvironmentEnum!
+  "The AdExchangeEnvironment of the marketplace web property that is associated with this line item. The last API version in which this field will be available is v202102. Starting with v202105, this field will no longer be available. To control which platforms your proposal line item will serve on from v202105 onward, please use request platform targeting in the targeting expression."
+  adExchangeEnvironment: AdExchangeEnvironmentEnum
 }
 
 "Represents the platform which requests and renders the ad."
@@ -1529,7 +1529,7 @@ type Targeting {
   "Specifies what geographical locations are targeted by the LineItem. This attribute is optional."
   geoTargeting: GeoTargeting
   "Specifies what inventory is targeted by the LineItem. This attribute is required. The line item must target at least one ad unit or placement."
-  inventoryTargeting: InventoryTargeting!
+  inventoryTargeting: InventoryTargeting
   "Specifies the days of the week and times that are targeted by the LineItem. This attribute is optional."
   dayPartTargeting: DayPartTargeting
   "Specifies the dates and time ranges that are targeted by the LineItem. This attribute is optional."
@@ -1549,7 +1549,7 @@ type Targeting {
   "Specifies whether buyer user lists are targeted on a programmatic LineItem or ProposalLineItem. This attribute is readonly and is populated by Google."
   buyerUserListTargeting: BuyerUserListTargeting
   "Specifies the request platforms that are targeted by the LineItem. This attribute is required for video line items. This value is modifiable for video line items, but read-only for non-video line items. This value is read-only for video line items generated from proposal line items."
-  requestPlatformTargeting: RequestPlatformTargeting!
+  requestPlatformTargeting: RequestPlatformTargeting
 }
 
 "Contains targeting criteria for LineItem objects. See LineItem#targeting."
@@ -1557,7 +1557,7 @@ input TargetingInput {
   "Specifies what geographical locations are targeted by the LineItem. This attribute is optional."
   geoTargeting: GeoTargetingInput
   "Specifies what inventory is targeted by the LineItem. This attribute is required. The line item must target at least one ad unit or placement."
-  inventoryTargeting: InventoryTargetingInput!
+  inventoryTargeting: InventoryTargetingInput
   "Specifies the days of the week and times that are targeted by the LineItem. This attribute is optional."
   dayPartTargeting: DayPartTargetingInput
   "Specifies the dates and time ranges that are targeted by the LineItem. This attribute is optional."
@@ -1794,7 +1794,7 @@ type UpdateResult {
 "Provides line items the ability to target or exclude users visiting their websites from a list of domains or subdomains."
 type UserDomainTargeting {
   "The domains or subdomains that are being targeted or excluded by the LineItem. This attribute is required and the maximum length of each domain is 67 characters."
-  domains: [String]!
+  domains: [String]
   "Indicates whether domains should be targeted or excluded. This attribute is optional and defaults to \`true\`."
   targeted: Boolean
 }
@@ -1802,7 +1802,7 @@ type UserDomainTargeting {
 "Provides line items the ability to target or exclude users visiting their websites from a list of domains or subdomains."
 input UserDomainTargetingInput {
   "The domains or subdomains that are being targeted or excluded by the LineItem. This attribute is required and the maximum length of each domain is 67 characters."
-  domains: [String]!
+  domains: [String]
   "Indicates whether domains should be targeted or excluded. This attribute is optional and defaults to \`true\`."
   targeted: Boolean
 }
@@ -1839,7 +1839,7 @@ input VideoPositionInput {
 "Represents the options for targetable positions within a video."
 type VideoPositionTarget {
   "The video position to target. This attribute is required."
-  videoPosition: VideoPosition!
+  videoPosition: VideoPosition
   "The video bumper type to target. To target a video position or a pod position, this value must be null. To target a bumper position this value must be populated and the line item must have a bumper type. To target a custom ad spot, this value must be null."
   videoBumperType: VideoBumperTypeEnum
   "The video position within a pod to target. To target a video position or a bumper position, this value must be null. To target a position within a pod this value must be populated. To target a custom ad spot, this value must be null."
@@ -1851,7 +1851,7 @@ type VideoPositionTarget {
 "Represents the options for targetable positions within a video."
 input VideoPositionTargetInput {
   "The video position to target. This attribute is required."
-  videoPosition: VideoPositionInput!
+  videoPosition: VideoPositionInput
   "The video bumper type to target. To target a video position or a pod position, this value must be null. To target a bumper position this value must be populated and the line item must have a bumper type. To target a custom ad spot, this value must be null."
   videoBumperType: VideoBumperTypeEnum
   "The video position within a pod to target. To target a video position or a bumper position, this value must be null. To target a position within a pod this value must be populated. To target a custom ad spot, this value must be null."

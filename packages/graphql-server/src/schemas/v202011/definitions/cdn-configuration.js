@@ -9,9 +9,9 @@ type CdnConfiguration {
   "The unique ID of the CdnConfiguration. This value is read-only and is assigned by Google."
   id: BigInt!
   "The name of the CdnConfiguration. This value is required to create a CDN configuration and has a maximum length of 255 characters."
-  name: String!
+  name: String
   "The type of CDN configuration represented by this CdnConfiguration. This value is required to create a CDN configuration"
-  cdnConfigurationType: CdnConfigurationTypeEnum!
+  cdnConfigurationType: CdnConfigurationTypeEnum
   "Parameters about this CDN configuration as a source of content. This facilitates fetching the original content for conditioning and delivering the original content as part of a modified stream."
   sourceContentConfiguration: SourceContentConfiguration
   "The status of the CDN configuration."
@@ -21,9 +21,9 @@ type CdnConfiguration {
 "A CdnConfiguration encapsulates information about where and how to ingest and deliver content enabled for DAI (Dynamic Ad Insertion)."
 input CdnConfigurationInput {
   "The name of the CdnConfiguration. This value is required to create a CDN configuration and has a maximum length of 255 characters."
-  name: String!
+  name: String
   "The type of CDN configuration represented by this CdnConfiguration. This value is required to create a CDN configuration"
-  cdnConfigurationType: CdnConfigurationTypeEnum!
+  cdnConfigurationType: CdnConfigurationTypeEnum
   "Parameters about this CDN configuration as a source of content. This facilitates fetching the original content for conditioning and delivering the original content as part of a modified stream."
   sourceContentConfiguration: SourceContentConfigurationInput
   "The status of the CDN configuration."
@@ -73,17 +73,17 @@ type MediaLocationSettings {
   "The name of the media location. This value is read-only and is assigned by Google."
   name: String
   "The url prefix of the media location. This value is required for a valid media location."
-  urlPrefix: String!
+  urlPrefix: String
   "The security policy and authentication credentials needed to access the content in this media location. This value is required for a valid media location."
-  securityPolicy: SecurityPolicySettings!
+  securityPolicy: SecurityPolicySettings
 }
 
 "Configuration that associates a media location with a security policy and the authentication credentials needed to access the content."
 input MediaLocationSettingsInput {
   "The url prefix of the media location. This value is required for a valid media location."
-  urlPrefix: String!
+  urlPrefix: String
   "The security policy and authentication credentials needed to access the content in this media location. This value is required for a valid media location."
-  securityPolicy: SecurityPolicySettingsInput!
+  securityPolicy: SecurityPolicySettingsInput
 }
 
 "Indicates the type of origin forwarding used to support Akamai authentication policies for LiveStreamEvent"
@@ -107,7 +107,7 @@ input PerformCdnConfigurationActionInput {
 "A set of security requirements to authenticate against in order to access video content. Different locations (e.g. different CDNs) can have different security policies."
 type SecurityPolicySettings {
   "Type of security policy. This determines which other fields should be populated. This value is required for a valid security policy."
-  securityPolicyType: SecurityPolicyTypeEnum!
+  securityPolicyType: SecurityPolicyTypeEnum
   "Shared security key used to generate the Akamai HMAC token for authenticating requests. This field is only applicable when the value of #securityPolicyType is equal to SecurityPolicyType#AKAMAI and will be set to null otherwise."
   tokenAuthenticationKey: String
   "Whether the segment URLs should be signed using the #tokenAuthenticationKey on the server. This is only applicable for delivery media locations that have token authentication enabled."
@@ -125,7 +125,7 @@ type SecurityPolicySettings {
 "A set of security requirements to authenticate against in order to access video content. Different locations (e.g. different CDNs) can have different security policies."
 input SecurityPolicySettingsInput {
   "Type of security policy. This determines which other fields should be populated. This value is required for a valid security policy."
-  securityPolicyType: SecurityPolicyTypeEnum!
+  securityPolicyType: SecurityPolicyTypeEnum
   "Shared security key used to generate the Akamai HMAC token for authenticating requests. This field is only applicable when the value of #securityPolicyType is equal to SecurityPolicyType#AKAMAI and will be set to null otherwise."
   tokenAuthenticationKey: String
   "Whether the segment URLs should be signed using the #tokenAuthenticationKey on the server. This is only applicable for delivery media locations that have token authentication enabled."
@@ -153,17 +153,17 @@ enum SecurityPolicyTypeEnum {
 "Parameters about this CDN configuration as a source of content. This facilitates fetching the original content for conditioning and delivering the original content as part of a modified stream."
 type SourceContentConfiguration {
   "Configuration for how DAI should ingest media. At ingest time, we match the url prefix of media in a stream's playlist with an ingest location and use the authentication credentials from the corresponding ingest settings to download the media. This value is required for a valid source content configuration."
-  ingestSettings: MediaLocationSettings!
+  ingestSettings: MediaLocationSettings
   "Default configuration for how DAI should deliver the non-modified media segments. At delivery time, we replace the ingest location's url prefix with the delivery location's URL prefix and use the security policy from the delivery settings to determine how DAI needs to deliver the media so that users can access it. This value is required for a valid source content configuration."
-  defaultDeliverySettings: MediaLocationSettings!
+  defaultDeliverySettings: MediaLocationSettings
 }
 
 "Parameters about this CDN configuration as a source of content. This facilitates fetching the original content for conditioning and delivering the original content as part of a modified stream."
 input SourceContentConfigurationInput {
   "Configuration for how DAI should ingest media. At ingest time, we match the url prefix of media in a stream's playlist with an ingest location and use the authentication credentials from the corresponding ingest settings to download the media. This value is required for a valid source content configuration."
-  ingestSettings: MediaLocationSettingsInput!
+  ingestSettings: MediaLocationSettingsInput
   "Default configuration for how DAI should deliver the non-modified media segments. At delivery time, we replace the ingest location's url prefix with the delivery location's URL prefix and use the security policy from the delivery settings to determine how DAI needs to deliver the media so that users can access it. This value is required for a valid source content configuration."
-  defaultDeliverySettings: MediaLocationSettingsInput!
+  defaultDeliverySettings: MediaLocationSettingsInput
 }
 
 "Updates the specified CdnConfiguration objects."

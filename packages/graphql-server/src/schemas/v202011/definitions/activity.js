@@ -11,7 +11,7 @@ type Activity {
   "The ID of the ActivityGroup that this Activity belongs to."
   activityGroupId: BigInt
   "The name of the \`Activity\`. This attribute is required and has a maximum length of 255 characters."
-  name: String!
+  name: String
   "The URL of the webpage where the tags from this activity will be placed. This attribute is optional."
   expectedURL: String
   "The status of this activity. This attribute is readonly."
@@ -25,7 +25,7 @@ input ActivityInput {
   "The ID of the ActivityGroup that this Activity belongs to."
   activityGroupId: BigInt
   "The name of the \`Activity\`. This attribute is required and has a maximum length of 255 characters."
-  name: String!
+  name: String
   "The URL of the webpage where the tags from this activity will be placed. This attribute is optional."
   expectedURL: String
   "The activity type. This attribute is optional and defaults to Activity.Type#PAGE_VIEWS"

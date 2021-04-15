@@ -109,7 +109,7 @@ type Proposal {
   "The unique ID of corresponding Order. This will be \`null\` if the \`Proposal\` has not been pushed to Ad Manager. This attribute is read-only."
   dfpOrderId: BigInt
   "The name of the \`Proposal\`. This value has a maximum length of 255 characters. This value is copied to Order#name when the proposal turns into an order. This attribute can be configured as editable after the proposal has been submitted. Please check with your network administrator for editable fields configuration. This attribute is required."
-  name: String!
+  name: String
   "The date and time at which the order and line items associated with the \`Proposal\` are eligible to begin serving. This attribute is derived from the proposal line item of the proposal which has the earliest ProposalLineItem#startDateTime. This attribute will be null, if this proposal has no related line items, or none of its line items have a start time. This attribute is read-only."
   startDateTime: DateTime
   "The date and time at which the order and line items associated with the \`Proposal\` stop being served. This attribute is derived from the proposal line item of the proposal which has the latest ProposalLineItem#endDateTime. This attribute will be null, if this proposal has no related line items, or none of its line items have an end time. This attribute is read-only."
@@ -119,17 +119,17 @@ type Proposal {
   "The archival status of the \`Proposal\`. This attribute is read-only."
   isArchived: Boolean
   "The advertiser, to which this \`Proposal\` belongs, and a set of Contact objects associated with the advertiser. The ProposalCompanyAssociation#type of this attribute should be ProposalCompanyAssociationType#ADVERTISER. This attribute is required when the proposal turns into an order, and its ProposalCompanyAssociation#companyId will be copied to Order#advertiserId. This attribute becomes readonly once the \`Proposal\` has been pushed."
-  advertiser: ProposalCompanyAssociation!
+  advertiser: ProposalCompanyAssociation
   "List of agencies and the set of Contact objects associated with each agency. This attribute is optional. A \`Proposal\` only has at most one Company with ProposalCompanyAssociationType#PRIMARY_AGENCY type, but a Company can appear more than once with different ProposalCompanyAssociationType values. If primary agency exists, its ProposalCompanyAssociation#companyId will be copied to Order#agencyId when the proposal turns into an order."
   agencies: [ProposalCompanyAssociation]
   "Provides any additional notes that may annotate the \`Proposal\`. This attribute is optional and has a maximum length of 65,535 characters. This attribute can be configured as editable after the proposal has been submitted. Please check with your network administrator for editable fields configuration."
   internalNotes: String
   "The primary salesperson who brokered the transaction with the #advertiser. This attribute is required when the proposal turns into an order. This attribute can be configured as editable after the proposal has been submitted. Please check with your network administrator for editable fields configuration."
-  primarySalesperson: SalespersonSplit!
+  primarySalesperson: SalespersonSplit
   "List of unique IDs of User objects who are the sales planners of the \`Proposal\`. This attribute is optional. A proposal could have 8 sales planners at most. This attribute can be configured as editable after the proposal has been submitted. Please check with your network administrator for editable fields configuration."
   salesPlannerIds: [BigInt]
   "The unique ID of the User who is primary trafficker and is responsible for trafficking the \`Proposal\`. This attribute is required when the proposal turns into an order, and will be copied to Order#primaryTraffickerId . This attribute can be configured as editable after the proposal has been submitted. Please check with your network administrator for editable fields configuration."
-  primaryTraffickerId: BigInt!
+  primaryTraffickerId: BigInt
   "users who are the seller's contacts. This attribute is applicable when:using programmatic guaranteed, using sales management.using programmatic guaranteed, not using sales management.using preferred deals, not using sales management."
   sellerContactIds: [BigInt]
   "The IDs of all teams that the \`Proposal\` is on directly. This attribute is optional. This attribute can be configured as editable after the proposal has been submitted. Please check with your network administrator for editable fields configuration."
@@ -161,9 +161,9 @@ type Proposal {
 "A \`ProposalCompanyAssociation\` represents a Company associated with the Proposal and a set of Contact objects belonging to the company."
 type ProposalCompanyAssociation {
   "The unique ID of the Company associated with the Proposal. This attribute is required."
-  companyId: BigInt!
+  companyId: BigInt
   "The association type of the Company and Proposal. This attribute is required."
-  type: ProposalCompanyAssociationTypeEnum!
+  type: ProposalCompanyAssociationTypeEnum
   "List of unique IDs for Contact objects of the Company."
   contactIds: [BigInt]
 }
@@ -171,9 +171,9 @@ type ProposalCompanyAssociation {
 "A \`ProposalCompanyAssociation\` represents a Company associated with the Proposal and a set of Contact objects belonging to the company."
 input ProposalCompanyAssociationInput {
   "The unique ID of the Company associated with the Proposal. This attribute is required."
-  companyId: BigInt!
+  companyId: BigInt
   "The association type of the Company and Proposal. This attribute is required."
-  type: ProposalCompanyAssociationTypeEnum!
+  type: ProposalCompanyAssociationTypeEnum
   "List of unique IDs for Contact objects of the Company."
   contactIds: [BigInt]
 }
@@ -199,19 +199,19 @@ input ProposalInput {
   "Flag that specifies whether this \`Proposal\` is for programmatic deals. This value is default to \`false\`."
   isProgrammatic: Boolean
   "The name of the \`Proposal\`. This value has a maximum length of 255 characters. This value is copied to Order#name when the proposal turns into an order. This attribute can be configured as editable after the proposal has been submitted. Please check with your network administrator for editable fields configuration. This attribute is required."
-  name: String!
+  name: String
   "The advertiser, to which this \`Proposal\` belongs, and a set of Contact objects associated with the advertiser. The ProposalCompanyAssociation#type of this attribute should be ProposalCompanyAssociationType#ADVERTISER. This attribute is required when the proposal turns into an order, and its ProposalCompanyAssociation#companyId will be copied to Order#advertiserId. This attribute becomes readonly once the \`Proposal\` has been pushed."
-  advertiser: ProposalCompanyAssociationInput!
+  advertiser: ProposalCompanyAssociationInput
   "List of agencies and the set of Contact objects associated with each agency. This attribute is optional. A \`Proposal\` only has at most one Company with ProposalCompanyAssociationType#PRIMARY_AGENCY type, but a Company can appear more than once with different ProposalCompanyAssociationType values. If primary agency exists, its ProposalCompanyAssociation#companyId will be copied to Order#agencyId when the proposal turns into an order."
   agencies: [ProposalCompanyAssociationInput]
   "Provides any additional notes that may annotate the \`Proposal\`. This attribute is optional and has a maximum length of 65,535 characters. This attribute can be configured as editable after the proposal has been submitted. Please check with your network administrator for editable fields configuration."
   internalNotes: String
   "The primary salesperson who brokered the transaction with the #advertiser. This attribute is required when the proposal turns into an order. This attribute can be configured as editable after the proposal has been submitted. Please check with your network administrator for editable fields configuration."
-  primarySalesperson: SalespersonSplitInput!
+  primarySalesperson: SalespersonSplitInput
   "List of unique IDs of User objects who are the sales planners of the \`Proposal\`. This attribute is optional. A proposal could have 8 sales planners at most. This attribute can be configured as editable after the proposal has been submitted. Please check with your network administrator for editable fields configuration."
   salesPlannerIds: [BigInt]
   "The unique ID of the User who is primary trafficker and is responsible for trafficking the \`Proposal\`. This attribute is required when the proposal turns into an order, and will be copied to Order#primaryTraffickerId . This attribute can be configured as editable after the proposal has been submitted. Please check with your network administrator for editable fields configuration."
-  primaryTraffickerId: BigInt!
+  primaryTraffickerId: BigInt
   "users who are the seller's contacts. This attribute is applicable when:using programmatic guaranteed, using sales management.using programmatic guaranteed, not using sales management.using preferred deals, not using sales management."
   sellerContactIds: [BigInt]
   "The IDs of all teams that the \`Proposal\` is on directly. This attribute is optional. This attribute can be configured as editable after the proposal has been submitted. Please check with your network administrator for editable fields configuration."
@@ -245,7 +245,7 @@ type ProposalMarketplaceInfo {
   "Indicates that the buyer has made updates to the proposal on Marketplace. This attribute is only meaningful if the proposal is open for edit (i.e., #hasLocalVersionEdits is \`true\`) This attribute is read-only."
   isNewVersionFromBuyer: Boolean
   "The Authorized Buyers ID of the buyer that this \`Proposal\` is being negotiated with. This attribute is required."
-  buyerAccountId: BigInt!
+  buyerAccountId: BigInt
   "The ID used to represent Display & Video 360 client buyer partner ID (if Display & Video 360) or Authorized Buyers client buyer account ID. This field is readonly and assigned by Google. This attribute is read-only."
   partnerClientId: String
 }
@@ -255,7 +255,7 @@ input ProposalMarketplaceInfoInput {
   "The comment on the Proposal to be sent to the buyer."
   marketplaceComment: String
   "The Authorized Buyers ID of the buyer that this \`Proposal\` is being negotiated with. This attribute is required."
-  buyerAccountId: BigInt!
+  buyerAccountId: BigInt
 }
 
 "Captures a page of Proposal objects."
@@ -303,7 +303,7 @@ enum RfpTypeEnum {
 "A \`SalespersonSplit\` represents a salesperson and their split."
 type SalespersonSplit {
   "The unique ID of the User responsible for the sales of the Proposal. This attribute is required."
-  userId: BigInt!
+  userId: BigInt
   "The split can be attributed to the salesperson. The percentage value is stored as millipercents, and must be multiples of 10 with the range from 0 to 100000. The default value is 0."
   split: Int
 }
@@ -311,7 +311,7 @@ type SalespersonSplit {
 "A \`SalespersonSplit\` represents a salesperson and their split."
 input SalespersonSplitInput {
   "The unique ID of the User responsible for the sales of the Proposal. This attribute is required."
-  userId: BigInt!
+  userId: BigInt
   "The split can be attributed to the salesperson. The percentage value is stored as millipercents, and must be multiples of 10 with the range from 0 to 100000. The default value is 0."
   split: Int
 }

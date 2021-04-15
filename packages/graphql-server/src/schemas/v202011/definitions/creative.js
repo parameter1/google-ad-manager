@@ -8,13 +8,13 @@ module.exports = gql`
 type AdExchangeCreative implements HasHtmlSnippetDynamicAllocationCreativeInterface & BaseDynamicAllocationCreativeInterface & CreativeInterface {
   _: Boolean
   "The ID of the advertiser that owns the creative. This attribute is required."
-  advertiserId: BigInt!
+  advertiserId: BigInt
   "Uniquely identifies the \`Creative\`. This value is read-only and is assigned by Google when the creative is created. This attribute is required for updates."
   id: BigInt!
   "The name of the creative. This attribute is required and has a maximum length of 255 characters."
-  name: String!
+  name: String
   "The Size of the creative. This attribute is required for creation and then is read-only."
-  size: Size!
+  size: Size
   "The URL of the creative for previewing the media. This attribute is read-only and is assigned by Google when a creative is created."
   previewUrl: String
   "Set of policy labels detected for this creative. This attribute is read-only."
@@ -51,13 +51,13 @@ enum AdIdTypeEnum {
 type AdSenseCreative implements HasHtmlSnippetDynamicAllocationCreativeInterface & BaseDynamicAllocationCreativeInterface & CreativeInterface {
   _: Boolean
   "The ID of the advertiser that owns the creative. This attribute is required."
-  advertiserId: BigInt!
+  advertiserId: BigInt
   "Uniquely identifies the \`Creative\`. This value is read-only and is assigned by Google when the creative is created. This attribute is required for updates."
   id: BigInt!
   "The name of the creative. This attribute is required and has a maximum length of 255 characters."
-  name: String!
+  name: String
   "The Size of the creative. This attribute is required for creation and then is read-only."
-  size: Size!
+  size: Size
   "The URL of the creative for previewing the media. This attribute is read-only and is assigned by Google when a creative is created."
   previewUrl: String
   "Set of policy labels detected for this creative. This attribute is read-only."
@@ -77,13 +77,13 @@ type AdSenseCreative implements HasHtmlSnippetDynamicAllocationCreativeInterface
 "A \`Creative\` intended for mobile platforms that displays an image, whose size is defined as an aspect ratio, i.e. Size#isAspectRatio. It can have multiple images whose dimensions conform to that aspect ratio."
 type AspectRatioImageCreative implements HasDestinationUrlCreativeInterface & CreativeInterface {
   "The ID of the advertiser that owns the creative. This attribute is required."
-  advertiserId: BigInt!
+  advertiserId: BigInt
   "Uniquely identifies the \`Creative\`. This value is read-only and is assigned by Google when the creative is created. This attribute is required for updates."
   id: BigInt!
   "The name of the creative. This attribute is required and has a maximum length of 255 characters."
-  name: String!
+  name: String
   "The Size of the creative. This attribute is required for creation and then is read-only."
-  size: Size!
+  size: Size
   "The URL of the creative for previewing the media. This attribute is read-only and is assigned by Google when a creative is created."
   previewUrl: String
   "Set of policy labels detected for this creative. This attribute is read-only."
@@ -97,11 +97,11 @@ type AspectRatioImageCreative implements HasDestinationUrlCreativeInterface & Cr
   "The third party companies associated with this creative. This is distinct from any associated companies that Google may detect programmatically."
   thirdPartyDataDeclaration: ThirdPartyDataDeclaration
   "The URL that the user is directed to if they click on the creative. This attribute is required unless the destinationUrlType is DestinationUrlType#NONE, and has a maximum length of 1024 characters."
-  destinationUrl: String!
+  destinationUrl: String
   "The action that should be performed if the user clicks on the creative. This attribute is optional and defaults to DestinationUrlType#CLICK_TO_WEB."
   destinationUrlType: DestinationUrlTypeEnum
   "The images associated with this creative. The ad server will choose one based on the capabilities of the device. Each asset should have a size which is of the same aspect ratio as the Creative#size. This attribute is required and must have at least one asset."
-  imageAssets: [CreativeAsset]!
+  imageAssets: [CreativeAsset]
   "The text that is served along with the image creative, primarily for accessibility. If no suitable image size is available for the device, this text replaces the image completely. This field is optional and has a maximum length of 500 characters."
   altText: String
   "An impression tracking URL to ping when this creative is displayed. This field is optional has a maximum length of 1024 characters."
@@ -115,7 +115,7 @@ type AssetCreativeTemplateVariableValue implements BaseCreativeTemplateVariableV
   "A uniqueName of the CreativeTemplateVariable."
   uniqueName: String
   "The associated asset. This attribute is required when creating a new \`TemplateCreative\`. To view the asset, use CreativeAsset#assetUrl."
-  asset: CreativeAsset!
+  asset: CreativeAsset
 }
 
 "Base asset properties."
@@ -132,13 +132,13 @@ interface BaseCreativeTemplateVariableValueInterface {
 "A base class for dynamic allocation creatives."
 interface BaseDynamicAllocationCreativeInterface implements CreativeInterface {
   "The ID of the advertiser that owns the creative. This attribute is required."
-  advertiserId: BigInt!
+  advertiserId: BigInt
   "Uniquely identifies the \`Creative\`. This value is read-only and is assigned by Google when the creative is created. This attribute is required for updates."
   id: BigInt!
   "The name of the creative. This attribute is required and has a maximum length of 255 characters."
-  name: String!
+  name: String
   "The Size of the creative. This attribute is required for creation and then is read-only."
-  size: Size!
+  size: Size
   "The URL of the creative for previewing the media. This attribute is read-only and is assigned by Google when a creative is created."
   previewUrl: String
   "Set of policy labels detected for this creative. This attribute is read-only."
@@ -156,13 +156,13 @@ interface BaseDynamicAllocationCreativeInterface implements CreativeInterface {
 "The base type for creatives that display an image."
 interface BaseImageCreativeInterface implements HasDestinationUrlCreativeInterface & CreativeInterface {
   "The ID of the advertiser that owns the creative. This attribute is required."
-  advertiserId: BigInt!
+  advertiserId: BigInt
   "Uniquely identifies the \`Creative\`. This value is read-only and is assigned by Google when the creative is created. This attribute is required for updates."
   id: BigInt!
   "The name of the creative. This attribute is required and has a maximum length of 255 characters."
-  name: String!
+  name: String
   "The Size of the creative. This attribute is required for creation and then is read-only."
-  size: Size!
+  size: Size
   "The URL of the creative for previewing the media. This attribute is read-only and is assigned by Google when a creative is created."
   previewUrl: String
   "Set of policy labels detected for this creative. This attribute is read-only."
@@ -176,25 +176,25 @@ interface BaseImageCreativeInterface implements HasDestinationUrlCreativeInterfa
   "The third party companies associated with this creative. This is distinct from any associated companies that Google may detect programmatically."
   thirdPartyDataDeclaration: ThirdPartyDataDeclaration
   "The URL that the user is directed to if they click on the creative. This attribute is required unless the destinationUrlType is DestinationUrlType#NONE, and has a maximum length of 1024 characters."
-  destinationUrl: String!
+  destinationUrl: String
   "The action that should be performed if the user clicks on the creative. This attribute is optional and defaults to DestinationUrlType#CLICK_TO_WEB."
   destinationUrlType: DestinationUrlTypeEnum
   "Allows the creative size to differ from the actual image asset size. This attribute is optional."
   overrideSize: Boolean
   "The primary image asset associated with this creative. This attribute is required."
-  primaryImageAsset: CreativeAsset!
+  primaryImageAsset: CreativeAsset
 }
 
 "The base type for creatives that load an image asset from a specified URL."
 interface BaseImageRedirectCreativeInterface implements HasDestinationUrlCreativeInterface & CreativeInterface {
   "The ID of the advertiser that owns the creative. This attribute is required."
-  advertiserId: BigInt!
+  advertiserId: BigInt
   "Uniquely identifies the \`Creative\`. This value is read-only and is assigned by Google when the creative is created. This attribute is required for updates."
   id: BigInt!
   "The name of the creative. This attribute is required and has a maximum length of 255 characters."
-  name: String!
+  name: String
   "The Size of the creative. This attribute is required for creation and then is read-only."
-  size: Size!
+  size: Size
   "The URL of the creative for previewing the media. This attribute is read-only and is assigned by Google when a creative is created."
   previewUrl: String
   "Set of policy labels detected for this creative. This attribute is read-only."
@@ -208,23 +208,23 @@ interface BaseImageRedirectCreativeInterface implements HasDestinationUrlCreativ
   "The third party companies associated with this creative. This is distinct from any associated companies that Google may detect programmatically."
   thirdPartyDataDeclaration: ThirdPartyDataDeclaration
   "The URL that the user is directed to if they click on the creative. This attribute is required unless the destinationUrlType is DestinationUrlType#NONE, and has a maximum length of 1024 characters."
-  destinationUrl: String!
+  destinationUrl: String
   "The action that should be performed if the user clicks on the creative. This attribute is optional and defaults to DestinationUrlType#CLICK_TO_WEB."
   destinationUrlType: DestinationUrlTypeEnum
   "The URL where the actual asset resides. This attribute is required and has a maximum length of 1024 characters."
-  imageUrl: String!
+  imageUrl: String
 }
 
 "A \`Creative\` that is created by a Rich Media Studio."
 interface BaseRichMediaStudioCreativeInterface implements CreativeInterface {
   "The ID of the advertiser that owns the creative. This attribute is required."
-  advertiserId: BigInt!
+  advertiserId: BigInt
   "Uniquely identifies the \`Creative\`. This value is read-only and is assigned by Google when the creative is created. This attribute is required for updates."
   id: BigInt!
   "The name of the creative. This attribute is required and has a maximum length of 255 characters."
-  name: String!
+  name: String
   "The Size of the creative. This attribute is required for creation and then is read-only."
-  size: Size!
+  size: Size
   "The URL of the creative for previewing the media. This attribute is read-only and is assigned by Google when a creative is created."
   previewUrl: String
   "Set of policy labels detected for this creative. This attribute is read-only."
@@ -276,13 +276,13 @@ interface BaseRichMediaStudioCreativeInterface implements CreativeInterface {
 "A base type for video creatives."
 interface BaseVideoCreativeInterface implements HasDestinationUrlCreativeInterface & CreativeInterface {
   "The ID of the advertiser that owns the creative. This attribute is required."
-  advertiserId: BigInt!
+  advertiserId: BigInt
   "Uniquely identifies the \`Creative\`. This value is read-only and is assigned by Google when the creative is created. This attribute is required for updates."
   id: BigInt!
   "The name of the creative. This attribute is required and has a maximum length of 255 characters."
-  name: String!
+  name: String
   "The Size of the creative. This attribute is required for creation and then is read-only."
-  size: Size!
+  size: Size
   "The URL of the creative for previewing the media. This attribute is read-only and is assigned by Google when a creative is created."
   previewUrl: String
   "Set of policy labels detected for this creative. This attribute is read-only."
@@ -296,7 +296,7 @@ interface BaseVideoCreativeInterface implements HasDestinationUrlCreativeInterfa
   "The third party companies associated with this creative. This is distinct from any associated companies that Google may detect programmatically."
   thirdPartyDataDeclaration: ThirdPartyDataDeclaration
   "The URL that the user is directed to if they click on the creative. This attribute is required unless the destinationUrlType is DestinationUrlType#NONE, and has a maximum length of 1024 characters."
-  destinationUrl: String!
+  destinationUrl: String
   "The action that should be performed if the user clicks on the creative. This attribute is optional and defaults to DestinationUrlType#CLICK_TO_WEB."
   destinationUrlType: DestinationUrlTypeEnum
   "The expected duration of this creative in milliseconds."
@@ -334,13 +334,13 @@ type ClickTag {
 "A creative that is used for tracking clicks on ads that are served directly from the customers' web servers or media servers. NOTE: The size attribute is not used for click tracking creative and it will not be persisted upon save."
 type ClickTrackingCreative implements CreativeInterface {
   "The ID of the advertiser that owns the creative. This attribute is required."
-  advertiserId: BigInt!
+  advertiserId: BigInt
   "Uniquely identifies the \`Creative\`. This value is read-only and is assigned by Google when the creative is created. This attribute is required for updates."
   id: BigInt!
   "The name of the creative. This attribute is required and has a maximum length of 255 characters."
-  name: String!
+  name: String
   "The Size of the creative. This attribute is required for creation and then is read-only."
-  size: Size!
+  size: Size
   "The URL of the creative for previewing the media. This attribute is read-only and is assigned by Google when a creative is created."
   previewUrl: String
   "Set of policy labels detected for this creative. This attribute is read-only."
@@ -354,7 +354,7 @@ type ClickTrackingCreative implements CreativeInterface {
   "The third party companies associated with this creative. This is distinct from any associated companies that Google may detect programmatically."
   thirdPartyDataDeclaration: ThirdPartyDataDeclaration
   "The click tracking URL. This attribute is required."
-  clickTrackingUrl: String!
+  clickTrackingUrl: String
 }
 
 "All possible tracking event types. Not all events are supported by every kind of creative."
@@ -437,9 +437,9 @@ type CreativeAsset {
   "The ID of the asset. This attribute is generated by Google upon creation."
   assetId: BigInt
   "The content of the asset as a byte array. This attribute is required when creating the creative that contains this asset if an \`assetId\` is not provided.  When updating the content, pass a new byte array, and set \`assetId\` to null. Otherwise, this field can be null.  The \`assetByteArray\` will be \`null\` when the creative is retrieved."
-  assetByteArray: String!
+  assetByteArray: String
   "The file name of the asset. This attribute is required when creating a new asset (e.g. when #assetByteArray is not null)."
-  fileName: String!
+  fileName: String
   "The file size of the asset in bytes. This attribute is read-only."
   fileSize: BigInt
   "A URL where the asset can be previewed at. This field is read-only and set by Google."
@@ -457,9 +457,9 @@ input CreativeAssetInput {
   "The ID of the asset. This attribute is generated by Google upon creation."
   assetId: BigInt
   "The content of the asset as a byte array. This attribute is required when creating the creative that contains this asset if an \`assetId\` is not provided.  When updating the content, pass a new byte array, and set \`assetId\` to null. Otherwise, this field can be null.  The \`assetByteArray\` will be \`null\` when the creative is retrieved."
-  assetByteArray: String!
+  assetByteArray: String
   "The file name of the asset. This attribute is required when creating a new asset (e.g. when #assetByteArray is not null)."
-  fileName: String!
+  fileName: String
   "The display density of the image. This is the ratio between a dimension in pixels of the image and the dimension in pixels that it should occupy in device-independent pixels when displayed. This attribute is optional and defaults to ONE_TO_ONE."
   imageDensity: ImageDensityEnum
 }
@@ -467,13 +467,13 @@ input CreativeAssetInput {
 "A \`Creative\` represents the media for the ad being served. Read more about creatives on the [Ad Manager Help Center](https://support.google.com/dfp_premium/answer/3185155)."
 interface CreativeInterface {
   "The ID of the advertiser that owns the creative. This attribute is required."
-  advertiserId: BigInt!
+  advertiserId: BigInt
   "Uniquely identifies the \`Creative\`. This value is read-only and is assigned by Google when the creative is created. This attribute is required for updates."
   id: BigInt!
   "The name of the creative. This attribute is required and has a maximum length of 255 characters."
-  name: String!
+  name: String
   "The Size of the creative. This attribute is required for creation and then is read-only."
-  size: Size!
+  size: Size
   "The URL of the creative for previewing the media. This attribute is read-only and is assigned by Google when a creative is created."
   previewUrl: String
   "Set of policy labels detected for this creative. This attribute is read-only."
@@ -541,13 +541,13 @@ enum CreativePolicyViolationEnum {
 "A \`Creative\` that contains an arbitrary HTML snippet and file assets."
 type CustomCreative implements HasDestinationUrlCreativeInterface & CreativeInterface {
   "The ID of the advertiser that owns the creative. This attribute is required."
-  advertiserId: BigInt!
+  advertiserId: BigInt
   "Uniquely identifies the \`Creative\`. This value is read-only and is assigned by Google when the creative is created. This attribute is required for updates."
   id: BigInt!
   "The name of the creative. This attribute is required and has a maximum length of 255 characters."
-  name: String!
+  name: String
   "The Size of the creative. This attribute is required for creation and then is read-only."
-  size: Size!
+  size: Size
   "The URL of the creative for previewing the media. This attribute is read-only and is assigned by Google when a creative is created."
   previewUrl: String
   "Set of policy labels detected for this creative. This attribute is read-only."
@@ -561,11 +561,11 @@ type CustomCreative implements HasDestinationUrlCreativeInterface & CreativeInte
   "The third party companies associated with this creative. This is distinct from any associated companies that Google may detect programmatically."
   thirdPartyDataDeclaration: ThirdPartyDataDeclaration
   "The URL that the user is directed to if they click on the creative. This attribute is required unless the destinationUrlType is DestinationUrlType#NONE, and has a maximum length of 1024 characters."
-  destinationUrl: String!
+  destinationUrl: String
   "The action that should be performed if the user clicks on the creative. This attribute is optional and defaults to DestinationUrlType#CLICK_TO_WEB."
   destinationUrlType: DestinationUrlTypeEnum
   "The HTML snippet that this creative delivers. This attribute is required."
-  htmlSnippet: String!
+  htmlSnippet: String
   "A list of file assets that are associated with this creative, and can be referenced in the snippet."
   customCreativeAssets: [CustomCreativeAsset]
   "\`true\` if this custom creative is interstitial. An interstitial creative will not consider an impression served until it is fully rendered in the browser."
@@ -587,7 +587,7 @@ type CustomCreativeAsset {
   "The name by which the associated asset will be referenced. For example, if the value is 'foo', then the asset can be inserted into an HTML snippet using the macro: '%%FILE:foo%%'."
   macroName: String
   "The asset. This attribute is required. To view the asset, use CreativeAsset#assetUrl."
-  asset: CreativeAsset!
+  asset: CreativeAsset
 }
 
 "A \`CustomCreativeAsset\` is an association between a CustomCreative and an asset. Any assets that are associated with a creative can be inserted into its HTML snippet."
@@ -595,7 +595,7 @@ input CustomCreativeAssetInput {
   "The name by which the associated asset will be referenced. For example, if the value is 'foo', then the asset can be inserted into an HTML snippet using the macro: '%%FILE:foo%%'."
   macroName: String
   "The asset. This attribute is required. To view the asset, use CreativeAsset#assetUrl."
-  asset: CreativeAssetInput!
+  asset: CreativeAssetInput
 }
 
 "The valid actions that a destination URL may perform if the user clicks on the ad."
@@ -620,13 +620,13 @@ input GetCreativesByStatementInput {
 "A \`Creative\` that has a destination url"
 interface HasDestinationUrlCreativeInterface implements CreativeInterface {
   "The ID of the advertiser that owns the creative. This attribute is required."
-  advertiserId: BigInt!
+  advertiserId: BigInt
   "Uniquely identifies the \`Creative\`. This value is read-only and is assigned by Google when the creative is created. This attribute is required for updates."
   id: BigInt!
   "The name of the creative. This attribute is required and has a maximum length of 255 characters."
-  name: String!
+  name: String
   "The Size of the creative. This attribute is required for creation and then is read-only."
-  size: Size!
+  size: Size
   "The URL of the creative for previewing the media. This attribute is read-only and is assigned by Google when a creative is created."
   previewUrl: String
   "Set of policy labels detected for this creative. This attribute is read-only."
@@ -640,7 +640,7 @@ interface HasDestinationUrlCreativeInterface implements CreativeInterface {
   "The third party companies associated with this creative. This is distinct from any associated companies that Google may detect programmatically."
   thirdPartyDataDeclaration: ThirdPartyDataDeclaration
   "The URL that the user is directed to if they click on the creative. This attribute is required unless the destinationUrlType is DestinationUrlType#NONE, and has a maximum length of 1024 characters."
-  destinationUrl: String!
+  destinationUrl: String
   "The action that should be performed if the user clicks on the creative. This attribute is optional and defaults to DestinationUrlType#CLICK_TO_WEB."
   destinationUrlType: DestinationUrlTypeEnum
 }
@@ -649,13 +649,13 @@ interface HasDestinationUrlCreativeInterface implements CreativeInterface {
 interface HasHtmlSnippetDynamicAllocationCreativeInterface implements BaseDynamicAllocationCreativeInterface & CreativeInterface {
   _: Boolean
   "The ID of the advertiser that owns the creative. This attribute is required."
-  advertiserId: BigInt!
+  advertiserId: BigInt
   "Uniquely identifies the \`Creative\`. This value is read-only and is assigned by Google when the creative is created. This attribute is required for updates."
   id: BigInt!
   "The name of the creative. This attribute is required and has a maximum length of 255 characters."
-  name: String!
+  name: String
   "The Size of the creative. This attribute is required for creation and then is read-only."
-  size: Size!
+  size: Size
   "The URL of the creative for previewing the media. This attribute is read-only and is assigned by Google when a creative is created."
   previewUrl: String
   "Set of policy labels detected for this creative. This attribute is read-only."
@@ -675,13 +675,13 @@ interface HasHtmlSnippetDynamicAllocationCreativeInterface implements BaseDynami
 "A \`Creative\` that contains a zipped HTML5 bundle asset, a list of third party impression trackers, and a third party click tracker."
 type Html5Creative implements CreativeInterface {
   "The ID of the advertiser that owns the creative. This attribute is required."
-  advertiserId: BigInt!
+  advertiserId: BigInt
   "Uniquely identifies the \`Creative\`. This value is read-only and is assigned by Google when the creative is created. This attribute is required for updates."
   id: BigInt!
   "The name of the creative. This attribute is required and has a maximum length of 255 characters."
-  name: String!
+  name: String
   "The Size of the creative. This attribute is required for creation and then is read-only."
-  size: Size!
+  size: Size
   "The URL of the creative for previewing the media. This attribute is read-only and is assigned by Google when a creative is created."
   previewUrl: String
   "Set of policy labels detected for this creative. This attribute is read-only."
@@ -709,19 +709,19 @@ type Html5Creative implements CreativeInterface {
   "Whether the Creative is compatible for SafeFrame rendering. This attribute is optional and defaults to \`true\`."
   isSafeFrameCompatible: Boolean
   "The HTML5 asset. To preview the HTML5 asset, use the CreativeAsset#assetUrl. In this field, the CreativeAsset#assetByteArray must be a zip bundle and the CreativeAsset#fileName must have a zip extension. This attribute is required."
-  html5Asset: CreativeAsset!
+  html5Asset: CreativeAsset
 }
 
 "A \`Creative\` that displays an image."
 type ImageCreative implements BaseImageCreativeInterface & HasDestinationUrlCreativeInterface & CreativeInterface {
   "The ID of the advertiser that owns the creative. This attribute is required."
-  advertiserId: BigInt!
+  advertiserId: BigInt
   "Uniquely identifies the \`Creative\`. This value is read-only and is assigned by Google when the creative is created. This attribute is required for updates."
   id: BigInt!
   "The name of the creative. This attribute is required and has a maximum length of 255 characters."
-  name: String!
+  name: String
   "The Size of the creative. This attribute is required for creation and then is read-only."
-  size: Size!
+  size: Size
   "The URL of the creative for previewing the media. This attribute is read-only and is assigned by Google when a creative is created."
   previewUrl: String
   "Set of policy labels detected for this creative. This attribute is read-only."
@@ -735,13 +735,13 @@ type ImageCreative implements BaseImageCreativeInterface & HasDestinationUrlCrea
   "The third party companies associated with this creative. This is distinct from any associated companies that Google may detect programmatically."
   thirdPartyDataDeclaration: ThirdPartyDataDeclaration
   "The URL that the user is directed to if they click on the creative. This attribute is required unless the destinationUrlType is DestinationUrlType#NONE, and has a maximum length of 1024 characters."
-  destinationUrl: String!
+  destinationUrl: String
   "The action that should be performed if the user clicks on the creative. This attribute is optional and defaults to DestinationUrlType#CLICK_TO_WEB."
   destinationUrlType: DestinationUrlTypeEnum
   "Allows the creative size to differ from the actual image asset size. This attribute is optional."
   overrideSize: Boolean
   "The primary image asset associated with this creative. This attribute is required."
-  primaryImageAsset: CreativeAsset!
+  primaryImageAsset: CreativeAsset
   "Alternative text to be rendered along with the creative used mainly for accessibility. This field is optional and has a maximum length of 500 characters."
   altText: String
   "An impression tracking URL to ping when this creative is displayed. This field is optional has a maximum length of 1024 characters."
@@ -765,13 +765,13 @@ enum ImageDensityEnum {
 "An overlay \`Creative\` that displays an image and is served via VAST 2.0 XML. Overlays cover part of the video content they are displayed on top of. This creative is read only prior to v201705."
 type ImageOverlayCreative implements BaseImageCreativeInterface & HasDestinationUrlCreativeInterface & CreativeInterface {
   "The ID of the advertiser that owns the creative. This attribute is required."
-  advertiserId: BigInt!
+  advertiserId: BigInt
   "Uniquely identifies the \`Creative\`. This value is read-only and is assigned by Google when the creative is created. This attribute is required for updates."
   id: BigInt!
   "The name of the creative. This attribute is required and has a maximum length of 255 characters."
-  name: String!
+  name: String
   "The Size of the creative. This attribute is required for creation and then is read-only."
-  size: Size!
+  size: Size
   "The URL of the creative for previewing the media. This attribute is read-only and is assigned by Google when a creative is created."
   previewUrl: String
   "Set of policy labels detected for this creative. This attribute is read-only."
@@ -785,13 +785,13 @@ type ImageOverlayCreative implements BaseImageCreativeInterface & HasDestination
   "The third party companies associated with this creative. This is distinct from any associated companies that Google may detect programmatically."
   thirdPartyDataDeclaration: ThirdPartyDataDeclaration
   "The URL that the user is directed to if they click on the creative. This attribute is required unless the destinationUrlType is DestinationUrlType#NONE, and has a maximum length of 1024 characters."
-  destinationUrl: String!
+  destinationUrl: String
   "The action that should be performed if the user clicks on the creative. This attribute is optional and defaults to DestinationUrlType#CLICK_TO_WEB."
   destinationUrlType: DestinationUrlTypeEnum
   "Allows the creative size to differ from the actual image asset size. This attribute is optional."
   overrideSize: Boolean
   "The primary image asset associated with this creative. This attribute is required."
-  primaryImageAsset: CreativeAsset!
+  primaryImageAsset: CreativeAsset
   "The IDs of the companion creatives that are associated with this creative. This attribute is optional. This attribute is read-only."
   companionCreativeIds: [BigInt]
   "A map from \`ConversionEvent\` to a list of URLs that will be pinged when the event happens. This attribute is optional."
@@ -809,13 +809,13 @@ type ImageOverlayCreative implements BaseImageCreativeInterface & HasDestination
 "A \`Creative\` that loads an image asset from a specified URL."
 type ImageRedirectCreative implements BaseImageRedirectCreativeInterface & HasDestinationUrlCreativeInterface & CreativeInterface {
   "The ID of the advertiser that owns the creative. This attribute is required."
-  advertiserId: BigInt!
+  advertiserId: BigInt
   "Uniquely identifies the \`Creative\`. This value is read-only and is assigned by Google when the creative is created. This attribute is required for updates."
   id: BigInt!
   "The name of the creative. This attribute is required and has a maximum length of 255 characters."
-  name: String!
+  name: String
   "The Size of the creative. This attribute is required for creation and then is read-only."
-  size: Size!
+  size: Size
   "The URL of the creative for previewing the media. This attribute is read-only and is assigned by Google when a creative is created."
   previewUrl: String
   "Set of policy labels detected for this creative. This attribute is read-only."
@@ -829,11 +829,11 @@ type ImageRedirectCreative implements BaseImageRedirectCreativeInterface & HasDe
   "The third party companies associated with this creative. This is distinct from any associated companies that Google may detect programmatically."
   thirdPartyDataDeclaration: ThirdPartyDataDeclaration
   "The URL that the user is directed to if they click on the creative. This attribute is required unless the destinationUrlType is DestinationUrlType#NONE, and has a maximum length of 1024 characters."
-  destinationUrl: String!
+  destinationUrl: String
   "The action that should be performed if the user clicks on the creative. This attribute is optional and defaults to DestinationUrlType#CLICK_TO_WEB."
   destinationUrlType: DestinationUrlTypeEnum
   "The URL where the actual asset resides. This attribute is required and has a maximum length of 1024 characters."
-  imageUrl: String!
+  imageUrl: String
   "Alternative text to be rendered along with the creative used mainly for accessibility. This field is optional and has a maximum length of 500 characters."
   altText: String
   "An impression tracking URL to ping when this creative is displayed. This field is optional has a maximum length of 1024 characters."
@@ -843,13 +843,13 @@ type ImageRedirectCreative implements BaseImageRedirectCreativeInterface & HasDe
 "An overlay \`Creative\` that loads an image asset from a specified URL and is served via VAST XML. Overlays cover part of the video content they are displayed on top of. This creative is read only."
 type ImageRedirectOverlayCreative implements BaseImageRedirectCreativeInterface & HasDestinationUrlCreativeInterface & CreativeInterface {
   "The ID of the advertiser that owns the creative. This attribute is required."
-  advertiserId: BigInt!
+  advertiserId: BigInt
   "Uniquely identifies the \`Creative\`. This value is read-only and is assigned by Google when the creative is created. This attribute is required for updates."
   id: BigInt!
   "The name of the creative. This attribute is required and has a maximum length of 255 characters."
-  name: String!
+  name: String
   "The Size of the creative. This attribute is required for creation and then is read-only."
-  size: Size!
+  size: Size
   "The URL of the creative for previewing the media. This attribute is read-only and is assigned by Google when a creative is created."
   previewUrl: String
   "Set of policy labels detected for this creative. This attribute is read-only."
@@ -863,11 +863,11 @@ type ImageRedirectOverlayCreative implements BaseImageRedirectCreativeInterface 
   "The third party companies associated with this creative. This is distinct from any associated companies that Google may detect programmatically."
   thirdPartyDataDeclaration: ThirdPartyDataDeclaration
   "The URL that the user is directed to if they click on the creative. This attribute is required unless the destinationUrlType is DestinationUrlType#NONE, and has a maximum length of 1024 characters."
-  destinationUrl: String!
+  destinationUrl: String
   "The action that should be performed if the user clicks on the creative. This attribute is optional and defaults to DestinationUrlType#CLICK_TO_WEB."
   destinationUrlType: DestinationUrlTypeEnum
   "The URL where the actual asset resides. This attribute is required and has a maximum length of 1024 characters."
-  imageUrl: String!
+  imageUrl: String
   "The size of the image asset. Note that this may differ from #size if the asset is not expected to fill the entire video player. This attribute is optional."
   assetSize: Size
   "Minimum suggested duration in milliseconds. This attribute is optional."
@@ -885,13 +885,13 @@ type ImageRedirectOverlayCreative implements BaseImageRedirectCreativeInterface 
 "A \`Creative\` hosted by Campaign Manager 360. Similar to third-party creatives, a Campaign Manager 360 tag is used to retrieve a creative asset. However, Campaign Manager 360 tags are not sent to the user's browser. Instead, they are processed internally within the Google Marketing Platform system.."
 type InternalRedirectCreative implements CreativeInterface {
   "The ID of the advertiser that owns the creative. This attribute is required."
-  advertiserId: BigInt!
+  advertiserId: BigInt
   "Uniquely identifies the \`Creative\`. This value is read-only and is assigned by Google when the creative is created. This attribute is required for updates."
   id: BigInt!
   "The name of the creative. This attribute is required and has a maximum length of 255 characters."
-  name: String!
+  name: String
   "The Size of the creative. This attribute is required for creation and then is read-only."
-  size: Size!
+  size: Size
   "The URL of the creative for previewing the media. This attribute is read-only and is assigned by Google when a creative is created."
   previewUrl: String
   "Set of policy labels detected for this creative. This attribute is read-only."
@@ -909,7 +909,7 @@ type InternalRedirectCreative implements CreativeInterface {
   "The asset size of an internal redirect creative. Note that this may differ from \`size\` if users set \`overrideSize\` to true. This attribute is read-only and is populated by Google."
   assetSize: Size
   "The internal redirect URL of the DFA or DART for Publishers hosted creative. This attribute is required and has a maximum length of 1024 characters."
-  internalRedirectUrl: String!
+  internalRedirectUrl: String
   "Allows the creative size to differ from the actual size specified in the internal redirect's url. This attribute is optional."
   overrideSize: Boolean
   "\`true\` if this internal redirect creative is interstitial."
@@ -925,13 +925,13 @@ type InternalRedirectCreative implements CreativeInterface {
 "A \`Creative\` that isn't supported by Google DFP, but was migrated from DART. Creatives of this type cannot be created or modified."
 type LegacyDfpCreative implements CreativeInterface {
   "The ID of the advertiser that owns the creative. This attribute is required."
-  advertiserId: BigInt!
+  advertiserId: BigInt
   "Uniquely identifies the \`Creative\`. This value is read-only and is assigned by Google when the creative is created. This attribute is required for updates."
   id: BigInt!
   "The name of the creative. This attribute is required and has a maximum length of 255 characters."
-  name: String!
+  name: String
   "The Size of the creative. This attribute is required for creation and then is read-only."
-  size: Size!
+  size: Size
   "The URL of the creative for previewing the media. This attribute is read-only and is assigned by Google when a creative is created."
   previewUrl: String
   "Set of policy labels detected for this creative. This attribute is read-only."
@@ -1102,13 +1102,13 @@ input PerformCreativeActionInput {
 "A \`Creative\` used for programmatic trafficking. This creative will be auto-created with the right approval from the buyer. This creative cannot be created through the API. This creative can be updated."
 type ProgrammaticCreative implements CreativeInterface {
   "The ID of the advertiser that owns the creative. This attribute is required."
-  advertiserId: BigInt!
+  advertiserId: BigInt
   "Uniquely identifies the \`Creative\`. This value is read-only and is assigned by Google when the creative is created. This attribute is required for updates."
   id: BigInt!
   "The name of the creative. This attribute is required and has a maximum length of 255 characters."
-  name: String!
+  name: String
   "The Size of the creative. This attribute is required for creation and then is read-only."
-  size: Size!
+  size: Size
   "The URL of the creative for previewing the media. This attribute is read-only and is assigned by Google when a creative is created."
   previewUrl: String
   "Set of policy labels detected for this creative. This attribute is read-only."
@@ -1161,13 +1161,13 @@ enum RichMediaStudioChildAssetPropertyTypeEnum {
 "A \`Creative\` that is created by a Rich Media Studio. You cannot create this creative, but you can update some fields of this creative."
 type RichMediaStudioCreative implements BaseRichMediaStudioCreativeInterface & CreativeInterface {
   "The ID of the advertiser that owns the creative. This attribute is required."
-  advertiserId: BigInt!
+  advertiserId: BigInt
   "Uniquely identifies the \`Creative\`. This value is read-only and is assigned by Google when the creative is created. This attribute is required for updates."
   id: BigInt!
   "The name of the creative. This attribute is required and has a maximum length of 255 characters."
-  name: String!
+  name: String
   "The Size of the creative. This attribute is required for creation and then is read-only."
-  size: Size!
+  size: Size
   "The URL of the creative for previewing the media. This attribute is read-only and is assigned by Google when a creative is created."
   previewUrl: String
   "Set of policy labels detected for this creative. This attribute is read-only."
@@ -1281,13 +1281,13 @@ enum ScalableTypeEnum {
 "A \`Creative\` that will be served into cable set-top boxes. There are no assets for this creative type, as they are hosted by external cable systems."
 type SetTopBoxCreative implements BaseVideoCreativeInterface & HasDestinationUrlCreativeInterface & CreativeInterface {
   "The ID of the advertiser that owns the creative. This attribute is required."
-  advertiserId: BigInt!
+  advertiserId: BigInt
   "Uniquely identifies the \`Creative\`. This value is read-only and is assigned by Google when the creative is created. This attribute is required for updates."
   id: BigInt!
   "The name of the creative. This attribute is required and has a maximum length of 255 characters."
-  name: String!
+  name: String
   "The Size of the creative. This attribute is required for creation and then is read-only."
-  size: Size!
+  size: Size
   "The URL of the creative for previewing the media. This attribute is read-only and is assigned by Google when a creative is created."
   previewUrl: String
   "Set of policy labels detected for this creative. This attribute is read-only."
@@ -1301,7 +1301,7 @@ type SetTopBoxCreative implements BaseVideoCreativeInterface & HasDestinationUrl
   "The third party companies associated with this creative. This is distinct from any associated companies that Google may detect programmatically."
   thirdPartyDataDeclaration: ThirdPartyDataDeclaration
   "The URL that the user is directed to if they click on the creative. This attribute is required unless the destinationUrlType is DestinationUrlType#NONE, and has a maximum length of 1024 characters."
-  destinationUrl: String!
+  destinationUrl: String
   "The action that should be performed if the user clicks on the creative. This attribute is optional and defaults to DestinationUrlType#CLICK_TO_WEB."
   destinationUrlType: DestinationUrlTypeEnum
   "The expected duration of this creative in milliseconds."
@@ -1367,13 +1367,13 @@ type StringCreativeTemplateVariableValue implements BaseCreativeTemplateVariable
 "A \`Creative\` that is created by the specified creative template."
 type TemplateCreative implements CreativeInterface {
   "The ID of the advertiser that owns the creative. This attribute is required."
-  advertiserId: BigInt!
+  advertiserId: BigInt
   "Uniquely identifies the \`Creative\`. This value is read-only and is assigned by Google when the creative is created. This attribute is required for updates."
   id: BigInt!
   "The name of the creative. This attribute is required and has a maximum length of 255 characters."
-  name: String!
+  name: String
   "The Size of the creative. This attribute is required for creation and then is read-only."
-  size: Size!
+  size: Size
   "The URL of the creative for previewing the media. This attribute is read-only and is assigned by Google when a creative is created."
   previewUrl: String
   "Set of policy labels detected for this creative. This attribute is read-only."
@@ -1409,13 +1409,13 @@ type TemplateCreative implements CreativeInterface {
 "A \`Creative\` that is served by a 3rd-party vendor."
 type ThirdPartyCreative implements CreativeInterface {
   "The ID of the advertiser that owns the creative. This attribute is required."
-  advertiserId: BigInt!
+  advertiserId: BigInt
   "Uniquely identifies the \`Creative\`. This value is read-only and is assigned by Google when the creative is created. This attribute is required for updates."
   id: BigInt!
   "The name of the creative. This attribute is required and has a maximum length of 255 characters."
-  name: String!
+  name: String
   "The Size of the creative. This attribute is required for creation and then is read-only."
-  size: Size!
+  size: Size
   "The URL of the creative for previewing the media. This attribute is read-only and is assigned by Google when a creative is created."
   previewUrl: String
   "Set of policy labels detected for this creative. This attribute is read-only."
@@ -1429,7 +1429,7 @@ type ThirdPartyCreative implements CreativeInterface {
   "The third party companies associated with this creative. This is distinct from any associated companies that Google may detect programmatically."
   thirdPartyDataDeclaration: ThirdPartyDataDeclaration
   "The HTML snippet that this creative delivers. This attribute is required."
-  snippet: String!
+  snippet: String
   "The HTML snippet that this creative delivers with macros expanded. This attribute is read-only and is set by Google."
   expandedSnippet: String
   "The SSL compatibility scan result for this creative. This attribute is read-only and determined by Google."
@@ -1459,13 +1459,13 @@ input TrackingUrlsInput {
 "A \`Creative\` that isn't supported by this version of the API. This object is readonly and when encountered should be reported on the Ad Manager API forum."
 type UnsupportedCreative implements CreativeInterface {
   "The ID of the advertiser that owns the creative. This attribute is required."
-  advertiserId: BigInt!
+  advertiserId: BigInt
   "Uniquely identifies the \`Creative\`. This value is read-only and is assigned by Google when the creative is created. This attribute is required for updates."
   id: BigInt!
   "The name of the creative. This attribute is required and has a maximum length of 255 characters."
-  name: String!
+  name: String
   "The Size of the creative. This attribute is required for creation and then is read-only."
-  size: Size!
+  size: Size
   "The URL of the creative for previewing the media. This attribute is read-only and is assigned by Google when a creative is created."
   previewUrl: String
   "Set of policy labels detected for this creative. This attribute is read-only."
@@ -1498,13 +1498,13 @@ type UrlCreativeTemplateVariableValue implements BaseCreativeTemplateVariableVal
 "A \`Creative\` that points to an externally hosted VAST ad and is served via VAST XML as a VAST Wrapper."
 type VastRedirectCreative implements CreativeInterface {
   "The ID of the advertiser that owns the creative. This attribute is required."
-  advertiserId: BigInt!
+  advertiserId: BigInt
   "Uniquely identifies the \`Creative\`. This value is read-only and is assigned by Google when the creative is created. This attribute is required for updates."
   id: BigInt!
   "The name of the creative. This attribute is required and has a maximum length of 255 characters."
-  name: String!
+  name: String
   "The Size of the creative. This attribute is required for creation and then is read-only."
-  size: Size!
+  size: Size
   "The URL of the creative for previewing the media. This attribute is read-only and is assigned by Google when a creative is created."
   previewUrl: String
   "Set of policy labels detected for this creative. This attribute is read-only."
@@ -1518,11 +1518,11 @@ type VastRedirectCreative implements CreativeInterface {
   "The third party companies associated with this creative. This is distinct from any associated companies that Google may detect programmatically."
   thirdPartyDataDeclaration: ThirdPartyDataDeclaration
   "The URL where the 3rd party VAST XML is hosted. This attribute is required."
-  vastXmlUrl: String!
+  vastXmlUrl: String
   "The type of VAST ad that this redirects to. This attribute is required."
-  vastRedirectType: VastRedirectTypeEnum!
+  vastRedirectType: VastRedirectTypeEnum
   "The duration of the VAST ad in milliseconds. This attribute is required."
-  duration: Int!
+  duration: Int
   "The IDs of the companion creatives that are associated with this creative. This attribute is optional."
   companionCreativeIds: [BigInt]
   "A map from \`ConversionEvent\` to a list of URLs that will be pinged when the event happens. This attribute is optional."
@@ -1550,13 +1550,13 @@ enum VastRedirectTypeEnum {
 "A \`Creative\` that contains Ad Manager hosted video ads and is served via VAST XML. This creative is read-only."
 type VideoCreative implements BaseVideoCreativeInterface & HasDestinationUrlCreativeInterface & CreativeInterface {
   "The ID of the advertiser that owns the creative. This attribute is required."
-  advertiserId: BigInt!
+  advertiserId: BigInt
   "Uniquely identifies the \`Creative\`. This value is read-only and is assigned by Google when the creative is created. This attribute is required for updates."
   id: BigInt!
   "The name of the creative. This attribute is required and has a maximum length of 255 characters."
-  name: String!
+  name: String
   "The Size of the creative. This attribute is required for creation and then is read-only."
-  size: Size!
+  size: Size
   "The URL of the creative for previewing the media. This attribute is read-only and is assigned by Google when a creative is created."
   previewUrl: String
   "Set of policy labels detected for this creative. This attribute is read-only."
@@ -1570,7 +1570,7 @@ type VideoCreative implements BaseVideoCreativeInterface & HasDestinationUrlCrea
   "The third party companies associated with this creative. This is distinct from any associated companies that Google may detect programmatically."
   thirdPartyDataDeclaration: ThirdPartyDataDeclaration
   "The URL that the user is directed to if they click on the creative. This attribute is required unless the destinationUrlType is DestinationUrlType#NONE, and has a maximum length of 1024 characters."
-  destinationUrl: String!
+  destinationUrl: String
   "The action that should be performed if the user clicks on the creative. This attribute is optional and defaults to DestinationUrlType#CLICK_TO_WEB."
   destinationUrlType: DestinationUrlTypeEnum
   "The expected duration of this creative in milliseconds."
@@ -1610,9 +1610,9 @@ enum VideoDeliveryTypeEnum {
 "Metadata for a video asset."
 type VideoMetadata {
   "The scalable type of the asset. This attribute is required."
-  scalableType: ScalableTypeEnum!
+  scalableType: ScalableTypeEnum
   "The duration of the asset in milliseconds. This attribute is required."
-  duration: Int!
+  duration: Int
   "The bit rate of the asset in kbps. If the asset can play at a range of bit rates (such as an Http Live Streaming video), then set the bit rate to zero and populate the minimum and maximum bit rate instead."
   bitRate: Int
   "The minimum bitrate of the video in kbps. Only set this if the asset can play at a range of bit rates."
@@ -1620,11 +1620,11 @@ type VideoMetadata {
   "The maximum bitrate of the video in kbps. Only set this if the asset can play at a range of bit rates."
   maximumBitRate: Int
   "The size (width and height) of the asset. This attribute is required."
-  size: Size!
+  size: Size
   "The mime type of the asset. This attribute is required."
-  mimeType: MimeTypeEnum!
+  mimeType: MimeTypeEnum
   "The delivery type of the asset. This attribute is required."
-  deliveryType: VideoDeliveryTypeEnum!
+  deliveryType: VideoDeliveryTypeEnum
   "The codecs of the asset. This attribute is optional and defaults to an empty list."
   codecs: [String]
 }
@@ -1632,9 +1632,9 @@ type VideoMetadata {
 "Metadata for a video asset."
 input VideoMetadataInput {
   "The scalable type of the asset. This attribute is required."
-  scalableType: ScalableTypeEnum!
+  scalableType: ScalableTypeEnum
   "The duration of the asset in milliseconds. This attribute is required."
-  duration: Int!
+  duration: Int
   "The bit rate of the asset in kbps. If the asset can play at a range of bit rates (such as an Http Live Streaming video), then set the bit rate to zero and populate the minimum and maximum bit rate instead."
   bitRate: Int
   "The minimum bitrate of the video in kbps. Only set this if the asset can play at a range of bit rates."
@@ -1642,11 +1642,11 @@ input VideoMetadataInput {
   "The maximum bitrate of the video in kbps. Only set this if the asset can play at a range of bit rates."
   maximumBitRate: Int
   "The size (width and height) of the asset. This attribute is required."
-  size: SizeInput!
+  size: SizeInput
   "The mime type of the asset. This attribute is required."
-  mimeType: MimeTypeEnum!
+  mimeType: MimeTypeEnum
   "The delivery type of the asset. This attribute is required."
-  deliveryType: VideoDeliveryTypeEnum!
+  deliveryType: VideoDeliveryTypeEnum
   "The codecs of the asset. This attribute is optional and defaults to an empty list."
   codecs: [String]
 }
@@ -1657,7 +1657,7 @@ type VideoRedirectAsset implements RedirectAssetInterface & AssetInterface {
   "The URL where the asset is hosted."
   redirectUrl: String
   "Metadata related to the asset. This attribute is required."
-  metadata: VideoMetadata!
+  metadata: VideoMetadata
 }
 
 "An externally-hosted video asset."
@@ -1665,19 +1665,19 @@ input VideoRedirectAssetInput {
   "The URL where the asset is hosted."
   redirectUrl: String
   "Metadata related to the asset. This attribute is required."
-  metadata: VideoMetadataInput!
+  metadata: VideoMetadataInput
 }
 
 "A \`Creative\` that contains externally hosted video ads and is served via VAST XML."
 type VideoRedirectCreative implements BaseVideoCreativeInterface & HasDestinationUrlCreativeInterface & CreativeInterface {
   "The ID of the advertiser that owns the creative. This attribute is required."
-  advertiserId: BigInt!
+  advertiserId: BigInt
   "Uniquely identifies the \`Creative\`. This value is read-only and is assigned by Google when the creative is created. This attribute is required for updates."
   id: BigInt!
   "The name of the creative. This attribute is required and has a maximum length of 255 characters."
-  name: String!
+  name: String
   "The Size of the creative. This attribute is required for creation and then is read-only."
-  size: Size!
+  size: Size
   "The URL of the creative for previewing the media. This attribute is read-only and is assigned by Google when a creative is created."
   previewUrl: String
   "Set of policy labels detected for this creative. This attribute is read-only."
@@ -1691,7 +1691,7 @@ type VideoRedirectCreative implements BaseVideoCreativeInterface & HasDestinatio
   "The third party companies associated with this creative. This is distinct from any associated companies that Google may detect programmatically."
   thirdPartyDataDeclaration: ThirdPartyDataDeclaration
   "The URL that the user is directed to if they click on the creative. This attribute is required unless the destinationUrlType is DestinationUrlType#NONE, and has a maximum length of 1024 characters."
-  destinationUrl: String!
+  destinationUrl: String
   "The action that should be performed if the user clicks on the creative. This attribute is optional and defaults to DestinationUrlType#CLICK_TO_WEB."
   destinationUrlType: DestinationUrlTypeEnum
   "The expected duration of this creative in milliseconds."

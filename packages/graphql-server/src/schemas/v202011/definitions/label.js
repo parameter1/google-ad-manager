@@ -39,7 +39,7 @@ type Label {
   "Unique ID of the \`Label\`. This value is readonly and is assigned by Google."
   id: BigInt!
   "Name of the \`Label\`. This is value is required to create a label and has a maximum length of 127 characters."
-  name: String!
+  name: String
   "A description of the label. This value is optional and its maximum length is 255 characters."
   description: String
   "Specifies whether or not the label is active. This attribute is read-only."
@@ -53,7 +53,7 @@ type Label {
 "A \`Label\` is additional information that can be added to an entity."
 input LabelInput {
   "Name of the \`Label\`. This is value is required to create a label and has a maximum length of 127 characters."
-  name: String!
+  name: String
   "A description of the label. This value is optional and its maximum length is 255 characters."
   description: String
   "Indicates the Ad Category associated with the label."

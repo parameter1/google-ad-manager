@@ -15,9 +15,9 @@ type Contact implements BaseContactInterface {
   "The unique ID of the \`Contact\`. This value is readonly and is assigned by Google."
   id: BigInt!
   "The name of the contact. This attribute is required and has a maximum length of 127 characters."
-  name: String!
+  name: String
   "The ID of the Company that this contact is associated with. This attribute is required and immutable."
-  companyId: BigInt!
+  companyId: BigInt
   "The status of the contact. This attribute is readonly and is assigned by Google."
   status: ContactStatusEnum
   "The address of the contact. This attribute is optional and has a maximum length of 1024 characters."
@@ -39,9 +39,9 @@ type Contact implements BaseContactInterface {
 "A \`Contact\` represents a person who is affiliated with a single Company. A contact can have a variety of contact information associated to it, and can be invited to view their company's orders, line items, creatives, and reports."
 input ContactInput {
   "The name of the contact. This attribute is required and has a maximum length of 127 characters."
-  name: String!
+  name: String
   "The ID of the Company that this contact is associated with. This attribute is required and immutable."
-  companyId: BigInt!
+  companyId: BigInt
   "The address of the contact. This attribute is optional and has a maximum length of 1024 characters."
   address: String
   "The cell phone number where the contact can be reached. This attribute is optional."

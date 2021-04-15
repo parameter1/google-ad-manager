@@ -61,9 +61,9 @@ type Company {
   "Uniquely identifies the \`Company\`. This value is read-only and is assigned by Google when the company is created. This attribute is required for updates."
   id: BigInt!
   "The full name of the company. This attribute is required and has a maximum length of 127 characters."
-  name: String!
+  name: String
   "Specifies what kind of company this is. This attribute is required."
-  type: CompanyTypeEnum!
+  type: CompanyTypeEnum
   "Specifies the address of the company. This attribute is optional and has a maximum length of 65,535 characters."
   address: String
   "Specifies the email of the company. This attribute is optional and has a maximum length of 128 characters."
@@ -113,9 +113,9 @@ enum CompanyCreditStatusEnum {
 "A \`Company\` represents an agency, a single advertiser or an entire advertising network."
 input CompanyInput {
   "The full name of the company. This attribute is required and has a maximum length of 127 characters."
-  name: String!
+  name: String
   "Specifies what kind of company this is. This attribute is required."
-  type: CompanyTypeEnum!
+  type: CompanyTypeEnum
   "Specifies the address of the company. This attribute is optional and has a maximum length of 65,535 characters."
   address: String
   "Specifies the email of the company. This attribute is optional and has a maximum length of 128 characters."

@@ -27,7 +27,7 @@ interface AudienceSegmentInterface {
   "Id of the AudienceSegment. This attribute is readonly and is populated by Google."
   id: BigInt!
   "Name of the AudienceSegment. This attribute is required and has a maximum length of 255 characters."
-  name: String!
+  name: String
   "The ids of the categories this segment belongs to. This field is optional, it may be empty."
   categoryIds: [BigInt]
   "Description of the AudienceSegment. This attribute is optional and has a maximum length of 8192 characters."
@@ -90,7 +90,7 @@ interface FirstPartyAudienceSegmentInterface implements AudienceSegmentInterface
   "Id of the AudienceSegment. This attribute is readonly and is populated by Google."
   id: BigInt!
   "Name of the AudienceSegment. This attribute is required and has a maximum length of 255 characters."
-  name: String!
+  name: String
   "The ids of the categories this segment belongs to. This field is optional, it may be empty."
   categoryIds: [BigInt]
   "Description of the AudienceSegment. This attribute is optional and has a maximum length of 8192 characters."
@@ -116,7 +116,7 @@ interface FirstPartyAudienceSegmentInterface implements AudienceSegmentInterface
 "Rule of a FirstPartyAudienceSegment that defines user's eligibility criteria to be part of a segment."
 type FirstPartyAudienceSegmentRule {
   "Specifies the inventory (i.e. ad units and placements) that are part of the rule of a FirstPartyAudienceSegment. This attribute is required."
-  inventoryRule: InventoryTargeting!
+  inventoryRule: InventoryTargeting
   "Specifies the collection of custom criteria that are part of the rule of a FirstPartyAudienceSegment.  Once the FirstPartyAudienceSegment is updated or modified with custom criteria, the server may return a normalized, but equivalent representation of the custom criteria rule.   \`customCriteriaRule\` will have up to three levels including itself.  The top level CustomCriteriaSet i.e. the \`customTargeting\` object can only contain a CustomCriteriaSet.LogicalOperator#OR of all its children.  The second level of CustomCriteriaSet objects can only contain CustomCriteriaSet.LogicalOperator#AND of all their children. If a CustomCriteria is placed on this level, the server will wrap it in a CustomCriteriaSet.  The third level can only comprise of CustomCriteria objects.   The resulting custom criteria rule would be of the form:   "
   customCriteriaRule: CustomCriteriaSet
 }
@@ -124,7 +124,7 @@ type FirstPartyAudienceSegmentRule {
 "Rule of a FirstPartyAudienceSegment that defines user's eligibility criteria to be part of a segment."
 input FirstPartyAudienceSegmentRuleInput {
   "Specifies the inventory (i.e. ad units and placements) that are part of the rule of a FirstPartyAudienceSegment. This attribute is required."
-  inventoryRule: InventoryTargetingInput!
+  inventoryRule: InventoryTargetingInput
   "Specifies the collection of custom criteria that are part of the rule of a FirstPartyAudienceSegment.  Once the FirstPartyAudienceSegment is updated or modified with custom criteria, the server may return a normalized, but equivalent representation of the custom criteria rule.   \`customCriteriaRule\` will have up to three levels including itself.  The top level CustomCriteriaSet i.e. the \`customTargeting\` object can only contain a CustomCriteriaSet.LogicalOperator#OR of all its children.  The second level of CustomCriteriaSet objects can only contain CustomCriteriaSet.LogicalOperator#AND of all their children. If a CustomCriteria is placed on this level, the server will wrap it in a CustomCriteriaSet.  The third level can only comprise of CustomCriteria objects.   The resulting custom criteria rule would be of the form:   "
   customCriteriaRule: CustomCriteriaSetInput
 }
@@ -150,7 +150,7 @@ type NonRuleBasedFirstPartyAudienceSegment implements FirstPartyAudienceSegmentI
   "Id of the AudienceSegment. This attribute is readonly and is populated by Google."
   id: BigInt!
   "Name of the AudienceSegment. This attribute is required and has a maximum length of 255 characters."
-  name: String!
+  name: String
   "The ids of the categories this segment belongs to. This field is optional, it may be empty."
   categoryIds: [BigInt]
   "Description of the AudienceSegment. This attribute is optional and has a maximum length of 8192 characters."
@@ -172,7 +172,7 @@ type NonRuleBasedFirstPartyAudienceSegment implements FirstPartyAudienceSegmentI
   "Type of the segment. This attribute is readonly and is assigned by Google."
   type: AudienceSegmentTypeEnum
   "Specifies the number of days after which a user's cookie will be removed from the audience segment due to inactivity. This attribute is required and can be between 1 and 540."
-  membershipExpirationDays: Int!
+  membershipExpirationDays: Int
 }
 
 "Performs the given AudienceSegmentAction on the set of segments identified by the given statement. @param action AudienceSegmentAction to perform @param filterStatement a Publisher Query Language statement used to filter a set of audience segments (the only supported operator is AND) @return UpdateResult indicating the result"
@@ -187,7 +187,7 @@ type RuleBasedFirstPartyAudienceSegment implements RuleBasedFirstPartyAudienceSe
   "Id of the AudienceSegment. This attribute is readonly and is populated by Google."
   id: BigInt!
   "Name of the AudienceSegment. This attribute is required and has a maximum length of 255 characters."
-  name: String!
+  name: String
   "The ids of the categories this segment belongs to. This field is optional, it may be empty."
   categoryIds: [BigInt]
   "Description of the AudienceSegment. This attribute is optional and has a maximum length of 8192 characters."
@@ -209,13 +209,13 @@ type RuleBasedFirstPartyAudienceSegment implements RuleBasedFirstPartyAudienceSe
   "Type of the segment. This attribute is readonly and is assigned by Google."
   type: AudienceSegmentTypeEnum
   "Specifies the number of times a user's cookie must match the segment rule before it's associated with the audience segment. This is used in combination with FirstPartyAudienceSegment#recencyDays to determine eligibility of the association. This attribute is required and can be between 1 and 12."
-  pageViews: Int!
+  pageViews: Int
   "Specifies the number of days within which a user's cookie must match the segment rule before it's associated with the audience segment. This is used in combination with FirstPartyAudienceSegment#pageViews to determine eligibility of the association. This attribute is required only if FirstPartyAudienceSegment#pageViews is greater than 1. When required, it can be between 1 and 90."
-  recencyDays: Int!
+  recencyDays: Int
   "Specifies the number of days after which a user's cookie will be removed from the audience segment due to inactivity. This attribute is required and can be between 1 and 540."
-  membershipExpirationDays: Int!
+  membershipExpirationDays: Int
   "Specifies the rule of the segment which determines user's eligibility criteria to be part of the segment. This attribute is required."
-  rule: FirstPartyAudienceSegmentRule!
+  rule: FirstPartyAudienceSegmentRule
 }
 
 "A RuleBasedFirstPartyAudienceSegmentSummary is a FirstPartyAudienceSegment owned by the publisher network."
@@ -224,7 +224,7 @@ interface RuleBasedFirstPartyAudienceSegmentSummaryInterface implements FirstPar
   "Id of the AudienceSegment. This attribute is readonly and is populated by Google."
   id: BigInt!
   "Name of the AudienceSegment. This attribute is required and has a maximum length of 255 characters."
-  name: String!
+  name: String
   "The ids of the categories this segment belongs to. This field is optional, it may be empty."
   categoryIds: [BigInt]
   "Description of the AudienceSegment. This attribute is optional and has a maximum length of 8192 characters."
@@ -246,11 +246,11 @@ interface RuleBasedFirstPartyAudienceSegmentSummaryInterface implements FirstPar
   "Type of the segment. This attribute is readonly and is assigned by Google."
   type: AudienceSegmentTypeEnum
   "Specifies the number of times a user's cookie must match the segment rule before it's associated with the audience segment. This is used in combination with FirstPartyAudienceSegment#recencyDays to determine eligibility of the association. This attribute is required and can be between 1 and 12."
-  pageViews: Int!
+  pageViews: Int
   "Specifies the number of days within which a user's cookie must match the segment rule before it's associated with the audience segment. This is used in combination with FirstPartyAudienceSegment#pageViews to determine eligibility of the association. This attribute is required only if FirstPartyAudienceSegment#pageViews is greater than 1. When required, it can be between 1 and 90."
-  recencyDays: Int!
+  recencyDays: Int
   "Specifies the number of days after which a user's cookie will be removed from the audience segment due to inactivity. This attribute is required and can be between 1 and 540."
-  membershipExpirationDays: Int!
+  membershipExpirationDays: Int
 }
 
 "A SharedAudienceSegment is an AudienceSegment owned by another entity and shared with the publisher network."
@@ -258,7 +258,7 @@ type SharedAudienceSegment implements AudienceSegmentInterface {
   "Id of the AudienceSegment. This attribute is readonly and is populated by Google."
   id: BigInt!
   "Name of the AudienceSegment. This attribute is required and has a maximum length of 255 characters."
-  name: String!
+  name: String
   "The ids of the categories this segment belongs to. This field is optional, it may be empty."
   categoryIds: [BigInt]
   "Description of the AudienceSegment. This attribute is optional and has a maximum length of 8192 characters."
@@ -286,7 +286,7 @@ type ThirdPartyAudienceSegment implements AudienceSegmentInterface {
   "Id of the AudienceSegment. This attribute is readonly and is populated by Google."
   id: BigInt!
   "Name of the AudienceSegment. This attribute is required and has a maximum length of 255 characters."
-  name: String!
+  name: String
   "The ids of the categories this segment belongs to. This field is optional, it may be empty."
   categoryIds: [BigInt]
   "Description of the AudienceSegment. This attribute is optional and has a maximum length of 8192 characters."
