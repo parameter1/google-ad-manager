@@ -1030,11 +1030,6 @@
     "@octokit/openapi-types" "^4.0.3"
     "@types/node" ">= 8"
 
-"@parameter1/graphql-type-date@^1.0.11":
-  version "1.0.11"
-  resolved "https://registry.yarnpkg.com/@parameter1/graphql-type-date/-/graphql-type-date-1.0.11.tgz#76fa7bcca89f7128c2e9e6653e29cca922134344"
-  integrity sha512-4BhEAIVPX3fBQZnTJtl9z9qjGlk15y8ek0tN66tf1k4vjpUKtEffPixtsQG53SvR82IPEgUATU6whJGNvjJkVw==
-
 "@parameter1/gulp@^1.1.10":
   version "1.1.10"
   resolved "https://registry.yarnpkg.com/@parameter1/gulp/-/gulp-1.1.10.tgz#6c327afa2d9961a11ca93fdc4f299e11129dea9d"

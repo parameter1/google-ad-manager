@@ -17,7 +17,6 @@
   },
   "dependencies": {
     "@parameter1/google-ad-manager-soap": "^0.1.0",
-    "@parameter1/graphql-type-date": "^1.0.11",
     "@parameter1/utils": "^1.1.12",
     "apollo-server-express": "^2.21.0",
     "apollo-type-bigint": "^0.1.3",
