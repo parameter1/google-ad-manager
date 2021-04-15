@@ -1,6 +1,6 @@
 {
   "name": "@parameter1/google-ad-manager-wsdl-parser",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "WSDL parser for the Google Ad Manager API",
   "author": "Jacob Bare <jacob@parameter1.com>",
   "homepage": "https://github.com/parameter1/google-ad-manager/tree/main/packages/wsdl-parser#readme",
