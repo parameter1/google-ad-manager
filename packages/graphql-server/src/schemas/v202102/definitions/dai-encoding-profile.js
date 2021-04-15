@@ -131,7 +131,7 @@ enum VariantTypeEnum {
 type VideoSettings {
   "The RFC6381 codec string of the audio."
   codec: String
-  "The bitrate of the audio, in bits per second. This value must be between 56kbps and 250 Mbps."
+  "The bitrate of the video, in bits per second. This value must be between 32kbps and 250 Mbps."
   bitrate: BigInt
   "The frames per second of the video. This value will be truncated to three decimal places."
   framesPerSecond: Float
@@ -143,7 +143,7 @@ type VideoSettings {
 input VideoSettingsInput {
   "The RFC6381 codec string of the audio."
   codec: String
-  "The bitrate of the audio, in bits per second. This value must be between 56kbps and 250 Mbps."
+  "The bitrate of the video, in bits per second. This value must be between 32kbps and 250 Mbps."
   bitrate: BigInt
   "The frames per second of the video. This value will be truncated to three decimal places."
   framesPerSecond: Float

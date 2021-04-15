@@ -1408,8 +1408,8 @@ input ProposalLineItemMakegoodInfoInput {
 
 "Marketplace info for ProposalLineItem with a corresponding deal in Marketplace."
 input ProposalLineItemMarketplaceInfoInput {
-  "The AdExchangeEnvironment of the marketplace web property that is associated with this line item. This is only for proposal line items with a corresponding deal in Marketplace. This attribute is required."
-  adExchangeEnvironment: AdExchangeEnvironmentEnum!
+  "The AdExchangeEnvironment of the marketplace web property that is associated with this line item. The last API version in which this field will be available is v202102. Starting with v202105, this field will no longer be available. To control which platforms your proposal line item will serve on from v202105 onward, please use request platform targeting in the targeting expression."
+  adExchangeEnvironment: AdExchangeEnvironmentEnum
 }
 
 "Represents the platform which requests and renders the ad."
@@ -1655,8 +1655,11 @@ type TextValue implements ValueInterface {
 
 "Possible options for third-party brand lift integration."
 enum ThirdPartyBrandLiftIntegrationPartnerEnum {
+  "Indicates third-party brand lift integration partner Dynata."
   DYNATA
+  "Indicates third-party brand lift integration partner Kantar."
   KANTAR_MILLWARD_BROWN
+  "Indicates there's no third-party brand lift integration partner."
   NONE
   "The value returned if the actual value is not exposed by the requested API version."
   UNKNOWN

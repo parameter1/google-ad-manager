@@ -1248,7 +1248,7 @@ enum DimensionEnum {
   PARENT_AD_UNIT_NAME
   "Breaks down reporting data by partner assignment id. Compatible with any of the following report types: Historical, Reach, Partner finance."
   PARTNER_MANAGEMENT_ASSIGNMENT_ID
-  "Breaks down reporting data by partner assignment name. ParnterAssignment name and id are automatically included as columns in the report. Corresponds to 'Assignment' in the Ad Manager UI. Compatible with any of the following report types: Historical, Reach, Partner finance."
+  "Breaks down reporting data by partner assignment name. PartnerAssignment name and id are automatically included as columns in the report. Corresponds to 'Assignment' in the Ad Manager UI. Compatible with any of the following report types: Historical, Reach, Partner finance."
   PARTNER_MANAGEMENT_ASSIGNMENT_NAME
   "Breaks down reporting data by partner Company#id. Compatible with any of the following report types: Historical, Reach, Partner finance."
   PARTNER_MANAGEMENT_PARTNER_ID

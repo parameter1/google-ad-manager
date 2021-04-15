@@ -55,7 +55,7 @@ type SitePage {
   results: [Site]
 }
 
-"Updates the specified Site objects. @param sites the sites to update @return the updated sites"
+"Updates the specified Site objects. The Site#childNetworkCode can be updated in order to 1) change the child network, 2) move a site from O&O to represented, or 3) move a site from represented to O&O. @param sites the sites to update @return the updated sites"
 input UpdateSitesInput {
   sites: [SiteInput]
 }
@@ -98,7 +98,7 @@ extend type Mutation {
 }
 
 extend type Mutation {
-  "Updates the specified Site objects. @param sites the sites to update @return the updated sites"
+  "Updates the specified Site objects. The Site#childNetworkCode can be updated in order to 1) change the child network, 2) move a site from O&O to represented, or 3) move a site from represented to O&O. @param sites the sites to update @return the updated sites"
   updateSites(input: UpdateSitesInput!): [Site]
     @soap(service: "Site", action: "updateSites")
 }

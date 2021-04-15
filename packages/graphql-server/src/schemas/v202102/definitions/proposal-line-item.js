@@ -131,8 +131,8 @@ type ProposalLineItemMakegoodInfo {
 
 "Marketplace info for ProposalLineItem with a corresponding deal in Marketplace."
 type ProposalLineItemMarketplaceInfo {
-  "The AdExchangeEnvironment of the marketplace web property that is associated with this line item. This is only for proposal line items with a corresponding deal in Marketplace. This attribute is required."
-  adExchangeEnvironment: AdExchangeEnvironmentEnum!
+  "The AdExchangeEnvironment of the marketplace web property that is associated with this line item. The last API version in which this field will be available is v202102. Starting with v202105, this field will no longer be available. To control which platforms your proposal line item will serve on from v202105 onward, please use request platform targeting in the targeting expression."
+  adExchangeEnvironment: AdExchangeEnvironmentEnum
 }
 
 "Captures a page of ProposalLineItem objects."
