@@ -24,10 +24,13 @@ class WSDLTypeField {
     const type = cleanType(element.$.type);
     const documentation = cleanDocs(element);
 
-    let required = [
-      /attribute is required/i,
-      /value is required/i,
-    ].some((pattern) => pattern.test(documentation));
+    let required = false;
+    // disabling required field guessing as some docs include the required attribute text
+    // but with a condition... so some fields are only required when other values are set/present
+    // let required = [
+    //   /attribute is required/i,
+    //   /value is required/i,
+    // ].some((pattern) => pattern.test(documentation));
     if (name === 'id') required = true;
 
     const readonly = [
