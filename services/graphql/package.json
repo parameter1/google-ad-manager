@@ -1,6 +1,6 @@
 {
   "name": "@parameter1/google-ad-manager-graphql-service",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "description": "The bootable GraphQL service for the Google Ad Manager API",
   "author": "Jacob Bare <jacob@parameter1.com>",
   "homepage": "https://github.com/parameter1/google-ad-manager/tree/main/services/graphql#readme",
@@ -18,7 +18,7 @@
     "test": "yarn lint"
   },
   "dependencies": {
-    "@parameter1/google-ad-manager-graphql-server": "^0.2.1",
+    "@parameter1/google-ad-manager-graphql-server": "^0.2.2",
     "@parameter1/terminus": "^1.3.1",
     "envalid": "^7.0.0",
     "helmet": "^4.4.1",
