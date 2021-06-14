@@ -7173,10 +7173,10 @@ snapdragon@^0.8.1:
     source-map-resolve "^0.5.0"
     use "^3.1.0"
 
-soap@^0.36.0:
-  version "0.36.0"
-  resolved "https://registry.yarnpkg.com/soap/-/soap-0.36.0.tgz#80d1a55e89e048f175ae5538c288428d8c649445"
-  integrity sha512-MEFr2H7+a02fAA2FWyJE1B0xvDE8jiH5Ke6P1WKChHR9TGcJMK7kRAlPK/YR+NNO1pUs6W1FaIz4w8I9kuvybw==
+soap@^0.39.0:
+  version "0.39.0"
+  resolved "https://registry.yarnpkg.com/soap/-/soap-0.39.0.tgz#66f1eebbd93cef39b40623c01eeb434c8898a720"
+  integrity sha512-H1pbwOzc2Q+T2u2OZ/VOGoXKPjjlEELJru6glc1Vi9nZtfxGYRW6teU0W/vavSZ1j404VGCA8TNzWqAm8QI7Xg==
   dependencies:
     debug "^4.1.1"
     get-stream "^6.0.0"
@@ -7186,7 +7186,7 @@ soap@^0.36.0:
     sax ">=0.6"
     strip-bom "^3.0.0"
     uuid "^8.3.0"
-    xml-crypto "^2.0.0"
+    xml-crypto "^2.1.0"
 
 socks-proxy-agent@^5.0.0:
   version "5.0.0"
@@ -8256,13 +8256,13 @@ write-pkg@^4.0.0:
   resolved "https://registry.yarnpkg.com/ws/-/ws-7.4.6.tgz#5654ca8ecdeee47c33a9a4bf6d28e2be2980377c"
   integrity sha512-YmhHDO4MzaDLB+M9ym/mDA5z0naX8j7SIlT8f8z+I0VtzsRbekxEutHSme7NPS2qE8StCYQNUnfWdXta/Yu85A==
 
-xml-crypto@^2.0.0:
-  version "2.0.0"
-  resolved "https://registry.yarnpkg.com/xml-crypto/-/xml-crypto-2.0.0.tgz#54cd268ad9d31930afcf7092cbb664258ca9e826"
-  integrity sha512-/a04qr7RpONRZHOxROZ6iIHItdsQQjN3sj8lJkYDDss8tAkEaAs0VrFjb3tlhmS5snQru5lTs9/5ISSMdPDHlg==
+xml-crypto@^2.1.0:
+  version "2.1.2"
+  resolved "https://registry.yarnpkg.com/xml-crypto/-/xml-crypto-2.1.2.tgz#501506d42e466f6cd908c5a03182217231b4e4b8"
+  integrity sha512-DBhZXtBjENtLwJmeJhLUBwUm9YWNjCRvAx6ESP4VJyM9PDuKqZu2Fp5Y5HKqcdJT7vV7eI25Z4UBMezji6QloQ==
   dependencies:
-    xmldom "0.1.27"
-    xpath "0.0.27"
+    xmldom "^0.6.0"
+    xpath "0.0.32"
 
 xml2js@^0.4.23:
   version "0.4.23"
@@ -8277,15 +8277,15 @@ xmlbuilder@~11.0.0:
   resolved "https://registry.yarnpkg.com/xmlbuilder/-/xmlbuilder-11.0.1.tgz#be9bae1c8a046e76b31127726347d0ad7002beb3"
   integrity sha512-fDlsI/kFEx7gLvbecc0/ohLG50fugQp8ryHzMTuW9vSa1GJ0XYWKnhsUx7oie3G98+r56aTQIUB4kht42R3JvA==
 
-xmldom@0.1.27:
-  version "0.1.27"
-  resolved "https://registry.yarnpkg.com/xmldom/-/xmldom-0.1.27.tgz#d501f97b3bdb403af8ef9ecc20573187aadac0e9"
-  integrity sha1-1QH5ezvbQDr4757MIFcxh6rawOk=
+xmldom@^0.6.0:
+  version "0.6.0"
+  resolved "https://registry.yarnpkg.com/xmldom/-/xmldom-0.6.0.tgz#43a96ecb8beece991cef382c08397d82d4d0c46f"
+  integrity sha512-iAcin401y58LckRZ0TkI4k0VSM1Qg0KGSc3i8rU+xrxe19A/BN1zHyVSJY7uoutVlaTSzYyk/v5AmkewAP7jtg==
 
-xpath@0.0.27:
-  version "0.0.27"
-  resolved "https://registry.yarnpkg.com/xpath/-/xpath-0.0.27.tgz#dd3421fbdcc5646ac32c48531b4d7e9d0c2cfa92"
-  integrity sha512-fg03WRxtkCV6ohClePNAECYsmpKKTv5L8y/X3Dn1hQrec3POx2jHZ/0P2qQ6HvsrU1BmeqXcof3NGGueG6LxwQ==
+xpath@0.0.32:
+  version "0.0.32"
+  resolved "https://registry.yarnpkg.com/xpath/-/xpath-0.0.32.tgz#1b73d3351af736e17ec078d6da4b8175405c48af"
+  integrity sha512-rxMJhSIoiO8vXcWvSifKqhvV96GjiD5wYb8/QHdoRyQvraTpp4IEv944nhGausZZ3u7dhQXteZuZbaqfpB7uYw==
 
 xss@^1.0.8:
   version "1.0.9"

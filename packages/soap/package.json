@@ -21,7 +21,7 @@
     "@parameter1/google-ad-manager-wsdl-parser": "^0.2.1",
     "@parameter1/utils": "^1.1.19",
     "inflected": "^2.1.0",
-    "soap": "^0.36.0"
+    "soap": "^0.39.0"
   },
   "devDependencies": {
     "eslint": "^7.28.0",
