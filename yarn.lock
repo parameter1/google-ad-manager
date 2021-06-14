@@ -92,10 +92,10 @@
     minimatch "^3.0.4"
     strip-json-comments "^3.1.1"
 
-"@godaddy/terminus@^4.5.0":
-  version "4.6.0"
-  resolved "https://registry.yarnpkg.com/@godaddy/terminus/-/terminus-4.6.0.tgz#1e746cf1715cf39866fd4a25569deb88774dda27"
-  integrity sha512-5OaPBRYIex8YcvK+Jk6/wUNulaQMWt1RWIpfYmRbP+1On5FRf3bumDWBni3V0RQRkm3JIvZiXbIndumEtasOMg==
+"@godaddy/terminus@^4.8.0":
+  version "4.9.0"
+  resolved "https://registry.yarnpkg.com/@godaddy/terminus/-/terminus-4.9.0.tgz#c7de0b45ede05116854d1461832dd05df169f689"
+  integrity sha512-j1E22ZK5jW+DVb2vIEOx9I6epWT/geJyWzuxsUThyPcds5UxjCBeKcDTtNVkoWLRASM49o9OKRrCKKybX7z9bw==
   dependencies:
     stoppable "^1.1.0"
 
@@ -1012,25 +1012,25 @@
   dependencies:
     "@octokit/openapi-types" "^7.3.2"
 
-"@parameter1/gulp@^1.1.10":
-  version "1.1.10"
-  resolved "https://registry.yarnpkg.com/@parameter1/gulp/-/gulp-1.1.10.tgz#6c327afa2d9961a11ca93fdc4f299e11129dea9d"
-  integrity sha512-5Veacq4igP2pandZPLyF4sIpy4FgWqC2bo8KL2MesDv7kaTxO6C2B06Fe6yUkde2iUVcMYogm1oWw5/QMurvnw==
+"@parameter1/gulp@^1.1.17":
+  version "1.1.17"
+  resolved "https://registry.yarnpkg.com/@parameter1/gulp/-/gulp-1.1.17.tgz#8280a4e38c51f1aa9b2b77684444f1cb5caa71ca"
+  integrity sha512-QcW0zsWAJojSyJvKaVArGJ1Wdtd0/o8qZMOr18gLytNSj9L0vhwx7kZ+1+mfG/eoUGDrynSmRxIlqEV78wVVNg==
   dependencies:
     gulp "^4.0.2"
 
-"@parameter1/terminus@^1.3.1":
-  version "1.3.1"
-  resolved "https://registry.yarnpkg.com/@parameter1/terminus/-/terminus-1.3.1.tgz#2c1e6c6b9397f53f8602eddf5852ab8fc78b281e"
-  integrity sha512-fmlPTLMQMVlBH2WYCFHHVim02zDVgEpHYS3QhtE4N2Wvhju5iKHsRK8bKPk/yUAhE1goRpybaPN+jmJb5EbZBQ==
+"@parameter1/terminus@^1.7.0":
+  version "1.7.0"
+  resolved "https://registry.yarnpkg.com/@parameter1/terminus/-/terminus-1.7.0.tgz#7300a5d618172530a3b02a35f61ef3d7b7c86da7"
+  integrity sha512-XyP4LBapxMCd4RopzayAQQNI9mYL8z9uF/93WGqZAfy2cfDUsAVueiRUGzsxJ/g9HJTN8HwmR8BCls0vZVCfUw==
   dependencies:
-    "@godaddy/terminus" "^4.5.0"
-    envalid "^6.0.2"
+    "@godaddy/terminus" "^4.8.0"
+    envalid "^7.1.0"
 
-"@parameter1/utils@^1.1.12":
-  version "1.1.12"
-  resolved "https://registry.yarnpkg.com/@parameter1/utils/-/utils-1.1.12.tgz#babba0a2d9966d9012084d74234a13f35a4189b5"
-  integrity sha512-bqwsxjdo8SiI/fOfEG+ZVfsCj0lSuhEHf4W08uJhGOJV2Oef9aBL0xo5KrMmN78iXeUjGAqSQ5y/9xb4UWtqKg==
+"@parameter1/utils@^1.1.19":
+  version "1.1.19"
+  resolved "https://registry.yarnpkg.com/@parameter1/utils/-/utils-1.1.19.tgz#9d86b3e092b2c11f19ade9f782dc23809698f389"
+  integrity sha512-fXo/eNz9U22vNjkfq49UA10hNKfLEDW9xYEm995srJ9n4nJXyzOmT8IjOkpmGHy96LAKq2//Tof+/KB74a0Elw==
   dependencies:
     object-path "^0.11.5"
 
@@ -2141,14 +2141,6 @@ chalk@^2.0.0:
     escape-string-regexp "^1.0.5"
     supports-color "^5.3.0"
 
-chalk@^3.0.0:
-  version "3.0.0"
-  resolved "https://registry.yarnpkg.com/chalk/-/chalk-3.0.0.tgz#3f73c2bf526591f574cc492c51e2456349f844e4"
-  integrity sha512-4D3B6Wf41KOYRFdszmDqMCGq5VV/uMAB273JILmO+3jAlh8X4qDtdtgCR3fxtbLEMzSx22QdhnDcJvu2u1fVwg==
-  dependencies:
-    ansi-styles "^4.1.0"
-    supports-color "^7.1.0"
-
 chalk@^4.0.0, chalk@^4.1.0:
   version "4.1.0"
   resolved "https://registry.yarnpkg.com/chalk/-/chalk-4.1.0.tgz#4e14870a618d9e2edd97dd8345fd9d9dc315646a"
@@ -2886,11 +2878,6 @@ dot-prop@^6.0.1:
   dependencies:
     is-obj "^2.0.0"
 
-dotenv@^8.2.0:
-  version "8.2.0"
-  resolved "https://registry.yarnpkg.com/dotenv/-/dotenv-8.2.0.tgz#97e619259ada750eea3e4ea3e26bceea5424b16a"
-  integrity sha512-8sJ78ElpbDJBHNeBzUbUVLsqKdccaa/BXF1uPTw3GrvQTBgrQrtObr2mUrE38vzYd8cEv+m/JBfDLioYcfXoaw==
-
 duplexer@^0.1.1:
   version "0.1.2"
   resolved "https://registry.yarnpkg.com/duplexer/-/duplexer-0.1.2.tgz#3abe43aef3835f8ae077d136ddce0f276b0400e6"
@@ -2980,20 +2967,15 @@ env-paths@^2.2.0:
   resolved "https://registry.yarnpkg.com/env-paths/-/env-paths-2.2.0.tgz#cdca557dc009152917d6166e2febe1f039685e43"
   integrity sha512-6u0VYSCo/OW6IoD5WCLLy9JUGARbamfSavcNXry/eu8aHVFei6CD3Sw+VGX5alea1i9pgPHW0mbu6Xj0uBh7gA==
 
-envalid@^6.0.2:
-  version "6.0.2"
-  resolved "https://registry.yarnpkg.com/envalid/-/envalid-6.0.2.tgz#7139770e089acc945c0e47b5075d72915d8683e8"
-  integrity sha512-ChJb9a5rjwZ/NkcXfBrzEl5cFZaGLg38N7MlWJkv5qsmSypX2WJe28LkoAWcklC60nKZXYKRlBbsjuJSjYw0Xg==
-  dependencies:
-    chalk "^3.0.0"
-    dotenv "^8.2.0"
-    meant "^1.0.1"
-    validator "^13.0.0"
-
 envalid@^7.0.0:
   version "7.0.0"
   resolved "https://registry.yarnpkg.com/envalid/-/envalid-7.0.0.tgz#46c43d586b56180b2523d21aad08108a51c52f1a"
   integrity sha512-uyHMNJqxr44ILkK4SEPJ+cPZ5e+xyj6wP0zvJulXg5r6ITGbyfri8AUlJ6nwD3W8/6fIzvheybkSqiW2sRi3GQ==
+
+envalid@^7.1.0:
+  version "7.1.0"
+  resolved "https://registry.yarnpkg.com/envalid/-/envalid-7.1.0.tgz#fccc499abb257e3992d73b02d014c867a85e2a69"
+  integrity sha512-C5rtCxfj+ozW5q79fBYKcBEf0KSNklKwZudjCzXy9ANT8Pz1MKxPBn6unZnYXXy6e+cqVgnEURQeXmdueG9/kA==
 
 envinfo@^7.7.4:
   version "7.8.1"
@@ -5305,11 +5287,6 @@ matchdep@^2.0.0:
     micromatch "^3.0.4"
     resolve "^1.4.0"
     stack-trace "0.0.10"
-
-meant@^1.0.1:
-  version "1.0.3"
-  resolved "https://registry.yarnpkg.com/meant/-/meant-1.0.3.tgz#67769af9de1d158773e928ae82c456114903554c"
-  integrity sha512-88ZRGcNxAq4EH38cQ4D85PM57pikCwS8Z99EWHODxN7KBY+UuPiqzRTtZzS8KTXO/ywSWbdjjJST2Hly/EQxLw==
 
 media-typer@0.3.0:
   version "0.3.0"
@@ -8010,11 +7987,6 @@ validate-npm-package-name@^3.0.0:
   integrity sha1-X6kS2B630MdK/BQN5zF/DKffQ34=
   dependencies:
     builtins "^1.0.3"
-
-validator@^13.0.0:
-  version "13.5.2"
-  resolved "https://registry.yarnpkg.com/validator/-/validator-13.5.2.tgz#c97ae63ed4224999fb6f42c91eaca9567fe69a46"
-  integrity sha512-mD45p0rvHVBlY2Zuy3F3ESIe1h5X58GPfAtslBjY7EtTqGquZTj+VX/J4RnHWN8FKq0C9WRVt1oWAcytWRuYLQ==
 
 value-or-function@^3.0.0:
   version "3.0.0"
