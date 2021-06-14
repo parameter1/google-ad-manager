@@ -58,7 +58,7 @@ type GrpSettings {
   applyTrueCoview: Boolean
 }
 
-"\`LineItem\` is an advertiser's commitment to purchase a specific number of ad impressions, clicks, or time."
+"LineItem is an advertiser's commitment to purchase a specific number of ad impressions, clicks, or time."
 type LineItem implements LineItemSummaryInterface {
   "The ID of the Order to which the \`LineItem\` belongs. This attribute is required."
   orderId: BigInt
