@@ -21,7 +21,7 @@
     "@parameter1/google-ad-manager-graphql-server": "^0.2.2",
     "@parameter1/terminus": "^1.7.0",
     "envalid": "^7.0.0",
-    "helmet": "^4.4.1",
+    "helmet": "^4.6.0",
     "newrelic": "^7.1.1"
   },
   "devDependencies": {
