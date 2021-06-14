@@ -61,7 +61,7 @@ type PlacementPage {
   results: [Placement]
 }
 
-"Contains information required for AdWords advertisers to place their ads."
+"Deprecated container for information required for AdWords advertisers to place their ads."
 interface SiteTargetingInfoInterface {
   _: Boolean
 }

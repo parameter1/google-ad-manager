@@ -61,7 +61,7 @@ input GetCmsMetadataKeysByStatementInput {
   statement: StatementInput
 }
 
-"Returns a page of CmsMetadataValues matching the specified Statement. The following fields are supported for filtering:   PQL Property Object Property   \`id\` CmsMetadataValue#cmsMetadataValueId   \`cmsValue\` CmsMetadataValue#valueName   \`cmsKey\` CmsMetadataValue#key#name   \`cmsKeyId\` CmsMetadataValue#key#id   \`keyValueMemberContent\` Content IDs tagged with a CMS metadata key-value   \`status\` CmsMetadataValue#status  "
+"Returns a page of CmsMetadataValues matching the specified Statement. The following fields are supported for filtering:   PQL Property Object Property   \`id\` CmsMetadataValue#cmsMetadataValueId   \`cmsValue\` CmsMetadataValue#valueName   \`cmsKey\` CmsMetadataValue#key#name   \`cmsKeyId\` CmsMetadataValue#key#id   \`status\` CmsMetadataValue#status  "
 input GetCmsMetadataValuesByStatementInput {
   statement: StatementInput
 }
@@ -123,7 +123,7 @@ extend type Query {
 }
 
 extend type Query {
-  "Returns a page of CmsMetadataValues matching the specified Statement. The following fields are supported for filtering:   PQL Property Object Property   \`id\` CmsMetadataValue#cmsMetadataValueId   \`cmsValue\` CmsMetadataValue#valueName   \`cmsKey\` CmsMetadataValue#key#name   \`cmsKeyId\` CmsMetadataValue#key#id   \`keyValueMemberContent\` Content IDs tagged with a CMS metadata key-value   \`status\` CmsMetadataValue#status  "
+  "Returns a page of CmsMetadataValues matching the specified Statement. The following fields are supported for filtering:   PQL Property Object Property   \`id\` CmsMetadataValue#cmsMetadataValueId   \`cmsValue\` CmsMetadataValue#valueName   \`cmsKey\` CmsMetadataValue#key#name   \`cmsKeyId\` CmsMetadataValue#key#id   \`status\` CmsMetadataValue#status  "
   getCmsMetadataValuesByStatement(input: GetCmsMetadataValuesByStatementInput!): CmsMetadataValuePage
     @soap(service: "CmsMetadata", action: "getCmsMetadataValuesByStatement")
 }

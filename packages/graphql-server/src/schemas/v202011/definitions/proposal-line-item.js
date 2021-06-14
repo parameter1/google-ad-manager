@@ -103,7 +103,7 @@ type ProposalLineItem {
   allowedFormats: [AllowedFormatsEnum]
   "Whether or not the Proposal for this \`ProposalLineItem\` is a programmatic deal. This attribute is populated from Proposal#isProgrammatic. This attribute is read-only."
   isProgrammatic: Boolean
-  "The marketplace info if this proposal line item is programmatic, null otherwise. This attribute is applicable when:using programmatic guaranteed, using sales management.using programmatic guaranteed, not using sales management. This attribute is required when:using programmatic guaranteed, using sales management.using programmatic guaranteed, not using sales management."
+  "The marketplace info if this proposal line item is programmatic, null otherwise. This attribute is applicable when:using programmatic guaranteed, using sales management.using programmatic guaranteed, not using sales management."
   marketplaceInfo: ProposalLineItemMarketplaceInfo
   "Additional terms shown to the buyer in Marketplace. This attribute is applicable when:using programmatic guaranteed, using sales management.using programmatic guaranteed, not using sales management."
   additionalTerms: String
@@ -131,7 +131,7 @@ type ProposalLineItemMakegoodInfo {
 
 "Marketplace info for ProposalLineItem with a corresponding deal in Marketplace."
 type ProposalLineItemMarketplaceInfo {
-  "The AdExchangeEnvironment of the marketplace web property that is associated with this line item. The last API version in which this field will be available is v202102. Starting with v202105, this field will no longer be available. To control which platforms your proposal line item will serve on from v202105 onward, please use request platform targeting in the targeting expression."
+  "The AdExchangeEnvironment of the marketplace web property that is associated with this line item. The last API version in which this field will be available is v202105. Starting with v202108, this field will no longer be available. To control which platforms your proposal line item will serve on from v202108 onward, please use request platform targeting in the targeting expression."
   adExchangeEnvironment: AdExchangeEnvironmentEnum
 }
 
