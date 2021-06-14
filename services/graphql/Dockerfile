@@ -5,7 +5,7 @@ ENV NODE_ENV production
 ADD package.json yarn.lock /gam/
 ADD packages /gam/packages
 ADD services/graphql /gam/services/graphql
-RUN yarn --production --pure-lockfile
+RUN yarn --production --frozen-lockfile
 
 WORKDIR /gam/services/graphql
 
