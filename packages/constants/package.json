@@ -1,6 +1,6 @@
 {
   "name": "@parameter1/google-ad-manager-constants",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "Common Google Ad Manager API constants.",
   "author": "Jacob Bare <jacob@parameter1.com>",
   "homepage": "https://github.com/parameter1/google-ad-manager/tree/main/packages/constants#readme",

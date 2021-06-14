@@ -1,6 +1,6 @@
 {
   "name": "@parameter1/google-ad-manager-soap",
-  "version": "0.2.1",
+  "version": "0.3.0",
   "description": "SOAP client for the Google Ad Manager API",
   "author": "Jacob Bare <jacob@parameter1.com>",
   "homepage": "https://github.com/parameter1/google-ad-manager/tree/main/packages/soap#readme",
@@ -16,9 +16,9 @@
     "test": "yarn lint"
   },
   "dependencies": {
-    "@parameter1/google-ad-manager-auth": "^0.2.0",
-    "@parameter1/google-ad-manager-constants": "^0.2.0",
-    "@parameter1/google-ad-manager-wsdl-parser": "^0.2.1",
+    "@parameter1/google-ad-manager-auth": "^0.3.0",
+    "@parameter1/google-ad-manager-constants": "^0.3.0",
+    "@parameter1/google-ad-manager-wsdl-parser": "^0.3.0",
     "@parameter1/utils": "^1.1.19",
     "inflected": "^2.1.0",
     "soap": "^0.39.0"

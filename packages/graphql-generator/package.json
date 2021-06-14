@@ -1,6 +1,6 @@
 {
   "name": "@parameter1/google-ad-manager-graphql-generator",
-  "version": "0.2.1",
+  "version": "0.3.0",
   "description": "Generates GraphQL type definitions using the Google Ad Manager API WSDLs.",
   "author": "Jacob Bare <jacob@parameter1.com>",
   "homepage": "https://github.com/parameter1/google-ad-manager/tree/main/packages/graphql-generator#readme",
@@ -19,9 +19,9 @@
     "test": "yarn lint"
   },
   "dependencies": {
-    "@parameter1/google-ad-manager-api-info": "^0.2.0",
-    "@parameter1/google-ad-manager-constants": "^0.2.0",
-    "@parameter1/google-ad-manager-wsdl-parser": "^0.2.1",
+    "@parameter1/google-ad-manager-api-info": "^0.3.0",
+    "@parameter1/google-ad-manager-constants": "^0.3.0",
+    "@parameter1/google-ad-manager-wsdl-parser": "^0.3.0",
     "cheerio": "^1.0.0-rc.10",
     "inflected": "^2.1.0",
     "inquirer": "^8.1.0",
