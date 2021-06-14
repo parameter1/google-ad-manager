@@ -22,7 +22,7 @@
     "@parameter1/google-ad-manager-api-info": "^0.2.0",
     "@parameter1/google-ad-manager-constants": "^0.2.0",
     "@parameter1/google-ad-manager-wsdl-parser": "^0.2.1",
-    "cheerio": "^1.0.0-rc.5",
+    "cheerio": "^1.0.0-rc.10",
     "inflected": "^2.1.0",
     "inquirer": "^8.1.0",
     "mkdirp": "^1.0.4",

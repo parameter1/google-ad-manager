@@ -17,7 +17,7 @@
   },
   "dependencies": {
     "@parameter1/google-ad-manager-constants": "^0.2.0",
-    "cheerio": "^1.0.0-rc.5",
+    "cheerio": "^1.0.0-rc.10",
     "node-fetch": "^2.6.1"
   },
   "devDependencies": {
