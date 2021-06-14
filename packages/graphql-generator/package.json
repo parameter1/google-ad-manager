@@ -24,7 +24,7 @@
     "@parameter1/google-ad-manager-wsdl-parser": "^0.2.1",
     "cheerio": "^1.0.0-rc.5",
     "inflected": "^2.1.0",
-    "inquirer": "^7.3.3",
+    "inquirer": "^8.1.0",
     "mkdirp": "^1.0.4",
     "node-fetch": "^2.6.1"
   },

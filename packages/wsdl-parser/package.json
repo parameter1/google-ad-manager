@@ -20,7 +20,7 @@
     "@parameter1/utils": "^1.1.19",
     "cheerio": "^1.0.0-rc.5",
     "inflected": "^2.1.0",
-    "inquirer": "^7.3.3",
+    "inquirer": "^8.1.0",
     "node-fetch": "^2.6.1",
     "xml2js": "^0.4.23"
   },
