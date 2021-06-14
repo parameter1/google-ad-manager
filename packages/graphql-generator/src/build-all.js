@@ -94,11 +94,12 @@ module.exports = async ({ urls } = {}) => {
     "const resolvers = require('./resolvers');",
     "const schemaDirectives = require('../../directives');",
     "const typeDefs = require('./definitions');",
+    "const addInterfaceResolvers = require('../add-interface-resolvers');",
     '',
     'module.exports = makeExecutableSchema({',
     '  typeDefs,',
     '  schemaDirectives,',
-    '  resolvers,',
+    '  resolvers: addInterfaceResolvers({ typeDefs, resolvers }),',
     '});',
   );
   fileMap.set('index.js', `${root.join('\n')}\n`);
