@@ -22,7 +22,7 @@
     "@parameter1/terminus": "^1.9.0",
     "envalid": "^7.2.1",
     "helmet": "^4.6.0",
-    "newrelic": "^7.5.0"
+    "newrelic": "^8.5.0"
   },
   "devDependencies": {
     "@parameter1/gulp": "^1.1.21",
