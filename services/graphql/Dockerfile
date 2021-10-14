@@ -1,4 +1,4 @@
-FROM node:14.15-alpine as build
+FROM node:14.17-alpine as build
 WORKDIR /gam
 ENV NODE_ENV production
 
@@ -9,7 +9,7 @@ RUN yarn --production --frozen-lockfile
 
 WORKDIR /gam/services/graphql
 
-FROM node:14.15-alpine
+FROM node:14.17-alpine
 ENV NODE_ENV production
 ENV PORT 80
 COPY --from=build /gam /gam

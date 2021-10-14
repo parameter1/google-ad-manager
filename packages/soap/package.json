@@ -19,14 +19,14 @@
     "@parameter1/google-ad-manager-auth": "^0.3.0",
     "@parameter1/google-ad-manager-constants": "^0.3.0",
     "@parameter1/google-ad-manager-wsdl-parser": "^0.3.0",
-    "@parameter1/utils": "^1.1.19",
+    "@parameter1/utils": "^1.1.24",
     "inflected": "^2.1.0",
-    "soap": "^0.39.0"
+    "soap": "^0.42.0"
   },
   "devDependencies": {
-    "eslint": "^7.28.0",
+    "eslint": "^8.0.1",
     "eslint-config-airbnb-base": "^14.2.1",
-    "eslint-plugin-import": "^2.23.4"
+    "eslint-plugin-import": "^2.25.2"
   },
   "publishConfig": {
     "access": "public"

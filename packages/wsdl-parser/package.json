@@ -17,17 +17,17 @@
   },
   "dependencies": {
     "@parameter1/google-ad-manager-constants": "^0.3.0",
-    "@parameter1/utils": "^1.1.19",
+    "@parameter1/utils": "^1.1.24",
     "cheerio": "^1.0.0-rc.10",
     "inflected": "^2.1.0",
-    "inquirer": "^8.1.0",
-    "node-fetch": "^2.6.1",
+    "inquirer": "^8.2.0",
+    "node-fetch": "^2.6.5",
     "xml2js": "^0.4.23"
   },
   "devDependencies": {
-    "eslint": "^7.28.0",
+    "eslint": "^8.0.1",
     "eslint-config-airbnb-base": "^14.2.1",
-    "eslint-plugin-import": "^2.23.4"
+    "eslint-plugin-import": "^2.25.2"
   },
   "publishConfig": {
     "access": "public"
