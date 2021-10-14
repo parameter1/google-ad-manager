@@ -80,7 +80,7 @@ enum AudienceSegmentTypeEnum {
   UNKNOWN
 }
 
-"Creates new RuleBasedFirstPartyAudienceSegment objects. @param segments first-party audience segments to create @return created first-party audience segments"
+"Creates new FirstPartyAudienceSegment objects. @param segments first-party audience segments to create @return created first-party audience segments"
 input CreateAudienceSegmentsInput {
   segments: [JSONObject]
 }
@@ -144,7 +144,7 @@ enum LicenseTypeEnum {
   UNKNOWN
 }
 
-"A NonRuleBasedFirstPartyAudienceSegment is a FirstPartyAudienceSegment owned by the publisher network. It doesn't contain a rule. Cookies are usually added to this segment via cookie upload. These segments are created by data management platforms or Google Analytics. They cannot be created using the Ad Manager API."
+"A NonRuleBasedFirstPartyAudienceSegment is a FirstPartyAudienceSegment owned by the publisher network. It doesn't contain a rule. Cookies are usually added to this segment via cookie upload."
 type NonRuleBasedFirstPartyAudienceSegment implements FirstPartyAudienceSegmentInterface & AudienceSegmentInterface {
   _: Boolean
   "Id of the AudienceSegment. This attribute is readonly and is populated by Google."
@@ -319,7 +319,7 @@ type ThirdPartyAudienceSegment implements AudienceSegmentInterface {
   endDateTime: DateTime
 }
 
-"Updates the given RuleBasedFirstPartyAudienceSegment objects. @param segments first-party audience segments to update @return updated first-party audience segments"
+"Updates the given FirstPartyAudienceSegment objects. @param segments first-party audience segments to update @return updated first-party audience segments"
 input UpdateAudienceSegmentsInput {
   segments: [JSONObject]
 }
@@ -344,7 +344,7 @@ extend type Query {
 }
 
 extend type Mutation {
-  "Creates new RuleBasedFirstPartyAudienceSegment objects. @param segments first-party audience segments to create @return created first-party audience segments"
+  "Creates new FirstPartyAudienceSegment objects. @param segments first-party audience segments to create @return created first-party audience segments"
   createAudienceSegments(input: CreateAudienceSegmentsInput!): [FirstPartyAudienceSegmentInterface]
     @soap(service: "AudienceSegment", action: "createAudienceSegments")
 }
@@ -362,7 +362,7 @@ extend type Mutation {
 }
 
 extend type Mutation {
-  "Updates the given RuleBasedFirstPartyAudienceSegment objects. @param segments first-party audience segments to update @return updated first-party audience segments"
+  "Updates the given FirstPartyAudienceSegment objects. @param segments first-party audience segments to update @return updated first-party audience segments"
   updateAudienceSegments(input: UpdateAudienceSegmentsInput!): [FirstPartyAudienceSegmentInterface]
     @soap(service: "AudienceSegment", action: "updateAudienceSegments")
 }
