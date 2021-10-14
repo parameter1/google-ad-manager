@@ -21,7 +21,7 @@
     "cheerio": "^1.0.0-rc.10",
     "inflected": "^2.1.0",
     "inquirer": "^8.1.0",
-    "node-fetch": "^2.6.1",
+    "node-fetch": "^2.6.5",
     "xml2js": "^0.4.23"
   },
   "devDependencies": {
