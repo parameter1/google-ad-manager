@@ -14,12 +14,12 @@ input BuyerUserListTargetingInput {
   hasBuyerUserListTargeting: Boolean
 }
 
-"Creates yield groups in bulk. @param yieldGroups the groups to create @return the created groups"
+"Creates yield groups in bulk."
 input CreateYieldGroupsInput {
   yieldGroups: [YieldGroupInput]
 }
 
-"Gets a page of yield groups, with child tags, filtered by the given statement. @param statement the statement used to filter yield groups. @return the page of yield groups"
+"Gets a page of yield groups, with child tags, filtered by the given statement."
 input GetYieldGroupsByStatementInput {
   statement: StatementInput
 }
@@ -51,7 +51,7 @@ type SdkMediationSettings implements AbstractDisplaySettingsInterface {
   platform: YieldPlatformEnum
 }
 
-"Updates a list of yield groups. @param yieldGroups the groups to update @return the updated groups"
+"Updates a list of yield groups."
 input UpdateYieldGroupsInput {
   yieldGroups: [YieldGroupInput]
 }
@@ -208,13 +208,13 @@ extend type Query {
 }
 
 extend type Mutation {
-  "Creates yield groups in bulk. @param yieldGroups the groups to create @return the created groups"
+  "Creates yield groups in bulk."
   createYieldGroups(input: CreateYieldGroupsInput!): [YieldGroup]
     @soap(service: "YieldGroup", action: "createYieldGroups")
 }
 
 extend type Query {
-  "Gets a page of yield groups, with child tags, filtered by the given statement. @param statement the statement used to filter yield groups. @return the page of yield groups"
+  "Gets a page of yield groups, with child tags, filtered by the given statement."
   getYieldGroupsByStatement(input: GetYieldGroupsByStatementInput!): YieldGroupPage
     @soap(service: "YieldGroup", action: "getYieldGroupsByStatement")
 }
@@ -226,7 +226,7 @@ extend type Query {
 }
 
 extend type Mutation {
-  "Updates a list of yield groups. @param yieldGroups the groups to update @return the updated groups"
+  "Updates a list of yield groups."
   updateYieldGroups(input: UpdateYieldGroupsInput!): [YieldGroup]
     @soap(service: "YieldGroup", action: "updateYieldGroups")
 }

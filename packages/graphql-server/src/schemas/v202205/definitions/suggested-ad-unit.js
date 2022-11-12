@@ -4,12 +4,12 @@ const { gql } = require('apollo-server-express');
 
 module.exports = gql`
 
-"Gets a SuggestedAdUnitPage of SuggestedAdUnit objects that satisfy the filter query. There is a system-enforced limit of 1000 on the number of suggested ad units that are suggested at any one time.   PQL Property Object Property   \`id\` SuggestedAdUnit#id   \`numRequests\` SuggestedAdUnit#numRequests   Note: After API version 201311, the \`id\` field will only be numerical. @param filterStatement a Publisher Query Language statement used to filter a set of suggested ad units @return the suggested ad units that match the given filter"
+"Gets a SuggestedAdUnitPage of SuggestedAdUnit objects that satisfy the filter query. There is a system-enforced limit of 1000 on the number of suggested ad units that are suggested at any one time.   PQL Property Object Property   \`id\` SuggestedAdUnit#id   \`numRequests\` SuggestedAdUnit#numRequests   Note: After API version 201311, the \`id\` field will only be numerical."
 input GetSuggestedAdUnitsByStatementInput {
   filterStatement: StatementInput
 }
 
-"Performs actions on SuggestedAdUnit objects that match the given Statement#query. The following fields are supported for filtering:   PQL Property Object Property   \`id\` SuggestedAdUnit#id   \`numRequests\` SuggestedAdUnit#numRequests   @param suggestedAdUnitAction the action to perform @param filterStatement a Publisher Query Language statement used to filter a set of suggested ad units @return the result of the action performed"
+"Performs actions on SuggestedAdUnit objects that match the given Statement#query. The following fields are supported for filtering:   PQL Property Object Property   \`id\` SuggestedAdUnit#id   \`numRequests\` SuggestedAdUnit#numRequests  "
 input PerformSuggestedAdUnitActionInput {
   suggestedAdUnitAction: JSONObject
   filterStatement: StatementInput
@@ -23,7 +23,7 @@ type SuggestedAdUnit {
   numRequests: BigInt
   "The hierarchical path from the last existing ad unit after this and all suggested parent ad units have been created. Each path element is a separate ad unit code in the returned list. This attribute is read-only and is populated by Google."
   path: [String]
-  "The existing hierarchical path leading up to, and including, the parent of the first suggested ad unit in the ad unit hierarchy. The \`parentPath\` and the \`path\` make up the full path of the suggested ad unit after it is approved. This attribute is read-only and is populated by Google.  Note: The ad unit code for each of the parent ad units will not be provided. "
+  "The existing hierarchical path leading up to, and including, the parent of the first suggested ad unit in the ad unit hierarchy. The \`parentPath\` and the \`path\` make up the full path of the suggested ad unit after it is approved. This attribute is read-only and is populated by Google. Note: The ad unit code for each of the parent ad units will not be provided."
   parentPath: [AdUnitParent]
   "The \`target\` attribute of the underlying ad tag, as defined in the AdUnit. This attribute is read-only and is populated by Google."
   targetWindow: AdUnitTargetWindowEnum
@@ -81,13 +81,13 @@ extend type Query {
 }
 
 extend type Query {
-  "Gets a SuggestedAdUnitPage of SuggestedAdUnit objects that satisfy the filter query. There is a system-enforced limit of 1000 on the number of suggested ad units that are suggested at any one time.   PQL Property Object Property   \`id\` SuggestedAdUnit#id   \`numRequests\` SuggestedAdUnit#numRequests   Note: After API version 201311, the \`id\` field will only be numerical. @param filterStatement a Publisher Query Language statement used to filter a set of suggested ad units @return the suggested ad units that match the given filter"
+  "Gets a SuggestedAdUnitPage of SuggestedAdUnit objects that satisfy the filter query. There is a system-enforced limit of 1000 on the number of suggested ad units that are suggested at any one time.   PQL Property Object Property   \`id\` SuggestedAdUnit#id   \`numRequests\` SuggestedAdUnit#numRequests   Note: After API version 201311, the \`id\` field will only be numerical."
   getSuggestedAdUnitsByStatement(input: GetSuggestedAdUnitsByStatementInput!): SuggestedAdUnitPage
     @soap(service: "SuggestedAdUnit", action: "getSuggestedAdUnitsByStatement")
 }
 
 extend type Mutation {
-  "Performs actions on SuggestedAdUnit objects that match the given Statement#query. The following fields are supported for filtering:   PQL Property Object Property   \`id\` SuggestedAdUnit#id   \`numRequests\` SuggestedAdUnit#numRequests   @param suggestedAdUnitAction the action to perform @param filterStatement a Publisher Query Language statement used to filter a set of suggested ad units @return the result of the action performed"
+  "Performs actions on SuggestedAdUnit objects that match the given Statement#query. The following fields are supported for filtering:   PQL Property Object Property   \`id\` SuggestedAdUnit#id   \`numRequests\` SuggestedAdUnit#numRequests  "
   performSuggestedAdUnitAction(input: PerformSuggestedAdUnitActionInput!): SuggestedAdUnitUpdateResult
     @soap(service: "SuggestedAdUnit", action: "performSuggestedAdUnitAction")
 }

@@ -74,7 +74,7 @@ type Row {
   values: [ValueInterface]
 }
 
-"Retrieves rows of data that satisfy the given Statement#query from the system. @param selectStatement a Publisher Query Language statement used to specify what data needs to returned @return a result set of data that matches the given filter"
+"Retrieves rows of data that satisfy the given Statement#query from the system."
 input SelectInput {
   selectStatement: StatementInput
 }
@@ -87,7 +87,7 @@ type TargetingValue implements ObjectValueInterface & ValueInterface {
 }
 
 extend type Query {
-  "Retrieves rows of data that satisfy the given Statement#query from the system. @param selectStatement a Publisher Query Language statement used to specify what data needs to returned @return a result set of data that matches the given filter"
+  "Retrieves rows of data that satisfy the given Statement#query from the system."
   select(input: SelectInput!): ResultSet
     @soap(service: "PublisherQueryLanguage", action: "select")
 }

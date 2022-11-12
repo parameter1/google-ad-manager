@@ -4,17 +4,17 @@ const { gql } = require('apollo-server-express');
 
 module.exports = gql`
 
-"Takes a prospective forecast adjustment and calculates the daily ad opportunity counts corresponding to its provided volume settings. @param forecastAdjustment the prospective forecast adjustment @return a forecast adjustment matching the one passed in, but with its \`calculatedDailyAdOpportunityCounts\` field populated"
+"Takes a prospective forecast adjustment and calculates the daily ad opportunity counts corresponding to its provided volume settings."
 input CalculateDailyAdOpportunityCountsInput {
   forecastAdjustment: ForecastAdjustmentInput
 }
 
-"Creates new ForecastAdjustment objects. @param forecastAdjustments the forecast adjustments to create @return the persisted forecast adjustments with their IDs populated @throws ApiException if there is an error creating the forecast adjustments"
+"Creates new ForecastAdjustment objects."
 input CreateForecastAdjustmentsInput {
   forecastAdjustments: [ForecastAdjustmentInput]
 }
 
-"Creates new TrafficForecastSegment objects. @param trafficForecastSegments the traffic forecast segments to create @return the persisted traffic forecast segments with their IDs populated @throws ApiException if there is an error creating the traffic forecast segments"
+"Creates new TrafficForecastSegment objects."
 input CreateTrafficForecastSegmentsInput {
   trafficForecastSegments: [TrafficForecastSegmentInput]
 }
@@ -109,12 +109,12 @@ enum ForecastAdjustmentVolumeTypeEnum {
   UNKNOWN
 }
 
-"Gets a ForecastAdjustmentPage of ForecastAdjustment objects that satisfy the given Statement#query. The following fields are supported for filtering:   PQL Property Object Property   \`id\` ForecastAdjustment#id   \`trafficForecastSegmentId\` ForecastAdjustment#trafficForecastSegmentId   \`name\` ForecastAdjustment#name   \`startDate\` ForecastAdjustment#startDate   \`endDate\` ForecastAdjustment#endDate   \`status\` ForecastAdjustment#status   @param filterStatement a Publisher Query Language statement to filter a list of traffic forecast segments @return a page of forecast adjustments that match the filter"
+"Gets a ForecastAdjustmentPage of ForecastAdjustment objects that satisfy the given Statement#query. The following fields are supported for filtering:   PQL Property Object Property   \`id\` ForecastAdjustment#id   \`trafficForecastSegmentId\` ForecastAdjustment#trafficForecastSegmentId   \`name\` ForecastAdjustment#name   \`startDate\` ForecastAdjustment#startDate   \`endDate\` ForecastAdjustment#endDate   \`status\` ForecastAdjustment#status  "
 input GetForecastAdjustmentsByStatementInput {
   filterStatement: StatementInput
 }
 
-"Gets a TrafficForecastSegmentPage of TrafficForecastSegment objects that satisfy the given Statement#query. The following fields are supported for filtering:   PQL Property Object Property   \`id\` TrafficForecastSegment#id   \`name\` TrafficForecastSegment#name   \`creationTime\` TrafficForecastSegment#creationTime   @param filterStatement a Publisher Query Language statement to filter a list of traffic forecast segments @return a page of traffic forecast segments that match the filter"
+"Gets a TrafficForecastSegmentPage of TrafficForecastSegment objects that satisfy the given Statement#query. The following fields are supported for filtering:   PQL Property Object Property   \`id\` TrafficForecastSegment#id   \`name\` TrafficForecastSegment#name   \`creationTime\` TrafficForecastSegment#creationTime  "
 input GetTrafficForecastSegmentsByStatementInput {
   filterStatement: StatementInput
 }
@@ -143,7 +143,7 @@ input HistoricalBasisVolumeSettingsInput {
   multiplierMilliPercent: BigInt
 }
 
-"Performs actions on ForecastAdjustment objects that match the given Statement#query. @param forecastAdjustmentAction the action to perform @param filterStatement a Publisher Query Language statement used to filter a set of forecast adjustments @return the result of the action performed"
+"Performs actions on ForecastAdjustment objects that match the given Statement#query."
 input PerformForecastAdjustmentActionInput {
   forecastAdjustmentAction: JSONObject
   filterStatement: StatementInput
@@ -193,12 +193,12 @@ type TrafficForecastSegmentPage {
   results: [TrafficForecastSegment]
 }
 
-"Updates the specified ForecastAdjustment objects. @param forecastAdjustments the forecast adjustments to update @return the updated forecast adjustments @throws ApiException if there is an error updating the forecast adjustments"
+"Updates the specified ForecastAdjustment objects."
 input UpdateForecastAdjustmentsInput {
   forecastAdjustments: [ForecastAdjustmentInput]
 }
 
-"Updates the specified TrafficForecastSegment objects. @param trafficForecastSegments the traffic forecast segments to update @return the updated traffic forecast segments @throws ApiException if there is an error updating the traffic forecast segments"
+"Updates the specified TrafficForecastSegment objects."
 input UpdateTrafficForecastSegmentsInput {
   trafficForecastSegments: [TrafficForecastSegmentInput]
 }
@@ -242,49 +242,49 @@ extend type Query {
 }
 
 extend type Query {
-  "Takes a prospective forecast adjustment and calculates the daily ad opportunity counts corresponding to its provided volume settings. @param forecastAdjustment the prospective forecast adjustment @return a forecast adjustment matching the one passed in, but with its \`calculatedDailyAdOpportunityCounts\` field populated"
+  "Takes a prospective forecast adjustment and calculates the daily ad opportunity counts corresponding to its provided volume settings."
   calculateDailyAdOpportunityCounts(input: CalculateDailyAdOpportunityCountsInput!): ForecastAdjustment
     @soap(service: "Adjustment", action: "calculateDailyAdOpportunityCounts")
 }
 
 extend type Mutation {
-  "Creates new ForecastAdjustment objects. @param forecastAdjustments the forecast adjustments to create @return the persisted forecast adjustments with their IDs populated @throws ApiException if there is an error creating the forecast adjustments"
+  "Creates new ForecastAdjustment objects."
   createForecastAdjustments(input: CreateForecastAdjustmentsInput!): [ForecastAdjustment]
     @soap(service: "Adjustment", action: "createForecastAdjustments")
 }
 
 extend type Mutation {
-  "Creates new TrafficForecastSegment objects. @param trafficForecastSegments the traffic forecast segments to create @return the persisted traffic forecast segments with their IDs populated @throws ApiException if there is an error creating the traffic forecast segments"
+  "Creates new TrafficForecastSegment objects."
   createTrafficForecastSegments(input: CreateTrafficForecastSegmentsInput!): [TrafficForecastSegment]
     @soap(service: "Adjustment", action: "createTrafficForecastSegments")
 }
 
 extend type Query {
-  "Gets a ForecastAdjustmentPage of ForecastAdjustment objects that satisfy the given Statement#query. The following fields are supported for filtering:   PQL Property Object Property   \`id\` ForecastAdjustment#id   \`trafficForecastSegmentId\` ForecastAdjustment#trafficForecastSegmentId   \`name\` ForecastAdjustment#name   \`startDate\` ForecastAdjustment#startDate   \`endDate\` ForecastAdjustment#endDate   \`status\` ForecastAdjustment#status   @param filterStatement a Publisher Query Language statement to filter a list of traffic forecast segments @return a page of forecast adjustments that match the filter"
+  "Gets a ForecastAdjustmentPage of ForecastAdjustment objects that satisfy the given Statement#query. The following fields are supported for filtering:   PQL Property Object Property   \`id\` ForecastAdjustment#id   \`trafficForecastSegmentId\` ForecastAdjustment#trafficForecastSegmentId   \`name\` ForecastAdjustment#name   \`startDate\` ForecastAdjustment#startDate   \`endDate\` ForecastAdjustment#endDate   \`status\` ForecastAdjustment#status  "
   getForecastAdjustmentsByStatement(input: GetForecastAdjustmentsByStatementInput!): ForecastAdjustmentPage
     @soap(service: "Adjustment", action: "getForecastAdjustmentsByStatement")
 }
 
 extend type Query {
-  "Gets a TrafficForecastSegmentPage of TrafficForecastSegment objects that satisfy the given Statement#query. The following fields are supported for filtering:   PQL Property Object Property   \`id\` TrafficForecastSegment#id   \`name\` TrafficForecastSegment#name   \`creationTime\` TrafficForecastSegment#creationTime   @param filterStatement a Publisher Query Language statement to filter a list of traffic forecast segments @return a page of traffic forecast segments that match the filter"
+  "Gets a TrafficForecastSegmentPage of TrafficForecastSegment objects that satisfy the given Statement#query. The following fields are supported for filtering:   PQL Property Object Property   \`id\` TrafficForecastSegment#id   \`name\` TrafficForecastSegment#name   \`creationTime\` TrafficForecastSegment#creationTime  "
   getTrafficForecastSegmentsByStatement(input: GetTrafficForecastSegmentsByStatementInput!): TrafficForecastSegmentPage
     @soap(service: "Adjustment", action: "getTrafficForecastSegmentsByStatement")
 }
 
 extend type Mutation {
-  "Performs actions on ForecastAdjustment objects that match the given Statement#query. @param forecastAdjustmentAction the action to perform @param filterStatement a Publisher Query Language statement used to filter a set of forecast adjustments @return the result of the action performed"
+  "Performs actions on ForecastAdjustment objects that match the given Statement#query."
   performForecastAdjustmentAction(input: PerformForecastAdjustmentActionInput!): UpdateResult
     @soap(service: "Adjustment", action: "performForecastAdjustmentAction")
 }
 
 extend type Mutation {
-  "Updates the specified ForecastAdjustment objects. @param forecastAdjustments the forecast adjustments to update @return the updated forecast adjustments @throws ApiException if there is an error updating the forecast adjustments"
+  "Updates the specified ForecastAdjustment objects."
   updateForecastAdjustments(input: UpdateForecastAdjustmentsInput!): [ForecastAdjustment]
     @soap(service: "Adjustment", action: "updateForecastAdjustments")
 }
 
 extend type Mutation {
-  "Updates the specified TrafficForecastSegment objects. @param trafficForecastSegments the traffic forecast segments to update @return the updated traffic forecast segments @throws ApiException if there is an error updating the traffic forecast segments"
+  "Updates the specified TrafficForecastSegment objects."
   updateTrafficForecastSegments(input: UpdateTrafficForecastSegmentsInput!): [TrafficForecastSegment]
     @soap(service: "Adjustment", action: "updateTrafficForecastSegments")
 }

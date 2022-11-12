@@ -4,7 +4,7 @@ const { gql } = require('apollo-server-express');
 
 module.exports = gql`
 
-"Creates new LineItemCreativeAssociation objects @param lineItemCreativeAssociations the line item creative associations to create @return the created line item creative associations with their IDs filled in"
+"Creates new LineItemCreativeAssociation objects"
 input CreateLineItemCreativeAssociationsInput {
   lineItemCreativeAssociations: [LineItemCreativeAssociationInput]
 }
@@ -27,19 +27,19 @@ input CreativePushOptionsInput {
   nativeStyleId: BigInt
 }
 
-"Gets a LineItemCreativeAssociationPage of LineItemCreativeAssociation objects that satisfy the given Statement#query. The following fields are supported for filtering:   PQL Property Object Property   \`creativeId\` LineItemCreativeAssociation#creativeId   \`manualCreativeRotationWeight\` LineItemCreativeAssociation#manualCreativeRotationWeight   \`destinationUrl\` LineItemCreativeAssociation#destinationUrl   \`lineItemId\` LineItemCreativeAssociation#lineItemId   \`status\` LineItemCreativeAssociation#status   \`lastModifiedDateTime\` LineItemCreativeAssociation#lastModifiedDateTime   @param filterStatement a Publisher Query Language statement used to filter a set of line item creative associations @return the line item creative associations that match the given filter"
+"Gets a LineItemCreativeAssociationPage of LineItemCreativeAssociation objects that satisfy the given Statement#query. The following fields are supported for filtering:   PQL Property Object Property   \`creativeId\` LineItemCreativeAssociation#creativeId   \`manualCreativeRotationWeight\` LineItemCreativeAssociation#manualCreativeRotationWeight   \`destinationUrl\` LineItemCreativeAssociation#destinationUrl   \`lineItemId\` LineItemCreativeAssociation#lineItemId   \`status\` LineItemCreativeAssociation#status   \`lastModifiedDateTime\` LineItemCreativeAssociation#lastModifiedDateTime  "
 input GetLineItemCreativeAssociationsByStatementInput {
   filterStatement: StatementInput
 }
 
-"Returns an insite preview URL that references the specified site URL with the specified creative from the association served to it. For Creative Set previewing you may specify the master creative Id. @param lineItemId the ID of the line item, which must already exist @param creativeId the ID of the creative, which must already exist @param siteUrl the URL of the site that the creative should be previewed in @return a URL that references the specified site URL with the specified creative served to it"
+"Returns an insite preview URL that references the specified site URL with the specified creative from the association served to it. For Creative Set previewing you may specify the master creative Id."
 input GetPreviewUrlInput {
   lineItemId: BigInt
   creativeId: BigInt
   siteUrl: String
 }
 
-"Returns a list of URLs that reference the specified site URL with the specified creative from the association served to it. For Creative Set previewing you may specify the master creative Id. Each URL corresponds to one available native style for previewing the specified creative. @param lineItemId the ID of the line item, which must already exist @param creativeId the ID of the creative, which must already exist and must be a native creative @param siteUrl the URL of the site that the creative should be previewed in @return the URLs that references the specified site URL and can be used to preview the specified creative with the available native styles"
+"Returns a list of URLs that reference the specified site URL with the specified creative from the association served to it. For Creative Set previewing you may specify the master creative Id. Each URL corresponds to one available native style for previewing the specified creative."
 input GetPreviewUrlsForNativeStylesInput {
   lineItemId: BigInt
   creativeId: BigInt
@@ -50,9 +50,9 @@ input GetPreviewUrlsForNativeStylesInput {
 type LineItemCreativeAssociation {
   "The ID of the LineItem to which the Creative should be associated. This attribute is required."
   lineItemId: BigInt
-  "The ID of the Creative being associated with a LineItem.  This attribute is required if this is an association between a line item and a creative.  This attribute is ignored if this is an association between a line item and a creative set.  If this is an association between a line item and a creative, when retrieving the line item creative association, the #creativeId will be the creative's ID.  If this is an association between a line item and a creative set, when retrieving the line item creative association, the #creativeId will be the ID of the master creative."
+  "The ID of the Creative being associated with a LineItem. This attribute is required if this is an association between a line item and a creative.  This attribute is ignored if this is an association between a line item and a creative set. If this is an association between a line item and a creative, when retrieving the line item creative association, the #creativeId will be the creative's ID.  If this is an association between a line item and a creative set, when retrieving the line item creative association, the #creativeId will be the ID of the master creative."
   creativeId: BigInt
-  "The ID of the CreativeSet being associated with a LineItem. This attribute is required if this is an association between a line item and a creative set.  This field will be \`null\` when retrieving associations between line items and creatives not belonging to a set."
+  "The ID of the CreativeSet being associated with a LineItem. This attribute is required if this is an association between a line item and a creative set. This field will be \`null\` when retrieving associations between line items and creatives not belonging to a set."
   creativeSetId: BigInt
   "The weight of the Creative. This value is only used if the line item's \`creativeRotationType\` is set to CreativeRotationType#MANUAL. This attribute is optional and defaults to 10."
   manualCreativeRotationWeight: Float
@@ -82,9 +82,9 @@ type LineItemCreativeAssociation {
 input LineItemCreativeAssociationInput {
   "The ID of the LineItem to which the Creative should be associated. This attribute is required."
   lineItemId: BigInt
-  "The ID of the Creative being associated with a LineItem.  This attribute is required if this is an association between a line item and a creative.  This attribute is ignored if this is an association between a line item and a creative set.  If this is an association between a line item and a creative, when retrieving the line item creative association, the #creativeId will be the creative's ID.  If this is an association between a line item and a creative set, when retrieving the line item creative association, the #creativeId will be the ID of the master creative."
+  "The ID of the Creative being associated with a LineItem. This attribute is required if this is an association between a line item and a creative.  This attribute is ignored if this is an association between a line item and a creative set. If this is an association between a line item and a creative, when retrieving the line item creative association, the #creativeId will be the creative's ID.  If this is an association between a line item and a creative set, when retrieving the line item creative association, the #creativeId will be the ID of the master creative."
   creativeId: BigInt
-  "The ID of the CreativeSet being associated with a LineItem. This attribute is required if this is an association between a line item and a creative set.  This field will be \`null\` when retrieving associations between line items and creatives not belonging to a set."
+  "The ID of the CreativeSet being associated with a LineItem. This attribute is required if this is an association between a line item and a creative set. This field will be \`null\` when retrieving associations between line items and creatives not belonging to a set."
   creativeSetId: BigInt
   "The weight of the Creative. This value is only used if the line item's \`creativeRotationType\` is set to CreativeRotationType#MANUAL. This attribute is optional and defaults to 10."
   manualCreativeRotationWeight: Float
@@ -150,13 +150,13 @@ input Long_StatsMapEntryInput {
   value: StatsInput
 }
 
-"Performs actions on LineItemCreativeAssociation objects that match the given Statement#query. @param lineItemCreativeAssociationAction the action to perform @param filterStatement a Publisher Query Language statement used to filter a set of line item creative associations @return the result of the action performed"
+"Performs actions on LineItemCreativeAssociation objects that match the given Statement#query."
 input PerformLineItemCreativeAssociationActionInput {
   lineItemCreativeAssociationAction: JSONObject
   filterStatement: StatementInput
 }
 
-"Pushes a creative to devices that that satisfy the given Statement#query. * @param filterStatement a Publisher Query Language statement on the ID, Name, UserId and LinkedDeviceVisibility fields of the LinkedDevice table. @param options criteria to use to push a given creative."
+"Pushes a creative to devices that that satisfy the given Statement#query. *"
 input PushCreativeToDevicesInput {
   filterStatement: StatementInput
   options: CreativePushOptionsInput
@@ -176,7 +176,7 @@ input StatsInput {
   viewableImpressionsDelivered: BigInt
 }
 
-"Updates the specified LineItemCreativeAssociation objects @param lineItemCreativeAssociations the line item creative associations to update @return the updated line item creative associations"
+"Updates the specified LineItemCreativeAssociation objects"
 input UpdateLineItemCreativeAssociationsInput {
   lineItemCreativeAssociations: [LineItemCreativeAssociationInput]
 }
@@ -201,43 +201,43 @@ extend type Query {
 }
 
 extend type Mutation {
-  "Creates new LineItemCreativeAssociation objects @param lineItemCreativeAssociations the line item creative associations to create @return the created line item creative associations with their IDs filled in"
+  "Creates new LineItemCreativeAssociation objects"
   createLineItemCreativeAssociations(input: CreateLineItemCreativeAssociationsInput!): [LineItemCreativeAssociation]
     @soap(service: "LineItemCreativeAssociation", action: "createLineItemCreativeAssociations")
 }
 
 extend type Query {
-  "Gets a LineItemCreativeAssociationPage of LineItemCreativeAssociation objects that satisfy the given Statement#query. The following fields are supported for filtering:   PQL Property Object Property   \`creativeId\` LineItemCreativeAssociation#creativeId   \`manualCreativeRotationWeight\` LineItemCreativeAssociation#manualCreativeRotationWeight   \`destinationUrl\` LineItemCreativeAssociation#destinationUrl   \`lineItemId\` LineItemCreativeAssociation#lineItemId   \`status\` LineItemCreativeAssociation#status   \`lastModifiedDateTime\` LineItemCreativeAssociation#lastModifiedDateTime   @param filterStatement a Publisher Query Language statement used to filter a set of line item creative associations @return the line item creative associations that match the given filter"
+  "Gets a LineItemCreativeAssociationPage of LineItemCreativeAssociation objects that satisfy the given Statement#query. The following fields are supported for filtering:   PQL Property Object Property   \`creativeId\` LineItemCreativeAssociation#creativeId   \`manualCreativeRotationWeight\` LineItemCreativeAssociation#manualCreativeRotationWeight   \`destinationUrl\` LineItemCreativeAssociation#destinationUrl   \`lineItemId\` LineItemCreativeAssociation#lineItemId   \`status\` LineItemCreativeAssociation#status   \`lastModifiedDateTime\` LineItemCreativeAssociation#lastModifiedDateTime  "
   getLineItemCreativeAssociationsByStatement(input: GetLineItemCreativeAssociationsByStatementInput!): LineItemCreativeAssociationPage
     @soap(service: "LineItemCreativeAssociation", action: "getLineItemCreativeAssociationsByStatement")
 }
 
 extend type Query {
-  "Returns an insite preview URL that references the specified site URL with the specified creative from the association served to it. For Creative Set previewing you may specify the master creative Id. @param lineItemId the ID of the line item, which must already exist @param creativeId the ID of the creative, which must already exist @param siteUrl the URL of the site that the creative should be previewed in @return a URL that references the specified site URL with the specified creative served to it"
+  "Returns an insite preview URL that references the specified site URL with the specified creative from the association served to it. For Creative Set previewing you may specify the master creative Id."
   getPreviewUrl(input: GetPreviewUrlInput!): String
     @soap(service: "LineItemCreativeAssociation", action: "getPreviewUrl")
 }
 
 extend type Query {
-  "Returns a list of URLs that reference the specified site URL with the specified creative from the association served to it. For Creative Set previewing you may specify the master creative Id. Each URL corresponds to one available native style for previewing the specified creative. @param lineItemId the ID of the line item, which must already exist @param creativeId the ID of the creative, which must already exist and must be a native creative @param siteUrl the URL of the site that the creative should be previewed in @return the URLs that references the specified site URL and can be used to preview the specified creative with the available native styles"
+  "Returns a list of URLs that reference the specified site URL with the specified creative from the association served to it. For Creative Set previewing you may specify the master creative Id. Each URL corresponds to one available native style for previewing the specified creative."
   getPreviewUrlsForNativeStyles(input: GetPreviewUrlsForNativeStylesInput!): [CreativeNativeStylePreview]
     @soap(service: "LineItemCreativeAssociation", action: "getPreviewUrlsForNativeStyles")
 }
 
 extend type Mutation {
-  "Performs actions on LineItemCreativeAssociation objects that match the given Statement#query. @param lineItemCreativeAssociationAction the action to perform @param filterStatement a Publisher Query Language statement used to filter a set of line item creative associations @return the result of the action performed"
+  "Performs actions on LineItemCreativeAssociation objects that match the given Statement#query."
   performLineItemCreativeAssociationAction(input: PerformLineItemCreativeAssociationActionInput!): UpdateResult
     @soap(service: "LineItemCreativeAssociation", action: "performLineItemCreativeAssociationAction")
 }
 
 extend type Query {
-  "Pushes a creative to devices that that satisfy the given Statement#query. * @param filterStatement a Publisher Query Language statement on the ID, Name, UserId and LinkedDeviceVisibility fields of the LinkedDevice table. @param options criteria to use to push a given creative."
+  "Pushes a creative to devices that that satisfy the given Statement#query. *"
   pushCreativeToDevices(input: PushCreativeToDevicesInput!): UpdateResult
     @soap(service: "LineItemCreativeAssociation", action: "pushCreativeToDevices")
 }
 
 extend type Mutation {
-  "Updates the specified LineItemCreativeAssociation objects @param lineItemCreativeAssociations the line item creative associations to update @return the updated line item creative associations"
+  "Updates the specified LineItemCreativeAssociation objects"
   updateLineItemCreativeAssociations(input: UpdateLineItemCreativeAssociationsInput!): [LineItemCreativeAssociation]
     @soap(service: "LineItemCreativeAssociation", action: "updateLineItemCreativeAssociations")
 }

@@ -86,17 +86,17 @@ enum ContactStatusEnum {
   USER_DISABLED
 }
 
-"Creates new Contact objects. @param contacts the contacts to create @return the created contacts with their IDs filled in"
+"Creates new Contact objects."
 input CreateContactsInput {
   contacts: [ContactInput]
 }
 
-"Gets a ContactPage of Contact objects that satisfy the given Statement#query. The following fields are supported for filtering:   PQL Property Object Property   \`name\` Contact#name   \`email\` Contact#email   \`id\` Contact#id   \`comment\` Contact#comment   \`companyId\` Contact#companyId   \`title\` Contact#title   \`cellPhone\` Contact#cellPhone   \`workPhone\` Contact#workPhone   \`faxPhone\` Contact#faxPhone   \`status\` Contact#status   @param filterStatement a Publisher Query Language statement used to filter a set of contacts @return the contacts that match the given filter"
+"Gets a ContactPage of Contact objects that satisfy the given Statement#query. The following fields are supported for filtering:   PQL Property Object Property   \`name\` Contact#name   \`email\` Contact#email   \`id\` Contact#id   \`comment\` Contact#comment   \`companyId\` Contact#companyId   \`title\` Contact#title   \`cellPhone\` Contact#cellPhone   \`workPhone\` Contact#workPhone   \`faxPhone\` Contact#faxPhone   \`status\` Contact#status  "
 input GetContactsByStatementInput {
   statement: StatementInput
 }
 
-"Updates the specified Contact objects. @param contacts the contacts to update @return the updated contacts"
+"Updates the specified Contact objects."
 input UpdateContactsInput {
   contacts: [ContactInput]
 }
@@ -121,19 +121,19 @@ extend type Query {
 }
 
 extend type Mutation {
-  "Creates new Contact objects. @param contacts the contacts to create @return the created contacts with their IDs filled in"
+  "Creates new Contact objects."
   createContacts(input: CreateContactsInput!): [Contact]
     @soap(service: "Contact", action: "createContacts")
 }
 
 extend type Query {
-  "Gets a ContactPage of Contact objects that satisfy the given Statement#query. The following fields are supported for filtering:   PQL Property Object Property   \`name\` Contact#name   \`email\` Contact#email   \`id\` Contact#id   \`comment\` Contact#comment   \`companyId\` Contact#companyId   \`title\` Contact#title   \`cellPhone\` Contact#cellPhone   \`workPhone\` Contact#workPhone   \`faxPhone\` Contact#faxPhone   \`status\` Contact#status   @param filterStatement a Publisher Query Language statement used to filter a set of contacts @return the contacts that match the given filter"
+  "Gets a ContactPage of Contact objects that satisfy the given Statement#query. The following fields are supported for filtering:   PQL Property Object Property   \`name\` Contact#name   \`email\` Contact#email   \`id\` Contact#id   \`comment\` Contact#comment   \`companyId\` Contact#companyId   \`title\` Contact#title   \`cellPhone\` Contact#cellPhone   \`workPhone\` Contact#workPhone   \`faxPhone\` Contact#faxPhone   \`status\` Contact#status  "
   getContactsByStatement(input: GetContactsByStatementInput!): ContactPage
     @soap(service: "Contact", action: "getContactsByStatement")
 }
 
 extend type Mutation {
-  "Updates the specified Contact objects. @param contacts the contacts to update @return the updated contacts"
+  "Updates the specified Contact objects."
   updateContacts(input: UpdateContactsInput!): [Contact]
     @soap(service: "Contact", action: "updateContacts")
 }

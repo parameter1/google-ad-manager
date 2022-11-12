@@ -4,7 +4,7 @@ const { gql } = require('apollo-server-express');
 
 module.exports = gql`
 
-"Gets a LineItemTemplatePage of LineItemTemplate objects that satisfy the given Statement#query. The following fields are supported for filtering:   PQL Property Object Property   \`id\` LineItemTemplate#id   @param filterStatement a Publisher Query Language statement used to filter a set of line item templates @return the line item templates that match the given filter @throws ApiException if a RuntimeException is thrown"
+"Gets a LineItemTemplatePage of LineItemTemplate objects that satisfy the given Statement#query. The following fields are supported for filtering:   PQL Property Object Property   \`id\` LineItemTemplate#id  "
 input GetLineItemTemplatesByStatementInput {
   filterStatement: StatementInput
 }
@@ -63,7 +63,7 @@ extend type Query {
 }
 
 extend type Query {
-  "Gets a LineItemTemplatePage of LineItemTemplate objects that satisfy the given Statement#query. The following fields are supported for filtering:   PQL Property Object Property   \`id\` LineItemTemplate#id   @param filterStatement a Publisher Query Language statement used to filter a set of line item templates @return the line item templates that match the given filter @throws ApiException if a RuntimeException is thrown"
+  "Gets a LineItemTemplatePage of LineItemTemplate objects that satisfy the given Statement#query. The following fields are supported for filtering:   PQL Property Object Property   \`id\` LineItemTemplate#id  "
   getLineItemTemplatesByStatement(input: GetLineItemTemplatesByStatementInput!): LineItemTemplatePage
     @soap(service: "LineItemTemplate", action: "getLineItemTemplatesByStatement")
 }

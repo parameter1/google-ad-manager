@@ -14,7 +14,7 @@ type CmsContent {
   cmsContentId: String
 }
 
-"A \`Content\` represents video metadata from a publisher's Content Management System (CMS) that has been synced to Ad Manager.  Video line items can be targeted to \`Content\` to indicate what ads should match when the \`Content\` is being played."
+"A \`Content\` represents video metadata from a publisher's Content Management System (CMS) that has been synced to Ad Manager. Video line items can be targeted to \`Content\` to indicate what ads should match when the \`Content\` is being played."
 type Content {
   "Uniquely identifies the \`Content\`. This attribute is read-only and is assigned by Google when the content is created."
   id: BigInt!
@@ -200,7 +200,7 @@ enum DaiIngestStatusEnum {
   WARNING
 }
 
-"Gets a ContentPage of Content objects that satisfy the given Statement#query. The following fields are supported for filtering:   PQL Property Object Property   \`id\` Content#id   \`status\` Content#status   \`name\` Content#name   \`lastModifiedDateTime\` Content#lastModifiedDateTime   \`lastDaiIngestDateTime\` Content#lastDaiIngestDateTime   \`daiIngestStatus\` Content#daiIngestStatus   @param statement a Publisher Query Language statement used to filter a set of content @return the content that matches the given filter"
+"Gets a ContentPage of Content objects that satisfy the given Statement#query. The following fields are supported for filtering:   PQL Property Object Property   \`id\` Content#id   \`status\` Content#status   \`name\` Content#name   \`lastModifiedDateTime\` Content#lastModifiedDateTime   \`lastDaiIngestDateTime\` Content#lastDaiIngestDateTime   \`daiIngestStatus\` Content#daiIngestStatus  "
 input GetContentByStatementInput {
   statement: StatementInput
 }
@@ -225,7 +225,7 @@ extend type Query {
 }
 
 extend type Query {
-  "Gets a ContentPage of Content objects that satisfy the given Statement#query. The following fields are supported for filtering:   PQL Property Object Property   \`id\` Content#id   \`status\` Content#status   \`name\` Content#name   \`lastModifiedDateTime\` Content#lastModifiedDateTime   \`lastDaiIngestDateTime\` Content#lastDaiIngestDateTime   \`daiIngestStatus\` Content#daiIngestStatus   @param statement a Publisher Query Language statement used to filter a set of content @return the content that matches the given filter"
+  "Gets a ContentPage of Content objects that satisfy the given Statement#query. The following fields are supported for filtering:   PQL Property Object Property   \`id\` Content#id   \`status\` Content#status   \`name\` Content#name   \`lastModifiedDateTime\` Content#lastModifiedDateTime   \`lastDaiIngestDateTime\` Content#lastDaiIngestDateTime   \`daiIngestStatus\` Content#daiIngestStatus  "
   getContentByStatement(input: GetContentByStatementInput!): ContentPage
     @soap(service: "Content", action: "getContentByStatement")
 }

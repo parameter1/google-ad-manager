@@ -4,12 +4,12 @@ const { gql } = require('apollo-server-express');
 
 module.exports = gql`
 
-"Creates new CustomTargetingKey objects. The following fields are required:  CustomTargetingKey#name CustomTargetingKey#type  @param keys the custom targeting keys to update @return the updated custom targeting keys"
+"Creates new CustomTargetingKey objects. The following fields are required:  CustomTargetingKey#name CustomTargetingKey#type "
 input CreateCustomTargetingKeysInput {
   keys: [CustomTargetingKeyInput]
 }
 
-"Creates new CustomTargetingValue objects. The following fields are required:  CustomTargetingValue#customTargetingKeyId CustomTargetingValue#name  @param values the custom targeting values to update @return the updated custom targeting keys"
+"Creates new CustomTargetingValue objects. The following fields are required:  CustomTargetingValue#customTargetingKeyId CustomTargetingValue#name "
 input CreateCustomTargetingValuesInput {
   values: [CustomTargetingValueInput]
 }
@@ -140,23 +140,23 @@ enum CustomTargetingValueStatusEnum {
   UNKNOWN
 }
 
-"Gets a CustomTargetingKeyPage of CustomTargetingKey objects that satisfy the given Statement#query. The following fields are supported for filtering:   PQL Property Object Property    \`id\` CustomTargetingKey#id   \`name\` CustomTargetingKey#name   \`displayName\` CustomTargetingKey#displayName   \`type\` CustomTargetingKey#type   @param filterStatement a Publisher Query Language statement used to filter a set of custom targeting keys @return the custom targeting keys that match the given filter"
+"Gets a CustomTargetingKeyPage of CustomTargetingKey objects that satisfy the given Statement#query. The following fields are supported for filtering:   PQL Property Object Property    \`id\` CustomTargetingKey#id   \`name\` CustomTargetingKey#name   \`displayName\` CustomTargetingKey#displayName   \`type\` CustomTargetingKey#type  "
 input GetCustomTargetingKeysByStatementInput {
   filterStatement: StatementInput
 }
 
-"Gets a CustomTargetingValuePage of CustomTargetingValue objects that satisfy the given Statement#query.  The \`WHERE\` clause in the Statement#query must always contain CustomTargetingValue#customTargetingKeyId as one of its columns in a way that it is AND'ed with the rest of the query. So, if you want to retrieve values for a known set of key ids, valid Statement#query would look like:    'WHERE customTargetingKeyId IN ('17','18','19')' retrieves all values that are associated with keys having ids 17, 18, 19.   'WHERE customTargetingKeyId = '17' AND name = 'red'' retrieves values that are associated with keys having id 17 and value name is 'red'.     The following fields are supported for filtering:    PQL Property Object Property   \`id\` CustomTargetingValue#id   \`customTargetingKeyId\` CustomTargetingValue#customTargetingKeyId   \`name\` CustomTargetingValue#name   \`displayName\` CustomTargetingValue#displayName   \`matchType\` CustomTargetingValue#matchType   @param filterStatement a Publisher Query Language statement used to filter a set of custom targeting values @return the custom targeting values that match the given filter"
+"Gets a CustomTargetingValuePage of CustomTargetingValue objects that satisfy the given Statement#query. The \`WHERE\` clause in the Statement#query must always contain CustomTargetingValue#customTargetingKeyId as one of its columns in a way that it is AND'ed with the rest of the query. So, if you want to retrieve values for a known set of key ids, valid Statement#query would look like:  'WHERE customTargetingKeyId IN ('17','18','19')' retrieves all values that are associated with keys having ids 17, 18, 19. 'WHERE customTargetingKeyId = '17' AND name = 'red'' retrieves values that are associated with keys having id 17 and value name is 'red'.  The following fields are supported for filtering:   PQL Property Object Property   \`id\` CustomTargetingValue#id   \`customTargetingKeyId\` CustomTargetingValue#customTargetingKeyId   \`name\` CustomTargetingValue#name   \`displayName\` CustomTargetingValue#displayName   \`matchType\` CustomTargetingValue#matchType  "
 input GetCustomTargetingValuesByStatementInput {
   filterStatement: StatementInput
 }
 
-"Performs actions on CustomTargetingKey objects that match the given Statement#query. @param customTargetingKeyAction the action to perform @param filterStatement a Publisher Query Language statement used to filter a set of custom targeting keys @return the result of the action performed"
+"Performs actions on CustomTargetingKey objects that match the given Statement#query."
 input PerformCustomTargetingKeyActionInput {
   customTargetingKeyAction: JSONObject
   filterStatement: StatementInput
 }
 
-"Performs actions on CustomTargetingValue objects that match the given Statement#query. @param customTargetingValueAction the action to perform @param filterStatement a Publisher Query Language statement used to filter a set of ad units @return the result of the action performed"
+"Performs actions on CustomTargetingValue objects that match the given Statement#query."
 input PerformCustomTargetingValueActionInput {
   customTargetingValueAction: JSONObject
   filterStatement: StatementInput
@@ -170,15 +170,16 @@ enum ReportableTypeEnum {
   OFF
   "Available for reporting in the Ad Manager query tool."
   ON
+  "The value returned if the actual value is not exposed by the requested API version."
   UNKNOWN
 }
 
-"Updates the specified CustomTargetingKey objects. @param keys the custom targeting keys to update @return the updated custom targeting keys"
+"Updates the specified CustomTargetingKey objects."
 input UpdateCustomTargetingKeysInput {
   keys: [CustomTargetingKeyInput]
 }
 
-"Updates the specified CustomTargetingValue objects. @param values the custom targeting values to update @return the updated custom targeting values"
+"Updates the specified CustomTargetingValue objects."
 input UpdateCustomTargetingValuesInput {
   values: [CustomTargetingValueInput]
 }
@@ -232,49 +233,49 @@ extend type Query {
 }
 
 extend type Mutation {
-  "Creates new CustomTargetingKey objects. The following fields are required:  CustomTargetingKey#name CustomTargetingKey#type  @param keys the custom targeting keys to update @return the updated custom targeting keys"
+  "Creates new CustomTargetingKey objects. The following fields are required:  CustomTargetingKey#name CustomTargetingKey#type "
   createCustomTargetingKeys(input: CreateCustomTargetingKeysInput!): [CustomTargetingKey]
     @soap(service: "CustomTargeting", action: "createCustomTargetingKeys")
 }
 
 extend type Mutation {
-  "Creates new CustomTargetingValue objects. The following fields are required:  CustomTargetingValue#customTargetingKeyId CustomTargetingValue#name  @param values the custom targeting values to update @return the updated custom targeting keys"
+  "Creates new CustomTargetingValue objects. The following fields are required:  CustomTargetingValue#customTargetingKeyId CustomTargetingValue#name "
   createCustomTargetingValues(input: CreateCustomTargetingValuesInput!): [CustomTargetingValue]
     @soap(service: "CustomTargeting", action: "createCustomTargetingValues")
 }
 
 extend type Query {
-  "Gets a CustomTargetingKeyPage of CustomTargetingKey objects that satisfy the given Statement#query. The following fields are supported for filtering:   PQL Property Object Property    \`id\` CustomTargetingKey#id   \`name\` CustomTargetingKey#name   \`displayName\` CustomTargetingKey#displayName   \`type\` CustomTargetingKey#type   @param filterStatement a Publisher Query Language statement used to filter a set of custom targeting keys @return the custom targeting keys that match the given filter"
+  "Gets a CustomTargetingKeyPage of CustomTargetingKey objects that satisfy the given Statement#query. The following fields are supported for filtering:   PQL Property Object Property    \`id\` CustomTargetingKey#id   \`name\` CustomTargetingKey#name   \`displayName\` CustomTargetingKey#displayName   \`type\` CustomTargetingKey#type  "
   getCustomTargetingKeysByStatement(input: GetCustomTargetingKeysByStatementInput!): CustomTargetingKeyPage
     @soap(service: "CustomTargeting", action: "getCustomTargetingKeysByStatement")
 }
 
 extend type Query {
-  "Gets a CustomTargetingValuePage of CustomTargetingValue objects that satisfy the given Statement#query.  The \`WHERE\` clause in the Statement#query must always contain CustomTargetingValue#customTargetingKeyId as one of its columns in a way that it is AND'ed with the rest of the query. So, if you want to retrieve values for a known set of key ids, valid Statement#query would look like:    'WHERE customTargetingKeyId IN ('17','18','19')' retrieves all values that are associated with keys having ids 17, 18, 19.   'WHERE customTargetingKeyId = '17' AND name = 'red'' retrieves values that are associated with keys having id 17 and value name is 'red'.     The following fields are supported for filtering:    PQL Property Object Property   \`id\` CustomTargetingValue#id   \`customTargetingKeyId\` CustomTargetingValue#customTargetingKeyId   \`name\` CustomTargetingValue#name   \`displayName\` CustomTargetingValue#displayName   \`matchType\` CustomTargetingValue#matchType   @param filterStatement a Publisher Query Language statement used to filter a set of custom targeting values @return the custom targeting values that match the given filter"
+  "Gets a CustomTargetingValuePage of CustomTargetingValue objects that satisfy the given Statement#query. The \`WHERE\` clause in the Statement#query must always contain CustomTargetingValue#customTargetingKeyId as one of its columns in a way that it is AND'ed with the rest of the query. So, if you want to retrieve values for a known set of key ids, valid Statement#query would look like:  'WHERE customTargetingKeyId IN ('17','18','19')' retrieves all values that are associated with keys having ids 17, 18, 19. 'WHERE customTargetingKeyId = '17' AND name = 'red'' retrieves values that are associated with keys having id 17 and value name is 'red'.  The following fields are supported for filtering:   PQL Property Object Property   \`id\` CustomTargetingValue#id   \`customTargetingKeyId\` CustomTargetingValue#customTargetingKeyId   \`name\` CustomTargetingValue#name   \`displayName\` CustomTargetingValue#displayName   \`matchType\` CustomTargetingValue#matchType  "
   getCustomTargetingValuesByStatement(input: GetCustomTargetingValuesByStatementInput!): CustomTargetingValuePage
     @soap(service: "CustomTargeting", action: "getCustomTargetingValuesByStatement")
 }
 
 extend type Mutation {
-  "Performs actions on CustomTargetingKey objects that match the given Statement#query. @param customTargetingKeyAction the action to perform @param filterStatement a Publisher Query Language statement used to filter a set of custom targeting keys @return the result of the action performed"
+  "Performs actions on CustomTargetingKey objects that match the given Statement#query."
   performCustomTargetingKeyAction(input: PerformCustomTargetingKeyActionInput!): UpdateResult
     @soap(service: "CustomTargeting", action: "performCustomTargetingKeyAction")
 }
 
 extend type Mutation {
-  "Performs actions on CustomTargetingValue objects that match the given Statement#query. @param customTargetingValueAction the action to perform @param filterStatement a Publisher Query Language statement used to filter a set of ad units @return the result of the action performed"
+  "Performs actions on CustomTargetingValue objects that match the given Statement#query."
   performCustomTargetingValueAction(input: PerformCustomTargetingValueActionInput!): UpdateResult
     @soap(service: "CustomTargeting", action: "performCustomTargetingValueAction")
 }
 
 extend type Mutation {
-  "Updates the specified CustomTargetingKey objects. @param keys the custom targeting keys to update @return the updated custom targeting keys"
+  "Updates the specified CustomTargetingKey objects."
   updateCustomTargetingKeys(input: UpdateCustomTargetingKeysInput!): [CustomTargetingKey]
     @soap(service: "CustomTargeting", action: "updateCustomTargetingKeys")
 }
 
 extend type Mutation {
-  "Updates the specified CustomTargetingValue objects. @param values the custom targeting values to update @return the updated custom targeting values"
+  "Updates the specified CustomTargetingValue objects."
   updateCustomTargetingValues(input: UpdateCustomTargetingValuesInput!): [CustomTargetingValue]
     @soap(service: "CustomTargeting", action: "updateCustomTargetingValues")
 }

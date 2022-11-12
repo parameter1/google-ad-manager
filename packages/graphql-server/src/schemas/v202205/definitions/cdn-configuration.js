@@ -98,7 +98,7 @@ enum OriginForwardingTypeEnum {
   UNKNOWN
 }
 
-"Performs actions on CdnConfiguration objects that match the given Statement#query. @param cdnConfigurationAction the action to perform @param filterStatement a Publisher Query Language statement used to filter a set of live stream events @return the result of the action performed"
+"Performs actions on CdnConfiguration objects that match the given Statement#query."
 input PerformCdnConfigurationActionInput {
   cdnConfigurationAction: JSONObject
   filterStatement: StatementInput
@@ -203,7 +203,7 @@ extend type Query {
 }
 
 extend type Mutation {
-  "Performs actions on CdnConfiguration objects that match the given Statement#query. @param cdnConfigurationAction the action to perform @param filterStatement a Publisher Query Language statement used to filter a set of live stream events @return the result of the action performed"
+  "Performs actions on CdnConfiguration objects that match the given Statement#query."
   performCdnConfigurationAction(input: PerformCdnConfigurationActionInput!): UpdateResult
     @soap(service: "CdnConfiguration", action: "performCdnConfigurationAction")
 }

@@ -4,12 +4,12 @@ const { gql } = require('apollo-server-express');
 
 module.exports = gql`
 
-"Creates new NativeStyle objects. @param nativeStyles the native styles to create @return the created native styles with their IDs filled in"
+"Creates new NativeStyle objects."
 input CreateNativeStylesInput {
   nativeStyles: [NativeStyleInput]
 }
 
-"Gets a NativeStylePage of NativeStyle objects that satisfy the given Statement. The following fields are supported for filtering:   PQL Property Object Property   \`id\` NativeStyle#id   \`name\` NativeStyle#name   @param filterStatement a Publisher Query Language statement used to filter a set of native styles. @return the native styles that match the given filter"
+"Gets a NativeStylePage of NativeStyle objects that satisfy the given Statement. The following fields are supported for filtering:   PQL Property Object Property   \`id\` NativeStyle#id   \`name\` NativeStyle#name  "
 input GetNativeStylesByStatementInput {
   filterStatement: StatementInput
 }
@@ -74,13 +74,13 @@ enum NativeStyleStatusEnum {
   UNKNOWN
 }
 
-"Performs actions on native styles that match the given Statement. @param nativeStyleAction the action to perform @param filterStatement a Publisher Query Language statement to filter a set of native styles @return the result of the action performed"
+"Performs actions on native styles that match the given Statement."
 input PerformNativeStyleActionInput {
   nativeStyleAction: JSONObject
   filterStatement: StatementInput
 }
 
-"Updates the specified NativeStyle objects. @param nativeStyles the native styles to be updated @return the updated native styles"
+"Updates the specified NativeStyle objects."
 input UpdateNativeStylesInput {
   nativeStyles: [NativeStyleInput]
 }
@@ -105,25 +105,25 @@ extend type Query {
 }
 
 extend type Mutation {
-  "Creates new NativeStyle objects. @param nativeStyles the native styles to create @return the created native styles with their IDs filled in"
+  "Creates new NativeStyle objects."
   createNativeStyles(input: CreateNativeStylesInput!): [NativeStyle]
     @soap(service: "NativeStyle", action: "createNativeStyles")
 }
 
 extend type Query {
-  "Gets a NativeStylePage of NativeStyle objects that satisfy the given Statement. The following fields are supported for filtering:   PQL Property Object Property   \`id\` NativeStyle#id   \`name\` NativeStyle#name   @param filterStatement a Publisher Query Language statement used to filter a set of native styles. @return the native styles that match the given filter"
+  "Gets a NativeStylePage of NativeStyle objects that satisfy the given Statement. The following fields are supported for filtering:   PQL Property Object Property   \`id\` NativeStyle#id   \`name\` NativeStyle#name  "
   getNativeStylesByStatement(input: GetNativeStylesByStatementInput!): NativeStylePage
     @soap(service: "NativeStyle", action: "getNativeStylesByStatement")
 }
 
 extend type Mutation {
-  "Performs actions on native styles that match the given Statement. @param nativeStyleAction the action to perform @param filterStatement a Publisher Query Language statement to filter a set of native styles @return the result of the action performed"
+  "Performs actions on native styles that match the given Statement."
   performNativeStyleAction(input: PerformNativeStyleActionInput!): UpdateResult
     @soap(service: "NativeStyle", action: "performNativeStyleAction")
 }
 
 extend type Mutation {
-  "Updates the specified NativeStyle objects. @param nativeStyles the native styles to be updated @return the updated native styles"
+  "Updates the specified NativeStyle objects."
   updateNativeStyles(input: UpdateNativeStylesInput!): [NativeStyle]
     @soap(service: "NativeStyle", action: "updateNativeStyles")
 }

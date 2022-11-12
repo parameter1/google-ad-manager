@@ -4,12 +4,12 @@ const { gql } = require('apollo-server-express');
 
 module.exports = gql`
 
-"Creates new Order objects. @param orders the orders to create @return the created orders with their IDs filled in"
+"Creates new Order objects."
 input CreateOrdersInput {
   orders: [OrderInput]
 }
 
-"Gets an OrderPage of Order objects that satisfy the given Statement#query. The following fields are supported for filtering:   PQL Property Object Property   \`advertiserId\` Order#advertiserId   \`endDateTime\` Order#endDateTime   \`id\` Order#id   \`name\` Order#name   \`salespersonId\` Order#salespersonId   \`startDateTime\` Order#startDateTime   \`status\` Order#status   \`traffickerId\` Order#traffickerId   \`lastModifiedDateTime\` Order#lastModifiedDateTime   @param filterStatement a Publisher Query Language statement used to filter a set of orders @return the orders that match the given filter"
+"Gets an OrderPage of Order objects that satisfy the given Statement#query. The following fields are supported for filtering:   PQL Property Object Property   \`advertiserId\` Order#advertiserId   \`endDateTime\` Order#endDateTime   \`id\` Order#id   \`name\` Order#name   \`salespersonId\` Order#salespersonId   \`startDateTime\` Order#startDateTime   \`status\` Order#status   \`traffickerId\` Order#traffickerId   \`lastModifiedDateTime\` Order#lastModifiedDateTime  "
 input GetOrdersByStatementInput {
   filterStatement: StatementInput
 }
@@ -154,13 +154,13 @@ enum OrderStatusEnum {
   UNKNOWN
 }
 
-"Performs actions on Order objects that match the given Statement#query. @param orderAction the action to perform @param filterStatement a Publisher Query Language statement used to filter a set of orders @return the result of the action performed"
+"Performs actions on Order objects that match the given Statement#query."
 input PerformOrderActionInput {
   orderAction: JSONObject
   filterStatement: StatementInput
 }
 
-"Updates the specified Order objects. @param orders the orders to update @return the updated orders"
+"Updates the specified Order objects."
 input UpdateOrdersInput {
   orders: [OrderInput]
 }
@@ -185,25 +185,25 @@ extend type Query {
 }
 
 extend type Mutation {
-  "Creates new Order objects. @param orders the orders to create @return the created orders with their IDs filled in"
+  "Creates new Order objects."
   createOrders(input: CreateOrdersInput!): [Order]
     @soap(service: "Order", action: "createOrders")
 }
 
 extend type Query {
-  "Gets an OrderPage of Order objects that satisfy the given Statement#query. The following fields are supported for filtering:   PQL Property Object Property   \`advertiserId\` Order#advertiserId   \`endDateTime\` Order#endDateTime   \`id\` Order#id   \`name\` Order#name   \`salespersonId\` Order#salespersonId   \`startDateTime\` Order#startDateTime   \`status\` Order#status   \`traffickerId\` Order#traffickerId   \`lastModifiedDateTime\` Order#lastModifiedDateTime   @param filterStatement a Publisher Query Language statement used to filter a set of orders @return the orders that match the given filter"
+  "Gets an OrderPage of Order objects that satisfy the given Statement#query. The following fields are supported for filtering:   PQL Property Object Property   \`advertiserId\` Order#advertiserId   \`endDateTime\` Order#endDateTime   \`id\` Order#id   \`name\` Order#name   \`salespersonId\` Order#salespersonId   \`startDateTime\` Order#startDateTime   \`status\` Order#status   \`traffickerId\` Order#traffickerId   \`lastModifiedDateTime\` Order#lastModifiedDateTime  "
   getOrdersByStatement(input: GetOrdersByStatementInput!): OrderPage
     @soap(service: "Order", action: "getOrdersByStatement")
 }
 
 extend type Mutation {
-  "Performs actions on Order objects that match the given Statement#query. @param orderAction the action to perform @param filterStatement a Publisher Query Language statement used to filter a set of orders @return the result of the action performed"
+  "Performs actions on Order objects that match the given Statement#query."
   performOrderAction(input: PerformOrderActionInput!): UpdateResult
     @soap(service: "Order", action: "performOrderAction")
 }
 
 extend type Mutation {
-  "Updates the specified Order objects. @param orders the orders to update @return the updated orders"
+  "Updates the specified Order objects."
   updateOrders(input: UpdateOrdersInput!): [Order]
     @soap(service: "Order", action: "updateOrders")
 }

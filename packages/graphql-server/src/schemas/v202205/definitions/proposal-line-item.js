@@ -9,12 +9,12 @@ input CreateMakegoodsInput {
   makegoodInfos: [ProposalLineItemMakegoodInfoInput]
 }
 
-"Creates new ProposalLineItem objects. @param proposalLineItems the proposal line items to create @return the created proposal line items with their IDs filled in"
+"Creates new ProposalLineItem objects."
 input CreateProposalLineItemsInput {
   proposalLineItems: [ProposalLineItemInput]
 }
 
-"Gets a ProposalLineItemPage of ProposalLineItem objects that satisfy the given Statement#query. The following fields are supported for filtering:   PQL Property Object Property   \`id\` ProposalLineItem#id   \`name\` ProposalLineItem#name   \`proposalId\` ProposalLineItem#proposalId   \`startDateTime\` ProposalLineItem#startDateTime   \`endDateTime\` ProposalLineItem#endDateTime   \`isArchived\` ProposalLineItem#isArchived   \`lastModifiedDateTime\` ProposalLineItem#lastModifiedDateTime   \`isProgrammatic\` ProposalLineItem#isProgrammatic   @param filterStatement a Publisher Query Language statement used to filter a set of proposal line items @return the proposal line items that match the given filter"
+"Gets a ProposalLineItemPage of ProposalLineItem objects that satisfy the given Statement#query. The following fields are supported for filtering:   PQL Property Object Property   \`id\` ProposalLineItem#id   \`name\` ProposalLineItem#name   \`proposalId\` ProposalLineItem#proposalId   \`startDateTime\` ProposalLineItem#startDateTime   \`endDateTime\` ProposalLineItem#endDateTime   \`isArchived\` ProposalLineItem#isArchived   \`lastModifiedDateTime\` ProposalLineItem#lastModifiedDateTime   \`isProgrammatic\` ProposalLineItem#isProgrammatic  "
 input GetProposalLineItemsByStatementInput {
   filterStatement: StatementInput
 }
@@ -26,7 +26,7 @@ enum NegotiationRoleEnum {
   UNKNOWN
 }
 
-"Performs actions on ProposalLineItem objects that match the given Statement#query. @param proposalLineItemAction the action to perform @param filterStatement a Publisher Query Language statement used to filter a set of proposal line items @return the result of the action performed"
+"Performs actions on ProposalLineItem objects that match the given Statement#query."
 input PerformProposalLineItemActionInput {
   proposalLineItemAction: JSONObject
   filterStatement: StatementInput
@@ -72,7 +72,7 @@ type ProposalLineItem {
   dfpLineItemId: BigInt
   "The corresponding LineItemType of the \`ProposalLineItem\`. For a programmatic \`ProposalLineItem\`, the value can only be one of:  LineItemType#SPONSORSHIP LineItemType#STANDARD LineItemType#PREFERRED_DEAL  This attribute is required."
   lineItemType: LineItemTypeEnum
-  "The priority for the corresponding LineItem of the \`ProposalLineItem\`. This attribute is optional during creation and defaults to the product's priority, or a default value assigned by Google. See LineItem#priority for more information."
+  "The priority for the corresponding LineItem of the \`ProposalLineItem\`. This attribute is optional during creation and defaults to the default priority of the #lineItemType. For forecasting, this attribute is optional and has a default value assigned by Google. See LineItem#priority for more information."
   lineItemPriority: Int
   "The method used for billing the \`ProposalLineItem\`. This attribute is read-only. This attribute is required."
   rateType: RateTypeEnum
@@ -90,9 +90,9 @@ type ProposalLineItem {
   disableSameAdvertiserCompetitiveExclusion: Boolean
   "Indicates whether this \`ProposalLineItem\` has been sold. This attribute is read-only."
   isSold: Boolean
-  "The amount of money to spend per impression or click in proposal currency. It supports precision of 4 decimal places in terms of the fundamental currency unit, so the Money#getAmountInMicros must be multiples of 100. It doesn't include agency commission. For example, if Proposal#currencyCode is 'USD', then $123.4567 could be represented as 123456700, but further precision is not supported. When using sales management, at least one of the four fields ProposalLineItem#netRate, ProposalLineItem#grossRate, ProposalLineItem#netCost and ProposalLineItem#grossCost is required. When not using sales management, at least one of the two fields ProposalLineItem#netRate and ProposalLineItem#netCost is required."
+  "The amount of money to spend per impression or click in proposal currency. It supports precision of 4 decimal places in terms of the fundamental currency unit, so the Money#getAmountInMicros must be multiples of 100. It doesn't include agency commission. For example, if Proposal#currencyCode is 'USD', then $123.4567 could be represented as 123456700, but further precision is not supported. At least one of the two fields ProposalLineItem#netRate,and ProposalLineItem#netCost is required."
   netRate: Money
-  "The cost of the \`ProposalLineItem\` in proposal currency. It supports precision of 2 decimal places in terms of the fundamental currency unit, so the Money#getAmountInMicros must be multiples of 10000. It doesn't include agency commission. For example, if Proposal#currencyCode is 'USD', then $123.45 could be represented as 123450000, but further precision is not supported. When using sales management, at least one of the four fields ProposalLineItem#netRate, ProposalLineItem#grossRate, ProposalLineItem#netCost and ProposalLineItem#grossCost is required. When not using sales management, at least one of the two fields ProposalLineItem#netRate and ProposalLineItem#netCost is required."
+  "The cost of the \`ProposalLineItem\` in proposal currency. It supports precision of 2 decimal places in terms of the fundamental currency unit, so the Money#getAmountInMicros must be multiples of 10000. It doesn't include agency commission. For example, if Proposal#currencyCode is 'USD', then $123.45 could be represented as 123450000, but further precision is not supported. At least one of the two fields ProposalLineItem#netRate and ProposalLineItem#netCost is required."
   netCost: Money
   "Indicates how well the line item generated from this proposal line item has been performing. This will be \`null\` if the delivery indicator information is not available due to one of the following reasons:  The proposal line item has not pushed to Ad Manager. The line item is not delivering. The line item has an unlimited goal or cap. The line item has a percentage based goal or cap.  This attribute is read-only."
   deliveryIndicator: DeliveryIndicator
@@ -186,7 +186,7 @@ enum ReservationStatusEnum {
   UNKNOWN
 }
 
-"Updates the specified ProposalLineItem objects. @param proposalLineItems the proposal line items to update @return the updated proposal line items"
+"Updates the specified ProposalLineItem objects."
 input UpdateProposalLineItemsInput {
   proposalLineItems: [ProposalLineItemInput]
 }
@@ -217,25 +217,25 @@ extend type Mutation {
 }
 
 extend type Mutation {
-  "Creates new ProposalLineItem objects. @param proposalLineItems the proposal line items to create @return the created proposal line items with their IDs filled in"
+  "Creates new ProposalLineItem objects."
   createProposalLineItems(input: CreateProposalLineItemsInput!): [ProposalLineItem]
     @soap(service: "ProposalLineItem", action: "createProposalLineItems")
 }
 
 extend type Query {
-  "Gets a ProposalLineItemPage of ProposalLineItem objects that satisfy the given Statement#query. The following fields are supported for filtering:   PQL Property Object Property   \`id\` ProposalLineItem#id   \`name\` ProposalLineItem#name   \`proposalId\` ProposalLineItem#proposalId   \`startDateTime\` ProposalLineItem#startDateTime   \`endDateTime\` ProposalLineItem#endDateTime   \`isArchived\` ProposalLineItem#isArchived   \`lastModifiedDateTime\` ProposalLineItem#lastModifiedDateTime   \`isProgrammatic\` ProposalLineItem#isProgrammatic   @param filterStatement a Publisher Query Language statement used to filter a set of proposal line items @return the proposal line items that match the given filter"
+  "Gets a ProposalLineItemPage of ProposalLineItem objects that satisfy the given Statement#query. The following fields are supported for filtering:   PQL Property Object Property   \`id\` ProposalLineItem#id   \`name\` ProposalLineItem#name   \`proposalId\` ProposalLineItem#proposalId   \`startDateTime\` ProposalLineItem#startDateTime   \`endDateTime\` ProposalLineItem#endDateTime   \`isArchived\` ProposalLineItem#isArchived   \`lastModifiedDateTime\` ProposalLineItem#lastModifiedDateTime   \`isProgrammatic\` ProposalLineItem#isProgrammatic  "
   getProposalLineItemsByStatement(input: GetProposalLineItemsByStatementInput!): ProposalLineItemPage
     @soap(service: "ProposalLineItem", action: "getProposalLineItemsByStatement")
 }
 
 extend type Mutation {
-  "Performs actions on ProposalLineItem objects that match the given Statement#query. @param proposalLineItemAction the action to perform @param filterStatement a Publisher Query Language statement used to filter a set of proposal line items @return the result of the action performed"
+  "Performs actions on ProposalLineItem objects that match the given Statement#query."
   performProposalLineItemAction(input: PerformProposalLineItemActionInput!): UpdateResult
     @soap(service: "ProposalLineItem", action: "performProposalLineItemAction")
 }
 
 extend type Mutation {
-  "Updates the specified ProposalLineItem objects. @param proposalLineItems the proposal line items to update @return the updated proposal line items"
+  "Updates the specified ProposalLineItem objects."
   updateProposalLineItems(input: UpdateProposalLineItemsInput!): [ProposalLineItem]
     @soap(service: "ProposalLineItem", action: "updateProposalLineItems")
 }

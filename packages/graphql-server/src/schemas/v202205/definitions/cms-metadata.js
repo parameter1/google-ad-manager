@@ -66,13 +66,13 @@ input GetCmsMetadataValuesByStatementInput {
   statement: StatementInput
 }
 
-"Performs actions on CmsMetadataKey objects that match the given Statement#query. @param keyAction the action to perform @param filterStatement a Publisher Query Language statement used to filter a set of cms metadata keys. @return the result of the action performed"
+"Performs actions on CmsMetadataKey objects that match the given Statement#query."
 input PerformCmsMetadataKeyActionInput {
   keyAction: JSONObject
   filterStatement: StatementInput
 }
 
-"Performs actions on CmsMetadataValue objects that match the given Statement#query. @param valueAction the action to perform @param filterStatement a Publisher Query Language statement used to filter a set of cms metadata values. @return the result of the action performed"
+"Performs actions on CmsMetadataValue objects that match the given Statement#query."
 input PerformCmsMetadataValueActionInput {
   valueAction: JSONObject
   filterStatement: StatementInput
@@ -129,13 +129,13 @@ extend type Query {
 }
 
 extend type Mutation {
-  "Performs actions on CmsMetadataKey objects that match the given Statement#query. @param keyAction the action to perform @param filterStatement a Publisher Query Language statement used to filter a set of cms metadata keys. @return the result of the action performed"
+  "Performs actions on CmsMetadataKey objects that match the given Statement#query."
   performCmsMetadataKeyAction(input: PerformCmsMetadataKeyActionInput!): UpdateResult
     @soap(service: "CmsMetadata", action: "performCmsMetadataKeyAction")
 }
 
 extend type Mutation {
-  "Performs actions on CmsMetadataValue objects that match the given Statement#query. @param valueAction the action to perform @param filterStatement a Publisher Query Language statement used to filter a set of cms metadata values. @return the result of the action performed"
+  "Performs actions on CmsMetadataValue objects that match the given Statement#query."
   performCmsMetadataValueAction(input: PerformCmsMetadataValueActionInput!): UpdateResult
     @soap(service: "CmsMetadata", action: "performCmsMetadataValueAction")
 }

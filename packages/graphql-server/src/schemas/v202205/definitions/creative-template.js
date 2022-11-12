@@ -90,7 +90,7 @@ interface CreativeTemplateVariableInterface {
   isRequired: Boolean
 }
 
-"Gets a CreativeTemplatePage of CreativeTemplate objects that satisfy the given Statement#query. The following fields are supported for filtering:   PQL Property Object Property   \`id\` CreativeTemplate#id   \`name\` CreativeTemplate#name   \`type\` CreativeTemplate#type   \`status\` CreativeTemplate#status   @param filterStatement a Publisher Query Language statement used to filter a set of creative templates. @return the creative templates that match the given filter"
+"Gets a CreativeTemplatePage of CreativeTemplate objects that satisfy the given Statement#query. The following fields are supported for filtering:   PQL Property Object Property   \`id\` CreativeTemplate#id   \`name\` CreativeTemplate#name   \`type\` CreativeTemplate#type   \`status\` CreativeTemplate#status  "
 input GetCreativeTemplatesByStatementInput {
   filterStatement: StatementInput
 }
@@ -185,7 +185,7 @@ extend type Query {
 }
 
 extend type Query {
-  "Gets a CreativeTemplatePage of CreativeTemplate objects that satisfy the given Statement#query. The following fields are supported for filtering:   PQL Property Object Property   \`id\` CreativeTemplate#id   \`name\` CreativeTemplate#name   \`type\` CreativeTemplate#type   \`status\` CreativeTemplate#status   @param filterStatement a Publisher Query Language statement used to filter a set of creative templates. @return the creative templates that match the given filter"
+  "Gets a CreativeTemplatePage of CreativeTemplate objects that satisfy the given Statement#query. The following fields are supported for filtering:   PQL Property Object Property   \`id\` CreativeTemplate#id   \`name\` CreativeTemplate#name   \`type\` CreativeTemplate#type   \`status\` CreativeTemplate#status  "
   getCreativeTemplatesByStatement(input: GetCreativeTemplatesByStatementInput!): CreativeTemplatePage
     @soap(service: "CreativeTemplate", action: "getCreativeTemplatesByStatement")
 }

@@ -4,12 +4,12 @@ const { gql } = require('apollo-server-express');
 
 module.exports = gql`
 
-"Creates a new \`CreativeWrapper\` objects. The following fields are required:  CreativeWrapper#labelId CreativeWrapper#ordering CreativeWrapper#header or CreativeWrapper#footer  @param creativeWrappers the creative wrappers to create @return the creative wrappers with their IDs filled in @throws ApiException"
+"Creates a new \`CreativeWrapper\` objects. The following fields are required:  CreativeWrapper#labelId CreativeWrapper#ordering CreativeWrapper#header or CreativeWrapper#footer "
 input CreateCreativeWrappersInput {
   creativeWrappers: [CreativeWrapperInput]
 }
 
-"A \`CreativeWrapper\` allows the wrapping of HTML snippets to be served along with \`Creative\` objects.  Creative wrappers must be associated with a LabelType#CREATIVE_WRAPPER label and applied to ad units by AdUnit#appliedLabels."
+"A \`CreativeWrapper\` allows the wrapping of HTML snippets to be served along with \`Creative\` objects. Creative wrappers must be associated with a LabelType#CREATIVE_WRAPPER label and applied to ad units by AdUnit#appliedLabels."
 type CreativeWrapper {
   "The unique ID of the \`CreativeWrapper\`. This value is readonly and is assigned by Google."
   id: BigInt!
@@ -35,7 +35,7 @@ type CreativeWrapper {
   status: CreativeWrapperStatusEnum
 }
 
-"A \`CreativeWrapper\` allows the wrapping of HTML snippets to be served along with \`Creative\` objects.  Creative wrappers must be associated with a LabelType#CREATIVE_WRAPPER label and applied to ad units by AdUnit#appliedLabels."
+"A \`CreativeWrapper\` allows the wrapping of HTML snippets to be served along with \`Creative\` objects. Creative wrappers must be associated with a LabelType#CREATIVE_WRAPPER label and applied to ad units by AdUnit#appliedLabels."
 input CreativeWrapperInput {
   "The ID of the Label which will be used to label ad units. The \`labelId\` on a creative wrapper cannot be changed once it is created."
   labelId: BigInt
@@ -93,18 +93,18 @@ enum CreativeWrapperTypeEnum {
   VIDEO_TRACKING_URL
 }
 
-"Gets a CreativeWrapperPage of CreativeWrapper objects that satisfy the given Statement#query. The following fields are supported for filtering:   PQL Property Object Property   \`id\` CreativeWrapper#id   \`labelId\` CreativeWrapper#labelId   \`status\` CreativeWrapper#status   \`ordering\` CreativeWrapper#ordering   @param filterStatement a Publisher Query Language statement used to filter a set of creative wrappers. @return the creative wrappers that match the given filter"
+"Gets a CreativeWrapperPage of CreativeWrapper objects that satisfy the given Statement#query. The following fields are supported for filtering:   PQL Property Object Property   \`id\` CreativeWrapper#id   \`labelId\` CreativeWrapper#labelId   \`status\` CreativeWrapper#status   \`ordering\` CreativeWrapper#ordering  "
 input GetCreativeWrappersByStatementInput {
   filterStatement: StatementInput
 }
 
-"Performs actions on CreativeWrapper objects that match the given Statement#query. @param creativeWrapperAction the action to perform @param filterStatement a Publisher Query Language statement used to filter a set of labels @return the result of the action performed"
+"Performs actions on CreativeWrapper objects that match the given Statement#query."
 input PerformCreativeWrapperActionInput {
   creativeWrapperAction: JSONObject
   filterStatement: StatementInput
 }
 
-"Updates the specified \`CreativeWrapper\` objects. @param creativeWrappers the creative wrappers to update @return the updated creative wrapper objects @throws ApiException"
+"Updates the specified \`CreativeWrapper\` objects."
 input UpdateCreativeWrappersInput {
   creativeWrappers: [CreativeWrapperInput]
 }
@@ -129,25 +129,25 @@ extend type Query {
 }
 
 extend type Mutation {
-  "Creates a new \`CreativeWrapper\` objects. The following fields are required:  CreativeWrapper#labelId CreativeWrapper#ordering CreativeWrapper#header or CreativeWrapper#footer  @param creativeWrappers the creative wrappers to create @return the creative wrappers with their IDs filled in @throws ApiException"
+  "Creates a new \`CreativeWrapper\` objects. The following fields are required:  CreativeWrapper#labelId CreativeWrapper#ordering CreativeWrapper#header or CreativeWrapper#footer "
   createCreativeWrappers(input: CreateCreativeWrappersInput!): [CreativeWrapper]
     @soap(service: "CreativeWrapper", action: "createCreativeWrappers")
 }
 
 extend type Query {
-  "Gets a CreativeWrapperPage of CreativeWrapper objects that satisfy the given Statement#query. The following fields are supported for filtering:   PQL Property Object Property   \`id\` CreativeWrapper#id   \`labelId\` CreativeWrapper#labelId   \`status\` CreativeWrapper#status   \`ordering\` CreativeWrapper#ordering   @param filterStatement a Publisher Query Language statement used to filter a set of creative wrappers. @return the creative wrappers that match the given filter"
+  "Gets a CreativeWrapperPage of CreativeWrapper objects that satisfy the given Statement#query. The following fields are supported for filtering:   PQL Property Object Property   \`id\` CreativeWrapper#id   \`labelId\` CreativeWrapper#labelId   \`status\` CreativeWrapper#status   \`ordering\` CreativeWrapper#ordering  "
   getCreativeWrappersByStatement(input: GetCreativeWrappersByStatementInput!): CreativeWrapperPage
     @soap(service: "CreativeWrapper", action: "getCreativeWrappersByStatement")
 }
 
 extend type Mutation {
-  "Performs actions on CreativeWrapper objects that match the given Statement#query. @param creativeWrapperAction the action to perform @param filterStatement a Publisher Query Language statement used to filter a set of labels @return the result of the action performed"
+  "Performs actions on CreativeWrapper objects that match the given Statement#query."
   performCreativeWrapperAction(input: PerformCreativeWrapperActionInput!): UpdateResult
     @soap(service: "CreativeWrapper", action: "performCreativeWrapperAction")
 }
 
 extend type Mutation {
-  "Updates the specified \`CreativeWrapper\` objects. @param creativeWrappers the creative wrappers to update @return the updated creative wrapper objects @throws ApiException"
+  "Updates the specified \`CreativeWrapper\` objects."
   updateCreativeWrappers(input: UpdateCreativeWrappersInput!): [CreativeWrapper]
     @soap(service: "CreativeWrapper", action: "updateCreativeWrappers")
 }

@@ -4,7 +4,7 @@ const { gql } = require('apollo-server-express');
 
 module.exports = gql`
 
-"Gets a TargetingPresetPage of TargetingPreset objects that satisfy the given Statement#query. The following fields are supported for filtering:   PQL Property Object Property   \`id\` TargetingPreset#id   \`name\` TargetingPreset#name   @param filterStatement a Publisher Query Language statement used to filter a set of labels. @return the targeting presets that match the given filter"
+"Gets a TargetingPresetPage of TargetingPreset objects that satisfy the given Statement#query. The following fields are supported for filtering:   PQL Property Object Property   \`id\` TargetingPreset#id   \`name\` TargetingPreset#name  "
 input GetTargetingPresetsByStatementInput {
   filterStatement: StatementInput
 }
@@ -49,7 +49,7 @@ extend type Query {
 }
 
 extend type Query {
-  "Gets a TargetingPresetPage of TargetingPreset objects that satisfy the given Statement#query. The following fields are supported for filtering:   PQL Property Object Property   \`id\` TargetingPreset#id   \`name\` TargetingPreset#name   @param filterStatement a Publisher Query Language statement used to filter a set of labels. @return the targeting presets that match the given filter"
+  "Gets a TargetingPresetPage of TargetingPreset objects that satisfy the given Statement#query. The following fields are supported for filtering:   PQL Property Object Property   \`id\` TargetingPreset#id   \`name\` TargetingPreset#name  "
   getTargetingPresetsByStatement(input: GetTargetingPresetsByStatementInput!): TargetingPresetPage
     @soap(service: "TargetingPreset", action: "getTargetingPresetsByStatement")
 }

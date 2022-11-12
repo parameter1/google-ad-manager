@@ -4,17 +4,17 @@ const { gql } = require('apollo-server-express');
 
 module.exports = gql`
 
-"Creates new Team objects. The following fields are required:  Team#name  @param teams the teams to create @return the created teams with their IDs filled in"
+"Creates new Team objects. The following fields are required:  Team#name "
 input CreateTeamsInput {
   teams: [TeamInput]
 }
 
-"Gets a \`TeamPage\` of \`Team\` objects that satisfy the given Statement#query. The following fields are supported for filtering:   PQL Property Object Property   \`id\` Team#id   \`name\` Team#name   \`description\` Team#description   @param filterStatement a Publisher Query Language statement used to filter a set of teams. @return the teams that match the given filter"
+"Gets a \`TeamPage\` of \`Team\` objects that satisfy the given Statement#query. The following fields are supported for filtering:   PQL Property Object Property   \`id\` Team#id   \`name\` Team#name   \`description\` Team#description  "
 input GetTeamsByStatementInput {
   filterStatement: StatementInput
 }
 
-"Performs actions on Team objects that match the given Statement#query. @param teamAction the action to perform @param filterStatement a Publisher Query Language statement used to filter a set of teams @return the result of the action performed"
+"Performs actions on Team objects that match the given Statement#query."
 input PerformTeamActionInput {
   teamAction: JSONObject
   filterStatement: StatementInput
@@ -74,7 +74,7 @@ enum TeamStatusEnum {
   UNKNOWN
 }
 
-"Updates the specified Team objects. @param teams the teams to update @return the updated teams"
+"Updates the specified Team objects."
 input UpdateTeamsInput {
   teams: [TeamInput]
 }
@@ -99,25 +99,25 @@ extend type Query {
 }
 
 extend type Mutation {
-  "Creates new Team objects. The following fields are required:  Team#name  @param teams the teams to create @return the created teams with their IDs filled in"
+  "Creates new Team objects. The following fields are required:  Team#name "
   createTeams(input: CreateTeamsInput!): [Team]
     @soap(service: "Team", action: "createTeams")
 }
 
 extend type Query {
-  "Gets a \`TeamPage\` of \`Team\` objects that satisfy the given Statement#query. The following fields are supported for filtering:   PQL Property Object Property   \`id\` Team#id   \`name\` Team#name   \`description\` Team#description   @param filterStatement a Publisher Query Language statement used to filter a set of teams. @return the teams that match the given filter"
+  "Gets a \`TeamPage\` of \`Team\` objects that satisfy the given Statement#query. The following fields are supported for filtering:   PQL Property Object Property   \`id\` Team#id   \`name\` Team#name   \`description\` Team#description  "
   getTeamsByStatement(input: GetTeamsByStatementInput!): TeamPage
     @soap(service: "Team", action: "getTeamsByStatement")
 }
 
 extend type Mutation {
-  "Performs actions on Team objects that match the given Statement#query. @param teamAction the action to perform @param filterStatement a Publisher Query Language statement used to filter a set of teams @return the result of the action performed"
+  "Performs actions on Team objects that match the given Statement#query."
   performTeamAction(input: PerformTeamActionInput!): UpdateResult
     @soap(service: "Team", action: "performTeamAction")
 }
 
 extend type Mutation {
-  "Updates the specified Team objects. @param teams the teams to update @return the updated teams"
+  "Updates the specified Team objects."
   updateTeams(input: UpdateTeamsInput!): [Team]
     @soap(service: "Team", action: "updateTeams")
 }

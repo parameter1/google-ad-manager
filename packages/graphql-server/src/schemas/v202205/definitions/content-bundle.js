@@ -44,23 +44,23 @@ enum ContentBundleStatusEnum {
   UNKNOWN
 }
 
-"Creates new ContentBundle objects. @param contentBundles the content bundles to create @return the created content bundles with their IDs filled in"
+"Creates new ContentBundle objects."
 input CreateContentBundlesInput {
   contentBundles: [ContentBundleInput]
 }
 
-"Gets a ContentBundlePage of ContentBundle objects that satisfy the given Statement#query. The following fields are supported for filtering:   PQL Property Object Property   \`id\` ContentBundle#id   \`name\` ContentBundle#name   \`status\` ContentBundle#status   @param filterStatement a Publisher Query Language statement used to filter a set of content bundles @return the content bundles that match the given filter"
+"Gets a ContentBundlePage of ContentBundle objects that satisfy the given Statement#query. The following fields are supported for filtering:   PQL Property Object Property   \`id\` ContentBundle#id   \`name\` ContentBundle#name   \`status\` ContentBundle#status  "
 input GetContentBundlesByStatementInput {
   filterStatement: StatementInput
 }
 
-"Performs actions on ContentBundle objects that match the given Statement#query. @param contentBundleAction the action to perform @param filterStatement a Publisher Query Language statement used to filter a set of content bundles @return the result of the action performed"
+"Performs actions on ContentBundle objects that match the given Statement#query."
 input PerformContentBundleActionInput {
   contentBundleAction: JSONObject
   filterStatement: StatementInput
 }
 
-"Updates the specified ContentBundle objects. @param contentBundles the content bundles to update @return the updated content bundles"
+"Updates the specified ContentBundle objects."
 input UpdateContentBundlesInput {
   contentBundles: [ContentBundleInput]
 }
@@ -85,25 +85,25 @@ extend type Query {
 }
 
 extend type Mutation {
-  "Creates new ContentBundle objects. @param contentBundles the content bundles to create @return the created content bundles with their IDs filled in"
+  "Creates new ContentBundle objects."
   createContentBundles(input: CreateContentBundlesInput!): [ContentBundle]
     @soap(service: "ContentBundle", action: "createContentBundles")
 }
 
 extend type Query {
-  "Gets a ContentBundlePage of ContentBundle objects that satisfy the given Statement#query. The following fields are supported for filtering:   PQL Property Object Property   \`id\` ContentBundle#id   \`name\` ContentBundle#name   \`status\` ContentBundle#status   @param filterStatement a Publisher Query Language statement used to filter a set of content bundles @return the content bundles that match the given filter"
+  "Gets a ContentBundlePage of ContentBundle objects that satisfy the given Statement#query. The following fields are supported for filtering:   PQL Property Object Property   \`id\` ContentBundle#id   \`name\` ContentBundle#name   \`status\` ContentBundle#status  "
   getContentBundlesByStatement(input: GetContentBundlesByStatementInput!): ContentBundlePage
     @soap(service: "ContentBundle", action: "getContentBundlesByStatement")
 }
 
 extend type Mutation {
-  "Performs actions on ContentBundle objects that match the given Statement#query. @param contentBundleAction the action to perform @param filterStatement a Publisher Query Language statement used to filter a set of content bundles @return the result of the action performed"
+  "Performs actions on ContentBundle objects that match the given Statement#query."
   performContentBundleAction(input: PerformContentBundleActionInput!): UpdateResult
     @soap(service: "ContentBundle", action: "performContentBundleAction")
 }
 
 extend type Mutation {
-  "Updates the specified ContentBundle objects. @param contentBundles the content bundles to update @return the updated content bundles"
+  "Updates the specified ContentBundle objects."
   updateContentBundles(input: UpdateContentBundlesInput!): [ContentBundle]
     @soap(service: "ContentBundle", action: "updateContentBundles")
 }

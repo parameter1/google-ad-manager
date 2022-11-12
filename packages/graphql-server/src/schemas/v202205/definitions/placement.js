@@ -4,17 +4,17 @@ const { gql } = require('apollo-server-express');
 
 module.exports = gql`
 
-"Creates new Placement objects. @param placements the placements to create @return the new placements, with their IDs filled in"
+"Creates new Placement objects."
 input CreatePlacementsInput {
   placements: [PlacementInput]
 }
 
-"Gets a PlacementPage of Placement objects that satisfy the given Statement#query. The following fields are supported for filtering:   PQL Property Object Property   \`description\` Placement#description   \`id\` Placement#id   \`name\` Placement#name   \`placementCode\` Placement#placementCode   \`status\` Placement#status   \`lastModifiedDateTime\` Placement#lastModifiedDateTime   @param filterStatement a Publisher Query Language statement used to filter a set of placements @return the placements that match the given filter"
+"Gets a PlacementPage of Placement objects that satisfy the given Statement#query. The following fields are supported for filtering:   PQL Property Object Property   \`description\` Placement#description   \`id\` Placement#id   \`name\` Placement#name   \`placementCode\` Placement#placementCode   \`status\` Placement#status   \`lastModifiedDateTime\` Placement#lastModifiedDateTime  "
 input GetPlacementsByStatementInput {
   filterStatement: StatementInput
 }
 
-"Performs actions on Placement objects that match the given Statement#query. @param placementAction the action to perform @param filterStatement a Publisher Query Language statement used to filter a set of placements @return the result of the action performed"
+"Performs actions on Placement objects that match the given Statement#query."
 input PerformPlacementActionInput {
   placementAction: JSONObject
   filterStatement: StatementInput
@@ -66,7 +66,7 @@ interface SiteTargetingInfoInterface {
   _: Boolean
 }
 
-"Updates the specified Placement objects. @param placements the placements to update @return the updated placements"
+"Updates the specified Placement objects."
 input UpdatePlacementsInput {
   placements: [PlacementInput]
 }
@@ -91,25 +91,25 @@ extend type Query {
 }
 
 extend type Mutation {
-  "Creates new Placement objects. @param placements the placements to create @return the new placements, with their IDs filled in"
+  "Creates new Placement objects."
   createPlacements(input: CreatePlacementsInput!): [Placement]
     @soap(service: "Placement", action: "createPlacements")
 }
 
 extend type Query {
-  "Gets a PlacementPage of Placement objects that satisfy the given Statement#query. The following fields are supported for filtering:   PQL Property Object Property   \`description\` Placement#description   \`id\` Placement#id   \`name\` Placement#name   \`placementCode\` Placement#placementCode   \`status\` Placement#status   \`lastModifiedDateTime\` Placement#lastModifiedDateTime   @param filterStatement a Publisher Query Language statement used to filter a set of placements @return the placements that match the given filter"
+  "Gets a PlacementPage of Placement objects that satisfy the given Statement#query. The following fields are supported for filtering:   PQL Property Object Property   \`description\` Placement#description   \`id\` Placement#id   \`name\` Placement#name   \`placementCode\` Placement#placementCode   \`status\` Placement#status   \`lastModifiedDateTime\` Placement#lastModifiedDateTime  "
   getPlacementsByStatement(input: GetPlacementsByStatementInput!): PlacementPage
     @soap(service: "Placement", action: "getPlacementsByStatement")
 }
 
 extend type Mutation {
-  "Performs actions on Placement objects that match the given Statement#query. @param placementAction the action to perform @param filterStatement a Publisher Query Language statement used to filter a set of placements @return the result of the action performed"
+  "Performs actions on Placement objects that match the given Statement#query."
   performPlacementAction(input: PerformPlacementActionInput!): UpdateResult
     @soap(service: "Placement", action: "performPlacementAction")
 }
 
 extend type Mutation {
-  "Updates the specified Placement objects. @param placements the placements to update @return the updated placements"
+  "Updates the specified Placement objects."
   updatePlacements(input: UpdatePlacementsInput!): [Placement]
     @soap(service: "Placement", action: "updatePlacements")
 }

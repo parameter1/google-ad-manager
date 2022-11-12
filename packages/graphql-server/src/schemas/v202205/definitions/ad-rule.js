@@ -272,17 +272,17 @@ type BreakTemplatePage {
   results: [BreakTemplate]
 }
 
-"Creates new AdRule objects. @param adRules the ad rules to create @return the created ad rules with their IDs filled in"
+"Creates new AdRule objects."
 input CreateAdRulesInput {
   adRules: [AdRuleInput]
 }
 
-"Creates new AdSpot objects. @param adSpots the ad spots to create @return the created ad spots with their IDs filled in"
+"Creates new AdSpot objects."
 input CreateAdSpotsInput {
   adSpots: [AdSpotInput]
 }
 
-"Creates new breakTemplate objects. @param breakTemplate the break template to create @return the created break template with their IDs filled in"
+"Creates new breakTemplate objects."
 input CreateBreakTemplatesInput {
   breakTemplate: [BreakTemplateInput]
 }
@@ -299,17 +299,17 @@ enum FrequencyCapBehaviorEnum {
   UNKNOWN
 }
 
-"Gets an AdRulePage of AdRule objects that satisfy the given Statement#query. The following fields are supported for filtering:   PQL Property Object Property   \`id\` AdRule#id (AdRule#adRuleId beginning in v201702)   \`name\` AdRule#name   \`priority\` AdRule#priority   \`status\` AdRule#status  @param filterStatement a Publisher Query Language statement used to filter a set of ad rules @return the ad rules that match the given filter @throws ApiException if the ID of the active network does not exist or there is a backend error"
+"Gets an AdRulePage of AdRule objects that satisfy the given Statement#query. The following fields are supported for filtering:   PQL Property Object Property   \`id\` AdRule#id (AdRule#adRuleId beginning in v201702)   \`name\` AdRule#name   \`priority\` AdRule#priority   \`status\` AdRule#status "
 input GetAdRulesByStatementInput {
   statement: StatementInput
 }
 
-"Gets a AdSpotPage of AdSpot objects that satisfy the given Statement#query. @param filterStatement a Publisher Query Language statement to filter a list of ad spots @return the ad spots that match the filter"
+"Gets a AdSpotPage of AdSpot objects that satisfy the given Statement#query."
 input GetAdSpotsByStatementInput {
   filterStatement: StatementInput
 }
 
-"Gets a BreakTemplatePage of BreakTemplate objects that satisfy the given Statement#query. @param filterStatement a Publisher Query Language statement to filter a list of breakTemplate @return the break template that match the filter"
+"Gets a BreakTemplatePage of BreakTemplate objects that satisfy the given Statement#query."
 input GetBreakTemplatesByStatementInput {
   filterStatement: StatementInput
 }
@@ -374,7 +374,7 @@ type OptimizedPoddingAdRuleSlot implements BaseAdRuleSlotInterface {
   breakTemplateId: BigInt
 }
 
-"Performs actions on AdRule objects that match the given Statement#query. @param adRuleAction the action to perform @param filterStatement a Publisher Query Language statement used to filter a set of ad rules @return the result of the action performed"
+"Performs actions on AdRule objects that match the given Statement#query."
 input PerformAdRuleActionInput {
   adRuleAction: JSONObject
   filterStatement: StatementInput
@@ -424,17 +424,17 @@ type UnknownAdRuleSlot implements BaseAdRuleSlotInterface {
   breakTemplateId: BigInt
 }
 
-"Updates the specified AdRule objects. @param adRules the ad rules to update @return the updated ad rules @throws ApiException if there is an error updating the ad rules"
+"Updates the specified AdRule objects."
 input UpdateAdRulesInput {
   adRules: [AdRuleInput]
 }
 
-"Updates the specified AdSpot objects. @param adSpots the ad spots to update @return the updated ad spots @throws ApiException if there is an error updating the ad spots"
+"Updates the specified AdSpot objects."
 input UpdateAdSpotsInput {
   adSpots: [AdSpotInput]
 }
 
-"Updates the specified breakTemplate objects. @param breakTemplate the break template to update @return the updated break template"
+"Updates the specified breakTemplate objects."
 input UpdateBreakTemplatesInput {
   breakTemplate: [BreakTemplateInput]
 }
@@ -497,61 +497,61 @@ extend type Query {
 }
 
 extend type Mutation {
-  "Creates new AdRule objects. @param adRules the ad rules to create @return the created ad rules with their IDs filled in"
+  "Creates new AdRule objects."
   createAdRules(input: CreateAdRulesInput!): [AdRule]
     @soap(service: "AdRule", action: "createAdRules")
 }
 
 extend type Mutation {
-  "Creates new AdSpot objects. @param adSpots the ad spots to create @return the created ad spots with their IDs filled in"
+  "Creates new AdSpot objects."
   createAdSpots(input: CreateAdSpotsInput!): [AdSpot]
     @soap(service: "AdRule", action: "createAdSpots")
 }
 
 extend type Mutation {
-  "Creates new breakTemplate objects. @param breakTemplate the break template to create @return the created break template with their IDs filled in"
+  "Creates new breakTemplate objects."
   createBreakTemplates(input: CreateBreakTemplatesInput!): [BreakTemplate]
     @soap(service: "AdRule", action: "createBreakTemplates")
 }
 
 extend type Query {
-  "Gets an AdRulePage of AdRule objects that satisfy the given Statement#query. The following fields are supported for filtering:   PQL Property Object Property   \`id\` AdRule#id (AdRule#adRuleId beginning in v201702)   \`name\` AdRule#name   \`priority\` AdRule#priority   \`status\` AdRule#status  @param filterStatement a Publisher Query Language statement used to filter a set of ad rules @return the ad rules that match the given filter @throws ApiException if the ID of the active network does not exist or there is a backend error"
+  "Gets an AdRulePage of AdRule objects that satisfy the given Statement#query. The following fields are supported for filtering:   PQL Property Object Property   \`id\` AdRule#id (AdRule#adRuleId beginning in v201702)   \`name\` AdRule#name   \`priority\` AdRule#priority   \`status\` AdRule#status "
   getAdRulesByStatement(input: GetAdRulesByStatementInput!): AdRulePage
     @soap(service: "AdRule", action: "getAdRulesByStatement")
 }
 
 extend type Query {
-  "Gets a AdSpotPage of AdSpot objects that satisfy the given Statement#query. @param filterStatement a Publisher Query Language statement to filter a list of ad spots @return the ad spots that match the filter"
+  "Gets a AdSpotPage of AdSpot objects that satisfy the given Statement#query."
   getAdSpotsByStatement(input: GetAdSpotsByStatementInput!): AdSpotPage
     @soap(service: "AdRule", action: "getAdSpotsByStatement")
 }
 
 extend type Query {
-  "Gets a BreakTemplatePage of BreakTemplate objects that satisfy the given Statement#query. @param filterStatement a Publisher Query Language statement to filter a list of breakTemplate @return the break template that match the filter"
+  "Gets a BreakTemplatePage of BreakTemplate objects that satisfy the given Statement#query."
   getBreakTemplatesByStatement(input: GetBreakTemplatesByStatementInput!): BreakTemplatePage
     @soap(service: "AdRule", action: "getBreakTemplatesByStatement")
 }
 
 extend type Mutation {
-  "Performs actions on AdRule objects that match the given Statement#query. @param adRuleAction the action to perform @param filterStatement a Publisher Query Language statement used to filter a set of ad rules @return the result of the action performed"
+  "Performs actions on AdRule objects that match the given Statement#query."
   performAdRuleAction(input: PerformAdRuleActionInput!): UpdateResult
     @soap(service: "AdRule", action: "performAdRuleAction")
 }
 
 extend type Mutation {
-  "Updates the specified AdRule objects. @param adRules the ad rules to update @return the updated ad rules @throws ApiException if there is an error updating the ad rules"
+  "Updates the specified AdRule objects."
   updateAdRules(input: UpdateAdRulesInput!): [AdRule]
     @soap(service: "AdRule", action: "updateAdRules")
 }
 
 extend type Mutation {
-  "Updates the specified AdSpot objects. @param adSpots the ad spots to update @return the updated ad spots @throws ApiException if there is an error updating the ad spots"
+  "Updates the specified AdSpot objects."
   updateAdSpots(input: UpdateAdSpotsInput!): [AdSpot]
     @soap(service: "AdRule", action: "updateAdSpots")
 }
 
 extend type Mutation {
-  "Updates the specified breakTemplate objects. @param breakTemplate the break template to update @return the updated break template"
+  "Updates the specified breakTemplate objects."
   updateBreakTemplates(input: UpdateBreakTemplatesInput!): [BreakTemplate]
     @soap(service: "AdRule", action: "updateBreakTemplates")
 }

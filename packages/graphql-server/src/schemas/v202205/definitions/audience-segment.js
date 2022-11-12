@@ -82,7 +82,7 @@ enum AudienceSegmentTypeEnum {
   UNKNOWN
 }
 
-"Creates new FirstPartyAudienceSegment objects. @param segments first-party audience segments to create @return created first-party audience segments"
+"Creates new FirstPartyAudienceSegment objects."
 input CreateAudienceSegmentsInput {
   segments: [JSONObject]
 }
@@ -119,7 +119,7 @@ interface FirstPartyAudienceSegmentInterface implements AudienceSegmentInterface
 type FirstPartyAudienceSegmentRule {
   "Specifies the inventory (i.e. ad units and placements) that are part of the rule of a FirstPartyAudienceSegment. This attribute is required."
   inventoryRule: InventoryTargeting
-  "Specifies the collection of custom criteria that are part of the rule of a FirstPartyAudienceSegment.  Once the FirstPartyAudienceSegment is updated or modified with custom criteria, the server may return a normalized, but equivalent representation of the custom criteria rule.   \`customCriteriaRule\` will have up to three levels including itself.  The top level CustomCriteriaSet i.e. the \`customTargeting\` object can only contain a CustomCriteriaSet.LogicalOperator#OR of all its children.  The second level of CustomCriteriaSet objects can only contain CustomCriteriaSet.LogicalOperator#AND of all their children. If a CustomCriteria is placed on this level, the server will wrap it in a CustomCriteriaSet.  The third level can only comprise of CustomCriteria objects.   The resulting custom criteria rule would be of the form:   "
+  "Specifies the collection of custom criteria that are part of the rule of a FirstPartyAudienceSegment. Once the FirstPartyAudienceSegment is updated or modified with custom criteria, the server may return a normalized, but equivalent representation of the custom criteria rule.  \`customCriteriaRule\` will have up to three levels including itself. The top level CustomCriteriaSet i.e. the \`customTargeting\` object can only contain a CustomCriteriaSet.LogicalOperator#OR of all its children. The second level of CustomCriteriaSet objects can only contain CustomCriteriaSet.LogicalOperator#AND of all their children. If a CustomCriteria is placed on this level, the server will wrap it in a CustomCriteriaSet. The third level can only comprise of CustomCriteria objects.  The resulting custom criteria rule would be of the form:  "
   customCriteriaRule: CustomCriteriaSet
 }
 
@@ -127,11 +127,11 @@ type FirstPartyAudienceSegmentRule {
 input FirstPartyAudienceSegmentRuleInput {
   "Specifies the inventory (i.e. ad units and placements) that are part of the rule of a FirstPartyAudienceSegment. This attribute is required."
   inventoryRule: InventoryTargetingInput
-  "Specifies the collection of custom criteria that are part of the rule of a FirstPartyAudienceSegment.  Once the FirstPartyAudienceSegment is updated or modified with custom criteria, the server may return a normalized, but equivalent representation of the custom criteria rule.   \`customCriteriaRule\` will have up to three levels including itself.  The top level CustomCriteriaSet i.e. the \`customTargeting\` object can only contain a CustomCriteriaSet.LogicalOperator#OR of all its children.  The second level of CustomCriteriaSet objects can only contain CustomCriteriaSet.LogicalOperator#AND of all their children. If a CustomCriteria is placed on this level, the server will wrap it in a CustomCriteriaSet.  The third level can only comprise of CustomCriteria objects.   The resulting custom criteria rule would be of the form:   "
+  "Specifies the collection of custom criteria that are part of the rule of a FirstPartyAudienceSegment. Once the FirstPartyAudienceSegment is updated or modified with custom criteria, the server may return a normalized, but equivalent representation of the custom criteria rule.  \`customCriteriaRule\` will have up to three levels including itself. The top level CustomCriteriaSet i.e. the \`customTargeting\` object can only contain a CustomCriteriaSet.LogicalOperator#OR of all its children. The second level of CustomCriteriaSet objects can only contain CustomCriteriaSet.LogicalOperator#AND of all their children. If a CustomCriteria is placed on this level, the server will wrap it in a CustomCriteriaSet. The third level can only comprise of CustomCriteria objects.  The resulting custom criteria rule would be of the form:  "
   customCriteriaRule: CustomCriteriaSetInput
 }
 
-"Gets an AudienceSegmentPage of AudienceSegment objects that satisfy the given Statement#query. The following fields are supported for filtering:   PQL Property Object Property   \`id\` AudienceSegment#id   \`name\` AudienceSegment#name   \`status\` AudienceSegment#status   \`type\` AudienceSegment#type   \`size\` AudienceSegment#size   \`dataProviderName\` AudienceSegmentDataProvider#name   \`segmentType\` AudienceSegment#type   \`approvalStatus\` ThirdPartyAudienceSegment#approvalStatus   \`cost\` ThirdPartyAudienceSegment#cost   \`startDateTime\` ThirdPartyAudienceSegment#startDateTime   \`endDateTime\` ThirdPartyAudienceSegment#endDateTime   @param filterStatement a Publisher Query Language statement used to filter a set of audience segments (the only supported operator is AND) @return the audience segments that match the given filter"
+"Gets an AudienceSegmentPage of AudienceSegment objects that satisfy the given Statement#query. The following fields are supported for filtering:   PQL Property Object Property   \`id\` AudienceSegment#id   \`name\` AudienceSegment#name   \`status\` AudienceSegment#status   \`type\` AudienceSegment#type   \`size\` AudienceSegment#size   \`dataProviderName\` AudienceSegmentDataProvider#name   \`segmentType\` AudienceSegment#type   \`approvalStatus\` ThirdPartyAudienceSegment#approvalStatus   \`cost\` ThirdPartyAudienceSegment#cost   \`startDateTime\` ThirdPartyAudienceSegment#startDateTime   \`endDateTime\` ThirdPartyAudienceSegment#endDateTime  "
 input GetAudienceSegmentsByStatementInput {
   filterStatement: StatementInput
 }
@@ -177,7 +177,7 @@ type NonRuleBasedFirstPartyAudienceSegment implements FirstPartyAudienceSegmentI
   membershipExpirationDays: Int
 }
 
-"Performs the given AudienceSegmentAction on the set of segments identified by the given statement. @param action AudienceSegmentAction to perform @param filterStatement a Publisher Query Language statement used to filter a set of audience segments (the only supported operator is AND) @return UpdateResult indicating the result"
+"Performs the given AudienceSegmentAction on the set of segments identified by the given statement."
 input PerformAudienceSegmentActionInput {
   action: JSONObject
   filterStatement: StatementInput
@@ -311,7 +311,7 @@ type ThirdPartyAudienceSegment implements AudienceSegmentInterface {
   type: AudienceSegmentTypeEnum
   "Specifies if the publisher has approved or rejected the segment."
   approvalStatus: AudienceSegmentApprovalStatusEnum
-  "Specifies CPM cost for the given segment. This attribute is readonly and is assigned by the data provider.  The CPM cost comes from the active pricing, if there is one; otherwise it comes from the latest pricing."
+  "Specifies CPM cost for the given segment. This attribute is readonly and is assigned by the data provider. The CPM cost comes from the active pricing, if there is one; otherwise it comes from the latest pricing."
   cost: Money
   "Specifies the license type of the external segment. This attribute is read-only."
   licenseType: LicenseTypeEnum
@@ -321,7 +321,7 @@ type ThirdPartyAudienceSegment implements AudienceSegmentInterface {
   endDateTime: DateTime
 }
 
-"Updates the given FirstPartyAudienceSegment objects. @param segments first-party audience segments to update @return updated first-party audience segments"
+"Updates the given FirstPartyAudienceSegment objects."
 input UpdateAudienceSegmentsInput {
   segments: [JSONObject]
 }
@@ -346,25 +346,25 @@ extend type Query {
 }
 
 extend type Mutation {
-  "Creates new FirstPartyAudienceSegment objects. @param segments first-party audience segments to create @return created first-party audience segments"
+  "Creates new FirstPartyAudienceSegment objects."
   createAudienceSegments(input: CreateAudienceSegmentsInput!): [FirstPartyAudienceSegmentInterface]
     @soap(service: "AudienceSegment", action: "createAudienceSegments")
 }
 
 extend type Query {
-  "Gets an AudienceSegmentPage of AudienceSegment objects that satisfy the given Statement#query. The following fields are supported for filtering:   PQL Property Object Property   \`id\` AudienceSegment#id   \`name\` AudienceSegment#name   \`status\` AudienceSegment#status   \`type\` AudienceSegment#type   \`size\` AudienceSegment#size   \`dataProviderName\` AudienceSegmentDataProvider#name   \`segmentType\` AudienceSegment#type   \`approvalStatus\` ThirdPartyAudienceSegment#approvalStatus   \`cost\` ThirdPartyAudienceSegment#cost   \`startDateTime\` ThirdPartyAudienceSegment#startDateTime   \`endDateTime\` ThirdPartyAudienceSegment#endDateTime   @param filterStatement a Publisher Query Language statement used to filter a set of audience segments (the only supported operator is AND) @return the audience segments that match the given filter"
+  "Gets an AudienceSegmentPage of AudienceSegment objects that satisfy the given Statement#query. The following fields are supported for filtering:   PQL Property Object Property   \`id\` AudienceSegment#id   \`name\` AudienceSegment#name   \`status\` AudienceSegment#status   \`type\` AudienceSegment#type   \`size\` AudienceSegment#size   \`dataProviderName\` AudienceSegmentDataProvider#name   \`segmentType\` AudienceSegment#type   \`approvalStatus\` ThirdPartyAudienceSegment#approvalStatus   \`cost\` ThirdPartyAudienceSegment#cost   \`startDateTime\` ThirdPartyAudienceSegment#startDateTime   \`endDateTime\` ThirdPartyAudienceSegment#endDateTime  "
   getAudienceSegmentsByStatement(input: GetAudienceSegmentsByStatementInput!): AudienceSegmentPage
     @soap(service: "AudienceSegment", action: "getAudienceSegmentsByStatement")
 }
 
 extend type Mutation {
-  "Performs the given AudienceSegmentAction on the set of segments identified by the given statement. @param action AudienceSegmentAction to perform @param filterStatement a Publisher Query Language statement used to filter a set of audience segments (the only supported operator is AND) @return UpdateResult indicating the result"
+  "Performs the given AudienceSegmentAction on the set of segments identified by the given statement."
   performAudienceSegmentAction(input: PerformAudienceSegmentActionInput!): UpdateResult
     @soap(service: "AudienceSegment", action: "performAudienceSegmentAction")
 }
 
 extend type Mutation {
-  "Updates the given FirstPartyAudienceSegment objects. @param segments first-party audience segments to update @return updated first-party audience segments"
+  "Updates the given FirstPartyAudienceSegment objects."
   updateAudienceSegments(input: UpdateAudienceSegmentsInput!): [FirstPartyAudienceSegmentInterface]
     @soap(service: "AudienceSegment", action: "updateAudienceSegments")
 }

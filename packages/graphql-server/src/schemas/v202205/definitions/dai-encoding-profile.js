@@ -40,7 +40,7 @@ enum ContainerTypeEnum {
   UNKNOWN
 }
 
-"Creates new DaiEncodingProfile objects. @param daiEncodingProfiles the profiles to create @return the created profiles with their IDs filled in"
+"Creates new DaiEncodingProfile objects."
 input CreateDaiEncodingProfilesInput {
   daiEncodingProfiles: [DaiEncodingProfileInput]
 }
@@ -103,18 +103,18 @@ enum DaiEncodingProfileStatusEnum {
   UNKNOWN
 }
 
-"Gets a DaiEncodingProfilePage of DaiEncodingProfile objects that satisfy the given Statement#query. The following fields are supported for filtering:   PQL Property Object Property   \`id\` DaiEncodingProfile#id   \`status\` DaiEncodingProfile#status   \`name\` DaiEncodingProfile#name   @param filterStatement a Publisher Query Language statement to filter a list of profiles @return the profiles that match the filter"
+"Gets a DaiEncodingProfilePage of DaiEncodingProfile objects that satisfy the given Statement#query. The following fields are supported for filtering:   PQL Property Object Property   \`id\` DaiEncodingProfile#id   \`status\` DaiEncodingProfile#status   \`name\` DaiEncodingProfile#name  "
 input GetDaiEncodingProfilesByStatementInput {
   filterStatement: StatementInput
 }
 
-"Performs actions on DaiEncodingProfile objects that match the given Statement#query. @param daiEncodingProfileAction the action to perform @param filterStatement a Publisher Query Language statement used to filter a set of profiles @return the result of the action performed"
+"Performs actions on DaiEncodingProfile objects that match the given Statement#query."
 input PerformDaiEncodingProfileActionInput {
   daiEncodingProfileAction: JSONObject
   filterStatement: StatementInput
 }
 
-"Updates the specified DaiEncodingProfile objects. @param daiEncodingProfiles the content profiles to update @return the updated profiles @throws ApiException if there is an error updating the profiles"
+"Updates the specified DaiEncodingProfile objects."
 input UpdateDaiEncodingProfilesInput {
   daiEncodingProfiles: [DaiEncodingProfileInput]
 }
@@ -175,25 +175,25 @@ extend type Query {
 }
 
 extend type Mutation {
-  "Creates new DaiEncodingProfile objects. @param daiEncodingProfiles the profiles to create @return the created profiles with their IDs filled in"
+  "Creates new DaiEncodingProfile objects."
   createDaiEncodingProfiles(input: CreateDaiEncodingProfilesInput!): [DaiEncodingProfile]
     @soap(service: "DaiEncodingProfile", action: "createDaiEncodingProfiles")
 }
 
 extend type Query {
-  "Gets a DaiEncodingProfilePage of DaiEncodingProfile objects that satisfy the given Statement#query. The following fields are supported for filtering:   PQL Property Object Property   \`id\` DaiEncodingProfile#id   \`status\` DaiEncodingProfile#status   \`name\` DaiEncodingProfile#name   @param filterStatement a Publisher Query Language statement to filter a list of profiles @return the profiles that match the filter"
+  "Gets a DaiEncodingProfilePage of DaiEncodingProfile objects that satisfy the given Statement#query. The following fields are supported for filtering:   PQL Property Object Property   \`id\` DaiEncodingProfile#id   \`status\` DaiEncodingProfile#status   \`name\` DaiEncodingProfile#name  "
   getDaiEncodingProfilesByStatement(input: GetDaiEncodingProfilesByStatementInput!): DaiEncodingProfilePage
     @soap(service: "DaiEncodingProfile", action: "getDaiEncodingProfilesByStatement")
 }
 
 extend type Mutation {
-  "Performs actions on DaiEncodingProfile objects that match the given Statement#query. @param daiEncodingProfileAction the action to perform @param filterStatement a Publisher Query Language statement used to filter a set of profiles @return the result of the action performed"
+  "Performs actions on DaiEncodingProfile objects that match the given Statement#query."
   performDaiEncodingProfileAction(input: PerformDaiEncodingProfileActionInput!): UpdateResult
     @soap(service: "DaiEncodingProfile", action: "performDaiEncodingProfileAction")
 }
 
 extend type Mutation {
-  "Updates the specified DaiEncodingProfile objects. @param daiEncodingProfiles the content profiles to update @return the updated profiles @throws ApiException if there is an error updating the profiles"
+  "Updates the specified DaiEncodingProfile objects."
   updateDaiEncodingProfiles(input: UpdateDaiEncodingProfilesInput!): [DaiEncodingProfile]
     @soap(service: "DaiEncodingProfile", action: "updateDaiEncodingProfiles")
 }

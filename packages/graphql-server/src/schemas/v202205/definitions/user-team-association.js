@@ -4,23 +4,23 @@ const { gql } = require('apollo-server-express');
 
 module.exports = gql`
 
-"Creates new UserTeamAssociation objects. @param userTeamAssociations the user team associations to create @return the created user team associations with their IDs filled in"
+"Creates new UserTeamAssociation objects."
 input CreateUserTeamAssociationsInput {
   userTeamAssociations: [UserTeamAssociationInput]
 }
 
-"Gets a UserTeamAssociationPage of UserTeamAssociation objects that satisfy the given Statement#query. The following fields are supported for filtering:   PQL Property Object Property   \`userId\` UserTeamAssociation#userId   \`teamId\` UserTeamAssociation#teamId   @param filterStatement a Publisher Query Language statement used to filter a set of user team associations @return the user team associations that match the given filter"
+"Gets a UserTeamAssociationPage of UserTeamAssociation objects that satisfy the given Statement#query. The following fields are supported for filtering:   PQL Property Object Property   \`userId\` UserTeamAssociation#userId   \`teamId\` UserTeamAssociation#teamId  "
 input GetUserTeamAssociationsByStatementInput {
   filterStatement: StatementInput
 }
 
-"Performs actions on UserTeamAssociation objects that match the given Statement#query. @param userTeamAssociationAction the action to perform @param filterStatement a Publisher Query Language statement used to filter a set of user team associations @return the result of the action performed"
+"Performs actions on UserTeamAssociation objects that match the given Statement#query."
 input PerformUserTeamAssociationActionInput {
   userTeamAssociationAction: JSONObject
   statement: StatementInput
 }
 
-"Updates the specified UserTeamAssociation objects. @param userTeamAssociations the user team associations to update @return the updated user team associations"
+"Updates the specified UserTeamAssociation objects."
 input UpdateUserTeamAssociationsInput {
   userTeamAssociations: [UserTeamAssociationInput]
 }
@@ -87,25 +87,25 @@ extend type Query {
 }
 
 extend type Mutation {
-  "Creates new UserTeamAssociation objects. @param userTeamAssociations the user team associations to create @return the created user team associations with their IDs filled in"
+  "Creates new UserTeamAssociation objects."
   createUserTeamAssociations(input: CreateUserTeamAssociationsInput!): [UserTeamAssociation]
     @soap(service: "UserTeamAssociation", action: "createUserTeamAssociations")
 }
 
 extend type Query {
-  "Gets a UserTeamAssociationPage of UserTeamAssociation objects that satisfy the given Statement#query. The following fields are supported for filtering:   PQL Property Object Property   \`userId\` UserTeamAssociation#userId   \`teamId\` UserTeamAssociation#teamId   @param filterStatement a Publisher Query Language statement used to filter a set of user team associations @return the user team associations that match the given filter"
+  "Gets a UserTeamAssociationPage of UserTeamAssociation objects that satisfy the given Statement#query. The following fields are supported for filtering:   PQL Property Object Property   \`userId\` UserTeamAssociation#userId   \`teamId\` UserTeamAssociation#teamId  "
   getUserTeamAssociationsByStatement(input: GetUserTeamAssociationsByStatementInput!): UserTeamAssociationPage
     @soap(service: "UserTeamAssociation", action: "getUserTeamAssociationsByStatement")
 }
 
 extend type Mutation {
-  "Performs actions on UserTeamAssociation objects that match the given Statement#query. @param userTeamAssociationAction the action to perform @param filterStatement a Publisher Query Language statement used to filter a set of user team associations @return the result of the action performed"
+  "Performs actions on UserTeamAssociation objects that match the given Statement#query."
   performUserTeamAssociationAction(input: PerformUserTeamAssociationActionInput!): UpdateResult
     @soap(service: "UserTeamAssociation", action: "performUserTeamAssociationAction")
 }
 
 extend type Mutation {
-  "Updates the specified UserTeamAssociation objects. @param userTeamAssociations the user team associations to update @return the updated user team associations"
+  "Updates the specified UserTeamAssociation objects."
   updateUserTeamAssociations(input: UpdateUserTeamAssociationsInput!): [UserTeamAssociation]
     @soap(service: "UserTeamAssociation", action: "updateUserTeamAssociations")
 }

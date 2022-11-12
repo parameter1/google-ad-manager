@@ -4,17 +4,17 @@ const { gql } = require('apollo-server-express');
 
 module.exports = gql`
 
-"Creates new User objects. @param users the users to create @return the created users with their IDs filled in"
+"Creates new User objects."
 input CreateUsersInput {
   users: [UserInput]
 }
 
-"Gets a UserPage of User objects that satisfy the given Statement#query. The following fields are supported for filtering:   PQL Property Object Property   \`email\` User#email   \`id\` User#id   \`name\` User#name   \`roleId\` User#roleId   \`rolename\` User#roleName   \`status\` \`ACTIVE\` if User#isActive is true; \`INACTIVE\` otherwise   @param filterStatement a Publisher Query Language statement used to filter a set of users @return the users that match the given filter"
+"Gets a UserPage of User objects that satisfy the given Statement#query. The following fields are supported for filtering:   PQL Property Object Property   \`email\` User#email   \`id\` User#id   \`name\` User#name   \`roleId\` User#roleId   \`rolename\` User#roleName   \`status\` \`ACTIVE\` if User#isActive is true; \`INACTIVE\` otherwise  "
 input GetUsersByStatementInput {
   filterStatement: StatementInput
 }
 
-"Performs actions on User objects that match the given Statement#query. @param userAction the action to perform @param filterStatement a Publisher Query Language statement used to filter a set of users @return the result of the action performed"
+"Performs actions on User objects that match the given Statement#query."
 input PerformUserActionInput {
   userAction: JSONObject
   filterStatement: StatementInput
@@ -42,12 +42,12 @@ enum RoleStatusEnum {
   UNKNOWN
 }
 
-"Updates the specified User objects. @param users the users to update @return the updated users"
+"Updates the specified User objects."
 input UpdateUsersInput {
   users: [UserInput]
 }
 
-"Represents a user of the system.  Users may be assigned at most one Role per network. Each role provides a user with permissions to perform specific operations. Without a role, they will not be able to perform any actions. "
+"Represents a user of the system. Users may be assigned at most one Role per network. Each role provides a user with permissions to perform specific operations. Without a role, they will not be able to perform any actions."
 type User implements UserRecordInterface {
   "The unique ID of the \`User\`. This attribute is readonly and is assigned by Google."
   id: BigInt!
@@ -71,7 +71,7 @@ type User implements UserRecordInterface {
   ordersUiLocalTimeZoneId: String
 }
 
-"Represents a user of the system.  Users may be assigned at most one Role per network. Each role provides a user with permissions to perform specific operations. Without a role, they will not be able to perform any actions. "
+"Represents a user of the system. Users may be assigned at most one Role per network. Each role provides a user with permissions to perform specific operations. Without a role, they will not be able to perform any actions."
 input UserInput {
   "The name of the \`User\`. It has a maximum length of 128 characters."
   name: String
@@ -131,37 +131,37 @@ extend type Query {
 }
 
 extend type Mutation {
-  "Creates new User objects. @param users the users to create @return the created users with their IDs filled in"
+  "Creates new User objects."
   createUsers(input: CreateUsersInput!): [User]
     @soap(service: "User", action: "createUsers")
 }
 
 extend type Query {
-  "Returns the Role objects that are defined for the users of the network. @return the roles defined for the user's network"
+  "Returns the Role objects that are defined for the users of the network."
   getAllRoles: [Role]
     @soap(service: "User", action: "getAllRoles")
 }
 
 extend type Query {
-  "Returns the current User. @return the current user"
+  "Returns the current User."
   getCurrentUser: User
     @soap(service: "User", action: "getCurrentUser")
 }
 
 extend type Query {
-  "Gets a UserPage of User objects that satisfy the given Statement#query. The following fields are supported for filtering:   PQL Property Object Property   \`email\` User#email   \`id\` User#id   \`name\` User#name   \`roleId\` User#roleId   \`rolename\` User#roleName   \`status\` \`ACTIVE\` if User#isActive is true; \`INACTIVE\` otherwise   @param filterStatement a Publisher Query Language statement used to filter a set of users @return the users that match the given filter"
+  "Gets a UserPage of User objects that satisfy the given Statement#query. The following fields are supported for filtering:   PQL Property Object Property   \`email\` User#email   \`id\` User#id   \`name\` User#name   \`roleId\` User#roleId   \`rolename\` User#roleName   \`status\` \`ACTIVE\` if User#isActive is true; \`INACTIVE\` otherwise  "
   getUsersByStatement(input: GetUsersByStatementInput!): UserPage
     @soap(service: "User", action: "getUsersByStatement")
 }
 
 extend type Mutation {
-  "Performs actions on User objects that match the given Statement#query. @param userAction the action to perform @param filterStatement a Publisher Query Language statement used to filter a set of users @return the result of the action performed"
+  "Performs actions on User objects that match the given Statement#query."
   performUserAction(input: PerformUserActionInput!): UpdateResult
     @soap(service: "User", action: "performUserAction")
 }
 
 extend type Mutation {
-  "Updates the specified User objects. @param users the users to update @return the updated users"
+  "Updates the specified User objects."
   updateUsers(input: UpdateUsersInput!): [User]
     @soap(service: "User", action: "updateUsers")
 }

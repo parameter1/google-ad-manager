@@ -681,17 +681,17 @@ input DayPartInput {
 
 "Modify the delivery times of line items for particular days of the week. By default, line items are served at all days and times."
 type DayPartTargeting {
-  "Specifies days of the week and times at which a \`LineItem\` will be delivered.  If targeting all days and times, this value will be ignored."
+  "Specifies days of the week and times at which a \`LineItem\` will be delivered. If targeting all days and times, this value will be ignored."
   dayParts: [DayPart]
-  "Specifies the time zone to be used for delivering LineItem objects. This attribute is optional and defaults to DeliveryTimeZone#BROWSER.  Setting this has no effect if targeting all days and times."
+  "Specifies the time zone to be used for delivering LineItem objects. This attribute is optional and defaults to DeliveryTimeZone#BROWSER. Setting this has no effect if targeting all days and times."
   timeZone: DeliveryTimeZoneEnum
 }
 
 "Modify the delivery times of line items for particular days of the week. By default, line items are served at all days and times."
 input DayPartTargetingInput {
-  "Specifies days of the week and times at which a \`LineItem\` will be delivered.  If targeting all days and times, this value will be ignored."
+  "Specifies days of the week and times at which a \`LineItem\` will be delivered. If targeting all days and times, this value will be ignored."
   dayParts: [DayPartInput]
-  "Specifies the time zone to be used for delivering LineItem objects. This attribute is optional and defaults to DeliveryTimeZone#BROWSER.  Setting this has no effect if targeting all days and times."
+  "Specifies the time zone to be used for delivering LineItem objects. This attribute is optional and defaults to DeliveryTimeZone#BROWSER. Setting this has no effect if targeting all days and times."
   timeZone: DeliveryTimeZoneEnum
 }
 
@@ -881,7 +881,7 @@ input FrequencyCapInput {
   timeUnit: TimeUnitEnum
 }
 
-"Provides line items the ability to target geographical locations. By default, line items target all countries and their subdivisions. With geographical targeting, you can target line items to specific countries, regions, metro areas, and cities. You can also exclude the same.  The following rules apply for geographical targeting:   You cannot target and exclude the same location. You cannot target a child whose parent has been excluded. For example, if the state of Illinois has been excluded, then you cannot target Chicago. You must not target a location if you are also targeting its parent. For example, if you are targeting New York City, you must not have the state of New York as one of the targeted locations. You cannot explicitly define inclusions or exclusions that are already implicit. For example, if you explicitly include California, you implicitly exclude all other states. You therefore cannot explicitly exclude Florida, because it is already implicitly excluded. Conversely if you explicitly exclude Florida, you cannot explicitly include California. "
+"Provides line items the ability to target geographical locations. By default, line items target all countries and their subdivisions. With geographical targeting, you can target line items to specific countries, regions, metro areas, and cities. You can also exclude the same. The following rules apply for geographical targeting:  You cannot target and exclude the same location. You cannot target a child whose parent has been excluded. For example, if the state of Illinois has been excluded, then you cannot target Chicago. You must not target a location if you are also targeting its parent. For example, if you are targeting New York City, you must not have the state of New York as one of the targeted locations. You cannot explicitly define inclusions or exclusions that are already implicit. For example, if you explicitly include California, you implicitly exclude all other states. You therefore cannot explicitly exclude Florida, because it is already implicitly excluded. Conversely if you explicitly exclude Florida, you cannot explicitly include California. "
 type GeoTargeting {
   "The geographical locations being targeted by the LineItem."
   targetedLocations: [Location]
@@ -889,7 +889,7 @@ type GeoTargeting {
   excludedLocations: [Location]
 }
 
-"Provides line items the ability to target geographical locations. By default, line items target all countries and their subdivisions. With geographical targeting, you can target line items to specific countries, regions, metro areas, and cities. You can also exclude the same.  The following rules apply for geographical targeting:   You cannot target and exclude the same location. You cannot target a child whose parent has been excluded. For example, if the state of Illinois has been excluded, then you cannot target Chicago. You must not target a location if you are also targeting its parent. For example, if you are targeting New York City, you must not have the state of New York as one of the targeted locations. You cannot explicitly define inclusions or exclusions that are already implicit. For example, if you explicitly include California, you implicitly exclude all other states. You therefore cannot explicitly exclude Florida, because it is already implicitly excluded. Conversely if you explicitly exclude Florida, you cannot explicitly include California. "
+"Provides line items the ability to target geographical locations. By default, line items target all countries and their subdivisions. With geographical targeting, you can target line items to specific countries, regions, metro areas, and cities. You can also exclude the same. The following rules apply for geographical targeting:  You cannot target and exclude the same location. You cannot target a child whose parent has been excluded. For example, if the state of Illinois has been excluded, then you cannot target Chicago. You must not target a location if you are also targeting its parent. For example, if you are targeting New York City, you must not have the state of New York as one of the targeted locations. You cannot explicitly define inclusions or exclusions that are already implicit. For example, if you explicitly include California, you implicitly exclude all other states. You therefore cannot explicitly exclude Florida, because it is already implicitly excluded. Conversely if you explicitly exclude Florida, you cannot explicitly include California. "
 input GeoTargetingInput {
   "The geographical locations being targeted by the LineItem."
   targetedLocations: [LocationInput]
@@ -1094,7 +1094,7 @@ input LineItemInput {
   skippableAdType: SkippableAdTypeEnum
   "The set of frequency capping units for this \`LineItem\`. This attribute is optional."
   frequencyCaps: [FrequencyCapInput]
-  "Indicates the line item type of a \`LineItem\`. This attribute is required. The line item type determines the default priority of the line item. More information can be found on the [ Ad Manager Help Center](https://support.google.com/dfp_premium/answer/177279)."
+  "Indicates the line item type of a \`LineItem\`. This attribute is required. The line item type determines the default priority of the line item. More information can be found on the [Ad Manager Help Center](https://support.google.com/dfp_premium/answer/177279)."
   lineItemType: LineItemTypeEnum
   "The priority for the line item. Valid values range from 1 to 16. This field is optional and defaults to the default priority of the LineItemType. The following table shows the default, minimum, and maximum priority values are for each line item type:    LineItemType - default priority (minimum priority, maximum priority)    LineItemType#SPONSORSHIP 4 (2, 5)   LineItemType#STANDARD 8 (6, 10)   LineItemType#NETWORK 12 (11, 14)   LineItemType#BULK 12 (11, 14)   LineItemType#PRICE_PRIORITY 12 (11, 14)   LineItemType#HOUSE 16 (15, 16)   LineItemType#CLICK_TRACKING 16 (1, 16)   LineItemType#AD_EXCHANGE 12 (1, 16)  LineItemType#ADSENSE 12 (1, 16)  LineItemType#BUMPER 16 (15, 16)   This field can only be edited by certain networks, otherwise a PermissionError will occur."
   priority: Int
@@ -1108,7 +1108,7 @@ input LineItemInput {
   discountType: LineItemDiscountTypeEnum
   "The number here is either a percentage or an absolute value depending on the \`LineItemDiscountType\`. If the \`LineItemDiscountType\` is LineItemDiscountType#PERCENTAGE, then only non-fractional values are supported."
   discount: Float
-  "This attribute is only applicable for certain line item types and acts as an 'FYI' or note, which does not impact adserving or other backend systems.  For LineItemType#SPONSORSHIP line items, this represents the minimum quantity, which is a lifetime impression volume goal for reporting purposes only.  For LineItemType#STANDARD line items, this represent the contracted quantity, which is the number of units specified in the contract the advertiser has bought for this \`LineItem\`. This field is just a 'FYI' for traffickers to manually intervene with the \`LineItem\` when needed. This attribute is only available for LineItemType#STANDARD line items if you have this feature enabled on your network."
+  "This attribute is only applicable for certain line item types and acts as an 'FYI' or note, which does not impact adserving or other backend systems. For LineItemType#SPONSORSHIP line items, this represents the minimum quantity, which is a lifetime impression volume goal for reporting purposes only. For LineItemType#STANDARD line items, this represent the contracted quantity, which is the number of units specified in the contract the advertiser has bought for this \`LineItem\`. This field is just a 'FYI' for traffickers to manually intervene with the \`LineItem\` when needed. This attribute is only available for LineItemType#STANDARD line items if you have this feature enabled on your network."
   contractedUnitsBought: BigInt
   "Details about the creatives that are expected to serve through this \`LineItem\`. This attribute is required and replaces the \`creativeSizes\` attribute."
   creativePlaceholders: [CreativePlaceholderInput]
@@ -1118,7 +1118,7 @@ input LineItemInput {
   environmentType: EnvironmentTypeEnum
   "The set of allowedFormats that this programmatic line item can have. If the set is empty, this line item allows all formats."
   allowedFormats: [AllowedFormatsEnum]
-  "The delivery option for companions. Setting this field is only meaningful if the following conditions are met:   The Guaranteed roadblocks feature is enabled on your network.   One of the following is true (both cannot be true, these are mutually exclusive).   The #environmentType is EnvironmentType#VIDEO_PLAYER.   The #roadblockingType is RoadblockingType#CREATIVE_SET.      This field is optional and defaults to CompanionDeliveryOption#OPTIONAL if the above conditions are met. In all other cases it defaults to CompanionDeliveryOption#UNKNOWN and is not meaningful."
+  "The delivery option for companions. Setting this field is only meaningful if the following conditions are met:  The Guaranteed roadblocks feature is enabled on your network. One of the following is true (both cannot be true, these are mutually exclusive).  The #environmentType is EnvironmentType#VIDEO_PLAYER. The #roadblockingType is RoadblockingType#CREATIVE_SET.   This field is optional and defaults to CompanionDeliveryOption#OPTIONAL if the above conditions are met. In all other cases it defaults to CompanionDeliveryOption#UNKNOWN and is not meaningful."
   companionDeliveryOption: CompanionDeliveryOptionEnum
   "The flag indicates whether overbooking should be allowed when creating or updating reservations of line item types LineItemType#SPONSORSHIP and LineItemType#STANDARD. When true, operations on this line item will never trigger a ForecastError, which corresponds to an overbook warning in the UI. The default value is false. Note: this field will not persist on the line item itself, and the value will only affect the current request."
   allowOverbook: Boolean
@@ -1490,7 +1490,7 @@ input ProposalLineItemInput {
   frequencyCaps: [FrequencyCapInput]
   "The corresponding LineItemType of the \`ProposalLineItem\`. For a programmatic \`ProposalLineItem\`, the value can only be one of:  LineItemType#SPONSORSHIP LineItemType#STANDARD LineItemType#PREFERRED_DEAL  This attribute is required."
   lineItemType: LineItemTypeEnum
-  "The priority for the corresponding LineItem of the \`ProposalLineItem\`. This attribute is optional during creation and defaults to the product's priority, or a default value assigned by Google. See LineItem#priority for more information."
+  "The priority for the corresponding LineItem of the \`ProposalLineItem\`. This attribute is optional during creation and defaults to the default priority of the #lineItemType. For forecasting, this attribute is optional and has a default value assigned by Google. See LineItem#priority for more information."
   lineItemPriority: Int
   "Details about the creatives that are expected to serve through the \`ProposalLineItem\`. This attribute is optional during creation and defaults to the product's creative placeholders. This attribute is required."
   creativePlaceholders: [CreativePlaceholderInput]
@@ -1502,9 +1502,9 @@ input ProposalLineItemInput {
   appliedLabels: [AppliedLabelInput]
   "If a line item has a series of competitive exclusions on it, it could be blocked from serving with line items from the same advertiser. Setting this to \`true\` will allow line items from the same advertiser to serve regardless of the other competitive exclusion labels being applied. This attribute is optional and defaults to false."
   disableSameAdvertiserCompetitiveExclusion: Boolean
-  "The amount of money to spend per impression or click in proposal currency. It supports precision of 4 decimal places in terms of the fundamental currency unit, so the Money#getAmountInMicros must be multiples of 100. It doesn't include agency commission. For example, if Proposal#currencyCode is 'USD', then $123.4567 could be represented as 123456700, but further precision is not supported. When using sales management, at least one of the four fields ProposalLineItem#netRate, ProposalLineItem#grossRate, ProposalLineItem#netCost and ProposalLineItem#grossCost is required. When not using sales management, at least one of the two fields ProposalLineItem#netRate and ProposalLineItem#netCost is required."
+  "The amount of money to spend per impression or click in proposal currency. It supports precision of 4 decimal places in terms of the fundamental currency unit, so the Money#getAmountInMicros must be multiples of 100. It doesn't include agency commission. For example, if Proposal#currencyCode is 'USD', then $123.4567 could be represented as 123456700, but further precision is not supported. At least one of the two fields ProposalLineItem#netRate,and ProposalLineItem#netCost is required."
   netRate: MoneyInput
-  "The cost of the \`ProposalLineItem\` in proposal currency. It supports precision of 2 decimal places in terms of the fundamental currency unit, so the Money#getAmountInMicros must be multiples of 10000. It doesn't include agency commission. For example, if Proposal#currencyCode is 'USD', then $123.45 could be represented as 123450000, but further precision is not supported. When using sales management, at least one of the four fields ProposalLineItem#netRate, ProposalLineItem#grossRate, ProposalLineItem#netCost and ProposalLineItem#grossCost is required. When not using sales management, at least one of the two fields ProposalLineItem#netRate and ProposalLineItem#netCost is required."
+  "The cost of the \`ProposalLineItem\` in proposal currency. It supports precision of 2 decimal places in terms of the fundamental currency unit, so the Money#getAmountInMicros must be multiples of 10000. It doesn't include agency commission. For example, if Proposal#currencyCode is 'USD', then $123.45 could be represented as 123450000, but further precision is not supported. At least one of the two fields ProposalLineItem#netRate and ProposalLineItem#netCost is required."
   netCost: MoneyInput
   "The set of AllowedFormats that this proposal line item can have. If the set is empty, this proposal line item allows all formats."
   allowedFormats: [AllowedFormatsEnum]
@@ -1652,7 +1652,7 @@ type Targeting {
   dateTimeRangeTargeting: DateTimeRangeTargeting
   "Specifies the browsing technologies that are targeted by the LineItem. This attribute is optional."
   technologyTargeting: TechnologyTargeting
-  "Specifies the collection of custom criteria that is targeted by the LineItem.  Once the LineItem is updated or modified with custom targeting, the server may return a normalized, but equivalent representation of the custom targeting expression.  \`customTargeting\` will have up to three levels of expressions including itself.   The top level \`CustomCriteriaSet\` i.e. the \`customTargeting\` object can only contain a CustomCriteriaSet.LogicalOperator#OR of all its children.   The second level of \`CustomCriteriaSet\` objects can only contain CustomCriteriaSet.LogicalOperator#AND of all their children. If a CustomCriteria is placed on this level, the server will wrap it in a CustomCriteriaSet.   The third level can only comprise of CustomCriteria objects.   The resulting custom targeting tree would be of the form:   "
+  "Specifies the collection of custom criteria that is targeted by the LineItem. Once the LineItem is updated or modified with custom targeting, the server may return a normalized, but equivalent representation of the custom targeting expression. \`customTargeting\` will have up to three levels of expressions including itself. The top level \`CustomCriteriaSet\` i.e. the \`customTargeting\` object can only contain a CustomCriteriaSet.LogicalOperator#OR of all its children. The second level of \`CustomCriteriaSet\` objects can only contain CustomCriteriaSet.LogicalOperator#AND of all their children. If a CustomCriteria is placed on this level, the server will wrap it in a CustomCriteriaSet. The third level can only comprise of CustomCriteria objects. The resulting custom targeting tree would be of the form:  "
   customTargeting: CustomCriteriaSet
   "Specifies the domains or subdomains that are targeted or excluded by the LineItem. Users visiting from an IP address associated with those domains will be targeted or excluded. This attribute is optional."
   userDomainTargeting: UserDomainTargeting
@@ -1682,7 +1682,7 @@ input TargetingInput {
   dateTimeRangeTargeting: DateTimeRangeTargetingInput
   "Specifies the browsing technologies that are targeted by the LineItem. This attribute is optional."
   technologyTargeting: TechnologyTargetingInput
-  "Specifies the collection of custom criteria that is targeted by the LineItem.  Once the LineItem is updated or modified with custom targeting, the server may return a normalized, but equivalent representation of the custom targeting expression.  \`customTargeting\` will have up to three levels of expressions including itself.   The top level \`CustomCriteriaSet\` i.e. the \`customTargeting\` object can only contain a CustomCriteriaSet.LogicalOperator#OR of all its children.   The second level of \`CustomCriteriaSet\` objects can only contain CustomCriteriaSet.LogicalOperator#AND of all their children. If a CustomCriteria is placed on this level, the server will wrap it in a CustomCriteriaSet.   The third level can only comprise of CustomCriteria objects.   The resulting custom targeting tree would be of the form:   "
+  "Specifies the collection of custom criteria that is targeted by the LineItem. Once the LineItem is updated or modified with custom targeting, the server may return a normalized, but equivalent representation of the custom targeting expression. \`customTargeting\` will have up to three levels of expressions including itself. The top level \`CustomCriteriaSet\` i.e. the \`customTargeting\` object can only contain a CustomCriteriaSet.LogicalOperator#OR of all its children. The second level of \`CustomCriteriaSet\` objects can only contain CustomCriteriaSet.LogicalOperator#AND of all their children. If a CustomCriteria is placed on this level, the server will wrap it in a CustomCriteriaSet. The third level can only comprise of CustomCriteria objects. The resulting custom targeting tree would be of the form:  "
   customTargeting: CustomCriteriaSetInput
   "Specifies the domains or subdomains that are targeted or excluded by the LineItem. Users visiting from an IP address associated with those domains will be targeted or excluded. This attribute is optional."
   userDomainTargeting: UserDomainTargetingInput

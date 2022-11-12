@@ -118,31 +118,31 @@ input ForecastBreakdownTargetInput {
   creative: CreativePlaceholderInput
 }
 
-"Gets an AvailabilityForecast for an existing LineItem object. An availability forecast reports the maximum number of available units that the line item can be booked with, and also the total number of units matching the line item's targeting. Only line items having type LineItemType#SPONSORSHIP or LineItemType#STANDARD are valid. Other types will result in ReservationDetailsError.Reason#LINE_ITEM_TYPE_NOT_ALLOWED. @param lineItemId the ID of a LineItem to run the forecast on. @param forecastOptions options controlling the forecast"
+"Gets an AvailabilityForecast for an existing LineItem object. An availability forecast reports the maximum number of available units that the line item can be booked with, and also the total number of units matching the line item's targeting. Only line items having type LineItemType#SPONSORSHIP or LineItemType#STANDARD are valid. Other types will result in ReservationDetailsError.Reason#LINE_ITEM_TYPE_NOT_ALLOWED."
 input GetAvailabilityForecastByIdInput {
   lineItemId: BigInt
   forecastOptions: AvailabilityForecastOptionsInput
 }
 
-"Gets the availability forecast for a ProspectiveLineItem. An availability forecast reports the maximum number of available units that the line item can book, and the total number of units matching the line item's targeting. @param lineItem the prospective line item (new or existing) to be forecasted for availability @param forecastOptions options controlling the forecast"
+"Gets the availability forecast for a ProspectiveLineItem. An availability forecast reports the maximum number of available units that the line item can book, and the total number of units matching the line item's targeting."
 input GetAvailabilityForecastInput {
   lineItem: ProspectiveLineItemInput
   forecastOptions: AvailabilityForecastOptionsInput
 }
 
-"Gets the delivery forecast for a list of existing LineItem objects in a single delivery simulation. A delivery forecast reports the number of units that will be delivered to each line item given the line item goals and contentions from other line items. @param lineItemIds the IDs of line items to be forecasted for delivery @param forecastOptions options controlling the forecast"
+"Gets the delivery forecast for a list of existing LineItem objects in a single delivery simulation. A delivery forecast reports the number of units that will be delivered to each line item given the line item goals and contentions from other line items."
 input GetDeliveryForecastByIdsInput {
   lineItemIds: [BigInt]
   forecastOptions: DeliveryForecastOptionsInput
 }
 
-"Gets the delivery forecast for a list of ProspectiveLineItem objects in a single delivery simulation with line items potentially contending with each other. A delivery forecast reports the number of units that will be delivered to each line item given the line item goals and contentions from other line items. @param lineItems line items to be forecasted for delivery @param forecastOptions options controlling the forecast"
+"Gets the delivery forecast for a list of ProspectiveLineItem objects in a single delivery simulation with line items potentially contending with each other. A delivery forecast reports the number of units that will be delivered to each line item given the line item goals and contentions from other line items."
 input GetDeliveryForecastInput {
   lineItems: [ProspectiveLineItemInput]
   forecastOptions: DeliveryForecastOptionsInput
 }
 
-"Returns forecasted and historical traffic data for the segment of traffic specified by the provided request. Calling this endpoint programmatically is only available for Ad Manager 360 networks. @param trafficDataRequest the request specifying the segment of traffic for which data should be returned @return a dto containing forecasted and historical traffic data for the specified segment of traffic"
+"Returns forecasted and historical traffic data for the segment of traffic specified by the provided request. Calling this endpoint programmatically is only available for Ad Manager 360 networks."
 input GetTrafficDataInput {
   trafficDataRequest: TrafficDataRequestInput
 }
@@ -297,31 +297,31 @@ type TrafficDataResponse {
 }
 
 extend type Query {
-  "Gets the availability forecast for a ProspectiveLineItem. An availability forecast reports the maximum number of available units that the line item can book, and the total number of units matching the line item's targeting. @param lineItem the prospective line item (new or existing) to be forecasted for availability @param forecastOptions options controlling the forecast"
+  "Gets the availability forecast for a ProspectiveLineItem. An availability forecast reports the maximum number of available units that the line item can book, and the total number of units matching the line item's targeting."
   getAvailabilityForecast(input: GetAvailabilityForecastInput!): AvailabilityForecast
     @soap(service: "Forecast", action: "getAvailabilityForecast")
 }
 
 extend type Query {
-  "Gets an AvailabilityForecast for an existing LineItem object. An availability forecast reports the maximum number of available units that the line item can be booked with, and also the total number of units matching the line item's targeting. Only line items having type LineItemType#SPONSORSHIP or LineItemType#STANDARD are valid. Other types will result in ReservationDetailsError.Reason#LINE_ITEM_TYPE_NOT_ALLOWED. @param lineItemId the ID of a LineItem to run the forecast on. @param forecastOptions options controlling the forecast"
+  "Gets an AvailabilityForecast for an existing LineItem object. An availability forecast reports the maximum number of available units that the line item can be booked with, and also the total number of units matching the line item's targeting. Only line items having type LineItemType#SPONSORSHIP or LineItemType#STANDARD are valid. Other types will result in ReservationDetailsError.Reason#LINE_ITEM_TYPE_NOT_ALLOWED."
   getAvailabilityForecastById(input: GetAvailabilityForecastByIdInput!): AvailabilityForecast
     @soap(service: "Forecast", action: "getAvailabilityForecastById")
 }
 
 extend type Query {
-  "Gets the delivery forecast for a list of ProspectiveLineItem objects in a single delivery simulation with line items potentially contending with each other. A delivery forecast reports the number of units that will be delivered to each line item given the line item goals and contentions from other line items. @param lineItems line items to be forecasted for delivery @param forecastOptions options controlling the forecast"
+  "Gets the delivery forecast for a list of ProspectiveLineItem objects in a single delivery simulation with line items potentially contending with each other. A delivery forecast reports the number of units that will be delivered to each line item given the line item goals and contentions from other line items."
   getDeliveryForecast(input: GetDeliveryForecastInput!): DeliveryForecast
     @soap(service: "Forecast", action: "getDeliveryForecast")
 }
 
 extend type Query {
-  "Gets the delivery forecast for a list of existing LineItem objects in a single delivery simulation. A delivery forecast reports the number of units that will be delivered to each line item given the line item goals and contentions from other line items. @param lineItemIds the IDs of line items to be forecasted for delivery @param forecastOptions options controlling the forecast"
+  "Gets the delivery forecast for a list of existing LineItem objects in a single delivery simulation. A delivery forecast reports the number of units that will be delivered to each line item given the line item goals and contentions from other line items."
   getDeliveryForecastByIds(input: GetDeliveryForecastByIdsInput!): DeliveryForecast
     @soap(service: "Forecast", action: "getDeliveryForecastByIds")
 }
 
 extend type Query {
-  "Returns forecasted and historical traffic data for the segment of traffic specified by the provided request. Calling this endpoint programmatically is only available for Ad Manager 360 networks. @param trafficDataRequest the request specifying the segment of traffic for which data should be returned @return a dto containing forecasted and historical traffic data for the specified segment of traffic"
+  "Returns forecasted and historical traffic data for the segment of traffic specified by the provided request. Calling this endpoint programmatically is only available for Ad Manager 360 networks."
   getTrafficData(input: GetTrafficDataInput!): TrafficDataResponse
     @soap(service: "Forecast", action: "getTrafficData")
 }

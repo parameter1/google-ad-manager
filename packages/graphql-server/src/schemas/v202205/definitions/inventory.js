@@ -222,38 +222,38 @@ input AdUnitSizeInput {
   isAudio: Boolean
 }
 
-"Creates new AdUnit objects. @param adUnits the ad units to create @return the created ad units, with their IDs filled in"
+"Creates new AdUnit objects."
 input CreateAdUnitsInput {
   adUnits: [AdUnitInput]
 }
 
-"Returns a set of all relevant AdUnitSize objects. The given Statement is currently ignored but may be honored in future versions. @param filterStatement currently ignored but may be honored in future versions @return the ad unit sizes"
+"Returns a set of all relevant AdUnitSize objects. The given Statement is currently ignored but may be honored in future versions."
 input GetAdUnitSizesByStatementInput {
   filterStatement: StatementInput
 }
 
-"Gets a AdUnitPage of AdUnit objects that satisfy the given Statement#query. The following fields are supported for filtering:   PQL Property Object Property   \`adUnitCode\` AdUnit#adUnitCode   \`id\` AdUnit#id   \`name\` AdUnit#name   \`parentId\` AdUnit#parentId   \`status\` AdUnit#status   \`lastModifiedDateTime\` AdUnit#lastModifiedDateTime   @param filterStatement a Publisher Query Language statement used to filter a set of ad units @return the ad units that match the given filter"
+"Gets a AdUnitPage of AdUnit objects that satisfy the given Statement#query. The following fields are supported for filtering:   PQL Property Object Property   \`adUnitCode\` AdUnit#adUnitCode   \`id\` AdUnit#id   \`name\` AdUnit#name   \`parentId\` AdUnit#parentId   \`status\` AdUnit#status   \`lastModifiedDateTime\` AdUnit#lastModifiedDateTime  "
 input GetAdUnitsByStatementInput {
   filterStatement: StatementInput
 }
 
 "A \`LabelFrequencyCap\` assigns a frequency cap to a label. The frequency cap will limit the cumulative number of impressions of any ad units with this label that may be shown to a particular user over a time unit."
 type LabelFrequencyCap {
-  "The frequency cap to be applied with this label."
+  "The frequency cap to be applied with this label. *"
   frequencyCap: FrequencyCap
-  "ID of the label being capped on the AdUnit."
+  "ID of the label being capped on the AdUnit. *"
   labelId: BigInt
 }
 
 "A \`LabelFrequencyCap\` assigns a frequency cap to a label. The frequency cap will limit the cumulative number of impressions of any ad units with this label that may be shown to a particular user over a time unit."
 input LabelFrequencyCapInput {
-  "The frequency cap to be applied with this label."
+  "The frequency cap to be applied with this label. *"
   frequencyCap: FrequencyCapInput
-  "ID of the label being capped on the AdUnit."
+  "ID of the label being capped on the AdUnit. *"
   labelId: BigInt
 }
 
-"Performs actions on AdUnit objects that match the given Statement#query. @param adUnitAction the action to perform @param filterStatement a Publisher Query Language statement used to filter a set of ad units @return the result of the action performed"
+"Performs actions on AdUnit objects that match the given Statement#query."
 input PerformAdUnitActionInput {
   adUnitAction: JSONObject
   filterStatement: StatementInput
@@ -271,7 +271,7 @@ enum SmartSizeModeEnum {
   UNKNOWN
 }
 
-"Updates the specified AdUnit objects. @param adUnits the ad units to update @return the updated ad units"
+"Updates the specified AdUnit objects."
 input UpdateAdUnitsInput {
   adUnits: [AdUnitInput]
 }
@@ -306,31 +306,31 @@ extend type Query {
 }
 
 extend type Mutation {
-  "Creates new AdUnit objects. @param adUnits the ad units to create @return the created ad units, with their IDs filled in"
+  "Creates new AdUnit objects."
   createAdUnits(input: CreateAdUnitsInput!): [AdUnit]
     @soap(service: "Inventory", action: "createAdUnits")
 }
 
 extend type Query {
-  "Returns a set of all relevant AdUnitSize objects. The given Statement is currently ignored but may be honored in future versions. @param filterStatement currently ignored but may be honored in future versions @return the ad unit sizes"
+  "Returns a set of all relevant AdUnitSize objects. The given Statement is currently ignored but may be honored in future versions."
   getAdUnitSizesByStatement(input: GetAdUnitSizesByStatementInput!): [AdUnitSize]
     @soap(service: "Inventory", action: "getAdUnitSizesByStatement")
 }
 
 extend type Query {
-  "Gets a AdUnitPage of AdUnit objects that satisfy the given Statement#query. The following fields are supported for filtering:   PQL Property Object Property   \`adUnitCode\` AdUnit#adUnitCode   \`id\` AdUnit#id   \`name\` AdUnit#name   \`parentId\` AdUnit#parentId   \`status\` AdUnit#status   \`lastModifiedDateTime\` AdUnit#lastModifiedDateTime   @param filterStatement a Publisher Query Language statement used to filter a set of ad units @return the ad units that match the given filter"
+  "Gets a AdUnitPage of AdUnit objects that satisfy the given Statement#query. The following fields are supported for filtering:   PQL Property Object Property   \`adUnitCode\` AdUnit#adUnitCode   \`id\` AdUnit#id   \`name\` AdUnit#name   \`parentId\` AdUnit#parentId   \`status\` AdUnit#status   \`lastModifiedDateTime\` AdUnit#lastModifiedDateTime  "
   getAdUnitsByStatement(input: GetAdUnitsByStatementInput!): AdUnitPage
     @soap(service: "Inventory", action: "getAdUnitsByStatement")
 }
 
 extend type Mutation {
-  "Performs actions on AdUnit objects that match the given Statement#query. @param adUnitAction the action to perform @param filterStatement a Publisher Query Language statement used to filter a set of ad units @return the result of the action performed"
+  "Performs actions on AdUnit objects that match the given Statement#query."
   performAdUnitAction(input: PerformAdUnitActionInput!): UpdateResult
     @soap(service: "Inventory", action: "performAdUnitAction")
 }
 
 extend type Mutation {
-  "Updates the specified AdUnit objects. @param adUnits the ad units to update @return the updated ad units"
+  "Updates the specified AdUnit objects."
   updateAdUnits(input: UpdateAdUnitsInput!): [AdUnit]
     @soap(service: "Inventory", action: "updateAdUnits")
 }

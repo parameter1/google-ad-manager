@@ -4,7 +4,7 @@ const { gql } = require('apollo-server-express');
 
 module.exports = gql`
 
-"Creates a new CreativeSet. @param creativeSet the creative set to create @return the creative set with its ID filled in"
+"Creates a new CreativeSet."
 input CreateCreativeSetInput {
   creativeSet: CreativeSetInput
 }
@@ -45,12 +45,12 @@ type CreativeSetPage {
   results: [CreativeSet]
 }
 
-"Gets a CreativeSetPage of CreativeSet objects that satisfy the given Statement#query. The following fields are supported for filtering:   PQL Property Object Property   \`id\` CreativeSet#id   \`name\` CreativeSet#name   \`masterCreativeId\` CreativeSet#masterCreativeId   \`lastModifiedDateTime\` CreativeSet#lastModifiedDateTime   @param statement a Publisher Query Language statement used to filter a set of creative sets @return the creative sets that match the given filter"
+"Gets a CreativeSetPage of CreativeSet objects that satisfy the given Statement#query. The following fields are supported for filtering:   PQL Property Object Property   \`id\` CreativeSet#id   \`name\` CreativeSet#name   \`masterCreativeId\` CreativeSet#masterCreativeId   \`lastModifiedDateTime\` CreativeSet#lastModifiedDateTime  "
 input GetCreativeSetsByStatementInput {
   statement: StatementInput
 }
 
-"Updates the specified CreativeSet. @param creativeSet the creative set to update @return the updated creative set"
+"Updates the specified CreativeSet."
 input UpdateCreativeSetInput {
   creativeSet: CreativeSetInput
 }
@@ -75,19 +75,19 @@ extend type Query {
 }
 
 extend type Mutation {
-  "Creates a new CreativeSet. @param creativeSet the creative set to create @return the creative set with its ID filled in"
+  "Creates a new CreativeSet."
   createCreativeSet(input: CreateCreativeSetInput!): CreativeSet
     @soap(service: "CreativeSet", action: "createCreativeSet")
 }
 
 extend type Query {
-  "Gets a CreativeSetPage of CreativeSet objects that satisfy the given Statement#query. The following fields are supported for filtering:   PQL Property Object Property   \`id\` CreativeSet#id   \`name\` CreativeSet#name   \`masterCreativeId\` CreativeSet#masterCreativeId   \`lastModifiedDateTime\` CreativeSet#lastModifiedDateTime   @param statement a Publisher Query Language statement used to filter a set of creative sets @return the creative sets that match the given filter"
+  "Gets a CreativeSetPage of CreativeSet objects that satisfy the given Statement#query. The following fields are supported for filtering:   PQL Property Object Property   \`id\` CreativeSet#id   \`name\` CreativeSet#name   \`masterCreativeId\` CreativeSet#masterCreativeId   \`lastModifiedDateTime\` CreativeSet#lastModifiedDateTime  "
   getCreativeSetsByStatement(input: GetCreativeSetsByStatementInput!): CreativeSetPage
     @soap(service: "CreativeSet", action: "getCreativeSetsByStatement")
 }
 
 extend type Mutation {
-  "Updates the specified CreativeSet. @param creativeSet the creative set to update @return the updated creative set"
+  "Updates the specified CreativeSet."
   updateCreativeSet(input: UpdateCreativeSetInput!): CreativeSet
     @soap(service: "CreativeSet", action: "updateCreativeSet")
 }

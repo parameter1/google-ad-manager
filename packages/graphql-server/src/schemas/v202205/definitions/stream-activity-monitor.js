@@ -65,7 +65,7 @@ enum CreativeTranscodeIdTypeEnum {
   UNKNOWN_ID_TYPE
 }
 
-"Returns the logging information for a DAI session. A DAI session can be identified by it's session id or debug key. The session ID must be registered via the \`registerSessionsForMonitoring\` method before it can be accessed. There may be some delay before the session is available. The number of sessions requested is limited to 25. The following fields are supported for filtering:    Entity property PQL filter    Session id   'sessionId'     Debug key   'debugKey'     @param statement PQL specifying the sessionId or debugKey to fetch logging information for. Only '=' and 'IN' expressions are supported. @throws ApiException if there is an error while fetching the logging information or if there is no SAM session is associated with any of the \`sessionIds\`."
+"Returns the logging information for a DAI session. A DAI session can be identified by it's session id or debug key. The session ID must be registered via the \`registerSessionsForMonitoring\` method before it can be accessed. There may be some delay before the session is available. The number of sessions requested is limited to 25. The following fields are supported for filtering:    Entity property PQL filter    Session id   'sessionId'     Debug key   'debugKey'    "
 input GetSamSessionsByStatementInput {
   statement: StatementInput
 }
@@ -83,7 +83,7 @@ type LinearStreamCreateRequest implements StreamCreateRequestInterface {
   prefetchEnabled: Boolean
 }
 
-"Registers the specified list of \`sessionIds\` for monitoring. Once the session IDs have been registered, all logged information about the sessions will be persisted and can be viewed via the Ad Manager UI. A session ID is a unique identifier of a single user watching a live stream event. @param sessionIds a list of session IDs to register for monitoring @return the list of session IDs that were registered for monitoring @throws ApiException if there is an error registering any of the session IDs"
+"Registers the specified list of \`sessionIds\` for monitoring. Once the session IDs have been registered, all logged information about the sessions will be persisted and can be viewed via the Ad Manager UI. A session ID is a unique identifier of a single user watching a live stream event."
 input RegisterSessionsForMonitoringInput {
   sessionIds: [String]
 }
@@ -181,13 +181,13 @@ type VodStreamCreateRequest implements StreamCreateRequestInterface {
 }
 
 extend type Query {
-  "Returns the logging information for a DAI session. A DAI session can be identified by it's session id or debug key. The session ID must be registered via the \`registerSessionsForMonitoring\` method before it can be accessed. There may be some delay before the session is available. The number of sessions requested is limited to 25. The following fields are supported for filtering:    Entity property PQL filter    Session id   'sessionId'     Debug key   'debugKey'     @param statement PQL specifying the sessionId or debugKey to fetch logging information for. Only '=' and 'IN' expressions are supported. @throws ApiException if there is an error while fetching the logging information or if there is no SAM session is associated with any of the \`sessionIds\`."
+  "Returns the logging information for a DAI session. A DAI session can be identified by it's session id or debug key. The session ID must be registered via the \`registerSessionsForMonitoring\` method before it can be accessed. There may be some delay before the session is available. The number of sessions requested is limited to 25. The following fields are supported for filtering:    Entity property PQL filter    Session id   'sessionId'     Debug key   'debugKey'    "
   getSamSessionsByStatement(input: GetSamSessionsByStatementInput!): [SamSession]
     @soap(service: "StreamActivityMonitor", action: "getSamSessionsByStatement")
 }
 
 extend type Query {
-  "Registers the specified list of \`sessionIds\` for monitoring. Once the session IDs have been registered, all logged information about the sessions will be persisted and can be viewed via the Ad Manager UI. A session ID is a unique identifier of a single user watching a live stream event. @param sessionIds a list of session IDs to register for monitoring @return the list of session IDs that were registered for monitoring @throws ApiException if there is an error registering any of the session IDs"
+  "Registers the specified list of \`sessionIds\` for monitoring. Once the session IDs have been registered, all logged information about the sessions will be persisted and can be viewed via the Ad Manager UI. A session ID is a unique identifier of a single user watching a live stream event."
   registerSessionsForMonitoring(input: RegisterSessionsForMonitoringInput!): [String]
     @soap(service: "StreamActivityMonitor", action: "registerSessionsForMonitoring")
 }

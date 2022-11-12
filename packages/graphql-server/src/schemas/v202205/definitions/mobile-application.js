@@ -4,12 +4,12 @@ const { gql } = require('apollo-server-express');
 
 module.exports = gql`
 
-"Creates and claims mobile applications to be used for targeting in the network. @param mobileApplications the mobileApplications to create @return the created mobileApplications with their IDs filled in"
+"Creates and claims mobile applications to be used for targeting in the network."
 input CreateMobileApplicationsInput {
   mobileApplications: [MobileApplicationInput]
 }
 
-"Gets a mobileApplicationPage of mobile applications that satisfy the given Statement. The following fields are supported for filtering:   PQL Property Object Property   \`id\` MobileApplication#id   \`displayName\` MobileApplication#displayName   \`appStore\` MobileApplication#appStore   \`appStoreId\` MobileApplication#appStoreId   \`isArchived\` MobileApplication#isArchived   @param filterStatement a Publisher Query Language statement used to filter a set of mobile applications. @return the mobile applications that match the given filter"
+"Gets a mobileApplicationPage of mobile applications that satisfy the given Statement. The following fields are supported for filtering:   PQL Property Object Property   \`id\` MobileApplication#id   \`displayName\` MobileApplication#displayName   \`appStore\` MobileApplication#appStore   \`appStoreId\` MobileApplication#appStoreId   \`isArchived\` MobileApplication#isArchived  "
 input GetMobileApplicationsByStatementInput {
   filterStatement: StatementInput
 }
@@ -91,13 +91,13 @@ enum MobileApplicationStoreEnum {
   XIAOMI_APP_STORE
 }
 
-"Performs an action on mobile applications. @param mobileApplicationAction the action to perform @param filterStatement a Publisher Query Language statement used to filter a set of mobile applications. @return the result of the action performed"
+"Performs an action on mobile applications."
 input PerformMobileApplicationActionInput {
   mobileApplicationAction: JSONObject
   filterStatement: StatementInput
 }
 
-"Updates the specified mobile applications. @param mobileApplications the mobile applications to be updated @return the updated mobileApplications"
+"Updates the specified mobile applications."
 input UpdateMobileApplicationsInput {
   mobileApplications: [MobileApplicationInput]
 }
@@ -122,25 +122,25 @@ extend type Query {
 }
 
 extend type Mutation {
-  "Creates and claims mobile applications to be used for targeting in the network. @param mobileApplications the mobileApplications to create @return the created mobileApplications with their IDs filled in"
+  "Creates and claims mobile applications to be used for targeting in the network."
   createMobileApplications(input: CreateMobileApplicationsInput!): [MobileApplication]
     @soap(service: "MobileApplication", action: "createMobileApplications")
 }
 
 extend type Query {
-  "Gets a mobileApplicationPage of mobile applications that satisfy the given Statement. The following fields are supported for filtering:   PQL Property Object Property   \`id\` MobileApplication#id   \`displayName\` MobileApplication#displayName   \`appStore\` MobileApplication#appStore   \`appStoreId\` MobileApplication#appStoreId   \`isArchived\` MobileApplication#isArchived   @param filterStatement a Publisher Query Language statement used to filter a set of mobile applications. @return the mobile applications that match the given filter"
+  "Gets a mobileApplicationPage of mobile applications that satisfy the given Statement. The following fields are supported for filtering:   PQL Property Object Property   \`id\` MobileApplication#id   \`displayName\` MobileApplication#displayName   \`appStore\` MobileApplication#appStore   \`appStoreId\` MobileApplication#appStoreId   \`isArchived\` MobileApplication#isArchived  "
   getMobileApplicationsByStatement(input: GetMobileApplicationsByStatementInput!): MobileApplicationPage
     @soap(service: "MobileApplication", action: "getMobileApplicationsByStatement")
 }
 
 extend type Mutation {
-  "Performs an action on mobile applications. @param mobileApplicationAction the action to perform @param filterStatement a Publisher Query Language statement used to filter a set of mobile applications. @return the result of the action performed"
+  "Performs an action on mobile applications."
   performMobileApplicationAction(input: PerformMobileApplicationActionInput!): UpdateResult
     @soap(service: "MobileApplication", action: "performMobileApplicationAction")
 }
 
 extend type Mutation {
-  "Updates the specified mobile applications. @param mobileApplications the mobile applications to be updated @return the updated mobileApplications"
+  "Updates the specified mobile applications."
   updateMobileApplications(input: UpdateMobileApplicationsInput!): [MobileApplication]
     @soap(service: "MobileApplication", action: "updateMobileApplications")
 }

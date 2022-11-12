@@ -48,17 +48,17 @@ enum ActivityGroupStatusEnum {
   INACTIVE
 }
 
-"Creates a new ActivityGroup objects. @param activityGroups the activity groups to be created. @return the created activity groups with their IDs filled in."
+"Creates a new ActivityGroup objects."
 input CreateActivityGroupsInput {
   activityGroups: [ActivityGroupInput]
 }
 
-"Gets an ActivityGroupPage of ActivityGroup objects that satisfy the given Statement#query. The following fields are supported for filtering:   PQL Property Object Property   \`id\` ActivityGroup#id   \`name\` ActivityGroup#name   \`impressionsLookback\` ActivityGroup#impressionsLookback   \`clicksLookback\` ActivityGroup#clicksLookback   \`status\` ActivityGroup#status   @param filterStatement a statement used to filter a set of activity groups @return the activity groups that match the given filter"
+"Gets an ActivityGroupPage of ActivityGroup objects that satisfy the given Statement#query. The following fields are supported for filtering:   PQL Property Object Property   \`id\` ActivityGroup#id   \`name\` ActivityGroup#name   \`impressionsLookback\` ActivityGroup#impressionsLookback   \`clicksLookback\` ActivityGroup#clicksLookback   \`status\` ActivityGroup#status  "
 input GetActivityGroupsByStatementInput {
   filterStatement: StatementInput
 }
 
-"Updates the specified ActivityGroup objects. @param activityGroups the activity groups to update. @return the updated activity groups."
+"Updates the specified ActivityGroup objects."
 input UpdateActivityGroupsInput {
   activityGroups: [ActivityGroupInput]
 }
@@ -83,19 +83,19 @@ extend type Query {
 }
 
 extend type Mutation {
-  "Creates a new ActivityGroup objects. @param activityGroups the activity groups to be created. @return the created activity groups with their IDs filled in."
+  "Creates a new ActivityGroup objects."
   createActivityGroups(input: CreateActivityGroupsInput!): [ActivityGroup]
     @soap(service: "ActivityGroup", action: "createActivityGroups")
 }
 
 extend type Query {
-  "Gets an ActivityGroupPage of ActivityGroup objects that satisfy the given Statement#query. The following fields are supported for filtering:   PQL Property Object Property   \`id\` ActivityGroup#id   \`name\` ActivityGroup#name   \`impressionsLookback\` ActivityGroup#impressionsLookback   \`clicksLookback\` ActivityGroup#clicksLookback   \`status\` ActivityGroup#status   @param filterStatement a statement used to filter a set of activity groups @return the activity groups that match the given filter"
+  "Gets an ActivityGroupPage of ActivityGroup objects that satisfy the given Statement#query. The following fields are supported for filtering:   PQL Property Object Property   \`id\` ActivityGroup#id   \`name\` ActivityGroup#name   \`impressionsLookback\` ActivityGroup#impressionsLookback   \`clicksLookback\` ActivityGroup#clicksLookback   \`status\` ActivityGroup#status  "
   getActivityGroupsByStatement(input: GetActivityGroupsByStatementInput!): ActivityGroupPage
     @soap(service: "ActivityGroup", action: "getActivityGroupsByStatement")
 }
 
 extend type Mutation {
-  "Updates the specified ActivityGroup objects. @param activityGroups the activity groups to update. @return the updated activity groups."
+  "Updates the specified ActivityGroup objects."
   updateActivityGroups(input: UpdateActivityGroupsInput!): [ActivityGroup]
     @soap(service: "ActivityGroup", action: "updateActivityGroups")
 }

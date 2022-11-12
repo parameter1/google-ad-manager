@@ -882,7 +882,7 @@ enum DimensionEnum {
   CARRIER_NAME
   "Breaks down reporting data by channels. Corresponds to 'Channel' in the Ad Manager UI. Compatible with the 'Historical' report type."
   CHANNEL_NAME
-  "Breaks down reporting data by child network code in MCM 'Manage Inventory'. This experimental dimension only works for MCM 'Manage Inventory' parent publishers. Corresponds to 'Child network code' in the Ad Manager UI. Compatible with the 'Historical' report type."
+  "Breaks down reporting data by child network code in MCM 'Manage Inventory'. This dimension only works for MCM 'Manage Inventory' parent publishers. Corresponds to 'Child network code' in the Ad Manager UI. Compatible with the 'Historical' report type."
   CHILD_NETWORK_CODE
   "Breaks down reporting data by city criteria ID. Can be used to filter by city criteria ID. Compatible with the 'Historical' report type."
   CITY_CRITERIA_ID
@@ -1196,13 +1196,13 @@ enum ExportFormatEnum {
   XML
 }
 
-"Returns the URL at which the report file can be downloaded.  The report will be generated as a gzip archive, containing the report file itself. @param reportJobId the ID of the ReportJob @param exportFormat the ExportFormat for the report file @return the URL for report file download"
+"Returns the URL at which the report file can be downloaded. The report will be generated as a gzip archive, containing the report file itself."
 input GetReportDownloadURLInput {
   reportJobId: BigInt
   exportFormat: ExportFormatEnum
 }
 
-"Returns the URL at which the report file can be downloaded, and allows for customization of the downloaded report.  By default, the report will be generated as a gzip archive, containing the report file itself. This can be changed by setting ReportDownloadOptions#useGzipCompression to false. @param reportJobId the ID of the ReportJob @param reportDownloadOptions the ReportDownloadOptions for the request @return the URL for report file download"
+"Returns the URL at which the report file can be downloaded, and allows for customization of the downloaded report. By default, the report will be generated as a gzip archive, containing the report file itself. This can be changed by setting ReportDownloadOptions#useGzipCompression to false."
 input GetReportDownloadUrlWithOptionsInput {
   reportJobId: BigInt
   reportDownloadOptions: ReportDownloadOptionsInput
@@ -1213,7 +1213,7 @@ input GetReportJobStatusInput {
   reportJobId: BigInt
 }
 
-"Retrieves a page of the saved queries either created by or shared with the current user. Each SavedQuery in the page, if it is compatible with the current API version, will contain a ReportQuery object which can be optionally modified and used to create a ReportJob. This can then be passed to ReportService#runReportJob. The following fields are supported for filtering:   PQL Property Object Property   \`id\` SavedQuery#id   \`name\` SavedQuery#name   @param filterStatement a Publisher Query Language statement used to filter which saved queries should be returned. @return a SavedQueryPage that contains all SavedQuery instances which satisfy the given statement."
+"Retrieves a page of the saved queries either created by or shared with the current user. Each SavedQuery in the page, if it is compatible with the current API version, will contain a ReportQuery object which can be optionally modified and used to create a ReportJob. This can then be passed to ReportService#runReportJob. The following fields are supported for filtering:   PQL Property Object Property   \`id\` SavedQuery#id   \`name\` SavedQuery#name  "
 input GetSavedQueriesByStatementInput {
   filterStatement: StatementInput
 }
@@ -1320,7 +1320,7 @@ input ReportQueryInput {
   reportCurrency: String
 }
 
-"Initiates the execution of a ReportQuery on the server. The following fields are required:  ReportJob#reportQuery  @param reportJob the report job to run @return the report job with its ID filled in"
+"Initiates the execution of a ReportQuery on the server. The following fields are required:  ReportJob#reportQuery "
 input RunReportJobInput {
   reportJob: ReportJobInput
 }
@@ -1381,13 +1381,13 @@ extend type Query {
 }
 
 extend type Query {
-  "Returns the URL at which the report file can be downloaded.  The report will be generated as a gzip archive, containing the report file itself. @param reportJobId the ID of the ReportJob @param exportFormat the ExportFormat for the report file @return the URL for report file download"
+  "Returns the URL at which the report file can be downloaded. The report will be generated as a gzip archive, containing the report file itself."
   getReportDownloadURL(input: GetReportDownloadURLInput!): String
     @soap(service: "Report", action: "getReportDownloadURL")
 }
 
 extend type Query {
-  "Returns the URL at which the report file can be downloaded, and allows for customization of the downloaded report.  By default, the report will be generated as a gzip archive, containing the report file itself. This can be changed by setting ReportDownloadOptions#useGzipCompression to false. @param reportJobId the ID of the ReportJob @param reportDownloadOptions the ReportDownloadOptions for the request @return the URL for report file download"
+  "Returns the URL at which the report file can be downloaded, and allows for customization of the downloaded report. By default, the report will be generated as a gzip archive, containing the report file itself. This can be changed by setting ReportDownloadOptions#useGzipCompression to false."
   getReportDownloadUrlWithOptions(input: GetReportDownloadUrlWithOptionsInput!): String
     @soap(service: "Report", action: "getReportDownloadUrlWithOptions")
 }
@@ -1399,13 +1399,13 @@ extend type Query {
 }
 
 extend type Query {
-  "Retrieves a page of the saved queries either created by or shared with the current user. Each SavedQuery in the page, if it is compatible with the current API version, will contain a ReportQuery object which can be optionally modified and used to create a ReportJob. This can then be passed to ReportService#runReportJob. The following fields are supported for filtering:   PQL Property Object Property   \`id\` SavedQuery#id   \`name\` SavedQuery#name   @param filterStatement a Publisher Query Language statement used to filter which saved queries should be returned. @return a SavedQueryPage that contains all SavedQuery instances which satisfy the given statement."
+  "Retrieves a page of the saved queries either created by or shared with the current user. Each SavedQuery in the page, if it is compatible with the current API version, will contain a ReportQuery object which can be optionally modified and used to create a ReportJob. This can then be passed to ReportService#runReportJob. The following fields are supported for filtering:   PQL Property Object Property   \`id\` SavedQuery#id   \`name\` SavedQuery#name  "
   getSavedQueriesByStatement(input: GetSavedQueriesByStatementInput!): SavedQueryPage
     @soap(service: "Report", action: "getSavedQueriesByStatement")
 }
 
 extend type Query {
-  "Initiates the execution of a ReportQuery on the server. The following fields are required:  ReportJob#reportQuery  @param reportJob the report job to run @return the report job with its ID filled in"
+  "Initiates the execution of a ReportQuery on the server. The following fields are required:  ReportJob#reportQuery "
   runReportJob(input: RunReportJobInput!): ReportJob
     @soap(service: "Report", action: "runReportJob")
 }

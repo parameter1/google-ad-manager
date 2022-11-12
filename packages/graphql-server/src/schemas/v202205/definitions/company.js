@@ -143,23 +143,23 @@ enum CompanyTypeEnum {
   VIEWABILITY_PROVIDER
 }
 
-"Creates new Company objects. @param companies the companies to create @return the created companies with their IDs filled in"
+"Creates new Company objects."
 input CreateCompaniesInput {
   companies: [CompanyInput]
 }
 
-"Gets a CompanyPage of Company objects that satisfy the given Statement#query. The following fields are supported for filtering:   PQL Property Object Property   \`id\` Company#id   \`name\` Company#name   \`type\` Company#type   \`lastModifiedDateTime\` Company#lastModifiedDateTime   @param filterStatement a Publisher Query Language statement used to filter a set of companies @return the companies that match the given filter"
+"Gets a CompanyPage of Company objects that satisfy the given Statement#query. The following fields are supported for filtering:   PQL Property Object Property   \`id\` Company#id   \`name\` Company#name   \`type\` Company#type   \`lastModifiedDateTime\` Company#lastModifiedDateTime  "
 input GetCompaniesByStatementInput {
   filterStatement: StatementInput
 }
 
-"Performs actions on Company objects that match the given \`Statement\`. @param companyAction the action to perform @param statement a PQL statement used to filter companies @return the result of the action performed @throws ApiException"
+"Performs actions on Company objects that match the given \`Statement\`."
 input PerformCompanyActionInput {
   companyAction: JSONObject
   statement: StatementInput
 }
 
-"Updates the specified Company objects. @param companies the companies to update @return the updated companies"
+"Updates the specified Company objects."
 input UpdateCompaniesInput {
   companies: [CompanyInput]
 }
@@ -208,25 +208,25 @@ extend type Query {
 }
 
 extend type Mutation {
-  "Creates new Company objects. @param companies the companies to create @return the created companies with their IDs filled in"
+  "Creates new Company objects."
   createCompanies(input: CreateCompaniesInput!): [Company]
     @soap(service: "Company", action: "createCompanies")
 }
 
 extend type Query {
-  "Gets a CompanyPage of Company objects that satisfy the given Statement#query. The following fields are supported for filtering:   PQL Property Object Property   \`id\` Company#id   \`name\` Company#name   \`type\` Company#type   \`lastModifiedDateTime\` Company#lastModifiedDateTime   @param filterStatement a Publisher Query Language statement used to filter a set of companies @return the companies that match the given filter"
+  "Gets a CompanyPage of Company objects that satisfy the given Statement#query. The following fields are supported for filtering:   PQL Property Object Property   \`id\` Company#id   \`name\` Company#name   \`type\` Company#type   \`lastModifiedDateTime\` Company#lastModifiedDateTime  "
   getCompaniesByStatement(input: GetCompaniesByStatementInput!): CompanyPage
     @soap(service: "Company", action: "getCompaniesByStatement")
 }
 
 extend type Mutation {
-  "Performs actions on Company objects that match the given \`Statement\`. @param companyAction the action to perform @param statement a PQL statement used to filter companies @return the result of the action performed @throws ApiException"
+  "Performs actions on Company objects that match the given \`Statement\`."
   performCompanyAction(input: PerformCompanyActionInput!): UpdateResult
     @soap(service: "Company", action: "performCompanyAction")
 }
 
 extend type Mutation {
-  "Updates the specified Company objects. @param companies the companies to update @return the updated companies"
+  "Updates the specified Company objects."
   updateCompanies(input: UpdateCompaniesInput!): [Company]
     @soap(service: "Company", action: "updateCompanies")
 }

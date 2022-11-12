@@ -50,17 +50,17 @@ type BuyerRfp {
   rfpType: RfpTypeEnum
 }
 
-"Creates new Proposal objects. For each proposal, the following fields are required:  Proposal#name  @param proposals the proposals to create @return the created proposals with their IDs filled in"
+"Creates new Proposal objects. For each proposal, the following fields are required:  Proposal#name "
 input CreateProposalsInput {
   proposals: [ProposalInput]
 }
 
-"Gets a MarketplaceCommentPage of MarketplaceComment objects that satisfy the given Statement#query. This method only returns comments already sent to Marketplace, local draft ProposalMarketplaceInfo#marketplaceComment are not included. The following fields are supported for filtering:   PQL Property Object Property   \`proposalId\` MarketplaceComment#proposalId   The query must specify a \`proposalId\`, and only supports a subset of PQL syntax: [WHERE  {AND  ...}] [ORDER BY  [ASC | DESC]] [LIMIT {[,] } | { OFFSET }]       :=  =   :=  IN  Only supports \`ORDER BY\` MarketplaceComment#creationTime. @param filterStatement a Publisher Query Language statement used to filter a set of marketplace comments @return the marketplace comments that match the given filter"
+"Gets a MarketplaceCommentPage of MarketplaceComment objects that satisfy the given Statement#query. This method only returns comments already sent to Marketplace, local draft ProposalMarketplaceInfo#marketplaceComment are not included. The following fields are supported for filtering:   PQL Property Object Property   \`proposalId\` MarketplaceComment#proposalId   The query must specify a \`proposalId\`, and only supports a subset of PQL syntax: [WHERE  {AND  ...}] [ORDER BY  [ASC | DESC]] [LIMIT {[,] } | { OFFSET }]       :=  =   :=  IN  Only supports \`ORDER BY\` MarketplaceComment#creationTime."
 input GetMarketplaceCommentsByStatementInput {
   filterStatement: StatementInput
 }
 
-"Gets a ProposalPage of Proposal objects that satisfy the given Statement#query. The following fields are supported for filtering:   PQL Property Object Property   \`id\` Proposal#id   \`dfpOrderId\` Proposal#dfpOrderId   \`name\` Proposal#name   \`status\` Proposal#status   \`isArchived\` Proposal#isArchived    \`approvalStatus\` Only applicable for proposals using sales management  Proposal#approvalStatus   \`lastModifiedDateTime\` Proposal#lastModifiedDateTime   \`isProgrammatic\` Proposal#isProgrammatic    \`negotiationStatus\` Only applicable for programmatic proposals  ProposalMarketplaceInfo#negotiationStatus   @param filterStatement a Publisher Query Language statement used to filter a set of proposals @return the proposals that match the given filter"
+"Gets a ProposalPage of Proposal objects that satisfy the given Statement#query. The following fields are supported for filtering:   PQL Property Object Property   \`id\` Proposal#id   \`dfpOrderId\` Proposal#dfpOrderId   \`name\` Proposal#name   \`status\` Proposal#status   \`isArchived\` Proposal#isArchived    \`approvalStatus\` Only applicable for proposals using sales management  Proposal#approvalStatus   \`lastModifiedDateTime\` Proposal#lastModifiedDateTime   \`isProgrammatic\` Proposal#isProgrammatic    \`negotiationStatus\` Only applicable for programmatic proposals  ProposalMarketplaceInfo#negotiationStatus  "
 input GetProposalsByStatementInput {
   filterStatement: StatementInput
 }
@@ -105,7 +105,7 @@ enum NegotiationStatusEnum {
   UNKNOWN
 }
 
-"Performs actions on Proposal objects that match the given Statement#query. The following fields are also required when submitting proposals for approval:  Proposal#advertiser Proposal#primarySalesperson Proposal#primaryTraffickerId  @param proposalAction the action to perform @param filterStatement a Publisher Query Language statement used to filter a set of proposals @return the result of the action performed"
+"Performs actions on Proposal objects that match the given Statement#query. The following fields are also required when submitting proposals for approval:  Proposal#advertiser Proposal#primarySalesperson Proposal#primaryTraffickerId "
 input PerformProposalActionInput {
   proposalAction: JSONObject
   filterStatement: StatementInput
@@ -309,7 +309,7 @@ input SalespersonSplitInput {
   userId: BigInt
 }
 
-"Updates the specified Proposal objects. @param proposals the proposals to update @return the updated proposals"
+"Updates the specified Proposal objects."
 input UpdateProposalsInput {
   proposals: [ProposalInput]
 }
@@ -353,31 +353,31 @@ extend type Query {
 }
 
 extend type Mutation {
-  "Creates new Proposal objects. For each proposal, the following fields are required:  Proposal#name  @param proposals the proposals to create @return the created proposals with their IDs filled in"
+  "Creates new Proposal objects. For each proposal, the following fields are required:  Proposal#name "
   createProposals(input: CreateProposalsInput!): [Proposal]
     @soap(service: "Proposal", action: "createProposals")
 }
 
 extend type Query {
-  "Gets a MarketplaceCommentPage of MarketplaceComment objects that satisfy the given Statement#query. This method only returns comments already sent to Marketplace, local draft ProposalMarketplaceInfo#marketplaceComment are not included. The following fields are supported for filtering:   PQL Property Object Property   \`proposalId\` MarketplaceComment#proposalId   The query must specify a \`proposalId\`, and only supports a subset of PQL syntax: [WHERE  {AND  ...}] [ORDER BY  [ASC | DESC]] [LIMIT {[,] } | { OFFSET }]       :=  =   :=  IN  Only supports \`ORDER BY\` MarketplaceComment#creationTime. @param filterStatement a Publisher Query Language statement used to filter a set of marketplace comments @return the marketplace comments that match the given filter"
+  "Gets a MarketplaceCommentPage of MarketplaceComment objects that satisfy the given Statement#query. This method only returns comments already sent to Marketplace, local draft ProposalMarketplaceInfo#marketplaceComment are not included. The following fields are supported for filtering:   PQL Property Object Property   \`proposalId\` MarketplaceComment#proposalId   The query must specify a \`proposalId\`, and only supports a subset of PQL syntax: [WHERE  {AND  ...}] [ORDER BY  [ASC | DESC]] [LIMIT {[,] } | { OFFSET }]       :=  =   :=  IN  Only supports \`ORDER BY\` MarketplaceComment#creationTime."
   getMarketplaceCommentsByStatement(input: GetMarketplaceCommentsByStatementInput!): MarketplaceCommentPage
     @soap(service: "Proposal", action: "getMarketplaceCommentsByStatement")
 }
 
 extend type Query {
-  "Gets a ProposalPage of Proposal objects that satisfy the given Statement#query. The following fields are supported for filtering:   PQL Property Object Property   \`id\` Proposal#id   \`dfpOrderId\` Proposal#dfpOrderId   \`name\` Proposal#name   \`status\` Proposal#status   \`isArchived\` Proposal#isArchived    \`approvalStatus\` Only applicable for proposals using sales management  Proposal#approvalStatus   \`lastModifiedDateTime\` Proposal#lastModifiedDateTime   \`isProgrammatic\` Proposal#isProgrammatic    \`negotiationStatus\` Only applicable for programmatic proposals  ProposalMarketplaceInfo#negotiationStatus   @param filterStatement a Publisher Query Language statement used to filter a set of proposals @return the proposals that match the given filter"
+  "Gets a ProposalPage of Proposal objects that satisfy the given Statement#query. The following fields are supported for filtering:   PQL Property Object Property   \`id\` Proposal#id   \`dfpOrderId\` Proposal#dfpOrderId   \`name\` Proposal#name   \`status\` Proposal#status   \`isArchived\` Proposal#isArchived    \`approvalStatus\` Only applicable for proposals using sales management  Proposal#approvalStatus   \`lastModifiedDateTime\` Proposal#lastModifiedDateTime   \`isProgrammatic\` Proposal#isProgrammatic    \`negotiationStatus\` Only applicable for programmatic proposals  ProposalMarketplaceInfo#negotiationStatus  "
   getProposalsByStatement(input: GetProposalsByStatementInput!): ProposalPage
     @soap(service: "Proposal", action: "getProposalsByStatement")
 }
 
 extend type Mutation {
-  "Performs actions on Proposal objects that match the given Statement#query. The following fields are also required when submitting proposals for approval:  Proposal#advertiser Proposal#primarySalesperson Proposal#primaryTraffickerId  @param proposalAction the action to perform @param filterStatement a Publisher Query Language statement used to filter a set of proposals @return the result of the action performed"
+  "Performs actions on Proposal objects that match the given Statement#query. The following fields are also required when submitting proposals for approval:  Proposal#advertiser Proposal#primarySalesperson Proposal#primaryTraffickerId "
   performProposalAction(input: PerformProposalActionInput!): UpdateResult
     @soap(service: "Proposal", action: "performProposalAction")
 }
 
 extend type Mutation {
-  "Updates the specified Proposal objects. @param proposals the proposals to update @return the updated proposals"
+  "Updates the specified Proposal objects."
   updateProposals(input: UpdateProposalsInput!): [Proposal]
     @soap(service: "Proposal", action: "updateProposals")
 }

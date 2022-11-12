@@ -24,12 +24,12 @@ input AdCategoryDtoInput {
   parentId: BigInt
 }
 
-"Creates new Label objects. @param labels the labels to create @return the created labels with their IDs filled in"
+"Creates new Label objects."
 input CreateLabelsInput {
   labels: [LabelInput]
 }
 
-"Gets a LabelPage of Label objects that satisfy the given Statement#query. The following fields are supported for filtering:   PQL Property Object Property   \`id\` Label#id   \`type\` Label#type   \`name\` Label#name   \`description\` Label#description   \`isActive\` Label#isActive   @param filterStatement a Publisher Query Language statement used to filter a set of labels. @return the labels that match the given filter"
+"Gets a LabelPage of Label objects that satisfy the given Statement#query. The following fields are supported for filtering:   PQL Property Object Property   \`id\` Label#id   \`type\` Label#type   \`name\` Label#name   \`description\` Label#description   \`isActive\` Label#isActive  "
 input GetLabelsByStatementInput {
   filterStatement: StatementInput
 }
@@ -88,13 +88,13 @@ enum LabelTypeEnum {
   UNKNOWN
 }
 
-"Performs actions on Label objects that match the given Statement#query. @param labelAction the action to perform @param filterStatement a Publisher Query Language statement used to filter a set of labels @return the result of the action performed"
+"Performs actions on Label objects that match the given Statement#query."
 input PerformLabelActionInput {
   labelAction: JSONObject
   filterStatement: StatementInput
 }
 
-"Updates the specified Label objects. @param labels the labels to update @return the updated labels"
+"Updates the specified Label objects."
 input UpdateLabelsInput {
   labels: [LabelInput]
 }
@@ -119,25 +119,25 @@ extend type Query {
 }
 
 extend type Mutation {
-  "Creates new Label objects. @param labels the labels to create @return the created labels with their IDs filled in"
+  "Creates new Label objects."
   createLabels(input: CreateLabelsInput!): [Label]
     @soap(service: "Label", action: "createLabels")
 }
 
 extend type Query {
-  "Gets a LabelPage of Label objects that satisfy the given Statement#query. The following fields are supported for filtering:   PQL Property Object Property   \`id\` Label#id   \`type\` Label#type   \`name\` Label#name   \`description\` Label#description   \`isActive\` Label#isActive   @param filterStatement a Publisher Query Language statement used to filter a set of labels. @return the labels that match the given filter"
+  "Gets a LabelPage of Label objects that satisfy the given Statement#query. The following fields are supported for filtering:   PQL Property Object Property   \`id\` Label#id   \`type\` Label#type   \`name\` Label#name   \`description\` Label#description   \`isActive\` Label#isActive  "
   getLabelsByStatement(input: GetLabelsByStatementInput!): LabelPage
     @soap(service: "Label", action: "getLabelsByStatement")
 }
 
 extend type Mutation {
-  "Performs actions on Label objects that match the given Statement#query. @param labelAction the action to perform @param filterStatement a Publisher Query Language statement used to filter a set of labels @return the result of the action performed"
+  "Performs actions on Label objects that match the given Statement#query."
   performLabelAction(input: PerformLabelActionInput!): UpdateResult
     @soap(service: "Label", action: "performLabelAction")
 }
 
 extend type Mutation {
-  "Updates the specified Label objects. @param labels the labels to update @return the updated labels"
+  "Updates the specified Label objects."
   updateLabels(input: UpdateLabelsInput!): [Label]
     @soap(service: "Label", action: "updateLabels")
 }

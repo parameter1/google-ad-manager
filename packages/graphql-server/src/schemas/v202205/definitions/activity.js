@@ -68,17 +68,17 @@ enum ActivityTypeEnum {
   UNKNOWN
 }
 
-"Creates a new Activity objects. @param activities to be created. @return the created activities with its IDs filled in."
+"Creates a new Activity objects."
 input CreateActivitiesInput {
   activities: [ActivityInput]
 }
 
-"Gets an ActivityPage of Activity objects that satisfy the given Statement#query. The following fields are supported for filtering:   PQL Property Object Property   \`id\` Activity#id   \`name\` Activity#name   \`expectedURL\` Activity#expectedURL   \`status\` Activity#status   \`activityGroupId\` Activity#activityGroupId   @param filterStatement a statement used to filter a set of activities. @return the activities that match the given filter."
+"Gets an ActivityPage of Activity objects that satisfy the given Statement#query. The following fields are supported for filtering:   PQL Property Object Property   \`id\` Activity#id   \`name\` Activity#name   \`expectedURL\` Activity#expectedURL   \`status\` Activity#status   \`activityGroupId\` Activity#activityGroupId  "
 input GetActivitiesByStatementInput {
   filterStatement: StatementInput
 }
 
-"Updates the specified Activity objects. @param activities to be updated. @return the updated activities."
+"Updates the specified Activity objects."
 input UpdateActivitiesInput {
   activities: [ActivityInput]
 }
@@ -103,19 +103,19 @@ extend type Query {
 }
 
 extend type Mutation {
-  "Creates a new Activity objects. @param activities to be created. @return the created activities with its IDs filled in."
+  "Creates a new Activity objects."
   createActivities(input: CreateActivitiesInput!): [Activity]
     @soap(service: "Activity", action: "createActivities")
 }
 
 extend type Query {
-  "Gets an ActivityPage of Activity objects that satisfy the given Statement#query. The following fields are supported for filtering:   PQL Property Object Property   \`id\` Activity#id   \`name\` Activity#name   \`expectedURL\` Activity#expectedURL   \`status\` Activity#status   \`activityGroupId\` Activity#activityGroupId   @param filterStatement a statement used to filter a set of activities. @return the activities that match the given filter."
+  "Gets an ActivityPage of Activity objects that satisfy the given Statement#query. The following fields are supported for filtering:   PQL Property Object Property   \`id\` Activity#id   \`name\` Activity#name   \`expectedURL\` Activity#expectedURL   \`status\` Activity#status   \`activityGroupId\` Activity#activityGroupId  "
   getActivitiesByStatement(input: GetActivitiesByStatementInput!): ActivityPage
     @soap(service: "Activity", action: "getActivitiesByStatement")
 }
 
 extend type Mutation {
-  "Updates the specified Activity objects. @param activities to be updated. @return the updated activities."
+  "Updates the specified Activity objects."
   updateActivities(input: UpdateActivitiesInput!): [Activity]
     @soap(service: "Activity", action: "updateActivities")
 }

@@ -44,12 +44,12 @@ enum AdServingFormatEnum {
   UNKNOWN
 }
 
-"Creates new LiveStreamEvent objects. The following fields are required:  LiveStreamEvent#name LiveStreamEvent#startDateTime LiveStreamEvent#endDateTime LiveStreamEvent#contentUrls LiveStreamEvent#adTags  @param liveStreamEvents the live stream events to create @return the created live stream events with their IDs filled in"
+"Creates new LiveStreamEvent objects. The following fields are required:  LiveStreamEvent#name LiveStreamEvent#startDateTime LiveStreamEvent#endDateTime LiveStreamEvent#contentUrls LiveStreamEvent#adTags "
 input CreateLiveStreamEventsInput {
   liveStreamEvents: [LiveStreamEventInput]
 }
 
-"Create new slates. A slate creative is served as backup content in a live stream event when no other creatives are eligible to be served. @param slates list of slate objects to create. @throws ApiException if there is an error while fetching the logging information"
+"Create new slates. A slate creative is served as backup content in a live stream event when no other creatives are eligible to be served."
 input CreateSlatesInput {
   slates: [SlateInput]
 }
@@ -66,12 +66,12 @@ enum DynamicAdInsertionTypeEnum {
   UNKNOWN
 }
 
-"Gets a LiveStreamEventPage of LiveStreamEvent objects that satisfy the given Statement#query. The following fields are supported for filtering:   PQL Property Object Property   \`id\` LiveStreamEvent#id   \`slateCreativeId\` LiveStreamEvent#slateCreativeId   \`assetKey\` LiveStreamEvent#assetKey   \`streamCreateDaiAuthenticationKeyIds\` LiveStreamEvent#streamCreateDaiAuthenticationKeyIds   \`dynamicAdInsertionType\` LiveStreamEvent#dynamicAdInsertionType   \`streamingFormat\` LiveStreamEvent#streamingFormat   \`customAssetKey\` LiveStreamEvent#customAssetKey   \`daiEncodingProfileIds\` LiveStreamEvent#daiEncodingProfileIds   \`segmentUrlAuthenticationKeyIds\` LiveStreamEvent#segmentUrlAuthenticationKeyIds   @param filterStatement a Publisher Query Language statement to filter a list of live stream events @return the live stream events that match the filter"
+"Gets a LiveStreamEventPage of LiveStreamEvent objects that satisfy the given Statement#query. The following fields are supported for filtering:   PQL Property Object Property   \`id\` LiveStreamEvent#id   \`slateCreativeId\` LiveStreamEvent#slateCreativeId   \`assetKey\` LiveStreamEvent#assetKey   \`streamCreateDaiAuthenticationKeyIds\` LiveStreamEvent#streamCreateDaiAuthenticationKeyIds   \`dynamicAdInsertionType\` LiveStreamEvent#dynamicAdInsertionType   \`streamingFormat\` LiveStreamEvent#streamingFormat   \`customAssetKey\` LiveStreamEvent#customAssetKey   \`daiEncodingProfileIds\` LiveStreamEvent#daiEncodingProfileIds   \`segmentUrlAuthenticationKeyIds\` LiveStreamEvent#segmentUrlAuthenticationKeyIds  "
 input GetLiveStreamEventsByStatementInput {
   filterStatement: StatementInput
 }
 
-"Gets a SlatePage of Slate objects that satisfy the given Statement#query. The following fields are supported for filtering:   PQL Property Object Property   \`id\` Slate#id   \`name\` Slate#name   \`lastModifiedDateTime\` Slate#lastModifiedDateTime   @param statement a Publisher Query Language statement used to filter slates @return the slates that match the given filter"
+"Gets a SlatePage of Slate objects that satisfy the given Statement#query. The following fields are supported for filtering:   PQL Property Object Property   \`id\` Slate#id   \`name\` Slate#name   \`lastModifiedDateTime\` Slate#lastModifiedDateTime  "
 input GetSlatesByStatementInput {
   statement: StatementInput
 }
@@ -286,13 +286,13 @@ input MasterPlaylistSettingsInput {
   refreshType: RefreshTypeEnum
 }
 
-"Performs actions on LiveStreamEvent objects that match the given Statement#query. @param liveStreamEventAction the action to perform @param filterStatement a Publisher Query Language statement used to filter a set of live stream events @return the result of the action performed"
+"Performs actions on LiveStreamEvent objects that match the given Statement#query."
 input PerformLiveStreamEventActionInput {
   liveStreamEventAction: JSONObject
   filterStatement: StatementInput
 }
 
-"Performs actions on slates that match the given Statement. @param slateAction the action to perform @param filterStatement a Publisher Query Language statement used to filter a set of slates @return the result of the action performed"
+"Performs actions on slates that match the given Statement."
 input PerformSlateActionInput {
   slateAction: JSONObject
   filterStatement: StatementInput
@@ -398,12 +398,12 @@ enum TranscodeStatusEnum {
   UNKNOWN
 }
 
-"Updates the specified LiveStreamEvent objects. @param liveStreamEvents the live stream events to update @return the updated live stream events @throws ApiException if there is an error updating the live stream events"
+"Updates the specified LiveStreamEvent objects."
 input UpdateLiveStreamEventsInput {
   liveStreamEvents: [LiveStreamEventInput]
 }
 
-"Update existing slates. Only the slateName is editable. @param slates list of slate objects to update. @throws ApiException if there is an error while fetching the logging information"
+"Update existing slates. Only the slateName is editable."
 input UpdateSlatesInput {
   slates: [SlateInput]
 }
@@ -447,49 +447,49 @@ extend type Query {
 }
 
 extend type Mutation {
-  "Creates new LiveStreamEvent objects. The following fields are required:  LiveStreamEvent#name LiveStreamEvent#startDateTime LiveStreamEvent#endDateTime LiveStreamEvent#contentUrls LiveStreamEvent#adTags  @param liveStreamEvents the live stream events to create @return the created live stream events with their IDs filled in"
+  "Creates new LiveStreamEvent objects. The following fields are required:  LiveStreamEvent#name LiveStreamEvent#startDateTime LiveStreamEvent#endDateTime LiveStreamEvent#contentUrls LiveStreamEvent#adTags "
   createLiveStreamEvents(input: CreateLiveStreamEventsInput!): [LiveStreamEvent]
     @soap(service: "LiveStreamEvent", action: "createLiveStreamEvents")
 }
 
 extend type Mutation {
-  "Create new slates. A slate creative is served as backup content in a live stream event when no other creatives are eligible to be served. @param slates list of slate objects to create. @throws ApiException if there is an error while fetching the logging information"
+  "Create new slates. A slate creative is served as backup content in a live stream event when no other creatives are eligible to be served."
   createSlates(input: CreateSlatesInput!): [Slate]
     @soap(service: "LiveStreamEvent", action: "createSlates")
 }
 
 extend type Query {
-  "Gets a LiveStreamEventPage of LiveStreamEvent objects that satisfy the given Statement#query. The following fields are supported for filtering:   PQL Property Object Property   \`id\` LiveStreamEvent#id   \`slateCreativeId\` LiveStreamEvent#slateCreativeId   \`assetKey\` LiveStreamEvent#assetKey   \`streamCreateDaiAuthenticationKeyIds\` LiveStreamEvent#streamCreateDaiAuthenticationKeyIds   \`dynamicAdInsertionType\` LiveStreamEvent#dynamicAdInsertionType   \`streamingFormat\` LiveStreamEvent#streamingFormat   \`customAssetKey\` LiveStreamEvent#customAssetKey   \`daiEncodingProfileIds\` LiveStreamEvent#daiEncodingProfileIds   \`segmentUrlAuthenticationKeyIds\` LiveStreamEvent#segmentUrlAuthenticationKeyIds   @param filterStatement a Publisher Query Language statement to filter a list of live stream events @return the live stream events that match the filter"
+  "Gets a LiveStreamEventPage of LiveStreamEvent objects that satisfy the given Statement#query. The following fields are supported for filtering:   PQL Property Object Property   \`id\` LiveStreamEvent#id   \`slateCreativeId\` LiveStreamEvent#slateCreativeId   \`assetKey\` LiveStreamEvent#assetKey   \`streamCreateDaiAuthenticationKeyIds\` LiveStreamEvent#streamCreateDaiAuthenticationKeyIds   \`dynamicAdInsertionType\` LiveStreamEvent#dynamicAdInsertionType   \`streamingFormat\` LiveStreamEvent#streamingFormat   \`customAssetKey\` LiveStreamEvent#customAssetKey   \`daiEncodingProfileIds\` LiveStreamEvent#daiEncodingProfileIds   \`segmentUrlAuthenticationKeyIds\` LiveStreamEvent#segmentUrlAuthenticationKeyIds  "
   getLiveStreamEventsByStatement(input: GetLiveStreamEventsByStatementInput!): LiveStreamEventPage
     @soap(service: "LiveStreamEvent", action: "getLiveStreamEventsByStatement")
 }
 
 extend type Query {
-  "Gets a SlatePage of Slate objects that satisfy the given Statement#query. The following fields are supported for filtering:   PQL Property Object Property   \`id\` Slate#id   \`name\` Slate#name   \`lastModifiedDateTime\` Slate#lastModifiedDateTime   @param statement a Publisher Query Language statement used to filter slates @return the slates that match the given filter"
+  "Gets a SlatePage of Slate objects that satisfy the given Statement#query. The following fields are supported for filtering:   PQL Property Object Property   \`id\` Slate#id   \`name\` Slate#name   \`lastModifiedDateTime\` Slate#lastModifiedDateTime  "
   getSlatesByStatement(input: GetSlatesByStatementInput!): SlatePage
     @soap(service: "LiveStreamEvent", action: "getSlatesByStatement")
 }
 
 extend type Mutation {
-  "Performs actions on LiveStreamEvent objects that match the given Statement#query. @param liveStreamEventAction the action to perform @param filterStatement a Publisher Query Language statement used to filter a set of live stream events @return the result of the action performed"
+  "Performs actions on LiveStreamEvent objects that match the given Statement#query."
   performLiveStreamEventAction(input: PerformLiveStreamEventActionInput!): UpdateResult
     @soap(service: "LiveStreamEvent", action: "performLiveStreamEventAction")
 }
 
 extend type Mutation {
-  "Performs actions on slates that match the given Statement. @param slateAction the action to perform @param filterStatement a Publisher Query Language statement used to filter a set of slates @return the result of the action performed"
+  "Performs actions on slates that match the given Statement."
   performSlateAction(input: PerformSlateActionInput!): UpdateResult
     @soap(service: "LiveStreamEvent", action: "performSlateAction")
 }
 
 extend type Mutation {
-  "Updates the specified LiveStreamEvent objects. @param liveStreamEvents the live stream events to update @return the updated live stream events @throws ApiException if there is an error updating the live stream events"
+  "Updates the specified LiveStreamEvent objects."
   updateLiveStreamEvents(input: UpdateLiveStreamEventsInput!): [LiveStreamEvent]
     @soap(service: "LiveStreamEvent", action: "updateLiveStreamEvents")
 }
 
 extend type Mutation {
-  "Update existing slates. Only the slateName is editable. @param slates list of slate objects to update. @throws ApiException if there is an error while fetching the logging information"
+  "Update existing slates. Only the slateName is editable."
   updateSlates(input: UpdateSlatesInput!): [Slate]
     @soap(service: "LiveStreamEvent", action: "updateSlates")
 }

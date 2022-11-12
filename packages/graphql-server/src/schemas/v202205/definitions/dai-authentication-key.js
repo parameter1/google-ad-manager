@@ -4,7 +4,7 @@ const { gql } = require('apollo-server-express');
 
 module.exports = gql`
 
-"Creates new DaiAuthenticationKey objects. The following fields are required:  DaiAuthenticationKey#name  @param daiAuthenticationKeys the DAI authentication keys to create @return the created DAI authentication keys with their IDs filled in"
+"Creates new DaiAuthenticationKey objects. The following fields are required:  DaiAuthenticationKey#name "
 input CreateDaiAuthenticationKeysInput {
   daiAuthenticationKeys: [DaiAuthenticationKeyInput]
 }
@@ -63,18 +63,18 @@ enum DaiAuthenticationKeyTypeEnum {
   UNKNOWN
 }
 
-"Gets a DaiAuthenticationKeyPage of DaiAuthenticationKey objects that satisfy the given Statement#query. The following fields are supported for filtering:   PQL Property Object Property   \`id\` DaiAuthenticationKey#id   \`status\` DaiAuthenticationKey#status   \`name\` DaiAuthenticationKey#name   @param filterStatement a Publisher Query Language statement to filter a list of DAI authentication keys @return the DAI authentication keys that match the filter"
+"Gets a DaiAuthenticationKeyPage of DaiAuthenticationKey objects that satisfy the given Statement#query. The following fields are supported for filtering:   PQL Property Object Property   \`id\` DaiAuthenticationKey#id   \`status\` DaiAuthenticationKey#status   \`name\` DaiAuthenticationKey#name  "
 input GetDaiAuthenticationKeysByStatementInput {
   filterStatement: StatementInput
 }
 
-"Performs actions on DaiAuthenticationKey objects that match the given Statement#query. DAI authentication keys cannot be deactivated if there are active LiveStreamEvents or Content Sources that are using them. @param daiAuthenticationKeyAction the action to perform @param filterStatement a Publisher Query Language statement used to filter a set of live stream events @return the result of the action performed"
+"Performs actions on DaiAuthenticationKey objects that match the given Statement#query. DAI authentication keys cannot be deactivated if there are active LiveStreamEvents or Content Sources that are using them."
 input PerformDaiAuthenticationKeyActionInput {
   daiAuthenticationKeyAction: JSONObject
   filterStatement: StatementInput
 }
 
-"Updates the specified DaiAuthenticationKey objects. @param daiAuthenticationKeys the video DAI authentication keys to update @return the updated DAI authentication keys @throws ApiException if there is an error updating the DAI authentication keys"
+"Updates the specified DaiAuthenticationKey objects."
 input UpdateDaiAuthenticationKeysInput {
   daiAuthenticationKeys: [DaiAuthenticationKeyInput]
 }
@@ -99,25 +99,25 @@ extend type Query {
 }
 
 extend type Mutation {
-  "Creates new DaiAuthenticationKey objects. The following fields are required:  DaiAuthenticationKey#name  @param daiAuthenticationKeys the DAI authentication keys to create @return the created DAI authentication keys with their IDs filled in"
+  "Creates new DaiAuthenticationKey objects. The following fields are required:  DaiAuthenticationKey#name "
   createDaiAuthenticationKeys(input: CreateDaiAuthenticationKeysInput!): [DaiAuthenticationKey]
     @soap(service: "DaiAuthenticationKey", action: "createDaiAuthenticationKeys")
 }
 
 extend type Query {
-  "Gets a DaiAuthenticationKeyPage of DaiAuthenticationKey objects that satisfy the given Statement#query. The following fields are supported for filtering:   PQL Property Object Property   \`id\` DaiAuthenticationKey#id   \`status\` DaiAuthenticationKey#status   \`name\` DaiAuthenticationKey#name   @param filterStatement a Publisher Query Language statement to filter a list of DAI authentication keys @return the DAI authentication keys that match the filter"
+  "Gets a DaiAuthenticationKeyPage of DaiAuthenticationKey objects that satisfy the given Statement#query. The following fields are supported for filtering:   PQL Property Object Property   \`id\` DaiAuthenticationKey#id   \`status\` DaiAuthenticationKey#status   \`name\` DaiAuthenticationKey#name  "
   getDaiAuthenticationKeysByStatement(input: GetDaiAuthenticationKeysByStatementInput!): DaiAuthenticationKeyPage
     @soap(service: "DaiAuthenticationKey", action: "getDaiAuthenticationKeysByStatement")
 }
 
 extend type Mutation {
-  "Performs actions on DaiAuthenticationKey objects that match the given Statement#query. DAI authentication keys cannot be deactivated if there are active LiveStreamEvents or Content Sources that are using them. @param daiAuthenticationKeyAction the action to perform @param filterStatement a Publisher Query Language statement used to filter a set of live stream events @return the result of the action performed"
+  "Performs actions on DaiAuthenticationKey objects that match the given Statement#query. DAI authentication keys cannot be deactivated if there are active LiveStreamEvents or Content Sources that are using them."
   performDaiAuthenticationKeyAction(input: PerformDaiAuthenticationKeyActionInput!): UpdateResult
     @soap(service: "DaiAuthenticationKey", action: "performDaiAuthenticationKeyAction")
 }
 
 extend type Mutation {
-  "Updates the specified DaiAuthenticationKey objects. @param daiAuthenticationKeys the video DAI authentication keys to update @return the updated DAI authentication keys @throws ApiException if there is an error updating the DAI authentication keys"
+  "Updates the specified DaiAuthenticationKey objects."
   updateDaiAuthenticationKeys(input: UpdateDaiAuthenticationKeysInput!): [DaiAuthenticationKey]
     @soap(service: "DaiAuthenticationKey", action: "updateDaiAuthenticationKeys")
 }

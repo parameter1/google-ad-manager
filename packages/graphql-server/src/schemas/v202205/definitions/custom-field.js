@@ -4,12 +4,12 @@ const { gql } = require('apollo-server-express');
 
 module.exports = gql`
 
-"Creates new CustomFieldOption objects. The following fields are required:  CustomFieldOption#displayName CustomFieldOption#customFieldId  @param customFieldOptions the custom fields to create @return the created custom field options with their IDs filled in"
+"Creates new CustomFieldOption objects. The following fields are required:  CustomFieldOption#displayName CustomFieldOption#customFieldId "
 input CreateCustomFieldOptionsInput {
   customFieldOptions: [CustomFieldOptionInput]
 }
 
-"Creates new CustomField objects. The following fields are required:  CustomField#name CustomField#entityType CustomField#dataType CustomField#visibility  @param customFields the custom fields to create @return the created custom fields with their IDs filled in"
+"Creates new CustomField objects. The following fields are required:  CustomField#name CustomField#entityType CustomField#dataType CustomField#visibility "
 input CreateCustomFieldsInput {
   customFields: [JSONObject]
 }
@@ -124,28 +124,28 @@ type DropDownCustomField implements CustomFieldInterface {
   options: [CustomFieldOption]
 }
 
-"Returns the CustomFieldOption uniquely identified by the given ID. @param customFieldOptionId the ID of the custom field option, which must already exist @return the \`CustomFieldOption\` uniquely identified by the given ID"
+"Returns the CustomFieldOption uniquely identified by the given ID."
 input GetCustomFieldOptionInput {
   customFieldOptionId: BigInt
 }
 
-"Gets a CustomFieldPage of CustomField objects that satisfy the given Statement#query. The following fields are supported for filtering:   PQL Property Object Property   \`id\` CustomField#id   \`entityType\` CustomField#entityType   \`name\` CustomField#name   \`isActive\` CustomField#isActive   \`visibility\` CustomField#visibility   @param filterStatement a Publisher Query Language statement used to filter a set of custom fields. @return the custom fields that match the given filter"
+"Gets a CustomFieldPage of CustomField objects that satisfy the given Statement#query. The following fields are supported for filtering:   PQL Property Object Property   \`id\` CustomField#id   \`entityType\` CustomField#entityType   \`name\` CustomField#name   \`isActive\` CustomField#isActive   \`visibility\` CustomField#visibility  "
 input GetCustomFieldsByStatementInput {
   filterStatement: StatementInput
 }
 
-"Performs actions on CustomField objects that match the given Statement#query. @param customFieldAction the action to perform @param filterStatement a Publisher Query Language statement used to filter a set of custom fields @return the result of the action performed"
+"Performs actions on CustomField objects that match the given Statement#query."
 input PerformCustomFieldActionInput {
   customFieldAction: JSONObject
   filterStatement: StatementInput
 }
 
-"Updates the specified CustomFieldOption objects. @param customFieldOptions the custom field options to update @return the updated custom field options"
+"Updates the specified CustomFieldOption objects."
 input UpdateCustomFieldOptionsInput {
   customFieldOptions: [CustomFieldOptionInput]
 }
 
-"Updates the specified CustomField objects. @param customFields the custom fields to update @return the updated custom fields"
+"Updates the specified CustomField objects."
 input UpdateCustomFieldsInput {
   customFields: [JSONObject]
 }
@@ -170,43 +170,43 @@ extend type Query {
 }
 
 extend type Mutation {
-  "Creates new CustomFieldOption objects. The following fields are required:  CustomFieldOption#displayName CustomFieldOption#customFieldId  @param customFieldOptions the custom fields to create @return the created custom field options with their IDs filled in"
+  "Creates new CustomFieldOption objects. The following fields are required:  CustomFieldOption#displayName CustomFieldOption#customFieldId "
   createCustomFieldOptions(input: CreateCustomFieldOptionsInput!): [CustomFieldOption]
     @soap(service: "CustomField", action: "createCustomFieldOptions")
 }
 
 extend type Mutation {
-  "Creates new CustomField objects. The following fields are required:  CustomField#name CustomField#entityType CustomField#dataType CustomField#visibility  @param customFields the custom fields to create @return the created custom fields with their IDs filled in"
+  "Creates new CustomField objects. The following fields are required:  CustomField#name CustomField#entityType CustomField#dataType CustomField#visibility "
   createCustomFields(input: CreateCustomFieldsInput!): [CustomFieldInterface]
     @soap(service: "CustomField", action: "createCustomFields")
 }
 
 extend type Query {
-  "Returns the CustomFieldOption uniquely identified by the given ID. @param customFieldOptionId the ID of the custom field option, which must already exist @return the \`CustomFieldOption\` uniquely identified by the given ID"
+  "Returns the CustomFieldOption uniquely identified by the given ID."
   getCustomFieldOption(input: GetCustomFieldOptionInput!): CustomFieldOption
     @soap(service: "CustomField", action: "getCustomFieldOption")
 }
 
 extend type Query {
-  "Gets a CustomFieldPage of CustomField objects that satisfy the given Statement#query. The following fields are supported for filtering:   PQL Property Object Property   \`id\` CustomField#id   \`entityType\` CustomField#entityType   \`name\` CustomField#name   \`isActive\` CustomField#isActive   \`visibility\` CustomField#visibility   @param filterStatement a Publisher Query Language statement used to filter a set of custom fields. @return the custom fields that match the given filter"
+  "Gets a CustomFieldPage of CustomField objects that satisfy the given Statement#query. The following fields are supported for filtering:   PQL Property Object Property   \`id\` CustomField#id   \`entityType\` CustomField#entityType   \`name\` CustomField#name   \`isActive\` CustomField#isActive   \`visibility\` CustomField#visibility  "
   getCustomFieldsByStatement(input: GetCustomFieldsByStatementInput!): CustomFieldPage
     @soap(service: "CustomField", action: "getCustomFieldsByStatement")
 }
 
 extend type Mutation {
-  "Performs actions on CustomField objects that match the given Statement#query. @param customFieldAction the action to perform @param filterStatement a Publisher Query Language statement used to filter a set of custom fields @return the result of the action performed"
+  "Performs actions on CustomField objects that match the given Statement#query."
   performCustomFieldAction(input: PerformCustomFieldActionInput!): UpdateResult
     @soap(service: "CustomField", action: "performCustomFieldAction")
 }
 
 extend type Mutation {
-  "Updates the specified CustomFieldOption objects. @param customFieldOptions the custom field options to update @return the updated custom field options"
+  "Updates the specified CustomFieldOption objects."
   updateCustomFieldOptions(input: UpdateCustomFieldOptionsInput!): [CustomFieldOption]
     @soap(service: "CustomField", action: "updateCustomFieldOptions")
 }
 
 extend type Mutation {
-  "Updates the specified CustomField objects. @param customFields the custom fields to update @return the updated custom fields"
+  "Updates the specified CustomField objects."
   updateCustomFields(input: UpdateCustomFieldsInput!): [CustomFieldInterface]
     @soap(service: "CustomField", action: "updateCustomFields")
 }
