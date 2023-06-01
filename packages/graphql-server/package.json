@@ -1,6 +1,6 @@
 {
   "name": "@parameter1/google-ad-manager-graphql-server",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "The GraphQL server library for the Google Ad Manager API",
   "author": "Jacob Bare <jacob@parameter1.com>",
   "homepage": "https://github.com/parameter1/google-ad-manager/tree/main/packages/graphql-server#readme",
